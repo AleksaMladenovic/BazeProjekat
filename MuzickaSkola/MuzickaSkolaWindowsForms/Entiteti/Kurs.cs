@@ -12,9 +12,9 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 
         public virtual string? Nivo { get; set; }
 
-        public virtual string? NazivKursa { get; set; }
+        public virtual required string NazivKursa { get; set; }
 
-        public virtual string? JMBGNastavnika { get; set; }
+        public virtual required string JMBGNastavnika { get; set; }
 
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    internal class proba
+    public class IndividualniKurs
     {
+        public virtual int IdKursa { get; set; }
     }
 }
