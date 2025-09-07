@@ -22,4 +22,29 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     {
         public string? GrupaInstrumenata { get; set; }
     }
+    public class HorskoPevanjeKurs : VokalniKurs
+    {
+    }
+
+    public class IndividualnoPevanje : VokalniKurs
+    {
+    }
+
+    public abstract class InstrumentalniKurs : Kurs
+    {
+    }
+
+    public class InstrumentKurs : InstrumentalniKurs
+    {
+        public string? Instrument { get; set; }
+    }
+
+    public class MuzickaTeorijaKurs : Kurs
+    {
+        public virtual string? NazivPredmeta { get; set; }
+    }
+    public abstract class VokalniKurs : Kurs
+    {
+
+    }
 }

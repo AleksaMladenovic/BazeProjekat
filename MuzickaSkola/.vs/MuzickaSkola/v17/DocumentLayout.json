@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\aleks\\desktop\\3. godina\\sistemi baza podataka\\drugi deo projekta\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\mapiranja\\grupainstrumenatakursmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\mapiranja\\grupainstrumenatakursmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\aleks\\desktop\\3. godina\\sistemi baza podataka\\drugi deo projekta\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\entiteti\\kurs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\entiteti\\kurs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\aleks\\desktop\\3. godina\\sistemi baza podataka\\drugi deo projekta\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\mapiranja\\kursmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\mapiranja\\kursmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,27 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GrupaInstrumenataKursMapiranja.cs",
-              "DocumentMoniker": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\GrupaInstrumenataKursMapiranja.cs",
-              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Mapiranja\\GrupaInstrumenataKursMapiranja.cs",
-              "ToolTip": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\GrupaInstrumenataKursMapiranja.cs",
-              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Mapiranja\\GrupaInstrumenataKursMapiranja.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Title": "KursMapiranja.cs",
+              "DocumentMoniker": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\KursMapiranja.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Mapiranja\\KursMapiranja.cs",
+              "ToolTip": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\KursMapiranja.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Mapiranja\\KursMapiranja.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAuwD4AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T20:02:09.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Kurs.cs",
-              "DocumentMoniker": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Kurs.cs",
-              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Entiteti\\Kurs.cs",
-              "ToolTip": "C:\\Users\\aleks\\Desktop\\3. GODINA\\Sistemi Baza Podataka\\Drugi deo projekta\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Kurs.cs",
-              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Entiteti\\Kurs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T20:01:35.598Z",
+              "WhenOpened": "2025-09-07T20:06:24.55Z",
               "EditorCaption": ""
             }
           ]
