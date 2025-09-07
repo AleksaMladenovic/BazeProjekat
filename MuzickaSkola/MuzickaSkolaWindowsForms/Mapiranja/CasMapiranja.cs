@@ -15,13 +15,12 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Table("CAS");
             Id(p => p.Id,"ID_CASA").GeneratedBy.TriggerIdentity();
 
-            Map(p => p.Datum, "DATUM");
-            Map(p => p.Vreme, "VREME");
+            Map(p => p.Termin, "TERMIN");
             Map(p => p.Tema, "TEMA");
-            Map(p => p.JmbgNastavnika, "JMBG_NASTAVNIKA");
-            Map(p => p.NazivUcionice, "NAZIV_UCIONICE");
-            Map(p => p.AdresaLokacije, "ADRESA_LOKACIJE");
-            Map(p => p.IdNastave, "ID_NASTAVE");
+            //Map(p => p.JmbgNastavnika, "JMBG_NASTAVNIKA");
+            //Map(p => p.NazivUcionice, "NAZIV_UCIONICE");
+            //Map(p => p.AdresaLokacije, "ADRESA_LOKACIJE");
+            //Map(p => p.IdNastave, "ID_NASTAVE");
             
         }
     }

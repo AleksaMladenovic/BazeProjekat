@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class MuzickaTeorija
+    public class InstrumentKurs : InstrumentalniKurs
     {
-        public virtual int IdKursa { get; set; }
-
-        public virtual string NazivPredmeta { get; set; }
+        public string? Instrument { get; set; }
     }
 }

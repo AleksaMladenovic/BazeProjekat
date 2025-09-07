@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class InstrumentalniKurs
+    public abstract class InstrumentalniKurs :Kurs
     {
-        public virtual int IdKursa { get; set; }
-        public virtual int FInstrument {  get; set; }
-        public virtual string? Instrument {  get; set; }
-        public virtual int FGrupaInstrumenata {  get; set; }
-        public virtual string? GrupaInstrumenata { get; set; }
+        //public virtual int IdKursa { get; set; }
+        //public virtual bool FInstrument { get; set; }
+        //public virtual string? Instrument {  get; set; }
+        //public virtual bool FGrupaInstrumenata { get; set; }
+        //public virtual string? GrupaInstrumenata { get; set; }
     }
 }

@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class Kurs
+    public abstract class Kurs
     {
         public virtual int Id { get; set; }
 
         public virtual string? Nivo { get; set; }
 
-        public virtual required string NazivKursa { get; set; }
+        public virtual required string Naziv { get; set; }
 
-        public virtual required string JMBGNastavnika { get; set; }
+        //public virtual required string JMBGNastavnika { get; set; }
 
+    }
+
+    public class GrupaInstrumenataKurs : InstrumentalniKurs
+    {
+        public string? GrupaInstrumenata { get; set; }
     }
 }

@@ -8,10 +8,11 @@ using Remotion.Linq.Parsing.Structure.NodeTypeProviders;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class VokalniKurs
+    public abstract class VokalniKurs : Kurs
     {
-        public virtual int IdKursa { get; set; }
-        public virtual int FIndividualnoPevanje {  get; set; }
-        public virtual int FHorskoPevanje { get; set; }
+        
+        //public virtual int IdKursa { get; set; }
+        //public virtual int FIndividualnoPevanje {  get; set; }
+        //public virtual int FHorskoPevanje { get; set; }
     }
 }

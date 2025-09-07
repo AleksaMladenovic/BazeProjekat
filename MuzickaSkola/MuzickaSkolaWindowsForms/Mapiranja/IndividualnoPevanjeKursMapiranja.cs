@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class VokalniKursMapiranja : SubclassMap<VokalniKurs>
+    class IndividualnoPevanjeKursMapiranja : SubclassMap<IndividualnoPevanje>
     {
-        VokalniKursMapiranja()
+        public IndividualnoPevanjeKursMapiranja()
         {
-            Table("VOKALNI_KURS");
+            DiscriminatorValue("GRUPA_INSTRUMENATA");
 
-            KeyColumn("ID_KURSA");
         }
+
     }
 }

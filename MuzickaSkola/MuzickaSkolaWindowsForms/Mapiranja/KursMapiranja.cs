@@ -16,9 +16,15 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
 
             Id(p => p.Id, "ID_KURSA").GeneratedBy.TriggerIdentity();
 
+            DiscriminateSubClassesOnColumn("TIP_KURSA");
+
             Map(p => p.Nivo, "NIVO");
-            Map(p => p.NazivKursa, "NAZIV_KURSA");
-            Map(p => p.JMBGNastavnika, "JMBG_NASTAVNIKA");
+            Map(p => p.Naziv, "NAZIV_KURSA");
+            //Map(p => p.JMBGNastavnika, "JMBG_NASTAVNIKA");
+
+
+            
+
         }
     }
 

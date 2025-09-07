@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class MuzickaTeorijaMapiranja:ClassMap<MuzickaTeorija>
+    class MuzickaTeorijaMapiranja:SubclassMap<MuzickaTeorijaKurs>
     {
         MuzickaTeorijaMapiranja()
         {
-            Table("MUZICKA_TEORIJA");
+            DiscriminatorValue("MUZICKA_TEORIJA");
 
-            Map(p => p.IdKursa, "ID_KURSA");
             Map(p => p.NazivPredmeta, "NAZIV_PREDMETA");
         }
     }

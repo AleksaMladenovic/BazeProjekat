@@ -11,6 +11,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         OsobaMapiranja()
         {
             Table("OSOBA");
+            Id(p => p.Id,"ID_OSOBE").GeneratedBy.TriggerIdentity();
 
             Map(p => p.Jmbg, "JMBG");
             Map(p => p.Ime, "IME");
@@ -18,11 +19,11 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.Telefon, "TELEFON");
             Map(p => p.Email, "EMAIL");
             Map(p => p.Adresa, "ADRESA");
-            Map(p => p.FPolaznik, "FPOLAZNIK");
-            Map(p => p.FNastavnik, "FNASTAVNIK");
-            Map(p => p.DatumZaposlenja, "DATUM_ZAPOSLENJA");
-            Map(p => p.StrucnaSprema, "STRUCNA_SPREMA");
-            Map(p => p.JmbgMentora, "JMBG_MENTORA");
+            //Map(p => p.FPolaznik, "FPOLAZNIK");
+            //Map(p => p.FNastavnik, "FNASTAVNIK");
+            //Map(p => p.DatumZaposlenja, "DATUM_ZAPOSLENJA");
+            //Map(p => p.StrucnaSprema, "STRUCNA_SPREMA");
+            //Map(p => p.JmbgMentora, "JMBG_MENTORA");
         }
     }
 }
