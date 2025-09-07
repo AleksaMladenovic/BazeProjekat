@@ -1,0 +1,36 @@
+Minisvet - Privatna muzicka skola
+
+Nastavnik - Stalno zaposleni ili honorarci - Mentor
+Casovi - Individualni i Grupni
+Isnstument
+Uzrast
+Polaznik - Dete i Odrasli
+Kurs/Nastava - Instrumentalni i Vokalni i Muzicka teorija
+
+Instrumentalni - jedan instrument ili grupa
+Vokalni kursevi - individualno ili horsko pevanje
+Termin
+Lokacija
+Zavrsni ispit
+Komisija
+
+
+da podelimo u dve kategorije, kategorija za individualnu nastavu i kategorija za grupnu nastavu.
+
+
+
+
+					Kursevi
+	prvi 					drugi				treci
+prvi1 	prvi2				drugi1  	drugi2 			
+
+
+
+
+
+
+
+
+
+	indi					grup
+				Nastava
