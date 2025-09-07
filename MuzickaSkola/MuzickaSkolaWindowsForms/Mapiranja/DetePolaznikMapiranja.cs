@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class DetePolaznikMapiranja : ClassMap<DetePolaznik>
+    class DetePolaznikMapiranja : SubclassMap<DetePolaznik>
     {
         public DetePolaznikMapiranja()
         {
             //OVO MORA PROVERIMO
             Table("DETE_POLAZNIK");
 
-            Map(p => p.Jmbg, "JMBG");
-            Map(p => p.Jbd, "JBD");
-            Map(p => p.JmbgRoditelja, "JMBG_RODITELJA");
+            DiscriminatorValue( 1);
+
         }
     }
 }
