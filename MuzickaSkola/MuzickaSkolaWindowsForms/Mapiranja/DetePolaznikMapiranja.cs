@@ -13,11 +13,14 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
     {
         public DetePolaznikMapiranja()
         {
-            //OVO MORA PROVERIMO
+            Extends<Polaznik>();
+
             Table("DETE_POLAZNIK");
 
-            DiscriminatorValue( 1);
+            KeyColumn("ID_OSOBE");
 
+            Map(x => x.Jbd, "JBD");
+            References(x => x.PrijavioRoditelj, "ID_RODITELJA");
         }
     }
 }

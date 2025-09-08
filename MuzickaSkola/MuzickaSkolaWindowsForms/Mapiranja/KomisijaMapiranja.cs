@@ -11,7 +11,19 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         KomisijaMapiranja()
         {
             Table("KOMISIJA");
-            Id(p => p.IdKomisije, "ID_KOMISIJE").GeneratedBy.TriggerIdentity();
+            Id(p => p.Id, "ID_KOMISIJE").GeneratedBy.TriggerIdentity();
+
+            HasManyToMany(x => x.ClanoviKomisije)
+                .Table("SE_SASTOJI")
+                .ParentKeyColumn("ID_KOMISIJE")
+                .ChildKeyColumn("ID_NASTAVNIKA")
+                .Cascade.All()
+                .Inverse();
+
+            HasMany(x => x.IspitiKojeOcenjuje)
+                .KeyColumn("ID_KOMISIJE")
+                .Cascade.All()
+                .Inverse();
         }
     }
 }

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class Honorarac
+    public class Honorarac : Nastavnik
     {
-        public virtual required string Jmbg { get; set; }
         public virtual required string BrojUgovora { get; set; }
-        public virtual string? TrajanjeUgovora { get; set; }
-        public virtual int BrojCasova { get; set; }
+        public virtual required string TrajanjeUgovora { get; set; }
+        public virtual int? BrojCasova { get; set; }
     }
 }

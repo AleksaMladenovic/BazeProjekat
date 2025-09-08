@@ -21,6 +21,29 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.Nivo, "NIVO");
             Map(p => p.Naziv, "NAZIV_KURSA");
 
+            HasMany(x => x.NastavniBlokovi)
+                .KeyColumn("ID_KURSA")
+                .Cascade.All()
+                .Inverse();
+
+            HasManyToMany(x => x.PrijavljeniPolaznici)
+                .Table("PRIJAVLJEN")
+                .ParentKeyColumn("ID_KURSA")
+                .ChildKeyColumn("ID_POLAZNIKA")
+                .Cascade.All()
+                .Inverse();
+
+            HasManyToMany(x=>x.LokacijeOdrzavanja)
+                .Table("ODVIJA_NA")
+                .ParentKeyColumn("ID_KURSA")
+                .ChildKeyColumn("ADRESA")
+                .Cascade.All();
+
+            HasMany(x=>x.ZavrsniIspiti)
+                .KeyColumn("ID_KURSA")
+                .Cascade.All().Inverse();
+
+            References(x => x.VodiNastavnik, "ID_NASTAVNIKA");
         }
     }
 

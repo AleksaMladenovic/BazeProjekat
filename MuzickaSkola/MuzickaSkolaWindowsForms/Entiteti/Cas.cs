@@ -11,11 +11,16 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         public virtual int Id { get; set; }
         public virtual DateTime Termin{ get; set;}
         public virtual string? Tema { get; set; }
-        //public  virtual required int  JmbgNastavnika { get; set; }
-        //public virtual string? NazivUcionice { get; set; }
-        
-        //public virtual required string AdresaLokacije { get; set; }
-        //public virtual int IdNastave { get; set; }
 
+        public virtual IList<Prisustvo> PrisutniPolaznici { get; set; }
+        public virtual Nastavnik DrziNastavnik { get; set; }
+
+        public virtual Nastava PripadaNastavi { get; set; }
+
+        public virtual Ucionica UcionicaOdrzavnja { get; set; }
+        public Cas()
+        {
+            PrisutniPolaznici = new List<Prisustvo>();
+        }
     }
 }

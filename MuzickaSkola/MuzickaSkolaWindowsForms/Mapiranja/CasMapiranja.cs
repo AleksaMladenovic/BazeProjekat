@@ -3,6 +3,7 @@ using MuzickaSkolaWindowsForms.Entiteti;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,15 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             //Map(p => p.NazivUcionice, "NAZIV_UCIONICE");
             //Map(p => p.AdresaLokacije, "ADRESA_LOKACIJE");
             //Map(p => p.IdNastave, "ID_NASTAVE");
-            
+
+            HasMany(x => x.PrisutniPolaznici)
+                .KeyColumn("ID_CASA")
+                .Cascade.All()
+                .Inverse();
+
+            References(x => x.DrziNastavnik, "ID_NASTAVNIKA");
+            References(x => x.PripadaNastavi, "ID_NASTAVE");
+            References(x => x.UcionicaOdrzavnja).Columns("ADRESA_LOKACIJE", "NAZIV_UCIONICE");
         }
     }
 }

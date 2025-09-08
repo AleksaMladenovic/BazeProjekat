@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class DetePolaznik
+    public class DetePolaznik : Polaznik
     {
         public virtual string? Jbd { get; set; }
+        public virtual required Roditelj PrijavioRoditelj { get; set; }
         //public virtual required string JmbgRoditelja { get; set; }
     }
 }

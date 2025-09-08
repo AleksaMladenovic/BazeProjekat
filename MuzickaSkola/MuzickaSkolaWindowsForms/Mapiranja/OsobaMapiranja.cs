@@ -8,13 +8,10 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
 {
     class OsobaMapiranja : ClassMap<Osoba>
     {
-        OsobaMapiranja()
+        public OsobaMapiranja()
         {
             Table("OSOBA");
             Id(p => p.Id,"ID_OSOBE").GeneratedBy.TriggerIdentity();
-
-            DiscriminateSubClassesOnColumn("FPOLAZNIK", 0);
-            DiscriminateSubClassesOnColumn("FNASTAVNIK", 0);
 
             Map(p => p.Jmbg, "JMBG");
             Map(p => p.Ime, "IME");
@@ -22,12 +19,13 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.Telefon, "TELEFON");
             Map(p => p.Email, "EMAIL");
             Map(p => p.Adresa, "ADRESA");
-            Map(p => p.Polaznik, "FPOLAZNIK");
-            Map(p => p.Nastavnik, "FNASTAVNIK");
-            //Map(p => p.FPolaznik, "FPOLAZNIK");
-            //Map(p => p.FNastavnik, "FNASTAVNIK");
-            
-            //Map(p => p.JmbgMentora, "JMBG_MENTORA");
+            Map(p => p.FPolaznik, "FPOLAZNIK");
+            Map(p => p.FRoditelj, "FRODITELJ");
+            Map(p => p.FNastavnik, "FNASTAVNIK");
+
+            HasOne(p => p.UlogaPolaznik).Cascade.All();
+            HasOne(p => p.UlogaNastavnik).Cascade.All();
+            HasOne(p => p.UlogaRoditelj).Cascade.All();
         }
     }
 }

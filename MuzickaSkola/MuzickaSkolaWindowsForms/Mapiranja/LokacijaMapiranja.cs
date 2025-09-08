@@ -12,8 +12,20 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         {
             Table("LOKACIJA");
 
-            Map(p => p.Adresa, "ADRESA");
+            Id(p => p.Adresa, "ADRESA").GeneratedBy.Assigned();
+
             Map(p => p.RadnoVreme, "RADNO_VREME");
+
+            HasMany(x => x.Ucionice)
+                .Cascade.All()
+                .Inverse();
+
+            HasManyToMany(x => x.KurseviKojiSeOdrzavaju)
+                .Table("ODVIJA_NA")
+                .ParentKeyColumn("ADRESA")
+                .ChildKeyColumn("ID_KURSA")
+                .Cascade.All()
+                .Inverse();
         }
     }
 }

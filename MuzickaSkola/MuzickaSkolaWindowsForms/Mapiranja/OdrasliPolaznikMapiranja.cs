@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-     class OdrasliPolaznikMapiranja:ClassMap<OdrasliPolaznik>
+     class OdrasliPolaznikMapiranja:SubclassMap<OdrasliPolaznik>
     {
-        OdrasliPolaznikMapiranja()
+        public OdrasliPolaznikMapiranja()
         {
+            Extends<Polaznik>();
             Table("ODRASLI_POLAZNIK");
 
-            Map(p => p.Jmbg, "JMBG");
+            KeyColumn("ID_OSOBE");
+
             Map(p => p.Zanimanje, "ZANIMANJE");
         }
     }

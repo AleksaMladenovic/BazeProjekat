@@ -10,10 +10,19 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     {
         public virtual int Id { get; set; }
         public virtual DateTime DatumOd { get; set; }
-        public virtual DateTime DatumDo { get; set; }
-        //public virtual int IdKursa {  get; set; }
-        //public virtual int FIndividualna {  get; set; }
-        //public virtual int FGrupna {  get; set; }
+        public virtual DateTime? DatumDo { get; set; }
+
+        public virtual bool FIndividualna { get; set; }
+        public virtual bool FGrupna{ get; set; }
+
+        public virtual Kurs PripadaKursu { get; set; }
+
+        public virtual IList<Cas> Casovi{ get; set; }
+
+        public Nastava()
+        {
+            Casovi = new List<Cas>();
+        }
 
     }
 }

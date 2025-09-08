@@ -12,8 +12,10 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         {
             Table("PRISUSTVO");
 
-            Map(p => p.JmbgPolaznika, "JMBG_POLAZNIKA");
-            Map(p => p.IdCasa, "ID_CASA");
+            CompositeId(p => p.Id)
+                .KeyReference(p => p.PolaznikNaCasu, "ID_POLAZNIKA")
+                .KeyReference(p => p.CasKomePrisustvuje, "ID_CASA");
+
             Map(p => p.Ocena, "OCENA");
         }
     }

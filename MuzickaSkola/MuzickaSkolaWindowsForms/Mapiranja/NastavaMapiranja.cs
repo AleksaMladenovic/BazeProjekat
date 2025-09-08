@@ -16,9 +16,15 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
 
             Map(p => p.DatumOd, "DATUM_OD");
             Map(p => p.DatumDo, "DATUM_DO");
-            //Map(p => p.IdKursa, "ID_KURSA");
-            //Map(p => p.FIndividualna, "FINDIVIDUALNA");
-            //Map(p => p.FGrupna, "FGRUPNA");
+            Map(p => p.FIndividualna, "FINDIVIDUALNA");
+            Map(p => p.FGrupna, "FGRUPNA");
+
+            References(x => x.PripadaKursu, "ID_KURSA");
+
+            HasMany(x => x.Casovi)
+                .KeyColumn("ID_NASTAVE")
+                .Cascade.All()
+                .Inverse();
 
         }
     }

@@ -20,7 +20,7 @@ namespace MuzickaSkolaWindowsForms
                 if (session != null)
                 {
                     Kurs? k = await session.LoadAsync<Kurs>(4);
-                    MessageBox.Show($"Kurs sa ID: 4\"{k.NazivKursa}\" je pronađena.");
+                    MessageBox.Show($"Kurs sa ID: 4\"{k.Naziv}\" je pronađena.");
                 }
             }
             catch (Exception ex)

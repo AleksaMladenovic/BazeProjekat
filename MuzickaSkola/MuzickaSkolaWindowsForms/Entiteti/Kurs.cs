@@ -14,13 +14,27 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 
         public virtual required string Naziv { get; set; }
 
-        //public virtual required string JMBGNastavnika { get; set; }
+        public virtual IList<Nastava> NastavniBlokovi { get; set; }
 
+        public virtual IList<Polaznik> PrijavljeniPolaznici { get; set; }
+
+        public virtual Nastavnik VodiNastavnik { get; set; }
+
+        public virtual IList<Lokacija> LokacijeOdrzavanja { get; set; }
+
+        public virtual IList<ZavrsniIspit> ZavrsniIspiti { get; set; }
+        public Kurs()
+        {
+            NastavniBlokovi = new List<Nastava>();
+            LokacijeOdrzavanja = new List<Lokacija>();
+            PrijavljeniPolaznici = new List<Polaznik>();
+            ZavrsniIspiti = new List<ZavrsniIspit>();
+        }
     }
 
     public class GrupaInstrumenataKurs : InstrumentalniKurs
     {
-        public string? GrupaInstrumenata { get; set; }
+        public virtual string? GrupaInstrumenata { get; set; }
     }
     public class HorskoPevanjeKurs : VokalniKurs
     {
@@ -36,7 +50,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 
     public class InstrumentKurs : InstrumentalniKurs
     {
-        public string? Instrument { get; set; }
+        public virtual string? Instrument { get; set; }
     }
 
     public class MuzickaTeorijaKurs : Kurs

@@ -6,10 +6,23 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public class Nastavnik:Osoba
+    public abstract class Nastavnik
     {
-        public virtual DateOnly DatumZaposlenja{ get; set; }
+        public virtual int Id { get; protected set; }
+        public virtual Osoba OsnovniPodaci { get; set; }
+        public virtual DateTime? DatumZaposlenja { get; set; }
+        public virtual required string StrucnaSprema { get; set; }
+        public virtual StalnoZaposlen? Mentor { get; set; }
 
-        public virtual string? StrucnaSprema { get; set; }
+        public virtual IList<Cas> DrziCasove { get; set; }
+
+        public virtual IList<Kurs> VodiKurseve { get; set; }
+
+        public virtual IList<Komisija> KomisijeCijiJeClan { get; set; }
+        protected Nastavnik() { 
+            DrziCasove = new List<Cas>();
+            VodiKurseve = new List<Kurs>();
+            KomisijeCijiJeClan = new List<Komisija>();
+        }
     }
 }

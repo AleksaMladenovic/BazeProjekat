@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class StaloZapMapiranja : ClassMap<StalnoZap>
+    class StaloZapMapiranja : SubclassMap<StalnoZaposlen>
     {
-        StaloZapMapiranja()
+        public StaloZapMapiranja()
         {
+            Extends<Nastavnik>();
             Table("STALNO_ZAP");
-            Map(p => p.Jmbg, "JMBG");
+            KeyColumn("ID_OSOBE");
             Map(p => p.RadnoVreme, "RADNO_VREME");
+
+            HasMany(x => x.JeMentor).KeyColumn("ID_MENTORA").Inverse().Cascade.All();
         }
     }
 }

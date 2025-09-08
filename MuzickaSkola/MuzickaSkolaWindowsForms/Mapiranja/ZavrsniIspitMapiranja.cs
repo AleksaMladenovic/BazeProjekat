@@ -12,12 +12,15 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         {
             Table("ZAVRSNI_ISPIT");
 
-            Map(p => p.IdKursa, "ID_KURSA");
-            Map(p => p.Datum, "DATUM");
+            CompositeId(p => p.Id)
+                .KeyReference(p => p.IspitIzKursa, "ID_KURSA")
+                .KeyProperty(p => p.Datum, "DATUM");
+
             Map(p => p.Ocena, "OCENA");
             Map(p => p.Sertifikat, "SERTIFIKAT");
-            Map(p => p.IdKomisije, "ID_KOMISIJE");
-            Map(p => p.JmbgPolaznika, "JMBG_POLAZNIKA");
+
+            References(x => x.OcenjujeKomisija, "ID_KOMISIJE");
+            References(x => x.PolazePolaznik, "ID_POLAZNIKA");
         }
     }
 }
