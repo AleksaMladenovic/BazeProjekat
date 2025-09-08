@@ -8,9 +8,9 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 {
     public abstract class Polaznik 
     {
-        public virtual int Id { get; protected set; } // ID je isti kao ID 
+        public virtual int Id { get; protected set; } 
 
-        public virtual Osoba OsnovniPodaci { get; set; } // Veza nazad ka Osobi
+        public virtual Osoba OsnovniPodaci { get; set; } 
 
         public virtual IList<Prisustvo> PrisustvoNaCasovima { get; set; }
 

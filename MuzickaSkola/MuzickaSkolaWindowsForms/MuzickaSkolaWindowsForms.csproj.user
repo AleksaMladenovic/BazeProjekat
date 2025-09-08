@@ -4,6 +4,15 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\DodajPolaznikaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\IzmeniPolaznika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\IzmeniRoditeljaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\KurseviForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -11,6 +20,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\PolazniciForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\PolozeniIspitiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\PrijavljeniKurseviForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\PrisustvoNaCasovimaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\RoditeljiForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PocetnaStranica.cs">
