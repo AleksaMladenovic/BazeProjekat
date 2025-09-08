@@ -12,7 +12,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         NastavaMapiranja()
         {
             Table("NASTAVA");
-            Id(p => p.Id,"ID_NASTAVE").GeneratedBy.TriggerIdentity();
+            Id(p => p.Id,"ID_NASTAVE").GeneratedBy.SequenceIdentity("NASTAVA_ID_SEQ");
 
             Map(p => p.DatumOd, "DATUM_OD");
             Map(p => p.DatumDo, "DATUM_DO");

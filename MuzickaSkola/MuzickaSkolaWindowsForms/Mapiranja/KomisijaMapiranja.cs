@@ -11,7 +11,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         KomisijaMapiranja()
         {
             Table("KOMISIJA");
-            Id(p => p.Id, "ID_KOMISIJE").GeneratedBy.TriggerIdentity();
+            Id(p => p.Id, "ID_KOMISIJE").GeneratedBy.SequenceIdentity("KOMISIJA_ID_SEQ");
 
             HasManyToMany(x => x.ClanoviKomisije)
                 .Table("SE_SASTOJI")

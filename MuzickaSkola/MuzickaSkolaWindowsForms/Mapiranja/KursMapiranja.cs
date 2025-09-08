@@ -14,7 +14,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         {
             Table("KURS");
 
-            Id(p => p.Id, "ID_KURSA").GeneratedBy.TriggerIdentity();
+            Id(p => p.Id, "ID_KURSA").GeneratedBy.SequenceIdentity("KURS_ID_SEQ");
 
             DiscriminateSubClassesOnColumn("TIP_KURSA");
 

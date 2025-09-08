@@ -11,7 +11,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         public OsobaMapiranja()
         {
             Table("OSOBA");
-            Id(p => p.Id,"ID_OSOBE").GeneratedBy.TriggerIdentity();
+            Id(p => p.Id,"ID_OSOBE").GeneratedBy.SequenceIdentity("OSOBA_ID_SEQ");
 
             Map(p => p.Jmbg, "JMBG");
             Map(p => p.Ime, "IME");

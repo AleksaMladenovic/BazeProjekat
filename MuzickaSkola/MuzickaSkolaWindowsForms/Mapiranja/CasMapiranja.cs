@@ -14,7 +14,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         public CasMapiranja()
         {
             Table("CAS");
-            Id(p => p.Id,"ID_CASA").GeneratedBy.TriggerIdentity();
+            Id(p => p.Id,"ID_CASA").GeneratedBy.SequenceIdentity("CAS_ID_SEQ");
 
             Map(p => p.Termin, "TERMIN");
             Map(p => p.Tema, "TEMA");
