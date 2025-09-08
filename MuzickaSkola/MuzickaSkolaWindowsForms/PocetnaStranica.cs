@@ -33,7 +33,7 @@ namespace MuzickaSkolaWindowsForms
 
         private void cmdKursevi_Click(object sender, EventArgs e)
         {
-            Form kurseviForm = new KurseviForm();
+            Form kurseviForm = new MojDeoForm();
             kurseviForm.ShowDialog();
 
         }

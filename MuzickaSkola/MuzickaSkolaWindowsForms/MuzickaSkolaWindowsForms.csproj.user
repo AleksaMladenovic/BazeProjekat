@@ -4,13 +4,28 @@
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\DodajIzmeniUcionicuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajIzmenLokacijuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\KurseviForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\LokacijeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\MojDeoForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\NastavniciForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\PolazniciForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\UcioniceForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PocetnaStranica.cs">
