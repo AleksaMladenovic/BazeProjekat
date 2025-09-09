@@ -12,13 +12,13 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 
         public virtual string? Nivo { get; set; }
 
-        public virtual required string Naziv { get; set; }
+        public virtual string Naziv { get; set; }
 
         public virtual IList<Nastava> NastavniBlokovi { get; set; }
 
-        public virtual IList<Polaznik> PrijavljeniPolaznici { get; set; }
+        //public virtual IList<Polaznik> PrijavljeniPolaznici { get; set; }
 
-        public virtual Nastavnik VodiNastavnik { get; set; }
+        //public virtual Nastavnik VodiNastavnik { get; set; }
 
         public virtual IList<Lokacija> LokacijeOdrzavanja { get; set; }
 
@@ -27,7 +27,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         {
             NastavniBlokovi = new List<Nastava>();
             LokacijeOdrzavanja = new List<Lokacija>();
-            PrijavljeniPolaznici = new List<Polaznik>();
+            //PrijavljeniPolaznici = new List<Polaznik>();
             ZavrsniIspiti = new List<ZavrsniIspit>();
         }
     }
@@ -40,7 +40,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     {
     }
 
-    public class IndividualnoPevanje : VokalniKurs
+    public class IndividualnoPevanjeKurs : VokalniKurs
     {
     }
 

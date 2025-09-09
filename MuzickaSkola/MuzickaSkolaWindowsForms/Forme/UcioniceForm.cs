@@ -38,7 +38,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                 return;
             }
             var selektovanaUcionicaPregled = (UcionicaPregled)listViewUcionice.SelectedItems[0].Tag;
-            UcionicaBasic ucionicaZaIzmenu = DTOManager.vratiUcionicuZaIzmenu(selektovanaUcionicaPregled);
+            UcionicaBasic ucionicaZaIzmenu = DTOManager.VratiUcionicuZaIzmenu(selektovanaUcionicaPregled);
 
             var forma = new DodajIzmeniUcionicuForm(ucionicaZaIzmenu);
             forma.ShowDialog();

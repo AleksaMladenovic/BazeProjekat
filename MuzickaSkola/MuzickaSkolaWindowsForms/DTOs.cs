@@ -57,4 +57,29 @@ namespace MuzickaSkolaWindowsForms
     }
 
     #endregion
+
+    #region Kurs
+
+    public class KursPregled
+    {
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public string Nivo { get; set; }
+        public string ImeNastavnika { get; set; }
+        public string TipKursa { get; set; }
+    }
+
+    public class KursBasic
+    {
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public string Nivo { get; set; }
+        public string ImeNastavnika { get; set; }
+        public string TipKursa { get; set; }
+
+        public string? Instrument { get; set; }
+        public string? GrupaInstrumenata { get; set; }
+        public string? NazivPredmeta { get; set; }
+    }
+    #endregion Kurs
 }
