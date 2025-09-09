@@ -201,12 +201,6 @@ namespace MuzickaSkolaWindowsForms
         public string Telefon { get; set; }
         public string Email { get; set; }
     }
-    public class KursPregled
-    {
-        public int IdKursa { get; set; }
-        public string Naziv { get; set; }
-        public string Nivo { get; set; } 
-    }
 
     public class PrisustvoPregled
     {
