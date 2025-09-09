@@ -8,12 +8,12 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
 {
     class PrisustvoMapiranja:ClassMap<Prisustvo>
     {
-        PrisustvoMapiranja()
+        public PrisustvoMapiranja()
         {
             Table("PRISUSTVO");
 
             CompositeId(p => p.Id)
-                .KeyReference(p => p.PolaznikNaCasu, "ID_POLAZNIKA")
+                .KeyProperty(p => p.PolaznikId, "ID_POLAZNIKA")
                 .KeyReference(p => p.CasKomePrisustvuje, "ID_CASA");
 
             Map(p => p.Ocena, "OCENA");
