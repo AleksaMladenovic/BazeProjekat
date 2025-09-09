@@ -7,15 +7,20 @@ using MuzickaSkolaWindowsForms.Entiteti;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class HonoraracMapiranja :SubclassMap<Honorarac>
+    class HonoraracMapiranja :ClassMap<Honorarac>
     {
         public HonoraracMapiranja()
         {
-            //Ovo mora proverimo
-            Extends<Nastavnik>();
-
+           
             Table("HONORARAC");
-            KeyColumn("ID_OSOBE");
+
+            Id(x => x.Id)
+                .Column("ID_OSOBE")
+                .GeneratedBy.Foreign("OsnovniPodaci");
+
+            HasOne(x => x.OsnovniPodaci)
+                .Constrained()
+                .Cascade.All();
 
             Map(p => p.BrojUgovora, "BROJ_UGOVORA");
             Map(p => p.TrajanjeUgovora, "TRAJANJE_UGOVORA");
