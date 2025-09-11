@@ -119,6 +119,7 @@ namespace MuzickaSkolaWindowsForms
     }   
 
     #endregion
+
     #region Polaznik
 
     public class PolaznikPregled
@@ -221,5 +222,53 @@ namespace MuzickaSkolaWindowsForms
         public int? Ocena { get; set; }
         public bool? Sertifikat { get; set; }
     }
+    #endregion
+
+    #region Nastava
+    public class NastavaPregled
+    {
+        public int Id { get; set; }
+        public DateTime DatumOd { get; set; }
+        public DateTime? DatumDo { get; set; }
+        public string TipNastave { get; set; } // "Individualna" ili "Grupna"
+
+        public string DatumOdString
+        {
+            get { return DatumOd.ToString("dd.MM.yyyy"); }
+        }
+
+        public string DatumDoString
+        {
+            get
+            {
+                if (DatumDo.HasValue)
+                {
+                    return DatumDo.Value.ToString("dd.MM.yyyy");
+                }
+                else
+                {
+                    return "Nije završena";
+                }
+            }
+        }
+    }
+    public class CasPregled
+    {
+        public int Id { get; set; }
+        public DateTime Termin { get; set; }
+        public string Tema { get; set; }
+        public string ImeNastavnika { get; set; }
+    }
+
+    public class NastavaBasic
+    {
+        public int Id { get; set; }
+        public DateTime DatumOd { get; set; }
+        public DateTime? DatumDo { get; set; }
+        public bool FIndividualna { get; set; }
+        public bool FGrupna { get; set; }
+        public int IdKursa { get; set; } // Važno za dodavanje/izmenu
+    }
+
     #endregion
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MuzickaSkolaWindowsForms.Mapiranja;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,14 +26,17 @@ namespace MuzickaSkolaWindowsForms.Forme
 
         private void OnemoguciDugmice()
         {
+
             cmdIzmeniKurs.Enabled = false;
             cmdObrisiKurs.Enabled = false;
+            cmdNastavniBlokovi.Enabled = false;
         }
 
         private void OmoguciDugmice()
         {
             cmdIzmeniKurs.Enabled = true;
             cmdObrisiKurs.Enabled = true;
+            cmdNastavniBlokovi.Enabled = true;
         }
         private void PopuniPodacima()
         {
@@ -94,6 +98,13 @@ namespace MuzickaSkolaWindowsForms.Forme
                 if (DTOManager.ObrisiKurs(selektovaniKursPregled.Id))
                     this.PopuniPodacima();
             }
+        }
+
+        private void cmdNastavniBlokovi_Click(object sender, EventArgs e)
+        {
+            KursPregled k = (KursPregled)listViewKursevi.SelectedItems[0].Tag;
+            var form = new NastavaForm(k);
+            form.ShowDialog();
         }
     }
 }

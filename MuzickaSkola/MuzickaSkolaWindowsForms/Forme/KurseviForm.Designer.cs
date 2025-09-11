@@ -36,6 +36,7 @@
             chTipKursa = new ColumnHeader();
             chNastavnik = new ColumnHeader();
             groupBox2 = new GroupBox();
+            cmdNastavniBlokovi = new Button();
             groupBox1 = new GroupBox();
             cmdObrisiKurs = new Button();
             cmdIzmeniKurs = new Button();
@@ -44,6 +45,7 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -105,12 +107,23 @@
             // 
             // groupBox2
             // 
-            groupBox2.Location = new Point(3, 180);
+            groupBox2.Controls.Add(cmdNastavniBlokovi);
+            groupBox2.Location = new Point(3, 125);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(207, 100);
+            groupBox2.Size = new Size(207, 155);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Detalji o selektovanom kursu";
+            // 
+            // cmdNastavniBlokovi
+            // 
+            cmdNastavniBlokovi.Location = new Point(6, 19);
+            cmdNastavniBlokovi.Name = "cmdNastavniBlokovi";
+            cmdNastavniBlokovi.Size = new Size(195, 23);
+            cmdNastavniBlokovi.TabIndex = 0;
+            cmdNastavniBlokovi.Text = "Nastavni blokovi";
+            cmdNastavniBlokovi.UseVisualStyleBackColor = true;
+            cmdNastavniBlokovi.Click += cmdNastavniBlokovi_Click;
             // 
             // groupBox1
             // 
@@ -167,6 +180,7 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -185,5 +199,6 @@
         private Button cmdObrisiKurs;
         private Button cmdIzmeniKurs;
         private Button cmdDodajKurs;
+        private Button cmdNastavniBlokovi;
     }
 }

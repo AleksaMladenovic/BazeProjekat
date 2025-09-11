@@ -549,5 +549,127 @@ namespace MuzickaSkolaWindowsForms
             }
         }
         #endregion
+
+        #region Nastava
+
+        public static List<NastavaPregled> VratiSvuNastavuZaKurs(int kursId, string tipKursa)
+        {
+            List<NastavaPregled> nastavePregled = new List<NastavaPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var nastave = from n in s.Query<Nastava>()
+                              where n.PripadaKursu.Id == kursId
+                              select n;
+
+                string tipNastave = VratiTipNastave(tipKursa);
+                foreach (var n in nastave)
+                {
+                    nastavePregled.Add(new NastavaPregled()
+                    {
+                        Id = n.Id,
+                        DatumOd = n.DatumOd,
+                        DatumDo = n.DatumDo,
+                        TipNastave = tipNastave,
+                    });
+                }
+                return nastavePregled;
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            return nastavePregled;
+        }
+
+        public static string VratiTipNastave(string tipKursa)
+        {
+            if (tipKursa == "INSTRUMENT" || tipKursa == "GRUPA_INSTRUMENATA" || tipKursa == "INDIVIDUALNO_PEVANJE")
+            {
+                return "Individualna";
+            }
+            else
+            {
+                return "Grupna";
+            }
+        }
+
+        public static bool DodajNastavu(NastavaBasic nastavaDto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Kurs kursEntitet = s.Get<Kurs>(nastavaDto.IdKursa);
+
+                Nastava nastava = new Nastava()
+                {
+                    DatumOd = nastavaDto.DatumOd,
+                    DatumDo = nastavaDto.DatumDo,
+                    FIndividualna = nastavaDto.FIndividualna,
+                    FGrupna = nastavaDto.FGrupna,
+                    PripadaKursu = kursEntitet,
+                };
+
+                
+                s.Save(nastava);
+                s.Flush();
+                s.Close();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+
+        }
+
+        public static bool IzmeniNastavu(NastavaBasic nastavaDto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Nastava nastava = s.Get<Nastava>(nastavaDto.Id);
+                bool postojeCasoviIzvanOpsega = false;
+                foreach(var cas in nastava.Casovi)
+                {
+                    if (cas.Termin < nastavaDto.DatumOd || (nastavaDto.DatumDo.HasValue&&cas.Termin > nastavaDto.DatumDo))
+                    {
+                        postojeCasoviIzvanOpsega = true;
+                    }
+                }
+                if (postojeCasoviIzvanOpsega)
+                {
+                    s.Close();
+                    MessageBox.Show($"Postoje časovi koji su izvan opsega datuma!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                nastava.DatumDo = nastavaDto.DatumDo;
+                nastava.DatumOd = nastavaDto.DatumOd;
+
+
+                s.Update(nastava);
+                s.Flush();
+                s.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+        }
+
+        public static bool ObrisiNastavu(int NastavaId)
+        {
+            return true;
+        }
+
+
+        #endregion
     }
 }

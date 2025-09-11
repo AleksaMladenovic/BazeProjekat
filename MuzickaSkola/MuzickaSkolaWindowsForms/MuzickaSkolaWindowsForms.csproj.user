@@ -7,6 +7,9 @@
     <Compile Update="Forme\DodajIzmeniKursForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\DodajIzmeniNastavuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\DodajIzmeniUcionicuForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -29,6 +32,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\UcioniceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\NastavaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PocetnaStranica.cs">
