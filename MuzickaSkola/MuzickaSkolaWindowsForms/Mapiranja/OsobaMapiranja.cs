@@ -1,4 +1,6 @@
-﻿using System;
+using FluentNHibernate.Mapping;
+using MuzickaSkolaWindowsForms.Entiteti;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +13,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         public OsobaMapiranja()
         {
             Table("OSOBA");
-            Id(p => p.Id,"ID_OSOBE").GeneratedBy.SequenceIdentity("OSOBA_ID_SEQ");
+            Id(p => p.Id, "ID_OSOBE").GeneratedBy.SequenceIdentity("OSOBA_ID_SEQ");
 
             Map(p => p.Jmbg, "JMBG");
             Map(p => p.Ime, "IME");
@@ -22,10 +24,9 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.FPolaznik, "FPOLAZNIK");
             Map(p => p.FRoditelj, "FRODITELJ");
             Map(p => p.FNastavnik, "FNASTAVNIK");
-
-            //HasOne(p => p.UlogaPolaznik).PropertyRef(p=>p.OsnovniPodaci).Cascade.All();
-            //HasOne(p => p.UlogaNastavnik).Cascade.All();
-            //HasOne(p => p.UlogaRoditelj).Cascade.All();
+            Map(x => x.DatumZaposlenja, "DATUM_ZAPOSLENJA");
+            Map(x => x.StrucnaSprema, "STRUCNA_SPREMA");
+            References(x => x.Mentor, "ID_MENTORA");
         }
     }
 }

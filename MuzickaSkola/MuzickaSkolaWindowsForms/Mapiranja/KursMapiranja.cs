@@ -66,11 +66,11 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         }
     }
 
-    class IndividualnoPevanjeKursMapiranja : SubclassMap<IndividualnoPevanje>
+    class IndividualnoPevanjeKursMapiranja : SubclassMap<IndividualnoPevanje>//OVDE SAM NAPRAVIO IZMENU JER MISLIM DA JE GRESKA 
     {
         public IndividualnoPevanjeKursMapiranja()
         {
-            DiscriminatorValue("GRUPA_INSTRUMENATA");
+            DiscriminatorValue("INDIVIDUALNO_PEVANJE");
 
         }
 

@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentNHibernate.Mapping;
 using MuzickaSkolaWindowsForms.Entiteti;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class HonoraracMapiranja :SubclassMap<Honorarac>
+    // KORISTIMO SubclassMap DA KAŽEMO DA JE OVO PODKLASA NASTAVNIKA
+    class HonoraracMapiranja : SubclassMap<Honorarac>
     {
         public HonoraracMapiranja()
         {
-            //Ovo mora proverimo
-            Extends<Nastavnik>();
-
+            // Kažemo gde se nalaze podaci specifični za Honorarca
             Table("HONORARAC");
+            // Kažemo preko koje kolone se spaja sa OSOBA tabelom
             KeyColumn("ID_OSOBE");
 
+            // Mapiramo samo atribute specifične za Honorarca
             Map(p => p.BrojUgovora, "BROJ_UGOVORA");
             Map(p => p.TrajanjeUgovora, "TRAJANJE_UGOVORA");
             Map(p => p.BrojCasova, "BROJ_CASOVA");
