@@ -41,6 +41,9 @@
             groupBox1 = new GroupBox();
             btnDetalji = new Button();
             groupBox2 = new GroupBox();
+            btnUpravljajKomisijama = new Button();
+            btnPrikaziCasove = new Button();
+            btnDodeliMentora = new Button();
             btnPrikaziKurseve = new Button();
             Komande.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -146,6 +149,9 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(btnUpravljajKomisijama);
+            groupBox2.Controls.Add(btnPrikaziCasove);
+            groupBox2.Controls.Add(btnDodeliMentora);
             groupBox2.Controls.Add(btnPrikaziKurseve);
             groupBox2.Location = new Point(586, 228);
             groupBox2.Name = "groupBox2";
@@ -154,9 +160,39 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Slozene funkcionalnosti";
             // 
+            // btnUpravljajKomisijama
+            // 
+            btnUpravljajKomisijama.Location = new Point(6, 162);
+            btnUpravljajKomisijama.Name = "btnUpravljajKomisijama";
+            btnUpravljajKomisijama.Size = new Size(183, 31);
+            btnUpravljajKomisijama.TabIndex = 4;
+            btnUpravljajKomisijama.Text = "Upravljaj komisijama";
+            btnUpravljajKomisijama.UseVisualStyleBackColor = true;
+            btnUpravljajKomisijama.Click += btnUpravljajKomisijama_Click;
+            // 
+            // btnPrikaziCasove
+            // 
+            btnPrikaziCasove.Location = new Point(6, 69);
+            btnPrikaziCasove.Name = "btnPrikaziCasove";
+            btnPrikaziCasove.Size = new Size(184, 31);
+            btnPrikaziCasove.TabIndex = 2;
+            btnPrikaziCasove.Text = "Prikazi casove";
+            btnPrikaziCasove.UseVisualStyleBackColor = true;
+            btnPrikaziCasove.Click += btnPrikaziCasove_Click;
+            // 
+            // btnDodeliMentora
+            // 
+            btnDodeliMentora.Location = new Point(6, 116);
+            btnDodeliMentora.Name = "btnDodeliMentora";
+            btnDodeliMentora.Size = new Size(185, 31);
+            btnDodeliMentora.TabIndex = 1;
+            btnDodeliMentora.Text = "Dodeli mentora";
+            btnDodeliMentora.UseVisualStyleBackColor = true;
+            btnDodeliMentora.Click += btnDodeliMentora_Click;
+            // 
             // btnPrikaziKurseve
             // 
-            btnPrikaziKurseve.Location = new Point(7, 22);
+            btnPrikaziKurseve.Location = new Point(6, 22);
             btnPrikaziKurseve.Name = "btnPrikaziKurseve";
             btnPrikaziKurseve.Size = new Size(185, 31);
             btnPrikaziKurseve.TabIndex = 0;
@@ -198,5 +234,8 @@
         private Button btnDetalji;
         private GroupBox groupBox2;
         private Button btnPrikaziKurseve;
+        private Button btnDodeliMentora;
+        private Button btnPrikaziCasove;
+        private Button btnUpravljajKomisijama;
     }
 }

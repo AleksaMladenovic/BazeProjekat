@@ -262,6 +262,9 @@ namespace MuzickaSkolaWindowsForms
                 if (n != null)
                 {
                     NHibernateUtil.Initialize(n.OsnovniPodaci);
+                    NHibernateUtil.Initialize(n.VodiKurseve);
+                    NHibernateUtil.Initialize(n.DrziCasove);
+                    NHibernateUtil.Initialize(n.KomisijeCijiJeClan);
                 }
                 return n;
             }
@@ -358,6 +361,185 @@ namespace MuzickaSkolaWindowsForms
                 }
             }
             return rezultat;
+        }
+
+        public static List<MentorPregled> VratiSveMoguceMentore()
+        {
+            List<MentorPregled> rezultat = new List<MentorPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                // Povlačimo sve stalno zaposlene, jer samo oni mogu biti mentori
+                IEnumerable<StalnoZaposlen> mentori = s.Query<StalnoZaposlen>().ToList();
+
+                foreach (var sz in mentori)
+                {
+                    rezultat.Add(new MentorPregled(sz.Id, $"{sz.OsnovniPodaci.Ime} {sz.OsnovniPodaci.Prezime}"));
+                }
+            }
+            catch (Exception ec) {
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally { if (s != null) s.Close(); }
+
+            return rezultat;
+        }
+
+        public static void DodeliMentora(int nastavnikId, int mentorId)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                s.BeginTransaction();
+
+                // 1. Učitamo nastavnika kojem dodeljujemo mentora
+                Osoba ucenik = s.Load<Osoba>(nastavnikId);
+
+                // 2. Učitamo nastavnika koji postaje mentor
+                StalnoZaposlen mentor = s.Load<StalnoZaposlen>(mentorId);
+
+                // 3. Povežemo ih
+                ucenik.Mentor = mentor;
+
+                // 4. s.Update() nije potreban, Commit će snimiti promenu
+                s.Transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                s?.Transaction.Rollback();
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+                if (s != null) s.Close();
+            }
+        }
+
+        public static List<CasPregled> VratiSveCasoveNastavnika(int nastavnikId)
+        {
+            List<CasPregled> rezultat = new List<CasPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Nastavnik n = (Nastavnik)s.Get<Honorarac>(nastavnikId) ?? s.Get<StalnoZaposlen>(nastavnikId);
+
+                if (n != null)
+                {
+                    // "Budimo" kolekciju časova pre zatvaranja sesije
+                    NHibernateUtil.Initialize(n.DrziCasove);
+
+                    foreach (Cas c in n.DrziCasove)
+                    {
+                        // Formiramo string za prikaz učionice
+                        string ucionicaInfo = "N/A";
+                        if (c.UcionicaOdrzavnja != null && c.UcionicaOdrzavnja.Id != null)
+                        {
+                            ucionicaInfo = $"{c.UcionicaOdrzavnja.Id.Naziv}, {c.UcionicaOdrzavnja.Id.PripadaLokaciji.Adresa}";
+                        }
+
+                        rezultat.Add(new CasPregled(c.Id, c.Termin, c.Tema, ucionicaInfo));
+                    }
+                }
+            }
+            catch (Exception ec)
+            {
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+                if (s != null) s.Close();
+            }
+            return rezultat;
+        }
+
+        public static List<KomisijaPregled> VratiSveKomisije()
+        {
+            List<KomisijaPregled> rezultat = new List<KomisijaPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                IEnumerable<Komisija> komisije = s.Query<Komisija>().ToList();
+                foreach (var k in komisije)
+                {
+                    rezultat.Add(new KomisijaPregled(k.Id));
+                }
+            }
+            catch (Exception ec)
+            {
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally { if (s != null) s.Close(); }
+            return rezultat;
+        }
+
+        // Metoda koja snima izmene u članstvu
+        public static void SacuvajIzmeneZaKomisije(int nastavnikId, List<int> noveKomisijeIds)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                s.BeginTransaction();
+
+                Nastavnik n = (Nastavnik)s.Get<Honorarac>(nastavnikId) ?? s.Get<StalnoZaposlen>(nastavnikId);
+
+                if (n != null)
+                {
+
+                    // 1. Prvo brišemo sve postojeće veze
+                    n.KomisijeCijiJeClan.Clear();
+
+                    // 2. Zatim dodajemo nove veze
+                    foreach (int komisijaId in noveKomisijeIds)
+                    {
+                        Komisija k = s.Load<Komisija>(komisijaId);
+                        n.KomisijeCijiJeClan.Add(k);
+                    }
+
+                    // s.Update(n) nije neophodan, Commit će snimiti promene u kolekciji
+                    s.Transaction.Commit();
+                }
+            }
+            catch (Exception ec)
+            {
+                s?.Transaction.Rollback();
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+                if (s != null) s.Close();
+            }
         }
     }
 }

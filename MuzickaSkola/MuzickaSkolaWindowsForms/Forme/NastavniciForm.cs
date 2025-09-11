@@ -145,5 +145,56 @@ namespace MuzickaSkolaWindowsForms.Forme
             KurseviNastavnikForm forma = new KurseviNastavnikForm(idNastavnika);
             forma.ShowDialog();
         }
+
+        private void btnDodeliMentora_Click(object sender, EventArgs e)
+        {
+            if (listViewNastavnici.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas, izaberite nastavnika kojem želite da dodelite mentora.");
+                return;
+            }
+
+            int idNastavnika = (int)listViewNastavnici.SelectedItems[0].Tag;
+            Nastavnik selektovaniNastavnik = DataProvider.VratiNastavnika(idNastavnika);
+
+            if (selektovaniNastavnik != null)
+            {
+                DodeliMentoraForm forma = new DodeliMentoraForm(selektovaniNastavnik);
+                forma.ShowDialog();
+                // Nije neophodno osvežiti listu, jer se mentor ne vidi u glavnom prikazu
+            }
+        }
+
+        private void btnPrikaziCasove_Click(object sender, EventArgs e)
+        {
+            if (listViewNastavnici.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas, izaberite nastavnika.");
+                return;
+            }
+
+            int idNastavnika = (int)listViewNastavnici.SelectedItems[0].Tag;
+
+            CasoviNastavnikaForm forma = new CasoviNastavnikaForm(idNastavnika);
+            forma.ShowDialog();
+        }
+
+        private void btnUpravljajKomisijama_Click(object sender, EventArgs e)
+        {
+            if (listViewNastavnici.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas, izaberite nastavnika.");
+                return;
+            }
+
+            int idNastavnika = (int)listViewNastavnici.SelectedItems[0].Tag;
+            Nastavnik selektovaniNastavnik = DataProvider.VratiNastavnika(idNastavnika);
+
+            if (selektovaniNastavnik != null)
+            {
+                UpravljanjeKomisijamaForm forma = new UpravljanjeKomisijamaForm(selektovaniNastavnik);
+                forma.ShowDialog();
+            }
+        }
     }
 }

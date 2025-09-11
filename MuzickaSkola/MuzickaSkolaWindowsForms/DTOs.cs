@@ -54,4 +54,50 @@ namespace MuzickaSkolaWindowsForms
             this.TipKursa = tipKursa;
         }
     }
+
+    public class MentorPregled
+    {
+        public int Id { get; set; }
+        public string PunoIme { get; set; }
+
+        public MentorPregled(int id, string punoIme)
+        {
+            this.Id = id;
+            this.PunoIme = punoIme;
+        }
+
+        // Ovo je važno da bi ComboBox znao šta da prikaže
+        public override string ToString()
+        {
+            return this.PunoIme;
+        }
+    }
+
+    public class CasPregled
+    {
+        public int Id { get; set; }
+        public DateTime Termin { get; set; }
+        public string Tema { get; set; }
+        public string Ucionica { get; set; } // Prikazaćemo i u kojoj je učionici
+
+        public CasPregled(int id, DateTime termin, string tema, string ucionica)
+        {
+            this.Id = id;
+            this.Termin = termin;
+            this.Tema = tema;
+            this.Ucionica = ucionica;
+        }
+    }
+
+    public class KomisijaPregled
+    {
+        public int Id { get; set; }
+        public string Opis { get; set; } // Da bi bilo lakše za prikaz
+
+        public KomisijaPregled(int id)
+        {
+            this.Id = id;
+            this.Opis = $"Komisija (ID: {id})";
+        }
+    }
 }
