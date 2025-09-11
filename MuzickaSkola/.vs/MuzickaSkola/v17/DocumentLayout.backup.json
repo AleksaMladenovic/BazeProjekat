@@ -3,16 +3,84 @@
   "WorkspaceRootPath": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\mapiranja\\prisustvomapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\mapiranja\\prisustvomapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\forme\\izmenipolaznika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\izmenipolaznika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\entiteti\\nastavnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\entiteti\\nastavnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\entiteti\\osoba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\entiteti\\osoba.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\entiteti\\polaznik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\entiteti\\polaznik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\mapiranja\\detepolaznikmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\mapiranja\\detepolaznikmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\dtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\dtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\dtomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\dtomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\entiteti\\prisustvo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\entiteti\\prisustvo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\dtomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\dtomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\mapiranja\\polaznikmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\mapiranja\\polaznikmapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\entiteti\\detepolaznik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\entiteti\\detepolaznik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\forme\\izmenipolaznika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\izmenipolaznika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\roditeljiform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\roditeljiform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\prisustvonacasovimaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\prisustvonacasovimaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\prijavljenikurseviform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\prijavljenikurseviform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\polozeniispitiform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\polozeniispitiform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\polazniciform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\polazniciform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\kurseviform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\kurseviform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\izmeniroditeljaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\izmeniroditeljaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\muzickaskolawindowsforms\\forme\\dodajpolaznikaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\forme\\dodajpolaznikaform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|c:\\users\\mmico\\desktop\\sistemibazepodataka\\bazeprojekat\\muzickaskola\\muzickaskolawindowsforms\\mapiranja\\prisustvomapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{747D7C45-9B20-4B03-A15F-A58A4E298374}|MuzickaSkolaWindowsForms\\MuzickaSkolaWindowsForms.csproj|solutionrelative:muzickaskolawindowsforms\\mapiranja\\prisustvomapiranja.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,12 +89,95 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 111,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 108,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "Polaznik.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Polaznik.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Entiteti\\Polaznik.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Polaznik.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Entiteti\\Polaznik.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T15:11:13.184Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DTOManager.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\DTOManager.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\DTOManager.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\DTOManager.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\DTOManager.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T22:47:57.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DetePolaznikMapiranja.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\DetePolaznikMapiranja.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Mapiranja\\DetePolaznikMapiranja.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\DetePolaznikMapiranja.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Mapiranja\\DetePolaznikMapiranja.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T15:05:02.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IzmeniPolaznika.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:00.94Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PolaznikMapiranja.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\PolaznikMapiranja.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Mapiranja\\PolaznikMapiranja.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\PolaznikMapiranja.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Mapiranja\\PolaznikMapiranja.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T15:05:55.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DetePolaznik.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\DetePolaznik.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Entiteti\\DetePolaznik.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\DetePolaznik.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Entiteti\\DetePolaznik.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T15:09:12.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PolozeniIspitiForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PolozeniIspitiForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\PolozeniIspitiForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PolozeniIspitiForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\PolozeniIspitiForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:42.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Prisustvo.cs",
               "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Prisustvo.cs",
               "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Entiteti\\Prisustvo.cs",
@@ -34,34 +185,151 @@
               "RelativeToolTip": "MuzickaSkolaWindowsForms\\Entiteti\\Prisustvo.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T22:52:49.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-08T22:52:49.658Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DTOManager.cs",
-              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\DTOManager.cs",
-              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\DTOManager.cs",
-              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\DTOManager.cs",
-              "RelativeToolTip": "MuzickaSkolaWindowsForms\\DTOManager.cs",
-              "ViewState": "AgIAAPsBAAAAAAAAAAAqwBICAABBAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "IzmeniPolaznika.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\IzmeniPolaznika.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAcwD4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T22:47:57.102Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-09T12:36:58.299Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 13,
+              "Title": "PrijavljeniKurseviForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PrijavljeniKurseviForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\PrijavljeniKurseviForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PrijavljeniKurseviForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\PrijavljeniKurseviForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:51.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PolazniciForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PolazniciForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\PolazniciForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PolazniciForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\PolazniciForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:24.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "KurseviForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\KurseviForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\KurseviForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\KurseviForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\KurseviForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:15.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IzmeniRoditeljaForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\IzmeniRoditeljaForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\IzmeniRoditeljaForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\IzmeniRoditeljaForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\IzmeniRoditeljaForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:12.071Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RoditeljiForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\RoditeljiForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\RoditeljiForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\RoditeljiForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\RoditeljiForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:33:00.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PrisustvoNaCasovimaForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PrisustvoNaCasovimaForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\PrisustvoNaCasovimaForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\PrisustvoNaCasovimaForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\PrisustvoNaCasovimaForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:32:55.681Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DodajPolaznikaForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\DodajPolaznikaForm.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Forme\\DodajPolaznikaForm.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Forme\\DodajPolaznikaForm.cs [Design]",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Forme\\DodajPolaznikaForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:31:22.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "PrisustvoMapiranja.cs",
               "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\PrisustvoMapiranja.cs",
               "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Mapiranja\\PrisustvoMapiranja.cs",
               "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Mapiranja\\PrisustvoMapiranja.cs",
               "RelativeToolTip": "MuzickaSkolaWindowsForms\\Mapiranja\\PrisustvoMapiranja.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T22:43:29.926Z",
+              "WhenOpened": "2025-09-08T22:43:29.926Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 114,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Nastavnik.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Nastavnik.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Entiteti\\Nastavnik.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Nastavnik.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Entiteti\\Nastavnik.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T15:46:28.372Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Osoba.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Osoba.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\Entiteti\\Osoba.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\Entiteti\\Osoba.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\Entiteti\\Osoba.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T15:41:23.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DTOs.cs",
+              "DocumentMoniker": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\DTOs.cs",
+              "RelativeDocumentMoniker": "MuzickaSkolaWindowsForms\\DTOs.cs",
+              "ToolTip": "C:\\Users\\mmico\\Desktop\\SistemiBazePodataka\\BazeProjekat\\MuzickaSkola\\MuzickaSkolaWindowsForms\\DTOs.cs",
+              "RelativeToolTip": "MuzickaSkolaWindowsForms\\DTOs.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAcwCYAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:56:21.612Z"
             }
           ]
         }

@@ -220,17 +220,16 @@ namespace MuzickaSkolaWindowsForms
                 var dp = s.Get<DetePolaznik>(idOsobe)
                          ?? throw new ApplicationException("Dete polaznik ne postoji.");
 
-                // --- NOVO: bez obzira da li je PrijavioRoditelj tip Roditelj ili Osoba,
-                //           uzmi ID i učitaj OSOBA pa pokupi Ime/Prezime.
+               
                 int idRoditelja = dp.PrijavioRoditelj?.Id ?? 0;
                 string? punoImeRoditelja = null;
                 if (idRoditelja > 0)
                 {
-                    var osobaRoditelj = s.Get<Osoba>(idRoditelja); // ← direktno iz OSOBA
+                    var osobaRoditelj = s.Get<Osoba>(idRoditelja); 
                     if (osobaRoditelj != null)
                         punoImeRoditelja = $"{osobaRoditelj.Ime} {osobaRoditelj.Prezime}";
                 }
-                // ---
+               
 
                 return new DetePolaznikBasic
                 {
@@ -314,6 +313,8 @@ namespace MuzickaSkolaWindowsForms
                             osobaRoditelj.Ime = roditeljIme!;
                         if (!string.IsNullOrWhiteSpace(roditeljPrezime))
                             osobaRoditelj.Prezime = roditeljPrezime!;
+                        if(!string.IsNullOrEmpty(roditeljJmbg))
+                            osobaRoditelj.Jmbg= roditeljJmbg!;
                        
                         s.Update(osobaRoditelj);
                     }
@@ -340,7 +341,7 @@ namespace MuzickaSkolaWindowsForms
         {
             using (var s = DataLayer.GetSession())
             {
-                // Ako imaš FRoditelj flag u OSOBA (kao što prikazuješ u klasi):
+             
                 var q = s.Query<Osoba>()
                          .Where(x => x.FRoditelj == true)
                          .Select(x => new RoditeljPregled
@@ -369,10 +370,10 @@ namespace MuzickaSkolaWindowsForms
 
                 if (roditelj != null)
                 {
-                    // Obeleži da je roditelj (ako već nije)
+                    
                     if (!roditelj.FRoditelj) roditelj.FRoditelj = true;
 
-                    // Po želji osveži osnovne podatke ako su uneti
+                    
                     if (!string.IsNullOrWhiteSpace(ime)) roditelj.Ime = ime!;
                     if (!string.IsNullOrWhiteSpace(prezime)) roditelj.Prezime = prezime!;
                     if (!string.IsNullOrWhiteSpace(adresa)) roditelj.Adresa = adresa!;
@@ -421,7 +422,7 @@ namespace MuzickaSkolaWindowsForms
                                        .Select(g => new { IdRod = g.Key, Broj = g.Count() })
                                        .ToDictionary(x => x.IdRod, x => x.Broj);
 
-                // 3) projekcija u DTO
+               
                 foreach (var o in roditelji)
                 {
                     rezultat.Add(new RoditeljListItem
@@ -464,7 +465,7 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
-        // Izmena roditelja (ažurira OSOBA)
+        
         public static void IzmeniRoditelja(RoditeljListItem dto)
         {
             using (var s = DataLayer.GetSession())
@@ -474,7 +475,7 @@ namespace MuzickaSkolaWindowsForms
 
                 o.Ime = dto.Ime ?? o.Ime;
                 o.Prezime = dto.Prezime ?? o.Prezime;
-                if (!string.IsNullOrWhiteSpace(dto.Jmbg)) o.Jmbg = dto.Jmbg; // pazi na jedinstvenost JMBG u bazi
+                if (!string.IsNullOrWhiteSpace(dto.Jmbg)) o.Jmbg = dto.Jmbg; 
                 o.Telefon = dto.Telefon;
                 o.Email = dto.Email;
 
@@ -483,7 +484,7 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
-        // "Brisanje" roditelja: skini ulogu i odveži svu decu (ID_RODITELJA = NULL)
+       
         public static void ObrisiRoditelja(int idOsobe)
         {
             using (var s = DataLayer.GetSession())
@@ -501,7 +502,7 @@ namespace MuzickaSkolaWindowsForms
                     s.Update(d);
                 }
 
-                // Skini ulogu roditelja (OSOBA ostaje)
+                
                 o.FRoditelj = false;
                 s.Update(o);
 

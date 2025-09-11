@@ -53,19 +53,17 @@ namespace MuzickaSkolaWindowsForms.Forme
        
         private void IzmeniPolaznikaForm_Load(object sender, EventArgs e)
         {
-            
+
             bool odrasli = string.Equals(_tip, "Odrasli", StringComparison.OrdinalIgnoreCase);
             rbOdrasli.Checked = odrasli;
             rbDete.Checked = !odrasli;
 
             if (odrasli)
             {
-                
                 ClearDynamic();
                 AddField("Zanimanje", "tbZanimanje", 0, 0);
                 pnlDynamic.Height = 60;
 
-                
                 var dto = DTOManager.VratiOdraslogPolaznika(_idOsobe);
                 tbJMBG.Text = dto.Jmbg;
                 tbIme.Text = dto.Ime;
@@ -78,15 +76,15 @@ namespace MuzickaSkolaWindowsForms.Forme
             else
             {
                 ClearDynamic();
-                
+
                 AddField("JBD", "tbJbd", 0, 0);
                 AddField("JMBG roditelja", "tbRoditeljJmbg", 0, 1);
-               
                 AddField("Ime roditelja", "tbRoditeljIme", 1, 0);
                 AddField("Prezime roditelja", "tbRoditeljPrezime", 1, 1);
                 pnlDynamic.Height = 100;
 
                 var dto = DTOManager.VratiDetePolaznika(_idOsobe);
+
                 tbJMBG.Text = dto.Jmbg;
                 tbIme.Text = dto.Ime;
                 tbPrezime.Text = dto.Prezime;
@@ -96,13 +94,42 @@ namespace MuzickaSkolaWindowsForms.Forme
 
                 (pnlDynamic.Controls["tbJbd"] as TextBox)!.Text = dto.Jbd;
 
-                
                 if (dto.IdRoditelja > 0)
                 {
+                    try
+                    {
+                        var r = DTOManager.VratiRoditeljaDetalji(dto.IdRoditelja);
+
+                        (pnlDynamic.Controls["tbRoditeljJmbg"] as TextBox)!.Text = r.Jmbg?.Trim();
+                        (pnlDynamic.Controls["tbRoditeljIme"] as TextBox)!.Text = r.Ime?.Trim();
+                        (pnlDynamic.Controls["tbRoditeljPrezime"] as TextBox)!.Text = r.Prezime?.Trim();
+                    }
+                    catch
+                    {
+                        
+                        var imePrez = dto.PunoImeRoditelja?
+                            .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                        (pnlDynamic.Controls["tbRoditeljIme"] as TextBox)!.Text =
+                            (imePrez != null && imePrez.Length > 0) ? imePrez[0] : string.Empty;
+
+                        (pnlDynamic.Controls["tbRoditeljPrezime"] as TextBox)!.Text =
+                            (imePrez != null && imePrez.Length > 1) ? string.Join(" ", imePrez.Skip(1)) : string.Empty;
+
+                        
+                    }
+                }
+                else
+                {
                     
-                    var imePrez = dto.PunoImeRoditelja?.Split(' ');
-                    (pnlDynamic.Controls["tbRoditeljIme"] as TextBox)!.Text = imePrez?.FirstOrDefault();
-                    (pnlDynamic.Controls["tbRoditeljPrezime"] as TextBox)!.Text = imePrez?.Skip(1).FirstOrDefault();
+                    var imePrez = dto.PunoImeRoditelja?
+                        .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                    (pnlDynamic.Controls["tbRoditeljIme"] as TextBox)!.Text =
+                        (imePrez != null && imePrez.Length > 0) ? imePrez[0] : string.Empty;
+
+                    (pnlDynamic.Controls["tbRoditeljPrezime"] as TextBox)!.Text =
+                        (imePrez != null && imePrez.Length > 1) ? string.Join(" ", imePrez.Skip(1)) : string.Empty;
                 }
             }
         }

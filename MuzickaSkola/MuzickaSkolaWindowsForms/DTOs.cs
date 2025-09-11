@@ -43,17 +43,7 @@ namespace MuzickaSkolaWindowsForms
         public string? Prezime { get; set; }
         public string? Adresa { get; set; }
         public string? Telefon { get; set; }
-        public string? Email { get; set; }
-
-   
-        //public IList<KursPregled> PrijavljeniKursevi { get; set; }
-        //public IList<PrisustvoPregled> PrisustvaNaCasovima { get; set; }
-
-        //protected PolaznikBasic()
-        //{
-        //    PrijavljeniKursevi = new List<KursPregled>();
-        //    PrisustvaNaCasovima = new List<PrisustvoPregled>();
-        //}
+        public string? Email { get; set; }  
     }
 
     public class OdrasliPolaznikBasic : PolaznikBasic

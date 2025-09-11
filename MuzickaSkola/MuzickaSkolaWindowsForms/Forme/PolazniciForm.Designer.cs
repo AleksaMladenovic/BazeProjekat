@@ -210,7 +210,7 @@
             Controls.Add(gbSviPolaznici);
             Controls.Add(gbPodaciOPolazniku);
             Name = "PolazniciForm";
-            Text = "PolazniciForm";
+            Text = "Svi polaznici";
             Load += PolazniciForm_Load;
             gbPodaciOPolazniku.ResumeLayout(false);
             gbDetaljiPolaznik.ResumeLayout(false);
