@@ -23,6 +23,8 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.Adresa, "ADRESA");
             Map(p => p.FPolaznik, "FPOLAZNIK");
             Map(p => p.FRoditelj, "FRODITELJ");
+            Map(p => p.StrucnaSprema, "STRUCNA_SPREMA");
+            Map(p => p.DatumZaposlenja, "DATUM_ZAPOSLENJA");
             Map(p => p.FNastavnik, "FNASTAVNIK");
         }
     }

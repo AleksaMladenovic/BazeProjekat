@@ -45,7 +45,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 .KeyColumn("ID_KURSA")
                 .Cascade.All().Inverse();
 
-            //References(x => x.VodiNastavnik, "ID_NASTAVNIKA");
+            References(x => x.VodiNastavnik, "ID_NASTAVNIKA");
         }
     }
 

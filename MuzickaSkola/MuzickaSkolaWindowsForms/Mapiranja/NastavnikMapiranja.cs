@@ -23,8 +23,8 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             HasOne(x => x.OsnovniPodaci).Constrained();
 
             // Mapiramo atribute koji logički pripadaju Nastavniku, ali se fizički nalaze u OSOBA tabeli
-            Map(x => x.DatumZaposlenja, "DATUM_ZAPOSLENJA");
-            Map(x => x.StrucnaSprema, "STRUCNA_SPREMA");
+            //Map(x => x.DatumZaposlenja, "DATUM_ZAPOSLENJA");
+            //Map(x => x.StrucnaSprema, "STRUCNA_SPREMA");
             References(x => x.Mentor, "ID_MENTORA");
 
             // Veze ka drugim tabelama ostaju iste

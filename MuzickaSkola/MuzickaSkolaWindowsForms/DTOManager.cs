@@ -280,13 +280,14 @@ namespace MuzickaSkolaWindowsForms
 
                 foreach (var k in kursevi)
                 {
+                    var Nastavnik = s.Get<Osoba>(k.VodiNastavnik.Id);
                     var noviKurs = new KursPregled()
                     {
                         Id = k.Id,
                         Naziv = k.Naziv,
                         Nivo = k.Nivo,
-                        ImeNastavnika = "Nije dodeljen",
-                        //ImeNastavnika = (k.VodiNastavnik != null) ? $"{k.VodiNastavnik.OsnovniPodaci.Ime} {k.VodiNastavnik.OsnovniPodaci.Prezime}" : "Nije dodeljen"
+                        ImeNastavnika = k.VodiNastavnik != null ? $"{Nastavnik.Ime} {Nastavnik.Prezime}" : "Nije dodeljen",
+                        NastavnikId = k.Id,
                     };
 
                     noviKurs.TipKursa = VratiTipKursa(k);
@@ -342,12 +343,14 @@ namespace MuzickaSkolaWindowsForms
                 {
                     MessageBox.Show($"Kurs sa id'{kursId}' ne postoji.", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                var nastavnik = VratiNastavnika(kurs.VodiNastavnik.Id);
                 kursBasic = new KursBasic()
                 {
                     Id = kurs.Id,
                     Naziv = kurs.Naziv,
                     Nivo = kurs.Nivo,
-                    ImeNastavnika = "Nepoznato",
+                    ImeNastavnika = nastavnik.OsnovniPodaci.Ime + " " + nastavnik.OsnovniPodaci.Prezime,
+                    NastavnikId = nastavnik.Id,
                     TipKursa = VratiTipKursa(kurs),
                 };
                 PostaviSpecijalanPropertyKursuBasic(kursBasic,kurs);
@@ -430,7 +433,7 @@ namespace MuzickaSkolaWindowsForms
                 {
                     noviKursEntitet.Naziv = kursDto.Naziv;
                     noviKursEntitet.Nivo = kursDto.Nivo;
-                    //noviKursEntitet.VodiNastavnik = null;
+                    noviKursEntitet.VodiNastavnik = DTOManager.VratiNastavnika(kursDto.NastavnikId);
 
                     s.Save(noviKursEntitet);
 
@@ -459,7 +462,7 @@ namespace MuzickaSkolaWindowsForms
                 kursZaIzmenu.Naziv = kursDto.Naziv;
                 kursZaIzmenu.Nivo = kursDto.Nivo;
                 PostaviSpecijalanProperyKursu(kursDto, kursZaIzmenu);
-                
+                kursZaIzmenu.VodiNastavnik = DTOManager.VratiNastavnika(kursDto.NastavnikId);
                 s.Update(kursZaIzmenu);
                 s.Flush();
                 s.Close();
@@ -491,6 +494,58 @@ namespace MuzickaSkolaWindowsForms
             {
                 MessageBox.Show(ex.FormatExceptionMessage());
                 return false;
+            }
+        }
+
+        public static List<Nastavnik> VratiSveNastavnike()
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                var osobeNastavnici =( from o in s.Query<Osoba>()
+                                       where o.FNastavnik==true
+                                       select o).ToList();
+
+                List<Nastavnik> listaNastavnika = new List<Nastavnik>();
+                foreach(var o in osobeNastavnici)
+                {
+                    var st = s.Get<StalnoZaposlen>(o.Id);
+                    if (st != null)
+                    {
+                        listaNastavnika.Add(st);
+                        continue;
+                    }
+                    var hn = s.Get<Honorarac>(o.Id);
+                    listaNastavnika.Add(hn);
+                }
+                s.Close();
+                return listaNastavnika;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return new List<Nastavnik>();
+            }
+        }
+
+        public static Nastavnik VratiNastavnika(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                
+                Nastavnik nastavnik = s.Get<StalnoZaposlen>(id);
+                if (nastavnik != null)
+                    return nastavnik;
+                nastavnik = s.Get<Honorarac>(id);
+                return nastavnik;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return null;
             }
         }
         #endregion

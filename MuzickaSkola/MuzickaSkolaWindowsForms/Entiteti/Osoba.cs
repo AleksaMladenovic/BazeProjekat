@@ -19,6 +19,8 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         // Flegovi ostaju da znamo koje uloge postoje
         public virtual bool FPolaznik { get; set; }
         public virtual bool FRoditelj { get; set; }
+        public virtual DateTime? DatumZaposlenja { get; set; }
+        public virtual required string StrucnaSprema { get; set; }
         public virtual bool FNastavnik { get; set; }
 
         // REFERENCE NA ULOGE (One-to-One)

@@ -18,7 +18,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 
         //public virtual IList<Polaznik> PrijavljeniPolaznici { get; set; }
 
-        //public virtual Nastavnik VodiNastavnik { get; set; }
+        public virtual Nastavnik VodiNastavnik { get; set; }
 
         public virtual IList<Lokacija> LokacijeOdrzavanja { get; set; }
 

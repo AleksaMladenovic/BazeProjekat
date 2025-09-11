@@ -49,6 +49,12 @@ namespace MuzickaSkolaWindowsForms.Forme
                 "MUZICKA_TEORIJA"
             });
 
+            var sviNastavnici = DTOManager.VratiSveNastavnike();
+            foreach(var nastavnik in sviNastavnici)
+            {
+                cmbNastavnici.Items.Add(new NastavnikComboBox { Id = nastavnik.Id, PunoIme = $"{nastavnik.OsnovniPodaci.Ime} {nastavnik.OsnovniPodaci.Prezime}" });
+            }
+
             if (this.kurs != null)
             {
                 txtNaziv.Text = this.kurs.Naziv;
@@ -58,7 +64,14 @@ namespace MuzickaSkolaWindowsForms.Forme
                 cmbTipKursa.SelectedItem = tip;
 
                 cmbTipKursa.Enabled = false;
-
+                foreach(var i in cmbNastavnici.Items)
+                {
+                    if (((NastavnikComboBox)i).Id == this.kurs.NastavnikId)
+                    {
+                        cmbNastavnici.SelectedItem = i;
+                        break;
+                    }
+                }
                 if (tip == "INSTRUMENT")
                 {
                     txtInstrument.Text = this.kurs.Instrument;
@@ -75,6 +88,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             else
             {
                 cmbTipKursa.SelectedIndex = 0;
+                cmbNastavnici.SelectedIndex = 0;
             }
         }
         private void cmdSacuvaj_Click(object sender, EventArgs e)
@@ -88,7 +102,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             var kursDto = this.kurs ?? new KursBasic();
             kursDto.Naziv = txtNaziv.Text;
             kursDto.Nivo = txtNivo.Text;
-            //dodati id nastavnika
+            kursDto.NastavnikId = ((NastavnikComboBox)cmbNastavnici.SelectedItem).Id;
             
             string tipKursa = cmbTipKursa.SelectedItem.ToString();
 
