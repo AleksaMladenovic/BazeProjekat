@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentNHibernate.Mapping;
+using MuzickaSkolaWindowsForms.Entiteti;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    class StaloZapMapiranja : ClassMap<StalnoZaposlen>
+    // KORISTIMO SubclassMap DA KAŽEMO DA JE OVO PODKLASA NASTAVNIKA
+    class StaloZapMapiranja : SubclassMap<StalnoZaposlen>
     {
         public StaloZapMapiranja()
         {
-            
+            // Kažemo gde se nalaze podaci specifični za StalnoZaposlenog
             Table("STALNO_ZAP");
+            // Kažemo preko koje kolone se spaja sa OSOBA tabelom
+            KeyColumn("ID_OSOBE");
 
-            Id(x => x.Id)
-                .Column("ID_OSOBE")
-                .GeneratedBy.Foreign("OsnovniPodaci");
-
-            HasOne(x => x.OsnovniPodaci)
-                .Constrained()
-                .Cascade.All();
-
+            // Mapiramo samo atribute specifične za StalnoZaposlenog
             Map(p => p.RadnoVreme, "RADNO_VREME");
-
             HasMany(x => x.JeMentor).KeyColumn("ID_MENTORA").Inverse().Cascade.All();
         }
     }

@@ -11,5 +11,6 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         public virtual required string BrojUgovora { get; set; }
         public virtual required string TrajanjeUgovora { get; set; }
         public virtual int? BrojCasova { get; set; }
+
     }
 }

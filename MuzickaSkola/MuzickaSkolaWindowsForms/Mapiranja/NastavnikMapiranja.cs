@@ -13,9 +13,10 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
     {
         public NastavnikMapiranja()
         {
-           
+
             UseUnionSubclassForInheritanceMapping();
 
+            Table("OSOBA");
             // Definišemo ključ i kažemo da je strani ključ koji pokazuje na Osobu
             Id(x => x.Id).Column("ID_OSOBE").GeneratedBy.Foreign("OsnovniPodaci");
 
@@ -23,9 +24,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             HasOne(x => x.OsnovniPodaci).Constrained();
 
             // Mapiramo atribute koji logički pripadaju Nastavniku, ali se fizički nalaze u OSOBA tabeli
-            Map(x => x.DatumZaposlenja, "DATUM_ZAPOSLENJA");
-            Map(x => x.StrucnaSprema, "STRUCNA_SPREMA");
-            References(x => x.Mentor, "ID_MENTORA");
+
 
             // Veze ka drugim tabelama ostaju iste
             HasMany(x => x.DrziCasove)
