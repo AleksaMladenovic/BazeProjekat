@@ -1,4 +1,4 @@
-namespace MuzickaSkolaWindowsForms.Forme
+﻿namespace MuzickaSkolaWindowsForms.Forme
 {
     partial class NastavniciForm
     {

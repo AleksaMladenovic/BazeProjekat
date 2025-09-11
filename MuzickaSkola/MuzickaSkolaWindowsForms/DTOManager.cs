@@ -501,57 +501,57 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
-        public static List<Nastavnik> VratiSveNastavnike()
-        {
-            try
-            {
-                ISession s = DataLayer.GetSession();
+        //public static List<Nastavnik> VratiSveNastavnike()
+        //{
+        //    try
+        //    {
+        //        ISession s = DataLayer.GetSession();
 
-                var osobeNastavnici =( from o in s.Query<Osoba>()
-                                       where o.FNastavnik==true
-                                       select o).ToList();
+        //        var osobeNastavnici =( from o in s.Query<Osoba>()
+        //                               where o.FNastavnik==true
+        //                               select o).ToList();
 
-                List<Nastavnik> listaNastavnika = new List<Nastavnik>();
-                foreach(var o in osobeNastavnici)
-                {
-                    var st = s.Get<StalnoZaposlen>(o.Id);
-                    if (st != null)
-                    {
-                        listaNastavnika.Add(st);
-                        continue;
-                    }
-                    var hn = s.Get<Honorarac>(o.Id);
-                    listaNastavnika.Add(hn);
-                }
-                s.Close();
-                return listaNastavnika;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.FormatExceptionMessage());
-                return new List<Nastavnik>();
-            }
-        }
+        //        List<Nastavnik> listaNastavnika = new List<Nastavnik>();
+        //        foreach(var o in osobeNastavnici)
+        //        {
+        //            var st = s.Get<StalnoZaposlen>(o.Id);
+        //            if (st != null)
+        //            {
+        //                listaNastavnika.Add(st);
+        //                continue;
+        //            }
+        //            var hn = s.Get<Honorarac>(o.Id);
+        //            listaNastavnika.Add(hn);
+        //        }
+        //        s.Close();
+        //        return listaNastavnika;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.FormatExceptionMessage());
+        //        return new List<Nastavnik>();
+        //    }
+        //}
 
-        public static Nastavnik VratiNastavnika(int id)
-        {
-            try
-            {
-                ISession s = DataLayer.GetSession();
+        //public static Nastavnik VratiNastavnika(int id)
+        //{
+        //    try
+        //    {
+        //        ISession s = DataLayer.GetSession();
 
                 
-                Nastavnik nastavnik = s.Get<StalnoZaposlen>(id);
-                if (nastavnik != null)
-                    return nastavnik;
-                nastavnik = s.Get<Honorarac>(id);
-                return nastavnik;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.FormatExceptionMessage());
-                return null;
-            }
-        }
+        //        Nastavnik nastavnik = s.Get<StalnoZaposlen>(id);
+        //        if (nastavnik != null)
+        //            return nastavnik;
+        //        nastavnik = s.Get<Honorarac>(id);
+        //        return nastavnik;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.FormatExceptionMessage());
+        //        return null;
+        //    }
+        //}
         #endregion
 
         #region Nastava
@@ -935,7 +935,7 @@ namespace MuzickaSkolaWindowsForms
                         if (k is MuzickaTeorijaKurs) tipKursa = "Muzička teorija";
                         else if (k is InstrumentKurs) tipKursa = "Instrument";
                         else if (k is GrupaInstrumenataKurs) tipKursa = "Grupa instrumenata";
-                        else if (k is IndividualnoPevanje) tipKursa = "Individualno pevanje";
+                        else if (k is IndividualnoPevanjeKurs) tipKursa = "Individualno pevanje";
                         else if (k is HorskoPevanjeKurs) tipKursa = "Horsko pevanje";
 
                         rezultat.Add(new KursPregled(k.Id, k.Naziv, k.Nivo,tipKursa));

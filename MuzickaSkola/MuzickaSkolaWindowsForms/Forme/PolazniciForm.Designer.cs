@@ -1,4 +1,4 @@
-namespace MuzickaSkolaWindowsForms.Forme
+﻿namespace MuzickaSkolaWindowsForms.Forme
 {
     partial class PolazniciForm
     {
@@ -19,6 +19,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             }
             base.Dispose(disposing);
         }
+
 
         #region Windows Form Designer generated code
 
@@ -219,5 +220,22 @@ namespace MuzickaSkolaWindowsForms.Forme
         }
 
         #endregion
+        private Button btnDodajPolaznika;
+        private Button btnObrisiPolaznika;
+        private Button btnIzmeniPol;
+        private GroupBox gbPodaciOPolazniku;
+        private GroupBox gbDetaljiPolaznik;
+        private Button btnPolozeniIspiti;
+        private Button btnPrisustvo;
+        private Button btnPrijavljeniKursevi;
+        private GroupBox gbRoditelj;
+        private Button btnPodaciRoditelj;
+        private ListView lwSviPolaznici;
+        private GroupBox gbSviPolaznici;
+        private ColumnHeader Id;
+        private ColumnHeader JMBG;
+        private ColumnHeader Ime;
+        private ColumnHeader Prezime;
+        private ColumnHeader Tip;
     }
 }

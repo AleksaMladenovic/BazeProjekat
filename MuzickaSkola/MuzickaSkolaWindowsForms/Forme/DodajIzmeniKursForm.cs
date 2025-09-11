@@ -52,7 +52,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             var sviNastavnici = DTOManager.VratiSveNastavnike();
             foreach(var nastavnik in sviNastavnici)
             {
-                cmbNastavnici.Items.Add(new NastavnikComboBox { Id = nastavnik.Id, PunoIme = $"{nastavnik.OsnovniPodaci.Ime} {nastavnik.OsnovniPodaci.Prezime}" });
+                cmbNastavnici.Items.Add(new NastavnikComboBox { Id = nastavnik.Id, PunoIme = $"{nastavnik.Ime} {nastavnik.Prezime}" });
             }
 
             if (this.kurs != null)
