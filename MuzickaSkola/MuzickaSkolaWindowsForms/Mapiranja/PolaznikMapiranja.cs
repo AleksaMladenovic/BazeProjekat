@@ -12,7 +12,9 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
     {
         public PolaznikMapiranja()
         {
-            Id(x => x.Id).GeneratedBy.Foreign("OsnovniPodaci");
+            UseUnionSubclassForInheritanceMapping();
+
+            Id(x => x.Id).Column("ID_OSOBE").GeneratedBy.Foreign("OsnovniPodaci");
 
             HasOne(x => x.OsnovniPodaci).Constrained();
 
@@ -31,7 +33,6 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 .KeyColumn("ID_POLAZNIKA")
                 .Cascade.All()
                 .Inverse();
-                
         }
     }
 }

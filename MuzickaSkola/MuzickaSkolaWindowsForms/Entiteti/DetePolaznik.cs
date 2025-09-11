@@ -10,6 +10,6 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     {
         public virtual string? Jbd { get; set; }
         public virtual required Roditelj PrijavioRoditelj { get; set; }
-        //public virtual required string JmbgRoditelja { get; set; }
+       
     }
 }
