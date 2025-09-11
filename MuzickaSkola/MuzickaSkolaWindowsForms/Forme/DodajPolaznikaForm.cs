@@ -91,7 +91,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                         Telefon = tbTelefon.Text?.Trim(),
                         Email = tbEmail.Text?.Trim(),
                         Jbd = jbd,
-                        IdRoditelja = idRoditelja // 0 ako ništa nije uneseno
+                        IdRoditelja = idRoditelja 
                     };
 
                     DTOManager.DodajDetePolaznika(dto);

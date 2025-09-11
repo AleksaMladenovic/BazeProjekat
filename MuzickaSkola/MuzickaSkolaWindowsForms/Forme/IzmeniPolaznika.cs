@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
     public partial class IzmeniPolaznika : Form
     {
         private readonly int _idOsobe;
-        private readonly string _tip; 
+        private readonly string _tip;
+       
         public IzmeniPolaznika()
         {
             InitializeComponent();
@@ -46,9 +48,6 @@ namespace MuzickaSkolaWindowsForms.Forme
             pnlDynamic.Controls.Add(lbl);
             pnlDynamic.Controls.Add(tb);
         }
-
-        private string GetDyn(string name) =>
-            (pnlDynamic.Controls.Find(name, true).FirstOrDefault() as TextBox)?.Text?.Trim();
 
        
         private void IzmeniPolaznikaForm_Load(object sender, EventArgs e)
@@ -99,7 +98,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                     try
                     {
                         var r = DTOManager.VratiRoditeljaDetalji(dto.IdRoditelja);
-
+                        
                         (pnlDynamic.Controls["tbRoditeljJmbg"] as TextBox)!.Text = r.Jmbg?.Trim();
                         (pnlDynamic.Controls["tbRoditeljIme"] as TextBox)!.Text = r.Ime?.Trim();
                         (pnlDynamic.Controls["tbRoditeljPrezime"] as TextBox)!.Text = r.Prezime?.Trim();

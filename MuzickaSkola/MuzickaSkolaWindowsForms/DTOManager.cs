@@ -370,10 +370,10 @@ namespace MuzickaSkolaWindowsForms
 
                 if (roditelj != null)
                 {
-                    
+
                     if (!roditelj.FRoditelj) roditelj.FRoditelj = true;
 
-                    
+
                     if (!string.IsNullOrWhiteSpace(ime)) roditelj.Ime = ime!;
                     if (!string.IsNullOrWhiteSpace(prezime)) roditelj.Prezime = prezime!;
                     if (!string.IsNullOrWhiteSpace(adresa)) roditelj.Adresa = adresa!;
@@ -385,22 +385,24 @@ namespace MuzickaSkolaWindowsForms
                     return roditelj.Id;
                 }
 
-                // 2) Ako ne postoji – kreiraj novog roditelja
-                var novaOsoba = new Osoba
-                {
-                    Jmbg = jmbg,
-                    Ime = ime ?? "",
-                    Prezime = prezime ?? "",
-                    Adresa = adresa,
-                    Telefon = telefon,
-                    Email = email,
-                    FRoditelj = true
-                };
 
-                s.Save(novaOsoba);
-                tx.Commit();
-                return novaOsoba.Id;
+                //    var novaOsoba = new Osoba
+                //    {
+                //        Jmbg = jmbg,
+                //        Ime = ime ?? "",
+                //        Prezime = prezime ?? "",
+                //        Adresa = adresa,
+                //        Telefon = telefon,
+                //        Email = email,
+                //        FRoditelj = true
+                //    };
+
+                //    s.Save(novaOsoba);
+                //    tx.Commit();
+                //    return novaOsoba.Id;
+                //}
             }
+            return 0;
         }
         public static List<RoditeljListItem> VratiSveRoditeljeDetalji()
         {
