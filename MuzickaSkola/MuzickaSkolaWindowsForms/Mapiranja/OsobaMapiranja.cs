@@ -23,9 +23,9 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.FRoditelj, "FRODITELJ");
             Map(p => p.FNastavnik, "FNASTAVNIK");
 
-            HasOne(p => p.UlogaPolaznik).Cascade.All();
-            HasOne(p => p.UlogaNastavnik).Cascade.All();
-            HasOne(p => p.UlogaRoditelj).Cascade.All();
+            //HasOne(p => p.UlogaPolaznik).PropertyRef(p=>p.OsnovniPodaci).Cascade.All();
+            //HasOne(p => p.UlogaNastavnik).Cascade.All();
+            //HasOne(p => p.UlogaRoditelj).Cascade.All();
         }
     }
 }

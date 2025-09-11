@@ -18,7 +18,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     public class PrisustvoId
     {
         // Deo ključa koji pokazuje na Polaznika
-        public virtual Polaznik PolaznikNaCasu { get; set; }
+        public virtual int PolaznikId { get; set; }    
 
         // Deo ključa koji pokazuje na Cas
         public virtual Cas CasKomePrisustvuje { get; set; }
@@ -33,7 +33,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
             var other = obj as PrisustvoId;
             if (other == null) return false;
 
-            return PolaznikNaCasu.Id == other.PolaznikNaCasu.Id &&
+            return PolaznikId == other.PolaznikId &&
                    CasKomePrisustvuje.Id == other.CasKomePrisustvuje.Id;
         }
 
