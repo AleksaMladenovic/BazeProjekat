@@ -10,11 +10,11 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     {
         public virtual required string RadnoVreme { get; set; }
 
-        public virtual IList<Nastavnik> JeMentor { get; set; }
+        public virtual IList<Osoba> JeMentor { get; set; }
 
         public StalnoZaposlen()
         {
-            JeMentor = new List<Nastavnik>();
+            JeMentor = new List<Osoba>();
         }
     }
 }

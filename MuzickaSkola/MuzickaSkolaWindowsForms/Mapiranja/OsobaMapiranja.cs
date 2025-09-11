@@ -13,7 +13,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         public OsobaMapiranja()
         {
             Table("OSOBA");
-            Id(p => p.Id,"ID_OSOBE").GeneratedBy.SequenceIdentity("OSOBA_ID_SEQ");
+            Id(p => p.Id, "ID_OSOBE").GeneratedBy.SequenceIdentity("OSOBA_ID_SEQ");
 
             Map(p => p.Jmbg, "JMBG");
             Map(p => p.Ime, "IME");
@@ -26,6 +26,9 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.StrucnaSprema, "STRUCNA_SPREMA");
             Map(p => p.DatumZaposlenja, "DATUM_ZAPOSLENJA");
             Map(p => p.FNastavnik, "FNASTAVNIK");
+            Map(x => x.DatumZaposlenja, "DATUM_ZAPOSLENJA");
+            Map(x => x.StrucnaSprema, "STRUCNA_SPREMA");
+            References(x => x.Mentor, "ID_MENTORA");
         }
     }
 }
