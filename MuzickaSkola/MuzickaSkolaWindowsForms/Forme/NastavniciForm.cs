@@ -131,5 +131,19 @@ namespace MuzickaSkolaWindowsForms.Forme
                 forma.ShowDialog();
             }
         }
+
+        private void btnPrikaziKurseve_Click(object sender, EventArgs e)
+        {
+            if (listViewNastavnici.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas, izaberite nastavnika.");
+                return;
+            }
+
+            int idNastavnika = (int)listViewNastavnici.SelectedItems[0].Tag;
+
+            KurseviNastavnikForm forma = new KurseviNastavnikForm(idNastavnika);
+            forma.ShowDialog();
+        }
     }
 }

@@ -38,4 +38,20 @@ namespace MuzickaSkolaWindowsForms
         }
         public NastavnikPregled() { }
     }
+
+    public class KursPregled
+    {
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public string Nivo { get; set; }
+        public string TipKursa { get; set; }
+
+        public KursPregled(int id, string naziv, string nivo, string tipKursa)
+        {
+            this.Id = id;
+            this.Naziv = naziv;
+            this.Nivo = nivo;
+            this.TipKursa = tipKursa;
+        }
+    }
 }

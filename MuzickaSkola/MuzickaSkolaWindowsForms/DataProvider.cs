@@ -308,5 +308,56 @@ namespace MuzickaSkolaWindowsForms
                 if (s != null) s.Close();
             }
         }
+
+        public static List<KursPregled> VratiSveKurseveNastavnika(int nastavnikId)
+        {
+            List<KursPregled> rezultat = new List<KursPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                // 1. Učitavamo kompletan objekat nastavnika iz baze
+                Nastavnik n = (Nastavnik)s.Get<Honorarac>(nastavnikId) ?? s.Get<StalnoZaposlen>(nastavnikId);
+
+                if (n != null)
+                {
+                    // 2. KLJUČAN KORAK: "Budimo" kolekciju kurseva PRE zatvaranja sesije
+                    //    da bismo izbegli LazyInitializationException.
+                    NHibernateUtil.Initialize(n.VodiKurseve);
+
+                    // 3. Sada kada je kolekcija učitana, prolazimo kroz nju
+                    foreach (Kurs k in n.VodiKurseve)
+                    {
+                        string tipKursa = "Nepoznat";
+                        if (k is MuzickaTeorijaKurs) tipKursa = "Muzička teorija";
+                        else if (k is InstrumentKurs) tipKursa = "Instrument";
+                        else if (k is GrupaInstrumenataKurs) tipKursa = "Grupa instrumenata";
+                        else if (k is IndividualnoPevanje) tipKursa = "Individualno pevanje";
+                        else if (k is HorskoPevanjeKurs) tipKursa = "Horsko pevanje";
+
+                        rezultat.Add(new KursPregled(k.Id, k.Naziv, k.Nivo,tipKursa));
+                    }
+                }
+            }
+            catch (Exception ec)
+            {
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+                if (s != null)
+                {
+                    s.Close();
+                    s.Dispose();
+                }
+            }
+            return rezultat;
+        }
     }
 }

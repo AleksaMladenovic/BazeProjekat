@@ -40,8 +40,11 @@
             btnObrisiNastavnika = new Button();
             groupBox1 = new GroupBox();
             btnDetalji = new Button();
+            groupBox2 = new GroupBox();
+            btnPrikaziKurseve = new Button();
             Komande.SuspendLayout();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // listViewNastavnici
@@ -135,17 +138,38 @@
             // 
             btnDetalji.Location = new Point(6, 22);
             btnDetalji.Name = "btnDetalji";
-            btnDetalji.Size = new Size(185, 25);
+            btnDetalji.Size = new Size(186, 25);
             btnDetalji.TabIndex = 0;
             btnDetalji.Text = "Prikazi Detalje";
             btnDetalji.UseVisualStyleBackColor = true;
             btnDetalji.Click += btnDetalji_Click;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnPrikaziKurseve);
+            groupBox2.Location = new Point(586, 228);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(202, 210);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Slozene funkcionalnosti";
+            // 
+            // btnPrikaziKurseve
+            // 
+            btnPrikaziKurseve.Location = new Point(7, 22);
+            btnPrikaziKurseve.Name = "btnPrikaziKurseve";
+            btnPrikaziKurseve.Size = new Size(185, 31);
+            btnPrikaziKurseve.TabIndex = 0;
+            btnPrikaziKurseve.Text = "Prikazi kurseve";
+            btnPrikaziKurseve.UseVisualStyleBackColor = true;
+            btnPrikaziKurseve.Click += btnPrikaziKurseve_Click;
             // 
             // NastavniciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(Komande);
             Controls.Add(listViewNastavnici);
@@ -154,6 +178,7 @@
             Load += NastavniciForm_Load;
             Komande.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -171,5 +196,7 @@
         private Button btnDodajNastavnika;
         private GroupBox groupBox1;
         private Button btnDetalji;
+        private GroupBox groupBox2;
+        private Button btnPrikaziKurseve;
     }
 }
