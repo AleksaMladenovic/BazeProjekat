@@ -1025,7 +1025,7 @@ namespace MuzickaSkolaWindowsForms
                 
                 return p.PrijavljeniKursevi?.Select(k => new KursPregled
                 {
-                    IdKursa = k.Id,
+                    Id = k.Id,
                     Naziv = k.Naziv,
                     Nivo = k.Nivo,
                 }).ToList() ?? new List<KursPregled>();

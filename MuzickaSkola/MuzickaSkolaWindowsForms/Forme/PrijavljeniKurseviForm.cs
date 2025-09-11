@@ -47,7 +47,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                     var nivo = k.Nivo;
                     var item = new ListViewItem(new[]
                     {
-                        k.IdKursa.ToString(),
+                        k.Id.ToString(),
                         k.Naziv ?? "",
                         nivo
                     });

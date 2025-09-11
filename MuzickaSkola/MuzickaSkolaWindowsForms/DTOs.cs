@@ -47,6 +47,7 @@ namespace MuzickaSkolaWindowsForms
         public string Nivo { get; set; }
         public string TipKursa { get; set; }
 
+        public KursPregled() { }
         public KursPregled(int id, string naziv, string nivo, string tipKursa)
         {
             this.Id = id;
@@ -104,11 +105,14 @@ namespace MuzickaSkolaWindowsForms
 
     public class ZavrsniIspitPregled
     {
+        public int IdKursa { get; set; }
         public string NazivKursa { get; set; }
         public DateTime Datum { get; set; }
-        public int Ocena { get; set; }
+        public int? Ocena { get; set; }
         public string PunoImePolaznika { get; set; }
+        public bool? Sertifikat { get; set; }
 
+        public ZavrsniIspitPregled() { }
         public ZavrsniIspitPregled(ZavrsniIspit zi)
         {
             this.NazivKursa = zi.Id.IspitIzKursa.Naziv;
@@ -192,12 +196,12 @@ namespace MuzickaSkolaWindowsForms
         public string Telefon { get; set; }
         public string Email { get; set; }
     }
-    public class KursPregled
-    {
-        public int IdKursa { get; set; }
-        public string Naziv { get; set; }
-        public string Nivo { get; set; } 
-    }
+    //public class KursPregled
+    //{
+    //    public int IdKursa { get; set; }
+    //    public string Naziv { get; set; }
+    //    public string Nivo { get; set; } 
+    //}
 
     public class PrisustvoPregled
     {
@@ -208,13 +212,13 @@ namespace MuzickaSkolaWindowsForms
         public int Ocena { get; set; }
     }
 
-    public class ZavrsniIspitPregled
-    {
-        public int IdKursa { get; set; }
-        public string NazivKursa { get; set; }
-        public DateTime Datum { get; set; }   
-        public int? Ocena { get; set; }
-        public bool? Sertifikat { get; set; }
-    }
+    //public class ZavrsniIspitPregled
+    //{
+    //    public int IdKursa { get; set; }
+    //    public string NazivKursa { get; set; }
+    //    public DateTime Datum { get; set; }   
+    //    public int? Ocena { get; set; }
+    //    public bool? Sertifikat { get; set; }
+    //}
     #endregion
 }

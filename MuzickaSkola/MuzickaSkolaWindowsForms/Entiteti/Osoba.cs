@@ -16,7 +16,7 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         public virtual string? Telefon { get; set; }
         public virtual string? Email { get; set; }
         public virtual DateTime? DatumZaposlenja { get; set; }
-        public virtual required string StrucnaSprema { get; set; }
+        public virtual string StrucnaSprema { get; set; }
         public virtual StalnoZaposlen? Mentor { get; set; }
         // Flegovi ostaju da znamo koje uloge postoje
         public virtual bool FPolaznik { get; set; }
