@@ -541,5 +541,50 @@ namespace MuzickaSkolaWindowsForms
                 if (s != null) s.Close();
             }
         }
+
+
+        // Metoda koja vraća sve ispite za jednu odabranu komisiju
+        public static List<ZavrsniIspitPregled> VratiIspiteZaKomisiju(int komisijaId)
+        {
+            List<ZavrsniIspitPregled> rezultat = new List<ZavrsniIspitPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Komisija k = s.Get<Komisija>(komisijaId);
+
+                if (k != null)
+                {
+                    // "Budimo" sve potrebne objekte pre zatvaranja sesije da izbegnemo greške
+                    NHibernateUtil.Initialize(k.IspitiKojeOcenjuje);
+                    foreach (var ispit in k.IspitiKojeOcenjuje)
+                    {
+                        NHibernateUtil.Initialize(ispit.Id.IspitIzKursa);
+                        NHibernateUtil.Initialize(ispit.PolazePolaznik);
+                        NHibernateUtil.Initialize(ispit.PolazePolaznik.OsnovniPodaci);
+                    }
+
+                    // Sada kada je sve učitano, pravimo DTO-e
+                    foreach (var ispit in k.IspitiKojeOcenjuje)
+                    {
+                        rezultat.Add(new ZavrsniIspitPregled(ispit));
+                    }
+                }
+            }
+            catch (Exception ec)
+            {
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+                if (s != null) s.Close();
+            }
+            return rezultat;
+        }
     }
 }

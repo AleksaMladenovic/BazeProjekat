@@ -196,5 +196,11 @@ namespace MuzickaSkolaWindowsForms.Forme
                 forma.ShowDialog();
             }
         }
+
+        private void btnKomisije_Click(object sender, EventArgs e)
+        {
+            KomisijeIspitiForm forma = new KomisijeIspitiForm();
+            forma.ShowDialog();
+        }
     }
 }

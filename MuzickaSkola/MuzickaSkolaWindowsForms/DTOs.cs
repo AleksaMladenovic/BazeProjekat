@@ -92,12 +92,28 @@ namespace MuzickaSkolaWindowsForms
     public class KomisijaPregled
     {
         public int Id { get; set; }
-        public string Opis { get; set; } // Da bi bilo lakše za prikaz
+        public string Opis { get; set; }
 
         public KomisijaPregled(int id)
         {
             this.Id = id;
             this.Opis = $"Komisija (ID: {id})";
+        }
+    }
+
+    public class ZavrsniIspitPregled
+    {
+        public string NazivKursa { get; set; }
+        public DateTime Datum { get; set; }
+        public int Ocena { get; set; }
+        public string PunoImePolaznika { get; set; }
+
+        public ZavrsniIspitPregled(ZavrsniIspit zi)
+        {
+            this.NazivKursa = zi.Id.IspitIzKursa.Naziv;
+            this.Datum = zi.Id.Datum;
+            this.Ocena = zi.Ocena;
+            this.PunoImePolaznika = $"{zi.PolazePolaznik.OsnovniPodaci.Ime} {zi.PolazePolaznik.OsnovniPodaci.Prezime}";
         }
     }
 }

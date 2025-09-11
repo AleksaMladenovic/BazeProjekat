@@ -45,6 +45,7 @@
             btnPrikaziCasove = new Button();
             btnDodeliMentora = new Button();
             btnPrikaziKurseve = new Button();
+            btnKomisije = new Button();
             Komande.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -149,6 +150,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(btnKomisije);
             groupBox2.Controls.Add(btnUpravljajKomisijama);
             groupBox2.Controls.Add(btnPrikaziCasove);
             groupBox2.Controls.Add(btnDodeliMentora);
@@ -162,7 +164,7 @@
             // 
             // btnUpravljajKomisijama
             // 
-            btnUpravljajKomisijama.Location = new Point(6, 162);
+            btnUpravljajKomisijama.Location = new Point(5, 133);
             btnUpravljajKomisijama.Name = "btnUpravljajKomisijama";
             btnUpravljajKomisijama.Size = new Size(183, 31);
             btnUpravljajKomisijama.TabIndex = 4;
@@ -172,7 +174,7 @@
             // 
             // btnPrikaziCasove
             // 
-            btnPrikaziCasove.Location = new Point(6, 69);
+            btnPrikaziCasove.Location = new Point(6, 59);
             btnPrikaziCasove.Name = "btnPrikaziCasove";
             btnPrikaziCasove.Size = new Size(184, 31);
             btnPrikaziCasove.TabIndex = 2;
@@ -182,7 +184,7 @@
             // 
             // btnDodeliMentora
             // 
-            btnDodeliMentora.Location = new Point(6, 116);
+            btnDodeliMentora.Location = new Point(5, 96);
             btnDodeliMentora.Name = "btnDodeliMentora";
             btnDodeliMentora.Size = new Size(185, 31);
             btnDodeliMentora.TabIndex = 1;
@@ -199,6 +201,16 @@
             btnPrikaziKurseve.Text = "Prikazi kurseve";
             btnPrikaziKurseve.UseVisualStyleBackColor = true;
             btnPrikaziKurseve.Click += btnPrikaziKurseve_Click;
+            // 
+            // btnKomisije
+            // 
+            btnKomisije.Location = new Point(6, 170);
+            btnKomisije.Name = "btnKomisije";
+            btnKomisije.Size = new Size(181, 31);
+            btnKomisije.TabIndex = 5;
+            btnKomisije.Text = "Komisije i ispiti";
+            btnKomisije.UseVisualStyleBackColor = true;
+            btnKomisije.Click += btnKomisije_Click;
             // 
             // NastavniciForm
             // 
@@ -237,5 +249,6 @@
         private Button btnDodeliMentora;
         private Button btnPrikaziCasove;
         private Button btnUpravljajKomisijama;
+        private Button btnKomisije;
     }
 }
