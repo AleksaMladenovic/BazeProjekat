@@ -6,6 +6,129 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms
 {
+    #region Lokacija
+    public class LokacijaPregled {
+        public string Adresa { get; set; }
+        public int Kapacitet { get; set; }
+        public string RadnoVreme { get; set; }
+
+        public LokacijaPregled()
+        {
+
+        }
+        public LokacijaPregled(string adresa, int kapacitet, string radnoVreme)
+        {
+            Adresa = adresa;
+            Kapacitet = kapacitet;
+            RadnoVreme = radnoVreme;
+        }
+    }
+
+    public class LokacijaBasic {
+        public string Adresa { get; set; }
+        public string RadnoVreme { get; set; }
+
+        public LokacijaBasic() { }
+
+        public LokacijaBasic(string adresa, string radnoVreme)
+        {
+            Adresa = adresa;
+            RadnoVreme = radnoVreme;
+        }
+    }
+
+    #endregion
+
+    #region Ucionica
+
+    public class UcionicaPregled() {
+        public string Naziv { get; set; }
+        public int Kapacitet { get; set; }
+        public string Opremljenost{ get; set; }
+        public string AdresaLokacije{ get; set; }
+    }
+
+    public class UcionicaBasic() 
+    {
+        public string Naziv { get; set; }
+        public int Kapacitet { get; set; }
+        public string Opremljenost { get; set; }
+        public string AdresaLokacije { get; set; }
+    }
+
+    #endregion
+
+    #region Kurs
+
+    public class KursPregled
+    {
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public string Nivo { get; set; }
+        public string ImeNastavnika { get; set; }
+        public int NastavnikId { get; set; }
+        public string TipKursa { get; set; }
+
+        public KursPregled() { }
+        public KursPregled(int id, string naziv, string nivo, string tipKursa)
+        {
+            this.Id = id;
+            this.Naziv = naziv;
+            this.Nivo = nivo;
+            this.TipKursa = tipKursa;
+        }
+    }
+
+    public class KursBasic
+    {
+        public int Id { get; set; }
+        public string Naziv { get; set; }
+        public string Nivo { get; set; }
+        public string ImeNastavnika { get; set; }
+        public int NastavnikId { get; set; }
+        public string TipKursa { get; set; }
+
+        public string? Instrument { get; set; }
+        public string? GrupaInstrumenata { get; set; }
+        public string? NazivPredmeta { get; set; }
+    }
+    #endregion Kurs
+
+    #region Nastavnik
+    //public class NastavnikPregled
+    //{
+    //    public int Id { get; set; }
+    //    public string Jmbg { get; set; }
+    //    public string Ime { get; set; }
+    //    public string Prezime { get; set; }
+    //    public string RadnoVreme { get; set; }
+    //    public string TrajanjeUgovora { get; set; }
+    //    public string StrucnaSprema { get; set; }
+    //    public string TipZaposlenja { get; set; } // Ovde će pisati "Stalno zaposlen" ili "Honorarac"
+    //}
+    public class NastavnikBasic
+    {
+        public int IdOsobe { get; set; }
+        public string? Jmbg { get; set; }
+        public string? Ime { get; set; }
+        public string? Prezime { get; set; }
+        public string? Adresa { get; set; }
+        public string? Telefon { get; set; }
+        public string? Email { get; set; }
+    }
+
+    public class NastavnikComboBox 
+    {
+        public int Id { get; set; }
+        public string PunoIme { get; set; }
+        public override string ToString()
+        {
+            return PunoIme;
+        }
+    }   
+
+    #endregion
+
     #region Nastavnik
     public class NastavnikPregled
     {
@@ -40,22 +163,22 @@ namespace MuzickaSkolaWindowsForms
         public NastavnikPregled() { }
     }
 
-    public class KursPregled
-    {
-        public int Id { get; set; }
-        public string Naziv { get; set; }
-        public string Nivo { get; set; }
-        public string TipKursa { get; set; }
+    //public class KursPregled
+    //{
+    //    public int Id { get; set; }
+    //    public string Naziv { get; set; }
+    //    public string Nivo { get; set; }
+    //    public string TipKursa { get; set; }
 
-        public KursPregled() { }
-        public KursPregled(int id, string naziv, string nivo, string tipKursa)
-        {
-            this.Id = id;
-            this.Naziv = naziv;
-            this.Nivo = nivo;
-            this.TipKursa = tipKursa;
-        }
-    }
+    //    public KursPregled() { }
+    //    public KursPregled(int id, string naziv, string nivo, string tipKursa)
+    //    {
+    //        this.Id = id;
+    //        this.Naziv = naziv;
+    //        this.Nivo = nivo;
+    //        this.TipKursa = tipKursa;
+    //    }
+    //}
 
     public class MentorPregled
     {
@@ -81,7 +204,9 @@ namespace MuzickaSkolaWindowsForms
         public DateTime Termin { get; set; }
         public string Tema { get; set; }
         public string Ucionica { get; set; } // Prikazaćemo i u kojoj je učionici
+        public string ImeNastavnika { get; set; }
 
+        public CasPregled() { }
         public CasPregled(int id, DateTime termin, string tema, string ucionica)
         {
             this.Id = id;
@@ -220,5 +345,53 @@ namespace MuzickaSkolaWindowsForms
     //    public int? Ocena { get; set; }
     //    public bool? Sertifikat { get; set; }
     //}
+    #endregion
+
+    #region Nastava
+    public class NastavaPregled
+    {
+        public int Id { get; set; }
+        public DateTime DatumOd { get; set; }
+        public DateTime? DatumDo { get; set; }
+        public string TipNastave { get; set; } // "Individualna" ili "Grupna"
+
+        public string DatumOdString
+        {
+            get { return DatumOd.ToString("dd.MM.yyyy"); }
+        }
+
+        public string DatumDoString
+        {
+            get
+            {
+                if (DatumDo.HasValue)
+                {
+                    return DatumDo.Value.ToString("dd.MM.yyyy");
+                }
+                else
+                {
+                    return "Nije završena";
+                }
+            }
+        }
+    }
+    //public class CasPregled
+    //{
+    //    public int Id { get; set; }
+    //    public DateTime Termin { get; set; }
+    //    public string Tema { get; set; }
+    //    public string ImeNastavnika { get; set; }
+    //}
+
+    public class NastavaBasic
+    {
+        public int Id { get; set; }
+        public DateTime DatumOd { get; set; }
+        public DateTime? DatumDo { get; set; }
+        public bool FIndividualna { get; set; }
+        public bool FGrupna { get; set; }
+        public int IdKursa { get; set; } // Važno za dodavanje/izmenu
+    }
+
     #endregion
 }

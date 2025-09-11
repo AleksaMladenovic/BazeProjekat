@@ -1,4 +1,4 @@
-﻿using FluentNHibernate.Mapping;
+using FluentNHibernate.Mapping;
 using MuzickaSkolaWindowsForms.Entiteti;
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,8 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Id(p => p.Id, "ID_KURSA").GeneratedBy.SequenceIdentity("KURS_ID_SEQ");
 
             DiscriminateSubClassesOnColumn("TIP_KURSA");
+                //.Not.Nullable()
+                //.Default("Kurs");
 
             Map(p => p.Nivo, "NIVO");
             Map(p => p.Naziv, "NAZIV_KURSA");
@@ -26,12 +28,12 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 .Cascade.All()
                 .Inverse();
 
-            HasManyToMany(x => x.PrijavljeniPolaznici)
-                .Table("PRIJAVLJEN")
-                .ParentKeyColumn("ID_KURSA")
-                .ChildKeyColumn("ID_POLAZNIKA")
-                .Cascade.All()
-                .Inverse();
+            //HasManyToMany(x => x.PrijavljeniPolaznici)
+            //    .Table("PRIJAVLJEN")
+            //    .ParentKeyColumn("ID_KURSA")
+            //    .ChildKeyColumn("ID_POLAZNIKA")
+            //    .Cascade.All()
+            //    .Inverse();
 
             HasManyToMany(x=>x.LokacijeOdrzavanja)
                 .Table("ODVIJA_NA")
@@ -66,7 +68,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         }
     }
 
-    class IndividualnoPevanjeKursMapiranja : SubclassMap<IndividualnoPevanje>//OVDE SAM NAPRAVIO IZMENU JER MISLIM DA JE GRESKA 
+    class IndividualnoPevanjeKursMapiranja : SubclassMap<IndividualnoPevanjeKurs>
     {
         public IndividualnoPevanjeKursMapiranja()
         {

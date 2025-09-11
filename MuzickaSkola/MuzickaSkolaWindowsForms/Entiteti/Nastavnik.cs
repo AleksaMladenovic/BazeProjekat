@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public abstract class Nastavnik
+    public class Nastavnik
     {
         public virtual int Id { get;  set; }
         public virtual Osoba OsnovniPodaci { get; set; }

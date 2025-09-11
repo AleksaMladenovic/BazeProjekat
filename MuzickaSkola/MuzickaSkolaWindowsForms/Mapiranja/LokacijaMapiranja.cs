@@ -17,6 +17,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Map(p => p.RadnoVreme, "RADNO_VREME");
 
             HasMany(x => x.Ucionice)
+                .KeyColumn("ADRESA")
                 .Cascade.All()
                 .Inverse();
 

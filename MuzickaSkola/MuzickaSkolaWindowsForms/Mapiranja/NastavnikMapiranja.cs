@@ -1,4 +1,4 @@
-﻿using FluentNHibernate.Mapping;
+using FluentNHibernate.Mapping;
 using MuzickaSkolaWindowsForms.Entiteti;
 using NHibernate.Type;
 using System;

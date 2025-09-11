@@ -10,13 +10,25 @@
     <Compile Update="Forme\DodajNastavnikaForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\DodajPolaznikaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\DodeliMentoraForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forme\DodajPolaznikaForm.cs">
+    <Compile Update="Forme\DodajIzmeniKursForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajIzmeniNastavuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajIzmeniUcionicuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajIzmenLokacijuForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\IzmeniPolaznika.cs">
@@ -28,16 +40,22 @@
     <Compile Update="Forme\KurseviForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forme\NastavniciForm.cs">
+    <Compile Update="Forme\LokacijeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forme\PolazniciForm.cs">
+    <Compile Update="Forme\MojDeoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\NastavniciForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\KomisijeIspitiForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\KurseviNastavnikForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\PolazniciForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\PolozeniIspitiForm.cs">
@@ -50,6 +68,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\RoditeljiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\UcioniceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\NastavaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PocetnaStranica.cs">

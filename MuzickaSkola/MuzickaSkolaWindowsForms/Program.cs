@@ -1,3 +1,5 @@
+using MuzickaSkolaWindowsForms.Forme;
+
 namespace MuzickaSkolaWindowsForms
 {
     internal static class Program
