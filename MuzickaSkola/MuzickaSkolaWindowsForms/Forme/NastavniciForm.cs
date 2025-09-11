@@ -28,7 +28,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             this.listViewNastavnici.Items.Clear();
 
             // Pozivamo našu metodu iz DataProvider-a koja vraća listu nastavnika
-            List<NastavnikPregled> podaci = DataProvider.VratiSveNastavnike();
+            List<NastavnikPregled> podaci = DTOManager.VratiSveNastavnike();
 
             // Sada, za svakog nastavnika iz te liste, pravimo jedan red u ListView-u
             foreach (NastavnikPregled n in podaci)
@@ -80,7 +80,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                 int idZaBrisanje = (int)listViewNastavnici.SelectedItems[0].Tag;
 
                 // 4. Pozivamo našu metodu iz DataProvider-a
-                DataProvider.ObrisiNastavnika(idZaBrisanje);
+                DTOManager.ObrisiNastavnika(idZaBrisanje);
 
                 MessageBox.Show("Nastavnik uspešno obrisan!");
 
@@ -98,7 +98,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             }
 
             int idZaIzmenu = (int)listViewNastavnici.SelectedItems[0].Tag;
-            Nastavnik nastavnik = DataProvider.VratiNastavnika(idZaIzmenu);
+            Nastavnik nastavnik = DTOManager.VratiNastavnika(idZaIzmenu);
 
             if (nastavnik != null)
             {
@@ -122,7 +122,7 @@ namespace MuzickaSkolaWindowsForms.Forme
 
             // Ponovo pozivamo DataProvider da dobijemo sve podatke
             // Ovo nije najefikasnije, ali je najjednostavnije za sada
-            List<NastavnikPregled> sviNastavnici = DataProvider.VratiSveNastavnike();
+            List<NastavnikPregled> sviNastavnici = DTOManager.VratiSveNastavnike();
             NastavnikPregled selektovaniNastavnik = sviNastavnici.FirstOrDefault(n => n.Id == id);
 
             if (selektovaniNastavnik != null)
@@ -155,7 +155,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             }
 
             int idNastavnika = (int)listViewNastavnici.SelectedItems[0].Tag;
-            Nastavnik selektovaniNastavnik = DataProvider.VratiNastavnika(idNastavnika);
+            Nastavnik selektovaniNastavnik = DTOManager.VratiNastavnika(idNastavnika);
 
             if (selektovaniNastavnik != null)
             {
@@ -188,7 +188,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             }
 
             int idNastavnika = (int)listViewNastavnici.SelectedItems[0].Tag;
-            Nastavnik selektovaniNastavnik = DataProvider.VratiNastavnika(idNastavnika);
+            Nastavnik selektovaniNastavnik = DTOManager.VratiNastavnika(idNastavnika);
 
             if (selektovaniNastavnik != null)
             {

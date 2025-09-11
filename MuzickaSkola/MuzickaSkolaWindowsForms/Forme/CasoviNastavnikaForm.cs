@@ -32,7 +32,7 @@ namespace MuzickaSkolaWindowsForms
         private void PopuniPodacima()
         {
             this.listViewCasovi.Items.Clear();
-            List<CasPregled> casovi = DataProvider.VratiSveCasoveNastavnika(this.idNastavnika);
+            List<CasPregled> casovi = DTOManager.VratiSveCasoveNastavnika(this.idNastavnika);
 
             foreach (CasPregled c in casovi)
             {

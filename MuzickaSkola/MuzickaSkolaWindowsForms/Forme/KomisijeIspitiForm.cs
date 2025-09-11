@@ -26,7 +26,7 @@ namespace MuzickaSkolaWindowsForms
         private void PopuniListuKomisija()
         {
             listViewKomisije.Items.Clear();
-            List<KomisijaPregled> komisije = DataProvider.VratiSveKomisije();
+            List<KomisijaPregled> komisije = DTOManager.VratiSveKomisije();
             foreach (var k in komisije)
             {
                 ListViewItem item = new ListViewItem(new string[] { k.Opis });
@@ -53,7 +53,7 @@ namespace MuzickaSkolaWindowsForms
         private void PopuniListuIspita(int komisijaId)
         {
             listViewIspiti.Items.Clear();
-            List<ZavrsniIspitPregled> ispiti = DataProvider.VratiIspiteZaKomisiju(komisijaId);
+            List<ZavrsniIspitPregled> ispiti = DTOManager.VratiIspiteZaKomisiju(komisijaId);
             foreach (var i in ispiti)
             {
                 ListViewItem item = new ListViewItem(new string[] { i.NazivKursa, i.Datum.ToString("dd.MM.yyyy"), i.Ocena.ToString(), i.PunoImePolaznika });

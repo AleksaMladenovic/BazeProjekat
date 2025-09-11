@@ -36,7 +36,7 @@ namespace MuzickaSkolaWindowsForms
         private void PopuniListuMentora()
         {
             listViewMentori.Items.Clear();
-            List<MentorPregled> mentori = DataProvider.VratiSveMoguceMentore();
+            List<MentorPregled> mentori = DTOManager.VratiSveMoguceMentore();
 
             foreach (var mentor in mentori)
             {
@@ -60,7 +60,7 @@ namespace MuzickaSkolaWindowsForms
 
             int idMentora = (int)listViewMentori.SelectedItems[0].Tag;
 
-            DataProvider.DodeliMentora(this.nastavnik.Id, idMentora);
+            DTOManager.DodeliMentora(this.nastavnik.Id, idMentora);
 
             MessageBox.Show("Mentor je uspešno dodeljen!");
             this.Close();

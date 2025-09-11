@@ -8,77 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace MuzickaSkolaWindowsForms
 {
-    public static class DataProvider
+    public static class DTOManager
     {
-        /*public static List<NastavnikPregled> VratiSveNastavnike()
-        {
-
-
-            List<NastavnikPregled> rezultat = new List<NastavnikPregled>();
-            ISession s = null;
-            try
-            {
-                s = DataLayer.GetSession();
-
-
-                IEnumerable<Honorarac> honorarac = s.Query<Honorarac>().ToList();
-
-                foreach (var op in honorarac)
-                {
-                    // SQL query – vrati strucnu spremu iz OSOBA
-
-
-                    rezultat.Add(new NastavnikPregled(
-                        op.OsnovniPodaci.Id,
-                        op.OsnovniPodaci.Jmbg,
-                        op.OsnovniPodaci.Ime,
-                        op.OsnovniPodaci.Prezime,
-                        op.OsnovniPodaci.StrucnaSprema,
-                        "Honorarac")
-                    {
-                        BrojCasova = op.BrojCasova,
-                        StrucnaSprema = op.OsnovniPodaci.StrucnaSprema,
-                        TrajanjeUgovora = op.TrajanjeUgovora,
-                        BrojUgovora = op.BrojUgovora,
-                        DatumZaposlenja = op.OsnovniPodaci.DatumZaposlenja,
-                    });
-                }
-
-
-                IEnumerable<StalnoZaposlen> stalno = s.Query<StalnoZaposlen>().ToList();
-
-                foreach (var dp in stalno)
-                {
-
-
-                    rezultat.Add(new NastavnikPregled(dp.OsnovniPodaci.Id, dp.OsnovniPodaci.Jmbg, dp.OsnovniPodaci.Ime, dp.OsnovniPodaci.Prezime, dp.OsnovniPodaci.StrucnaSprema, "Stalno Zaposleni")
-                    {
-                        RadnoVreme = dp.RadnoVreme,
-
-                        DatumZaposlenja = dp.OsnovniPodaci.DatumZaposlenja,
-
-                    });
-                }
-
-                s.Close();
-            }
-            catch (Exception ec)
-            {
-                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
-                if (ec.InnerException != null)
-                {
-                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
-                }
-                MessageBox.Show(errorMessage);
-            }
-
-            return rezultat;
-
-
-        }*/
-
-        // U DataProvider.cs
-
         public static List<NastavnikPregled> VratiSveNastavnike()
         {
             List<NastavnikPregled> rezultat = new List<NastavnikPregled>();

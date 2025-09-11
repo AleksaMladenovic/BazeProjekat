@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="CasoviNastavnikaForm.cs">
+    <Compile Update="Forme\CasoviNastavnikaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DetaljiNastavnikForm.cs">
+    <Compile Update="Forme\DetaljiNastavnikForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DodajNastavnikaForm.cs">
+    <Compile Update="Forme\DodajNastavnikaForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="DodeliMentoraForm.cs">
+    <Compile Update="Forme\DodeliMentoraForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form1.cs">
@@ -25,16 +25,16 @@
     <Compile Update="Forme\PolazniciForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="KomisijeIspitiForm.cs">
+    <Compile Update="Forme\KomisijeIspitiForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="KurseviNastavnikForm.cs">
+    <Compile Update="Forme\KurseviNastavnikForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="PocetnaStranica.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UpravljanjeKomisijamaForm.cs">
+    <Compile Update="Forme\UpravljanjeKomisijamaForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

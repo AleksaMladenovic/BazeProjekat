@@ -37,7 +37,7 @@ namespace MuzickaSkolaWindowsForms
             listViewNijeClan.Items.Clear();
 
             // Učitavamo sve komisije koje postoje u sistemu
-            List<KomisijaPregled> sveKomisije = DataProvider.VratiSveKomisije();
+            List<KomisijaPregled> sveKomisije = DTOManager.VratiSveKomisije();
 
             // "Budimo" kolekciju da izbegnemo LazyInitializationException
             NHibernateUtil.Initialize(nastavnik.KomisijeCijiJeClan);
@@ -95,7 +95,7 @@ namespace MuzickaSkolaWindowsForms
                 finalniIdjevi.Add((int)item.Tag);
             }
 
-            DataProvider.SacuvajIzmeneZaKomisije(this.nastavnik.Id, finalniIdjevi);
+            DTOManager.SacuvajIzmeneZaKomisije(this.nastavnik.Id, finalniIdjevi);
             MessageBox.Show("Promene u članstvu su uspešno sačuvane!");
             this.Close();
         }

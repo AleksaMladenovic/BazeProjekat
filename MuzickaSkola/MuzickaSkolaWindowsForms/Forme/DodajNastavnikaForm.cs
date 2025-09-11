@@ -130,7 +130,7 @@ namespace MuzickaSkolaWindowsForms
                         RadnoVreme = txtRadnoVreme.Text
                     };
                     // Šaljemo oba nova objekta DataProvider-u na snimanje
-                    DataProvider.DodajNastavnika(o, sz);
+                    DTOManager.DodajNastavnika(o, sz);
                 }
                 else // Mora biti Honorarac
                 {
@@ -142,7 +142,7 @@ namespace MuzickaSkolaWindowsForms
                         BrojCasova = (int)numBrojCasova.Value
                     };
                     // Šaljemo oba nova objekta DataProvider-u na snimanje
-                    DataProvider.DodajNastavnika(o, h);
+                    DTOManager.DodajNastavnika(o, h);
                 }
                 MessageBox.Show("Nastavnik je uspešno dodat!");
             }
@@ -177,7 +177,7 @@ namespace MuzickaSkolaWindowsForms
                 }
 
                 // 3. Prosleđujemo IZMENJENI objekat (samo Nastavnik, jer on sadrži i Osobu) DataProvider-u
-                DataProvider.IzmeniNastavnika(n);
+                DTOManager.IzmeniNastavnika(n);
                 MessageBox.Show("Nastavnik je uspešno izmenjen!");
             }
 

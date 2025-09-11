@@ -36,7 +36,7 @@ namespace MuzickaSkolaWindowsForms
         private void PopuniPodacima()
         {
             this.listViewKursevi.Items.Clear();
-            List<KursPregled> kursevi = DataProvider.VratiSveKurseveNastavnika(this.idNastavnika);
+            List<KursPregled> kursevi = DTOManager.VratiSveKurseveNastavnika(this.idNastavnika);
 
             foreach (KursPregled k in kursevi)
             {
