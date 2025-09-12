@@ -30,11 +30,10 @@
         {
             listViewKomisije = new ListView();
             columnHeader1 = new ColumnHeader();
-            listViewIspiti = new ListView();
+            listViewClanovi = new ListView();
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
-            columnHeader6 = new ColumnHeader();
             SuspendLayout();
             // 
             // listViewKomisije
@@ -54,46 +53,41 @@
             columnHeader1.Text = "Komisija";
             columnHeader1.Width = 150;
             // 
-            // listViewIspiti
+            // listViewClanovi
             // 
-            listViewIspiti.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
-            listViewIspiti.FullRowSelect = true;
-            listViewIspiti.Location = new Point(221, 12);
-            listViewIspiti.Name = "listViewIspiti";
-            listViewIspiti.Size = new Size(484, 287);
-            listViewIspiti.TabIndex = 1;
-            listViewIspiti.UseCompatibleStateImageBehavior = false;
-            listViewIspiti.View = View.Details;
+            listViewClanovi.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader4, columnHeader5 });
+            listViewClanovi.FullRowSelect = true;
+            listViewClanovi.Location = new Point(221, 12);
+            listViewClanovi.Name = "listViewClanovi";
+            listViewClanovi.Size = new Size(484, 287);
+            listViewClanovi.TabIndex = 1;
+            listViewClanovi.UseCompatibleStateImageBehavior = false;
+            listViewClanovi.View = View.Details;
             // 
             // columnHeader3
             // 
-            columnHeader3.Text = "Kurs";
+            columnHeader3.Text = "Ime";
             columnHeader3.Width = 150;
             // 
             // columnHeader4
             // 
-            columnHeader4.Text = "Datum";
+            columnHeader4.Text = "Prezime";
             columnHeader4.Width = 100;
             // 
             // columnHeader5
             // 
-            columnHeader5.Text = "Ocena";
-            columnHeader5.Width = 70;
-            // 
-            // columnHeader6
-            // 
-            columnHeader6.Text = "Polaznik";
-            columnHeader6.Width = 150;
+            columnHeader5.Text = "Strucna Sprema";
+            columnHeader5.Width = 150;
             // 
             // KomisijeIspitiForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(720, 316);
-            Controls.Add(listViewIspiti);
+            Controls.Add(listViewClanovi);
             Controls.Add(listViewKomisije);
             Name = "KomisijeIspitiForm";
-            Text = "KomisijeIspitiForm";
+            Text = "KomisijeClanoviForm";
             Load += KomisijeIspitiForm_Load;
             ResumeLayout(false);
         }
@@ -102,10 +96,9 @@
 
         private ListView listViewKomisije;
         private ColumnHeader columnHeader1;
-        private ListView listViewIspiti;
+        private ListView listViewClanovi;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
-        private ColumnHeader columnHeader6;
     }
 }

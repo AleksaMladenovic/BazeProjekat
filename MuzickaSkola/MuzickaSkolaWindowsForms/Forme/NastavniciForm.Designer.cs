@@ -41,11 +41,11 @@
             groupBox1 = new GroupBox();
             btnDetalji = new Button();
             groupBox2 = new GroupBox();
+            btnKomisije = new Button();
             btnUpravljajKomisijama = new Button();
             btnPrikaziCasove = new Button();
             btnDodeliMentora = new Button();
             btnPrikaziKurseve = new Button();
-            btnKomisije = new Button();
             Komande.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -162,6 +162,16 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Slozene funkcionalnosti";
             // 
+            // btnKomisije
+            // 
+            btnKomisije.Location = new Point(6, 170);
+            btnKomisije.Name = "btnKomisije";
+            btnKomisije.Size = new Size(181, 31);
+            btnKomisije.TabIndex = 5;
+            btnKomisije.Text = "Komisije i clanovi";
+            btnKomisije.UseVisualStyleBackColor = true;
+            btnKomisije.Click += btnKomisije_Click;
+            // 
             // btnUpravljajKomisijama
             // 
             btnUpravljajKomisijama.Location = new Point(5, 133);
@@ -201,16 +211,6 @@
             btnPrikaziKurseve.Text = "Prikazi kurseve";
             btnPrikaziKurseve.UseVisualStyleBackColor = true;
             btnPrikaziKurseve.Click += btnPrikaziKurseve_Click;
-            // 
-            // btnKomisije
-            // 
-            btnKomisije.Location = new Point(6, 170);
-            btnKomisije.Name = "btnKomisije";
-            btnKomisije.Size = new Size(181, 31);
-            btnKomisije.TabIndex = 5;
-            btnKomisije.Text = "Komisije i ispiti";
-            btnKomisije.UseVisualStyleBackColor = true;
-            btnKomisije.Click += btnKomisije_Click;
             // 
             // NastavniciForm
             // 

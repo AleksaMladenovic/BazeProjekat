@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MuzickaSkolaWindowsForms.Entiteti
 {
-    public abstract class Polaznik 
+    public class Polaznik 
     {
         public virtual int Id { get; protected set; } 
 

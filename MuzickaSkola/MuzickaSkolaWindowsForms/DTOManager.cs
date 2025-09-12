@@ -798,34 +798,22 @@ namespace MuzickaSkolaWindowsForms
             ISession s = null;
             try
             {
-                s = DataLayer.GetSession();
-                s.BeginTransaction();
+                // KORAK 1: Prvo raskačimo sve veze gde je ovaj nastavnik MENTOR.
+                // Ovo rešava ORA-02292 grešku ako je nastavnik mentor nekom drugom.
+                string updateMentorSql = "UPDATE OSOBA SET ID_MENTORA = NULL WHERE ID_MENTORA = :id";
+                s.CreateSQLQuery(updateMentorSql).SetParameter("id", idNastavnika).ExecuteUpdate();
 
-                // KORAK 1: Pokušaj da učitaš i obrišeš kao Honorarac
-                Honorarac honoraracZaBrisanje = s.Get<Honorarac>(idNastavnika);
-                if (honoraracZaBrisanje != null)
-                {
-                    // Našli smo ga, brišemo ga
-                    s.Delete(honoraracZaBrisanje);
-                }
-                else
-                {
-                    // Nije bio Honorarac, mora da je StalnoZaposlen
-                    StalnoZaposlen szZaBrisanje = s.Get<StalnoZaposlen>(idNastavnika);
-                    if (szZaBrisanje != null)
-                    {
-                        // Našli smo ga, brišemo ga
-                        s.Delete(szZaBrisanje);
-                    }
-                }
+                // KORAK 2: Eksplicitno brišemo red iz "child" tabela.
+                // Ovim garantujemo da će se ove komande izvršiti PRE brisanja iz OSOBA.
+                string deleteStalnoZapSql = "DELETE FROM STALNO_ZAP WHERE ID_OSOBE = :id";
+                s.CreateSQLQuery(deleteStalnoZapSql).SetParameter("id", idNastavnika).ExecuteUpdate();
 
-                // KORAK 2: Sada kada je "dete" (uloga) obrisano, brišemo i osnovne podatke.
-                // Ovo je neophodno jer Cascade ne radi uvek kako treba u ovom scenariju.
-                Osoba osobaZaBrisanje = s.Get<Osoba>(idNastavnika);
-                if (osobaZaBrisanje != null)
-                {
-                    s.Delete(osobaZaBrisanje);
-                }
+                string deleteHonoraracSql = "DELETE FROM HONORARAC WHERE ID_OSOBE = :id";
+                s.CreateSQLQuery(deleteHonoraracSql).SetParameter("id", idNastavnika).ExecuteUpdate();
+
+                // KORAK 3: Na kraju, kada su sve veze raskinute, brišemo red iz "parent" tabele OSOBA.
+                string deleteOsobaSql = "DELETE FROM OSOBA WHERE ID_OSOBE = :id";
+                s.CreateSQLQuery(deleteOsobaSql).SetParameter("id", idNastavnika).ExecuteUpdate();
 
                 s.Transaction.Commit();
             }
@@ -879,7 +867,7 @@ namespace MuzickaSkolaWindowsForms
         }
 
         // NOVA, KOMPLETNA METODA ZA IZMENU
-        public static void IzmeniNastavnika(Nastavnik nastavnikKojiSeMenja)
+        public static void IzmeniNastavnika(Nastavnik nastavnikSaForme)
         {
             ISession s = null;
             try
@@ -887,12 +875,76 @@ namespace MuzickaSkolaWindowsForms
                 s = DataLayer.GetSession();
                 s.BeginTransaction();
 
-                // Pošto je objekat `nastavnikKojiSeMenja` došao iz prethodne sesije,
-                // koristimo s.Update() da ga "zakačimo" za novu sesiju i snimimo promene.
-                // Moramo da uradimo Update za oba dela objekta.
-                s.Update(nastavnikKojiSeMenja.OsnovniPodaci);
-                s.Update(nastavnikKojiSeMenja);
+                // === KORAK 1: Učitavamo "žive" objekte iz baze ===
+                // Ovo je ključno. Radimo sa objektima koje ova sesija prati.
+                Osoba osobaIzBaze = s.Get<Osoba>(nastavnikSaForme.Id);
+                Nastavnik nastavnikIzBaze = (Nastavnik)s.Get<Honorarac>(nastavnikSaForme.Id) ?? s.Get<StalnoZaposlen>(nastavnikSaForme.Id);
 
+                // === KORAK 2: Ažuriramo OSOBA objekat (posao za NHibernate) ===
+                // Kopiramo sveže podatke sa forme na "živi" objekat.
+                // NHibernate će automatski detektovati ove promene.
+                osobaIzBaze.Jmbg = nastavnikSaForme.OsnovniPodaci.Jmbg;
+                osobaIzBaze.Ime = nastavnikSaForme.OsnovniPodaci.Ime;
+                osobaIzBaze.Prezime = nastavnikSaForme.OsnovniPodaci.Prezime;
+                osobaIzBaze.Adresa = nastavnikSaForme.OsnovniPodaci.Adresa;
+                osobaIzBaze.Telefon = nastavnikSaForme.OsnovniPodaci.Telefon;
+                osobaIzBaze.Email = nastavnikSaForme.OsnovniPodaci.Email;
+                osobaIzBaze.StrucnaSprema = nastavnikSaForme.OsnovniPodaci.StrucnaSprema;
+                osobaIzBaze.DatumZaposlenja = nastavnikSaForme.OsnovniPodaci.DatumZaposlenja;
+                osobaIzBaze.Mentor = nastavnikSaForme.OsnovniPodaci.Mentor;
+
+                // === KORAK 3: Proveravamo da li se tip zaposlenja promenio ===
+                bool tipSePromenio = nastavnikIzBaze.GetType() != nastavnikSaForme.GetType();
+
+                // === KORAK 4: Rukovanje promenom tipa i mentorstvom (posao za SQL) ===
+                if (tipSePromenio)
+                {
+                    if (nastavnikIzBaze is StalnoZaposlen) // Postaje Honorarac
+                    {
+                        // Raskidamo mentorstva SQL-om
+                        string updateMentorSql = "UPDATE OSOBA SET ID_MENTORA = NULL WHERE ID_MENTORA = :id";
+                        s.CreateSQLQuery(updateMentorSql).SetParameter("id", nastavnikSaForme.Id).ExecuteUpdate();
+
+                        // Brišemo stari zapis SQL-om
+                        string deleteStalnoZapSql = "DELETE FROM STALNO_ZAP WHERE ID_OSOBE = :id";
+                        s.CreateSQLQuery(deleteStalnoZapSql).SetParameter("id", nastavnikSaForme.Id).ExecuteUpdate();
+
+                        // Dodajemo novi zapis SQL-om
+                        Honorarac h = (Honorarac)nastavnikSaForme;
+                        string insertHonoraracSql = "INSERT INTO HONORARAC (ID_OSOBE, BROJ_UGOVORA, TRAJANJE_UGOVORA, BROJ_CASOVA) VALUES (:id, :broj, :trajanje, :casovi)";
+                        s.CreateSQLQuery(insertHonoraracSql)
+                            .SetParameter("id", h.Id).SetParameter("broj", h.BrojUgovora)
+                            .SetParameter("trajanje", h.TrajanjeUgovora).SetParameter("casovi", h.BrojCasova)
+                            .ExecuteUpdate();
+                    }
+                    else // Bio je Honorarac, postaje StalnoZaposlen
+                    {
+                        string deleteHonoraracSql = "DELETE FROM HONORARAC WHERE ID_OSOBE = :id";
+                        s.CreateSQLQuery(deleteHonoraracSql).SetParameter("id", nastavnikSaForme.Id).ExecuteUpdate();
+
+                        StalnoZaposlen sz = (StalnoZaposlen)nastavnikSaForme;
+                        string insertStalnoZapSql = "INSERT INTO STALNO_ZAP (ID_OSOBE, RADNO_VREME) VALUES (:id, :vreme)";
+                        s.CreateSQLQuery(insertStalnoZapSql)
+                            .SetParameter("id", sz.Id).SetParameter("vreme", sz.RadnoVreme)
+                            .ExecuteUpdate();
+                    }
+                }
+                else // Ako se tip NIJE promenio, ažuriramo postojeći zapis (posao za NHibernate)
+                {
+                    if (nastavnikIzBaze is StalnoZaposlen szIzBaze && nastavnikSaForme is StalnoZaposlen szSaForme)
+                    {
+                        szIzBaze.RadnoVreme = szSaForme.RadnoVreme;
+                    }
+                    else if (nastavnikIzBaze is Honorarac hIzBaze && nastavnikSaForme is Honorarac hSaForme)
+                    {
+                        hIzBaze.BrojUgovora = hSaForme.BrojUgovora;
+                        hIzBaze.TrajanjeUgovora = hSaForme.TrajanjeUgovora;
+                        hIzBaze.BrojCasova = hSaForme.BrojCasova;
+                    }
+                }
+
+                // === KORAK 5: Snimanje transakcije ===
+                // NHibernate će automatski snimiti sve promene na `osobaIzBaze` i `nastavnikIzBaze`
                 s.Transaction.Commit();
             }
             catch (Exception ec)
@@ -1143,7 +1195,7 @@ namespace MuzickaSkolaWindowsForms
 
 
         // Metoda koja vraća sve ispite za jednu odabranu komisiju
-        public static List<ZavrsniIspitPregled> VratiIspiteZaKomisiju(int komisijaId)
+       /* public static List<ZavrsniIspitPregled> VratiIspiteZaKomisiju(int komisijaId)
         {
             List<ZavrsniIspitPregled> rezultat = new List<ZavrsniIspitPregled>();
             ISession s = null;
@@ -1184,7 +1236,43 @@ namespace MuzickaSkolaWindowsForms
                 if (s != null) s.Close();
             }
             return rezultat;
+        }*/
+
+        public static List<NastavnikPregled> VratiClanoveKomisije(int komisijaId)
+        {
+            List<NastavnikPregled> rezultat = new List<NastavnikPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Komisija k = s.Get<Komisija>(komisijaId);
+
+                if (k != null)
+                {
+                    // "Budimo" kolekciju članova pre zatvaranja sesije
+                    NHibernateUtil.Initialize(k.ClanoviKomisije);
+
+                    // Sada prolazimo kroz listu članova (koji su tipa Osoba)
+                    foreach (Osoba clan in k.ClanoviKomisije)
+                    {
+                        // Za svakog člana, moramo da saznamo da li je Honorarac ili StalnoZaposlen
+                        // da bismo ga mogli prikazati u našem DTO-u.
+                        Nastavnik detaljiNastavnika = (Nastavnik)s.Get<Honorarac>(clan.Id) ?? s.Get<StalnoZaposlen>(clan.Id);
+
+                        if (detaljiNastavnika != null)
+                        {
+                            string tip = detaljiNastavnika is StalnoZaposlen ? "Stalno zaposlen" : "Honorarac";
+                            // Kreiramo DTO sa svim podacima
+                            rezultat.Add(new NastavnikPregled(clan.Id, clan.Jmbg, clan.Ime, clan.Prezime, clan.StrucnaSprema, tip)); // Detalje ostavljamo prazne za sada
+                        }
+                    }
+                }
+            }
+            catch (Exception ec) { /* ... error handling ... */ }
+            finally { if (s != null) s.Close(); }
+            return rezultat;
         }
+
         #endregion Nastavnik
         #region Polaznik
 

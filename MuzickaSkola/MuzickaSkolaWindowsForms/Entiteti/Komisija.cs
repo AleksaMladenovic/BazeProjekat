@@ -10,13 +10,13 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     {
         public virtual int Id { get; set; }
 
-        public virtual IList<Nastavnik> ClanoviKomisije { get; set; }
+        public virtual IList<Osoba> ClanoviKomisije { get; set; }
 
         public virtual IList<ZavrsniIspit> IspitiKojeOcenjuje { get; set; }
         public Komisija()
         {
             IspitiKojeOcenjuje = new List<ZavrsniIspit>();
-            ClanoviKomisije = new List<Nastavnik>();
+            ClanoviKomisije = new List<Osoba>();
         }
     }
 }
