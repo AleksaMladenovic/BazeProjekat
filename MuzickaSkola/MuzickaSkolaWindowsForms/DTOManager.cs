@@ -8,6 +8,7 @@ using MuzickaSkolaWindowsForms.Entiteti;
 using FluentNHibernate.Utils;
 using FluentNHibernate.Conventions;
 using NHibernate.Linq;
+using Antlr.Runtime.Tree;
 
 
 namespace MuzickaSkolaWindowsForms
@@ -1986,6 +1987,175 @@ namespace MuzickaSkolaWindowsForms
                         .ToList();
             }
         }
+
+        public static List<PrisustvoPregled> VratiPrisustvaZaCas(int casId)
+        {
+            List<PrisustvoPregled> prisustvaPregled = new List<PrisustvoPregled>();
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                IEnumerable<Prisustvo> svaPrisustva = s.Query<Prisustvo>()
+                    .Where(p => p.Id.CasKomePrisustvuje.Id == casId);
+
+                foreach (var p in svaPrisustva)
+                {
+                    var polaznikOsoba = s.Get<Osoba>(p.Id.PolaznikId);
+                    prisustvaPregled.Add(new PrisustvoPregled
+                    {
+                        IdPolaznika = p.Id.PolaznikId,
+                        ImePolaznika =  polaznikOsoba.Ime,
+                        PrezimePolaznika = polaznikOsoba.Prezime,
+                        IdCasa = casId,
+                        Ocena = p.Ocena,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                s?.Close();
+            }
+
+            return prisustvaPregled;
+        }
+
+        public static void DodajPrisustvo(PrisustvoPregled prisustvoDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Polaznik p = s.Load<Polaznik>(prisustvoDto.IdPolaznika);
+                Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
+
+                var novoPrisustvo = new Prisustvo
+                {
+                    Ocena = prisustvoDto.Ocena
+                };
+                novoPrisustvo.Id.PolaznikId = prisustvoDto.IdPolaznika;
+                novoPrisustvo.Id.CasKomePrisustvuje = c;
+
+                s.Save(novoPrisustvo);
+                s.Flush();
+            }
+            catch (Exception) { throw; }
+            finally { s?.Close(); }
+        }
+
+        public static void IzmeniPrisustvo(PrisustvoPregled prisustvoDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
+
+                var idZaPretragu = new PrisustvoId() {
+                    CasKomePrisustvuje = c,
+                    PolaznikId = prisustvoDto.IdPolaznika,
+                };
+                Prisustvo p = s.Get<Prisustvo>(idZaPretragu);
+                p.Ocena = prisustvoDto.Ocena;
+                
+
+                s.Update(p);
+                s.Flush();
+            }
+            catch (Exception) { throw; }
+            finally { s?.Close(); }
+        }
+
+        public static void ObrisiPrisustvo(PrisustvoPregled prisustvo)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                var idZaBrisanje = new PrisustvoId
+                {
+                    PolaznikId = prisustvo.IdPolaznika,
+                    CasKomePrisustvuje = s.Load<Cas>(prisustvo.IdCasa)
+                };
+
+                Prisustvo prisustvoZaBrisanje = s.Get<Prisustvo>(idZaBrisanje);
+
+                if (prisustvoZaBrisanje != null)
+                {
+                    s.Delete(prisustvoZaBrisanje);
+                }
+                s.Flush();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+        public static List<PolaznikPregled> VratiPolaznikeZaEvidenciju(int casId)
+        {
+            List<PolaznikPregled> polazniciZaEvidenciju = new List<PolaznikPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Cas cas = s.Get<Cas>(casId);
+                if (cas == null) return polazniciZaEvidenciju;
+                Kurs kurs = cas.PripadaNastavi.PripadaKursu;
+
+                IList<DetePolaznik> decaPolaznici = s.Query<DetePolaznik>()
+                                    .Where(dp => dp.PrijavljeniKursevi.Contains(kurs))
+                                    .ToList();
+
+                IList<OdrasliPolaznik> odrasliPolaznici = s.Query<OdrasliPolaznik>()
+                                                           .Where(op => op.PrijavljeniKursevi.Contains(kurs))
+                                                           .ToList();
+
+                IList<Polaznik> prijavljeniPolaznici = new List<Polaznik>();
+                foreach (var dete in decaPolaznici) { prijavljeniPolaznici.Add(dete); }
+                foreach (var odrasli in odrasliPolaznici) { prijavljeniPolaznici.Add(odrasli); }
+
+                if (!prijavljeniPolaznici.Any()) return polazniciZaEvidenciju;
+
+                HashSet<int> idjeviPrisutnihPolaznika = s.Query<Prisustvo>()
+                                                       .Where(p => p.Id.CasKomePrisustvuje.Id == casId)
+                                                       .Select(p => p.Id.PolaznikId)
+                                                       .ToHashSet();
+
+                var neevidentiraniPolaznici = prijavljeniPolaznici
+                                              .Where(p => !idjeviPrisutnihPolaznika.Contains(p.Id));
+
+                // 4. Prevedi u DTO
+                foreach (var p in neevidentiraniPolaznici)
+                {
+                    polazniciZaEvidenciju.Add(new PolaznikPregled
+                    {
+                        IdOsobe = p.Id,
+                        Ime = p.OsnovniPodaci.Ime,
+                        Prezime =p.OsnovniPodaci.Prezime
+                    });
+                }
+            }
+            catch (Exception ex) { throw; }
+            finally { s?.Close(); }
+
+            return polazniciZaEvidenciju;
+        }
+
+
         public static List<ZavrsniIspitPregled> VratiPolozeneIspite(int idOsobe)
         {
             using (var s = DataLayer.GetSession())

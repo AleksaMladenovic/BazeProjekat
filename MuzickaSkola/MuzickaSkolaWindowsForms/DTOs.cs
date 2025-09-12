@@ -278,6 +278,8 @@ namespace MuzickaSkolaWindowsForms
         }
 
         public PolaznikPregled() { }
+
+        public string PunoIme{ get => $"{this.Ime} {this.Prezime}"; }
     }
 
     public abstract class PolaznikBasic
@@ -340,6 +342,8 @@ namespace MuzickaSkolaWindowsForms
         public DateTime? Termin { get; set; }
         public string Tema { get; set; }
         public int Ocena { get; set; }
+        public string ImePolaznika{ get; set; }
+        public string PrezimePolaznika { get; set; }
     }
 
     //public class ZavrsniIspitPregled
