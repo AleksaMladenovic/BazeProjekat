@@ -62,6 +62,35 @@ namespace MuzickaSkolaWindowsForms
             }
             listViewClanovi.Refresh();
         }
-    
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (listViewKomisije.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas, izaberite komisiju koju želite da obrišete.");
+                return;
+            }
+
+            // 2. Pitamo korisnika za potvrdu
+            DialogResult rezultat = MessageBox.Show("Da li ste sigurni da želite da obrišete izabranu komisiju? Sve veze sa članovima.",
+                                                    "Potvrda brisanja",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Warning);
+
+            if (rezultat == DialogResult.Yes)
+            {
+                
+                int idZaBrisanje = (int)listViewKomisije.SelectedItems[0].Tag;
+
+                DTOManager.ObrisiKomisiju(idZaBrisanje);
+
+                
+                this.PopuniListuKomisija();
+                
+                this.listViewClanovi.Items.Clear();
+
+                MessageBox.Show("Komisija je uspešno obrisana.");
+            }
+        }
     }
 }

@@ -38,6 +38,7 @@
             listViewNijeClan = new ListView();
             columnHeader2 = new ColumnHeader();
             btnSnimiPromene = new Button();
+            btnDodajKomisiju = new Button();
             SuspendLayout();
             // 
             // lblNastavnikInfo
@@ -76,7 +77,7 @@
             // 
             // btnUkloniUcesce
             // 
-            btnUkloniUcesce.Location = new Point(155, 150);
+            btnUkloniUcesce.Location = new Point(155, 130);
             btnUkloniUcesce.Name = "btnUkloniUcesce";
             btnUkloniUcesce.Size = new Size(75, 23);
             btnUkloniUcesce.TabIndex = 3;
@@ -129,11 +130,22 @@
             btnSnimiPromene.UseVisualStyleBackColor = true;
             btnSnimiPromene.Click += btnSnimiPromene_Click;
             // 
+            // btnDodajKomisiju
+            // 
+            btnDodajKomisiju.Location = new Point(127, 169);
+            btnDodajKomisiju.Name = "btnDodajKomisiju";
+            btnDodajKomisiju.Size = new Size(125, 23);
+            btnDodajKomisiju.TabIndex = 8;
+            btnDodajKomisiju.Text = "Dodaj novu komisiju";
+            btnDodajKomisiju.UseVisualStyleBackColor = true;
+            btnDodajKomisiju.Click += btnDodajKomisiju_Click;
+            // 
             // UpravljanjeKomisijamaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(371, 230);
+            Controls.Add(btnDodajKomisiju);
             Controls.Add(btnSnimiPromene);
             Controls.Add(listViewNijeClan);
             Controls.Add(label2);
@@ -162,5 +174,6 @@
         private ListView listViewNijeClan;
         private ColumnHeader columnHeader2;
         private Button btnSnimiPromene;
+        private Button btnDodajKomisiju;
     }
 }

@@ -34,6 +34,7 @@
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
+            button1 = new Button();
             SuspendLayout();
             // 
             // listViewKomisije
@@ -42,7 +43,7 @@
             listViewKomisije.FullRowSelect = true;
             listViewKomisije.Location = new Point(12, 12);
             listViewKomisije.Name = "listViewKomisije";
-            listViewKomisije.Size = new Size(156, 287);
+            listViewKomisije.Size = new Size(156, 258);
             listViewKomisije.TabIndex = 0;
             listViewKomisije.UseCompatibleStateImageBehavior = false;
             listViewKomisije.View = View.Details;
@@ -79,11 +80,22 @@
             columnHeader5.Text = "Strucna Sprema";
             columnHeader5.Width = 150;
             // 
+            // button1
+            // 
+            button1.Location = new Point(12, 276);
+            button1.Name = "button1";
+            button1.Size = new Size(156, 23);
+            button1.TabIndex = 2;
+            button1.Text = "Obrisi Komisiju";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // KomisijeIspitiForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(720, 316);
+            Controls.Add(button1);
             Controls.Add(listViewClanovi);
             Controls.Add(listViewKomisije);
             Name = "KomisijeIspitiForm";
@@ -100,5 +112,6 @@
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
+        private Button button1;
     }
 }
