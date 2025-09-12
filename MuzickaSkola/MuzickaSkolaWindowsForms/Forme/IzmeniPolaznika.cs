@@ -13,12 +13,12 @@ namespace MuzickaSkolaWindowsForms.Forme
     public partial class IzmeniPolaznika : Form
     {
         private readonly int _idOsobe;
-        private readonly string _tip; 
+        private readonly string _tip;
         public IzmeniPolaznika()
         {
             InitializeComponent();
         }
-        
+
 
         public IzmeniPolaznika(int idOsobe, string tip)
         {
@@ -27,7 +27,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             InitializeComponent();
         }
 
-        
+
         private void ClearDynamic() => pnlDynamic.Controls.Clear();
 
         private void AddField(string labelText, string textBoxName, int rowIndex, int colIndex)
@@ -47,10 +47,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             pnlDynamic.Controls.Add(tb);
         }
 
-        private string GetDyn(string name) =>
-            (pnlDynamic.Controls.Find(name, true).FirstOrDefault() as TextBox)?.Text?.Trim();
 
-       
         private void IzmeniPolaznikaForm_Load(object sender, EventArgs e)
         {
 
@@ -106,7 +103,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                     }
                     catch
                     {
-                        
+
                         var imePrez = dto.PunoImeRoditelja?
                             .Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -116,12 +113,12 @@ namespace MuzickaSkolaWindowsForms.Forme
                         (pnlDynamic.Controls["tbRoditeljPrezime"] as TextBox)!.Text =
                             (imePrez != null && imePrez.Length > 1) ? string.Join(" ", imePrez.Skip(1)) : string.Empty;
 
-                        
+
                     }
                 }
                 else
                 {
-                    
+
                     var imePrez = dto.PunoImeRoditelja?
                         .Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -134,7 +131,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             }
         }
 
-     
+
         private void btnSacuvaj_Click(object sender, EventArgs e)
         {
             try
@@ -199,7 +196,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                         IdRoditelja = idR
                     };
 
-                    
+
                     DTOManager.IzmeniDetePolaznika(dto, roditeljJmbg: rJmbg, roditeljIme: rIme, roditeljPrezime: rPrez);
                 }
 

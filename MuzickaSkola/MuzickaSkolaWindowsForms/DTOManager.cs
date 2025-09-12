@@ -1530,7 +1530,7 @@ namespace MuzickaSkolaWindowsForms
         }
 
         public static int NadjiIliKreirajRoditeljaId(string jmbg, string? ime = null, string? prezime = null,
-                                             string? adresa = null, string? telefon = null, string? email = null)
+                                           string? adresa = null, string? telefon = null, string? email = null)
         {
             if (string.IsNullOrWhiteSpace(jmbg) || jmbg.Length != 13 || !jmbg.All(char.IsDigit))
                 throw new ApplicationException("JMBG roditelja je obavezan i mora imati 13 cifara.");
@@ -1544,10 +1544,10 @@ namespace MuzickaSkolaWindowsForms
 
                 if (roditelj != null)
                 {
-                    
+
                     if (!roditelj.FRoditelj) roditelj.FRoditelj = true;
 
-                    
+
                     if (!string.IsNullOrWhiteSpace(ime)) roditelj.Ime = ime!;
                     if (!string.IsNullOrWhiteSpace(prezime)) roditelj.Prezime = prezime!;
                     if (!string.IsNullOrWhiteSpace(adresa)) roditelj.Adresa = adresa!;
@@ -1558,22 +1558,13 @@ namespace MuzickaSkolaWindowsForms
                     tx.Commit();
                     return roditelj.Id;
                 }
-
-                // 2) Ako ne postoji – kreiraj novog roditelja
-                var novaOsoba = new Osoba
+                else
                 {
-                    Jmbg = jmbg,
-                    Ime = ime ?? "",
-                    Prezime = prezime ?? "",
-                    Adresa = adresa,
-                    Telefon = telefon,
-                    Email = email,
-                    FRoditelj = true
-                };
+                    if (roditelj == null)
+                        throw new ApplicationException("Roditelj sa ovim JMBG-om ne postoji. Molimo Vas dodajte ga.");
+                    return 0;
+                }
 
-                s.Save(novaOsoba);
-                tx.Commit();
-                return novaOsoba.Id;
             }
         }
         public static List<RoditeljListItem> VratiSveRoditeljeDetalji()
@@ -1658,28 +1649,47 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
-       
+
         public static void ObrisiRoditelja(int idOsobe)
         {
             using (var s = DataLayer.GetSession())
             using (var tx = s.BeginTransaction())
             {
-                var o = s.Get<Osoba>(idOsobe) ?? throw new ApplicationException("Roditelj ne postoji.");
+                var o = s.Get<Osoba>(idOsobe);
+                if (o == null)
+                    throw new ApplicationException($"Osoba sa ID={idOsobe} ne postoji.");
 
-                // Odveži svu decu koja imaju ovog roditelja
+
                 var deca = s.Query<DetePolaznik>()
                             .Where(d => d.PrijavioRoditelj != null && d.PrijavioRoditelj.Id == idOsobe)
                             .ToList();
+
                 foreach (var d in deca)
                 {
                     d.PrijavioRoditelj = null;
                     s.Update(d);
                 }
 
-                
-                o.FRoditelj = false;
-                s.Update(o);
 
+                s.Delete(o);
+
+                tx.Commit();
+            }
+        }
+        public static void DodajPolaznikaNaKurs(int idPolaznika, int idKursa)
+        {
+            using (var s = DataLayer.GetSession())
+            using (var tx = s.BeginTransaction())
+            {
+                var polaznik = s.Get<Polaznik>(idPolaznika);
+                var kurs = s.Get<Kurs>(idKursa);
+
+                if (polaznik == null || kurs == null)
+                    throw new Exception("Polaznik ili kurs ne postoji.");
+
+                polaznik.PrijavljeniKursevi.Add(kurs);
+
+                s.SaveOrUpdate(polaznik);
                 tx.Commit();
             }
         }

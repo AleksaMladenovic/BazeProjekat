@@ -28,76 +28,102 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.gbInfo = new GroupBox();
-            this.lblZaPolaznikaCaption = new Label();
-            this.lblPolaznikValue = new Label();
-            this.lvIspiti = new ListView();
-            this.btnZatvori = new Button();
-
-            this.SuspendLayout();
-
-            // Form
-            this.AutoScaleDimensions = new SizeF(7F, 15F);
-            this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(820, 500);
-            this.MinimumSize = new Size(820, 500);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.Name = "PolozniIspitiForm";
-            this.Text = "Položeni ispiti";
-            this.Load += new System.EventHandler(this.PolozeniIspitiForm_Load);
-
+            gbInfo = new GroupBox();
+            lblZaPolaznikaCaption = new Label();
+            lblPolaznikValue = new Label();
+            lvIspiti = new ListView();
+            btnZatvori = new Button();
+            btnDodajIspit = new Button();
+            gbInfo.SuspendLayout();
+            SuspendLayout();
+            // 
             // gbInfo
-            this.gbInfo.Name = "gbInfo";
-            this.gbInfo.Text = "Informacije";
-            this.gbInfo.Location = new Point(12, 12);
-            this.gbInfo.Size = new Size(796, 62);
-            this.gbInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-
-            // caption
-            this.lblZaPolaznikaCaption.AutoSize = true;
-            this.lblZaPolaznikaCaption.Location = new Point(12, 27);
-            this.lblZaPolaznikaCaption.Name = "lblZaPolaznikaCaption";
-            this.lblZaPolaznikaCaption.Size = new Size(74, 15);
-            this.lblZaPolaznikaCaption.Text = "Za polaznika:";
-
-            // value
-            this.lblPolaznikValue.AutoSize = true;
-            this.lblPolaznikValue.Location = new Point(100, 27);
-            this.lblPolaznikValue.Name = "lblPolaznikValue";
-            this.lblPolaznikValue.Size = new Size(12, 15);
-            this.lblPolaznikValue.Text = "-";
-
-            this.gbInfo.Controls.Add(this.lblZaPolaznikaCaption);
-            this.gbInfo.Controls.Add(this.lblPolaznikValue);
-
+            // 
+            gbInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gbInfo.Controls.Add(lblZaPolaznikaCaption);
+            gbInfo.Controls.Add(lblPolaznikValue);
+            gbInfo.Location = new Point(14, 16);
+            gbInfo.Margin = new Padding(3, 4, 3, 4);
+            gbInfo.Name = "gbInfo";
+            gbInfo.Padding = new Padding(3, 4, 3, 4);
+            gbInfo.Size = new Size(910, 83);
+            gbInfo.TabIndex = 0;
+            gbInfo.TabStop = false;
+            gbInfo.Text = "Informacije";
+            // 
+            // lblZaPolaznikaCaption
+            // 
+            lblZaPolaznikaCaption.AutoSize = true;
+            lblZaPolaznikaCaption.Location = new Point(14, 36);
+            lblZaPolaznikaCaption.Name = "lblZaPolaznikaCaption";
+            lblZaPolaznikaCaption.Size = new Size(97, 20);
+            lblZaPolaznikaCaption.TabIndex = 0;
+            lblZaPolaznikaCaption.Text = "Za polaznika:";
+            // 
+            // lblPolaznikValue
+            // 
+            lblPolaznikValue.AutoSize = true;
+            lblPolaznikValue.Location = new Point(114, 36);
+            lblPolaznikValue.Name = "lblPolaznikValue";
+            lblPolaznikValue.Size = new Size(15, 20);
+            lblPolaznikValue.TabIndex = 1;
+            lblPolaznikValue.Text = "-";
+            // 
             // lvIspiti
-            this.lvIspiti.Name = "lvIspiti";
-            this.lvIspiti.Location = new Point(12, 88);
-            this.lvIspiti.Size = new Size(796, 365);
-            this.lvIspiti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.lvIspiti.BorderStyle = BorderStyle.FixedSingle;
-            this.lvIspiti.FullRowSelect = true;
-            this.lvIspiti.GridLines = true;
-            this.lvIspiti.HideSelection = false;
-            this.lvIspiti.MultiSelect = false;
-            this.lvIspiti.View = View.Details;
-
+            // 
+            lvIspiti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lvIspiti.BorderStyle = BorderStyle.FixedSingle;
+            lvIspiti.FullRowSelect = true;
+            lvIspiti.GridLines = true;
+            lvIspiti.Location = new Point(14, 117);
+            lvIspiti.Margin = new Padding(3, 4, 3, 4);
+            lvIspiti.MultiSelect = false;
+            lvIspiti.Name = "lvIspiti";
+            lvIspiti.Size = new Size(909, 486);
+            lvIspiti.TabIndex = 1;
+            lvIspiti.UseCompatibleStateImageBehavior = false;
+            lvIspiti.View = View.Details;
+            // 
             // btnZatvori
-            this.btnZatvori.Name = "btnZatvori";
-            this.btnZatvori.Text = "Zatvori";
-            this.btnZatvori.Size = new Size(110, 34);
-            this.btnZatvori.Location = new Point(698, 459);
-            this.btnZatvori.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            this.btnZatvori.UseVisualStyleBackColor = true;
-            this.btnZatvori.Click += new System.EventHandler(this.btnZatvori_Click);
-
-            // to form
-            this.Controls.Add(this.gbInfo);
-            this.Controls.Add(this.lvIspiti);
-            this.Controls.Add(this.btnZatvori);
-
-            this.ResumeLayout(false);
+            // 
+            btnZatvori.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnZatvori.Location = new Point(798, 612);
+            btnZatvori.Margin = new Padding(3, 4, 3, 4);
+            btnZatvori.Name = "btnZatvori";
+            btnZatvori.Size = new Size(126, 45);
+            btnZatvori.TabIndex = 2;
+            btnZatvori.Text = "Zatvori";
+            btnZatvori.UseVisualStyleBackColor = true;
+            btnZatvori.Click += btnZatvori_Click;
+            // 
+            // btnDodajIspit
+            // 
+            btnDodajIspit.Location = new Point(14, 614);
+            btnDodajIspit.Name = "btnDodajIspit";
+            btnDodajIspit.Size = new Size(129, 43);
+            btnDodajIspit.TabIndex = 3;
+            btnDodajIspit.Text = "Dodaj ispit";
+            btnDodajIspit.UseVisualStyleBackColor = true;
+            btnDodajIspit.Click += btnDodajIspit_Click;
+            // 
+            // PolozeniIspitiForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(937, 667);
+            Controls.Add(btnDodajIspit);
+            Controls.Add(gbInfo);
+            Controls.Add(lvIspiti);
+            Controls.Add(btnZatvori);
+            Margin = new Padding(3, 4, 3, 4);
+            MinimumSize = new Size(935, 651);
+            Name = "PolozeniIspitiForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Položeni ispiti";
+            Load += PolozeniIspitiForm_Load;
+            gbInfo.ResumeLayout(false);
+            gbInfo.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -107,5 +133,6 @@
         private Label lblPolaznikValue;
         private ListView lvIspiti;
         private Button btnZatvori;
+        private Button btnDodajIspit;
     }
 }

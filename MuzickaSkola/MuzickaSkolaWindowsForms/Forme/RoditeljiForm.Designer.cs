@@ -38,6 +38,7 @@
             chEmail = new ColumnHeader();
             gbAkcije = new GroupBox();
             btnIzmeniRoditelja = new Button();
+            btnObrisiRoditelja = new Button();
             gbRoditelji.SuspendLayout();
             gbAkcije.SuspendLayout();
             SuspendLayout();
@@ -100,6 +101,7 @@
             // gbAkcije
             // 
             gbAkcije.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            gbAkcije.Controls.Add(btnObrisiRoditelja);
             gbAkcije.Controls.Add(btnIzmeniRoditelja);
             gbAkcije.Location = new Point(628, 142);
             gbAkcije.Name = "gbAkcije";
@@ -112,11 +114,21 @@
             // 
             btnIzmeniRoditelja.Location = new Point(20, 22);
             btnIzmeniRoditelja.Name = "btnIzmeniRoditelja";
-            btnIzmeniRoditelja.Size = new Size(142, 74);
+            btnIzmeniRoditelja.Size = new Size(135, 33);
             btnIzmeniRoditelja.TabIndex = 0;
             btnIzmeniRoditelja.Text = "Izmeni roditelja";
             btnIzmeniRoditelja.UseVisualStyleBackColor = true;
             btnIzmeniRoditelja.Click += btnIzmeniRoditelja_Click;
+            // 
+            // btnObrisiRoditelja
+            // 
+            btnObrisiRoditelja.Location = new Point(20, 73);
+            btnObrisiRoditelja.Name = "btnObrisiRoditelja";
+            btnObrisiRoditelja.Size = new Size(135, 30);
+            btnObrisiRoditelja.TabIndex = 1;
+            btnObrisiRoditelja.Text = "Obrisi roditelja";
+            btnObrisiRoditelja.UseVisualStyleBackColor = true;
+            btnObrisiRoditelja.Click += btnObrisiRoditelja_Click_1;
             // 
             // RoditeljiForm
             // 
@@ -145,5 +157,6 @@
         private System.Windows.Forms.ColumnHeader chEmail;
         private System.Windows.Forms.GroupBox gbAkcije;
         private System.Windows.Forms.Button btnIzmeniRoditelja;
+        private Button btnObrisiRoditelja;
     }
 }
