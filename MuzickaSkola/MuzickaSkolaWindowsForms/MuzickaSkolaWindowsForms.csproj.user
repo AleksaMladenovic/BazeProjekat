@@ -7,6 +7,9 @@
     <Compile Update="Forme\DetaljiNastavnikForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\DodajIzmeniCasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\DodajNastavnikaForm.cs">
       <SubType>Form</SubType>
     </Compile>

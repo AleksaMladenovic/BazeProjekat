@@ -57,6 +57,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                 listViewKursevi.Items.Add(item);
             }
             listViewKursevi.Refresh();
+            OnemoguciDugmice();
         }
 
         private void listViewKursevi_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,6 +84,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             var forma = new DodajIzmeniKursForm(((KursPregled)listViewKursevi.SelectedItems[0].Tag).Id);
             forma.ShowDialog();
             this.PopuniPodacima();
+            OnemoguciDugmice();
         }
 
         private void cmdObrisiKurs_Click(object sender, EventArgs e)
@@ -98,6 +100,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                 if (DTOManager.ObrisiKurs(selektovaniKursPregled.Id))
                     this.PopuniPodacima();
             }
+
         }
 
         private void cmdNastavniBlokovi_Click(object sender, EventArgs e)

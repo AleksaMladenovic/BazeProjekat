@@ -47,6 +47,7 @@
             chTermin = new ColumnHeader();
             chTema = new ColumnHeader();
             chNastavnik = new ColumnHeader();
+            chUcionica = new ColumnHeader();
             lblInfoNastava = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -73,8 +74,8 @@
             splitContainer1.Panel2.Controls.Add(cmdDodajCas);
             splitContainer1.Panel2.Controls.Add(listViewCasovi);
             splitContainer1.Panel2.Controls.Add(lblInfoNastava);
-            splitContainer1.Size = new Size(800, 450);
-            splitContainer1.SplitterDistance = 374;
+            splitContainer1.Size = new Size(931, 450);
+            splitContainer1.SplitterDistance = 386;
             splitContainer1.TabIndex = 0;
             // 
             // groupBox1
@@ -85,7 +86,7 @@
             groupBox1.Controls.Add(listViewNastava);
             groupBox1.Location = new Point(3, 27);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(368, 420);
+            groupBox1.Size = new Size(365, 420);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Nastavni blokovi";
@@ -126,10 +127,11 @@
             listViewNastava.FullRowSelect = true;
             listViewNastava.Location = new Point(9, 0);
             listViewNastava.Name = "listViewNastava";
-            listViewNastava.Size = new Size(353, 389);
+            listViewNastava.Size = new Size(350, 389);
             listViewNastava.TabIndex = 0;
             listViewNastava.UseCompatibleStateImageBehavior = false;
             listViewNastava.View = View.Details;
+            listViewNastava.SelectedIndexChanged += listViewNastava_SelectedIndexChanged;
             // 
             // chId
             // 
@@ -161,40 +163,45 @@
             // 
             // cmdObrisiCas
             // 
-            cmdObrisiCas.Location = new Point(273, 418);
+            cmdObrisiCas.Location = new Point(346, 418);
             cmdObrisiCas.Name = "cmdObrisiCas";
             cmdObrisiCas.Size = new Size(75, 23);
             cmdObrisiCas.TabIndex = 6;
             cmdObrisiCas.Text = "Obriši";
             cmdObrisiCas.UseVisualStyleBackColor = true;
+            cmdObrisiCas.Click += cmdObrisiCas_Click;
             // 
             // cmdIzmeniCas
             // 
-            cmdIzmeniCas.Location = new Point(172, 418);
+            cmdIzmeniCas.Location = new Point(245, 418);
             cmdIzmeniCas.Name = "cmdIzmeniCas";
             cmdIzmeniCas.Size = new Size(75, 23);
             cmdIzmeniCas.TabIndex = 5;
             cmdIzmeniCas.Text = "Izmeni";
             cmdIzmeniCas.UseVisualStyleBackColor = true;
+            cmdIzmeniCas.Click += cmdIzmeniCas_Click;
             // 
             // cmdDodajCas
             // 
-            cmdDodajCas.Location = new Point(64, 418);
+            cmdDodajCas.Location = new Point(137, 418);
             cmdDodajCas.Name = "cmdDodajCas";
             cmdDodajCas.Size = new Size(75, 23);
             cmdDodajCas.TabIndex = 4;
             cmdDodajCas.Text = "Dodaj";
             cmdDodajCas.UseVisualStyleBackColor = true;
+            cmdDodajCas.Click += cmdDodajCas_Click;
             // 
             // listViewCasovi
             // 
-            listViewCasovi.Columns.AddRange(new ColumnHeader[] { chIdCasa, chTermin, chTema, chNastavnik });
+            listViewCasovi.Columns.AddRange(new ColumnHeader[] { chIdCasa, chTermin, chTema, chNastavnik, chUcionica });
+            listViewCasovi.FullRowSelect = true;
             listViewCasovi.Location = new Point(3, 27);
             listViewCasovi.Name = "listViewCasovi";
-            listViewCasovi.Size = new Size(416, 389);
+            listViewCasovi.Size = new Size(526, 389);
             listViewCasovi.TabIndex = 1;
             listViewCasovi.UseCompatibleStateImageBehavior = false;
             listViewCasovi.View = View.Details;
+            listViewCasovi.SelectedIndexChanged += listViewCasovi_SelectedIndexChanged;
             // 
             // chIdCasa
             // 
@@ -215,6 +222,11 @@
             chNastavnik.Text = "Nastavnik";
             chNastavnik.Width = 130;
             // 
+            // chUcionica
+            // 
+            chUcionica.Text = "Učionica";
+            chUcionica.Width = 100;
+            // 
             // lblInfoNastava
             // 
             lblInfoNastava.AutoSize = true;
@@ -228,7 +240,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(931, 450);
             Controls.Add(splitContainer1);
             Name = "NastavaForm";
             Text = "NastavaForm";
@@ -265,5 +277,6 @@
         private ColumnHeader chTema;
         private ColumnHeader chNastavnik;
         private Label lblInfoNastava;
+        private ColumnHeader chUcionica;
     }
 }
