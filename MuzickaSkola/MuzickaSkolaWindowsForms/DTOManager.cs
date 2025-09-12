@@ -1329,7 +1329,7 @@ namespace MuzickaSkolaWindowsForms
                     NHibernateUtil.Initialize(k.IspitiKojeOcenjuje);
                     foreach (var ispit in k.IspitiKojeOcenjuje)
                     {
-                        NHibernateUtil.Initialize(ispit.Id.IspitIzKursa);
+                        NHibernateUtil.Initialize(ispit.KursKojiSePolaze);
                         NHibernateUtil.Initialize(ispit.PolazePolaznik);
                         NHibernateUtil.Initialize(ispit.PolazePolaznik.OsnovniPodaci);
                     }
@@ -1894,9 +1894,9 @@ namespace MuzickaSkolaWindowsForms
                         .Where(z => z.PolazePolaznik.Id == idOsobe)
                         .Select(z => new ZavrsniIspitPregled
                         {
-                            IdKursa = z.Id.IspitIzKursa.Id,
-                            NazivKursa = z.Id.IspitIzKursa.Naziv,
-                            Datum = z.Id.Datum,
+                            IdKursa = z.KursKojiSePolaze.Id,
+                            NazivKursa = z.KursKojiSePolaze.Naziv,
+                            Datum = z.Datum,
                             Ocena = z.Ocena,
                             Sertifikat = z.Sertifikat
                         })
