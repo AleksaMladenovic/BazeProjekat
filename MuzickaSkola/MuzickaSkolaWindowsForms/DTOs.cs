@@ -22,6 +22,19 @@ namespace MuzickaSkolaWindowsForms
             Kapacitet = kapacitet;
             RadnoVreme = radnoVreme;
         }
+        public override bool Equals(object obj)
+        {
+            if (obj is LokacijaPregled other)
+            {
+                return this.Adresa == other.Adresa;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Adresa?.GetHashCode() ?? 0;
+        }
     }
 
     public class LokacijaBasic {

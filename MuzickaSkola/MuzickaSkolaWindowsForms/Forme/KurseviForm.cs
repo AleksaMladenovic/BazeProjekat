@@ -30,6 +30,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             cmdIzmeniKurs.Enabled = false;
             cmdObrisiKurs.Enabled = false;
             cmdNastavniBlokovi.Enabled = false;
+            cmdLokacijeOdrzavanja.Enabled = false;
         }
 
         private void OmoguciDugmice()
@@ -37,6 +38,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             cmdIzmeniKurs.Enabled = true;
             cmdObrisiKurs.Enabled = true;
             cmdNastavniBlokovi.Enabled = true;
+            cmdLokacijeOdrzavanja.Enabled=true;
         }
         private void PopuniPodacima()
         {
@@ -107,6 +109,13 @@ namespace MuzickaSkolaWindowsForms.Forme
         {
             KursPregled k = (KursPregled)listViewKursevi.SelectedItems[0].Tag;
             var form = new NastavaForm(k);
+            form.ShowDialog();
+        }
+
+        private void cmdLokacijeOdrzavanja_Click(object sender, EventArgs e)
+        {
+            var selektovaniKurs = (KursPregled)listViewKursevi.SelectedItems[0].Tag;
+            var form = new KursLokacijeForm(selektovaniKurs.Id);
             form.ShowDialog();
         }
     }

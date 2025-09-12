@@ -45,6 +45,35 @@ namespace MuzickaSkolaWindowsForms
             return lokacijePregled;
         }
 
+        public static List<LokacijaPregled> VratiSveLokacijeZaKurs(int kursId)
+        {
+            List<LokacijaPregled> lokacijePregled = new List<LokacijaPregled>();
+            ISession? s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Kurs kurs = s.Get<Kurs>(kursId);
+                IList<Lokacija> sveLokacijeZaKurs = kurs.LokacijeOdrzavanja;
+
+                foreach (var lok in sveLokacijeZaKurs)
+                {
+                    int sumaKapaciteta = lok.Ucionice.Sum(u => u.Kapacitet);
+
+                    lokacijePregled.Add(new LokacijaPregled(lok.Adresa, sumaKapaciteta, lok.RadnoVreme));
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                s?.Close();
+            }
+            return lokacijePregled;
+        }
+
         public static void DodajLokaciju(LokacijaBasic lokacijaDto)
         {
             try
@@ -67,6 +96,43 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
+        public static void DodajLokacijuKursu(string lokacija, int idKursa)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+        }
+
+        public static bool DaLiPostojeCasoviZaKursNaLokaciji(int kursId,string adresa)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                var casovi = from c in s.Query<Cas>()
+                             where c.UcionicaOdrzavnja.Id.PripadaLokaciji.Adresa == adresa && c.PripadaNastavi.PripadaKursu.Id == kursId
+                             select c;
+
+                return casovi.Any();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return true;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
         public static bool DaLiLokacijaPostoji(string adresa)
         {
             try
@@ -104,7 +170,41 @@ namespace MuzickaSkolaWindowsForms
 
         }
 
+        public static void AzurirajLokacijeZaKurs(int kursId, List<string> adreseNovihLokacija)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
 
+                Kurs kurs = s.Get<Kurs>(kursId);
+
+                if (kurs == null)
+                {
+                    throw new ArgumentException($"Kurs sa ID-jem {kursId} ne postoji.");
+                }
+
+                kurs.LokacijeOdrzavanja.Clear();
+                
+                foreach (string adresa in adreseNovihLokacija)
+                {
+                    Lokacija lokacija = s.Load<Lokacija>(adresa);
+
+                    kurs.LokacijeOdrzavanja.Add(lokacija);
+                }
+
+                s.Update(kurs);
+                s.Flush();
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
         public static LokacijaBasic VratiLokacijuZaIzmenu(string adresa)
         {
             LokacijaBasic novaLokacija = new LokacijaBasic() { Adresa = adresa};

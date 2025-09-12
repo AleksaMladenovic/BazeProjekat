@@ -41,6 +41,7 @@
             cmdObrisiKurs = new Button();
             cmdIzmeniKurs = new Button();
             cmdDodajKurs = new Button();
+            cmdLokacijeOdrzavanja = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -107,10 +108,11 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(cmdLokacijeOdrzavanja);
             groupBox2.Controls.Add(cmdNastavniBlokovi);
             groupBox2.Location = new Point(3, 125);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(207, 155);
+            groupBox2.Size = new Size(207, 78);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Detalji o selektovanom kursu";
@@ -167,6 +169,16 @@
             cmdDodajKurs.UseVisualStyleBackColor = true;
             cmdDodajKurs.Click += cmdDodajKurs_Click;
             // 
+            // cmdLokacijeOdrzavanja
+            // 
+            cmdLokacijeOdrzavanja.Location = new Point(6, 48);
+            cmdLokacijeOdrzavanja.Name = "cmdLokacijeOdrzavanja";
+            cmdLokacijeOdrzavanja.Size = new Size(195, 23);
+            cmdLokacijeOdrzavanja.TabIndex = 1;
+            cmdLokacijeOdrzavanja.Text = "Lokacije održavanja";
+            cmdLokacijeOdrzavanja.UseVisualStyleBackColor = true;
+            cmdLokacijeOdrzavanja.Click += cmdLokacijeOdrzavanja_Click;
+            // 
             // KurseviForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -200,5 +212,6 @@
         private Button cmdIzmeniKurs;
         private Button cmdDodajKurs;
         private Button cmdNastavniBlokovi;
+        private Button cmdLokacijeOdrzavanja;
     }
 }
