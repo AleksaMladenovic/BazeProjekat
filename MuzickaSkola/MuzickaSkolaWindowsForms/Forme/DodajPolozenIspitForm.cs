@@ -30,7 +30,7 @@ namespace MuzickaSkolaWindowsForms.Forme
         {
             try
             {
-                var kursevi = DTOManager.VratiSveKurseve();
+                var kursevi = DTOManager.VratiPrijavljeneKurseve(_idPolaznika);
                 cmbKursevi.DataSource = kursevi;
                 cmbKursevi.DisplayMember = "Naziv"; // Prikazuje naziv kursa
                 cmbKursevi.ValueMember = "Id";      // Vrednost iza prikaza je ID
@@ -47,7 +47,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             {
                 var komisije = DTOManager.VratiSveKomisije();
                 cmbKomisije.DataSource = komisije;
-                cmbKomisije.DisplayMember = "Id"; // Prikazuje ID komisije (možete napraviti bolji prikaz ako želite)
+                cmbKomisije.DisplayMember = "Id"; 
                 cmbKomisije.ValueMember = "Id";
             }
             catch (Exception ex)
