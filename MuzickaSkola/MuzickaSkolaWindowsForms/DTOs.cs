@@ -240,8 +240,8 @@ namespace MuzickaSkolaWindowsForms
         public ZavrsniIspitPregled() { }
         public ZavrsniIspitPregled(ZavrsniIspit zi)
         {
-            this.NazivKursa = zi.Id.IspitIzKursa.Naziv;
-            this.Datum = zi.Id.Datum;
+            this.NazivKursa = zi.KursKojiSePolaze.Naziv;
+            this.Datum = zi.Datum;
             this.Ocena = zi.Ocena;
             this.PunoImePolaznika = $"{zi.PolazePolaznik.OsnovniPodaci.Ime} {zi.PolazePolaznik.OsnovniPodaci.Prezime}";
         }
