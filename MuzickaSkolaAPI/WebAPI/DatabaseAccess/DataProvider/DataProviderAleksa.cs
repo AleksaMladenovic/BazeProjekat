@@ -1,4 +1,5 @@
 ﻿using DatabaseAccess.DTOs;
+using FluentNHibernate.Conventions;
 using MuzickaSkolaWindowsForms;
 using MuzickaSkolaWindowsForms.Entiteti;
 using NHibernate.Linq;
@@ -705,6 +706,7 @@ namespace DatabaseAccess.DataProvider
         }
 
         #endregion
+
         #region Casovi
         public static Result<List<CasView>,ErrorMessage> VratiSveCasoveZaNastavu(int nastavaId)
         {
@@ -866,6 +868,208 @@ namespace DatabaseAccess.DataProvider
                 s.Close();
             }
         }
+        #endregion
+
+        #region PrisustvaCasovi
+
+        public static Result<List<PrisustvoView>,ErrorMessage> VratiPrisustvaZaCas(int casId)
+        {
+            List<PrisustvoView> prisustvaView = new List<PrisustvoView>();
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                IEnumerable<Prisustvo> svaPrisustva = s.Query<Prisustvo>()
+                    .Where(p => p.Id.CasKomePrisustvuje.Id == casId);
+
+                foreach (var p in svaPrisustva)
+                {
+                    var polaznikOsoba = s.Get<Osoba>(p.Id.PolaznikId);
+                    prisustvaView.Add(new PrisustvoView
+                    {
+                        PolaznikId = p.Id.PolaznikId,
+                        PolaznikPunoIme = polaznikOsoba.Ime + " " +polaznikOsoba.Prezime,
+                        CasId = casId,
+                        Ocena = p.Ocena,
+                    });
+                }
+                return prisustvaView;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s?.Close();
+            }
+
+        }
+
+        public static Result<PrisustvoView, ErrorMessage> DodajPrisustvo(PrisustvoPregled prisustvoDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                var moguciPolaznici = VratiPolaznikeZaEvidenciju(prisustvoDto.IdCasa);
+                if (moguciPolaznici.IsEmpty())
+                {
+                    return new ErrorMessage("Svi polaznici za ovaj kurs su vec evidentirani u času!", 400);
+                }
+                Polaznik p = s.Load<Polaznik>(prisustvoDto.IdPolaznika);
+                if (p == null)
+                    return new ErrorMessage("Polaznik sa Id-em ne postoji!", 400);
+
+                if (!moguciPolaznici.Select(p => p.IdOsobe).Contains(prisustvoDto.IdPolaznika))
+                {
+                    return new ErrorMessage("Nije moguce evidentirati polaznika za dati čas!",400);
+                }
+                Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
+                if(c==null)
+                    return new ErrorMessage("Cas sa Id-em ne postoji!", 400);
+
+                var novoPrisustvo = new Prisustvo
+                {
+                    Ocena = prisustvoDto.Ocena
+                };
+                novoPrisustvo.Id.PolaznikId = prisustvoDto.IdPolaznika;
+                novoPrisustvo.Id.CasKomePrisustvuje = c;
+
+                s.Save(novoPrisustvo);
+                s.Flush();
+                return new PrisustvoView
+                {
+                    PolaznikId = p.Id,
+                    PolaznikPunoIme = p.OsnovniPodaci.Ime + " " + p.OsnovniPodaci.Prezime,
+                    CasId = c.Id,
+                    Ocena = novoPrisustvo.Ocena,
+                };
+            }
+            catch (Exception ex) 
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally { s?.Close(); }
+        }
+
+        public static List<PolaznikPregled> VratiPolaznikeZaEvidenciju(int casId)
+        {
+            List<PolaznikPregled> polazniciZaEvidenciju = new List<PolaznikPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Cas cas = s.Get<Cas>(casId);
+                if (cas == null) return polazniciZaEvidenciju;
+                Kurs kurs = cas.PripadaNastavi.PripadaKursu;
+
+                IList<DetePolaznik> decaPolaznici = s.Query<DetePolaznik>()
+                                    .Where(dp => dp.PrijavljeniKursevi.Contains(kurs))
+                                    .ToList();
+
+                IList<OdrasliPolaznik> odrasliPolaznici = s.Query<OdrasliPolaznik>()
+                                                           .Where(op => op.PrijavljeniKursevi.Contains(kurs))
+                                                           .ToList();
+
+                IList<Polaznik> prijavljeniPolaznici = new List<Polaznik>();
+                foreach (var dete in decaPolaznici) { prijavljeniPolaznici.Add(dete); }
+                foreach (var odrasli in odrasliPolaznici) { prijavljeniPolaznici.Add(odrasli); }
+
+                if (!prijavljeniPolaznici.Any()) return polazniciZaEvidenciju;
+
+                HashSet<int> idjeviPrisutnihPolaznika = s.Query<Prisustvo>()
+                                                       .Where(p => p.Id.CasKomePrisustvuje.Id == casId)
+                                                       .Select(p => p.Id.PolaznikId)
+                                                       .ToHashSet();
+
+                var neevidentiraniPolaznici = prijavljeniPolaznici
+                                              .Where(p => !idjeviPrisutnihPolaznika.Contains(p.Id));
+
+                foreach (var p in neevidentiraniPolaznici)
+                {
+                    polazniciZaEvidenciju.Add(new PolaznikPregled
+                    {
+                        IdOsobe = p.Id,
+                        Ime = p.OsnovniPodaci.Ime,
+                        Prezime = p.OsnovniPodaci.Prezime
+                    });
+                }
+            }
+            catch (Exception ex) { throw; }
+            finally { s?.Close(); }
+
+            return polazniciZaEvidenciju;
+        }
+        public static Result<bool, ErrorMessage> IzmeniPrisustvo(PrisustvoPregled prisustvoDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
+                if (c == null)
+                    return new ErrorMessage("Cas sa Id-em ne postoji!", 400);
+                var idZaPretragu = new PrisustvoId()
+                {
+                    CasKomePrisustvuje = c,
+                    PolaznikId = prisustvoDto.IdPolaznika,
+                };
+                if (c == null)
+                    return new ErrorMessage("Prisustvo za promenu ne postoji!", 400);
+                Prisustvo p = s.Get<Prisustvo>(idZaPretragu);
+                p.Ocena = prisustvoDto.Ocena;
+
+                s.Update(p);
+                s.Flush();
+                return true; 
+            }
+            catch (Exception ex)
+            { 
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally { s?.Close(); }
+        }
+
+        public static Result<bool, ErrorMessage> ObrisiPrisustvo(int idPolaznika, int idCasa)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                var idZaBrisanje = new PrisustvoId
+                {
+                    PolaznikId = idPolaznika,
+                    CasKomePrisustvuje = s.Load<Cas>(idCasa)
+                };
+
+                Prisustvo prisustvoZaBrisanje = s.Get<Prisustvo>(idZaBrisanje);
+
+                if (prisustvoZaBrisanje != null)
+                {
+                    s.Delete(prisustvoZaBrisanje);
+                }
+                else
+                {
+                    return new ErrorMessage("Prisustvo za brisanje ne postoji!", 404);
+                }
+                s.Flush();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
         #endregion
     }
 }
