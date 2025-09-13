@@ -1,5 +1,7 @@
 ﻿using DatabaseAccess.DTOs;
 using MuzickaSkolaWindowsForms;
+using MuzickaSkolaWindowsForms.Entiteti;
+using NHibernate.Linq;
 using ProdavnicaLibrary;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using NHibernate.Linq;
 namespace DatabaseAccess.DataProvider
 {
     public static class DataProviderAleksa
@@ -493,7 +494,33 @@ namespace DatabaseAccess.DataProvider
                 return new ErrorMessage(ex.Message, 500);
             }
         }
-
+        public static string VratiTipKursa(Kurs kurs)
+        {
+            if (kurs is InstrumentKurs)
+            {
+                return TipKursaEnum.Instrument;
+            }
+            else if (kurs is GrupaInstrumenataKurs)
+            {
+                return TipKursaEnum.GrupaInstrumenata;
+            }
+            else if (kurs is IndividualnoPevanjeKurs)
+            {
+                return TipKursaEnum.IndividualnoPevanje;
+            }
+            else if (kurs is HorskoPevanjeKurs)
+            {
+                return TipKursaEnum.HorskoPevanje;
+            }
+            else if (kurs is MuzickaTeorijaKurs)
+            {
+                return TipKursaEnum.MuzickaTeorija;
+            }
+            else
+            {
+                return "NEPOZNAT_TIP";
+            }
+        }
         #endregion
 
         #region Nastavnik 
@@ -522,6 +549,321 @@ namespace DatabaseAccess.DataProvider
             finally
             {
                 if (s != null) s.Close();
+            }
+        }
+        #endregion
+
+        #region Nastava
+        public static Result<List<NastavaView>, ErrorMessage> VratiSvuNastavuZaKurs(int kursId)
+        {
+            List<NastavaView> nastavePregled = new List<NastavaView>();
+            ISession s = null; 
+
+            try
+            {
+                s = DataLayer.GetSession();
+                var nastave = from n in s.Query<Nastava>()
+                              where n.PripadaKursu.Id == kursId
+                              select n;
+                var kurs = s.Get<Kurs>(kursId);
+                if(kurs==null)
+                    return new ErrorMessage($"Kurs sa id'{kursId}' ne postoji.", 404);
+
+                string tipNastave = VratiTipNastave(VratiTipKursa(kurs));
+                foreach (var n in nastave)
+                {
+                    nastavePregled.Add(new NastavaView()
+                    {
+                        Id = n.Id,
+                        DatumOd = n.DatumOd,
+                        DatumDo = n.DatumDo,
+                        FIndividualna = tipNastave=="Individualna",
+                        FGrupna = tipNastave=="Grupna",
+                    });
+                }
+                return nastavePregled;
+
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+
+        public static string VratiTipNastave(string tipKursa)
+        {
+            if (tipKursa == TipKursaEnum.Instrument || tipKursa == TipKursaEnum.GrupaInstrumenata|| tipKursa == TipKursaEnum.IndividualnoPevanje)
+            {
+                return "Individualna";
+            }
+            else
+            {
+                return "Grupna";
+            }
+        }
+        public static Result<bool, ErrorMessage> DodajNastavu(NastavaBasic nastavaDto)
+        {
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+                Kurs kursEntitet = s.Get<Kurs>(nastavaDto.IdKursa);
+                if (kursEntitet == null)
+                    return new ErrorMessage($"Kurs sa id'{nastavaDto.IdKursa}' ne postoji.", 404);
+
+                Nastava nastava = new Nastava()
+                {
+                    DatumOd = nastavaDto.DatumOd,
+                    DatumDo = nastavaDto.DatumDo,
+                    FIndividualna = nastavaDto.FIndividualna,
+                    FGrupna = nastavaDto.FGrupna,
+                    PripadaKursu = kursEntitet,
+                };
+
+
+                s.Save(nastava);
+                s.Flush();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+
+        public static Result<NastavaView, ErrorMessage> IzmeniNastavu(NastavaBasic nastavaDto)
+        {
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+                Nastava nastava = s.Get<Nastava>(nastavaDto.Id);
+                bool postojeCasoviIzvanOpsega = false;
+                foreach (var cas in nastava.Casovi)
+                {
+                    if (cas.Termin < nastavaDto.DatumOd || (nastavaDto.DatumDo.HasValue && cas.Termin > nastavaDto.DatumDo))
+                    {
+                        postojeCasoviIzvanOpsega = true;
+                    }
+                }
+                if (postojeCasoviIzvanOpsega)
+                {
+                    return new ErrorMessage($"Postoje časovi za nastavu koji su van opsega!", 400);
+                }
+                nastava.DatumDo = nastavaDto.DatumDo;
+                nastava.DatumOd = nastavaDto.DatumOd;
+
+
+
+                s.Update(nastava);
+                s.Flush();
+                return new NastavaView(nastava);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+
+        public static Result<bool, ErrorMessage> ObrisiNastavu(int NastavaId)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Nastava? nastava = s.Get<Nastava>(NastavaId);
+                if (nastava == null )
+                    return new ErrorMessage("Nije pronadjena nastava!", 404);
+                if (nastava.Casovi.Count > 0)
+                    return new ErrorMessage("Za nastavu su evidentirani casovi!", 400);
+                s.Delete(nastava);
+                s.Flush();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+
+        #endregion
+        #region Casovi
+        public static Result<List<CasView>,ErrorMessage> VratiSveCasoveZaNastavu(int nastavaId)
+        {
+            List<CasView> casoviPregled = new List<CasView>();
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+                IEnumerable<Cas> sviCasovi = from c in s.Query<Cas>()
+                                             where c.PripadaNastavi.Id == nastavaId
+                                             select c;
+
+                foreach (Cas c in sviCasovi)
+                {
+
+                    casoviPregled.Add(new CasView
+                    {
+                        Id = c.Id,
+                        Termin = c.Termin,
+                        Tema = c.Tema,
+                        DrziNastavnik = NastavnikView.VratiNastavnika(c.DrziNastavnik.Id),
+                        UcionicaOdrzavanja = new UcionicaView(c.UcionicaOdrzavnja),
+                    });
+                }
+                return casoviPregled;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+
+        }
+
+        public static Result<CasView, ErrorMessage> DodajCas(CasBasic cas)
+        {
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+                var nastavnik = VratiNastavnika(cas.NastavnikId);
+                if(nastavnik == null)
+                    return new ErrorMessage("Ne postoji nastavnik sa datim ID-em!", 400);
+                var nastava = s.Get<Nastava>(cas.NastavaId);
+                if (nastavnik == null)
+                    return new ErrorMessage("Ne postoji nastava sa datim ID-em!", 400);
+                UcionicaId idUcionice = new UcionicaId() { Naziv = cas.Ucionica, PripadaLokaciji = s.Get<Lokacija>(cas.Lokacija) };
+                var ucionica = s.Get<Ucionica>(idUcionice);
+                if (ucionica == null)
+                    return new ErrorMessage("Ne postoji ucionica sa datim parametrima!", 400);
+                Cas? noviCas = new Cas()
+                {
+                    Termin = cas.Termin,
+                    Tema = cas.Tema,
+                    DrziNastavnik = nastavnik,
+                    PripadaNastavi = nastava,
+                    UcionicaOdrzavnja = ucionica,
+                };
+
+                s.Save(noviCas);
+
+                s.Flush();
+                return new CasView()
+                {
+                    Id = noviCas.Id,
+                    Tema = cas.Tema,
+                    Termin = cas.Termin,
+                    DrziNastavnik = NastavnikView.KreirajNastavnikView(nastavnik),
+                    UcionicaOdrzavanja = new UcionicaView(ucionica),
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+
+        public static Result<CasView, ErrorMessage> IzmeniCas(CasBasic cas)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                var casZaMenjanje = s.Get<Cas>(cas.Id);
+                if (casZaMenjanje == null)
+                    return new ErrorMessage("Cas sa datim id-em ne postoji", 400);
+
+                var nastavnik = VratiNastavnika(cas.NastavnikId);
+                if (nastavnik == null)
+                    return new ErrorMessage("Ne postoji nastavnik sa datim ID-em!", 400);
+                
+                var nastava = s.Get<Nastava>(cas.NastavaId);
+                if (nastavnik == null)
+                    return new ErrorMessage("Ne postoji nastava sa datim ID-em!", 400);
+                
+                UcionicaId idUcionice = new UcionicaId() { Naziv = cas.Ucionica, PripadaLokaciji = s.Get<Lokacija>(cas.Lokacija) };
+                var ucionica = s.Get<Ucionica>(idUcionice);
+                if (ucionica == null)
+                    return new ErrorMessage("Ne postoji ucionica sa datim parametrima!", 400);
+
+                casZaMenjanje.Tema = cas.Tema;
+                casZaMenjanje.Termin = cas.Termin;
+                casZaMenjanje.DrziNastavnik = nastavnik;
+                casZaMenjanje.PripadaNastavi = nastava;
+                casZaMenjanje.UcionicaOdrzavnja = ucionica;
+
+
+                s.Update(casZaMenjanje);
+
+                s.Flush();
+                return new CasView()
+                {
+                    Id = casZaMenjanje.Id,
+                    Tema = casZaMenjanje.Tema,
+                    Termin = casZaMenjanje.Termin,
+                    DrziNastavnik = NastavnikView.KreirajNastavnikView(nastavnik),
+                    UcionicaOdrzavanja = new UcionicaView(ucionica),
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+
+        public static Result<bool, ErrorMessage> ObrisiCas(int casId)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                var cas = s.Get<Cas>(casId);
+                if (cas == null)
+                    return new ErrorMessage("Cas sa id-em nije pronadjen!", 404);
+
+                s.Delete(cas);
+                s.Flush();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
             }
         }
         #endregion
