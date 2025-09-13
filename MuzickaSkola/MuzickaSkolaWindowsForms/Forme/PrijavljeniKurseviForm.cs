@@ -18,7 +18,7 @@ namespace MuzickaSkolaWindowsForms.Forme
         {
             InitializeComponent();
         }
-       
+
 
         public PrijavljeniKurseviForm(int idOsobe, string punoIme)
         {
@@ -65,6 +65,40 @@ namespace MuzickaSkolaWindowsForms.Forme
         }
 
         private void btnZatvori_Click(object sender, EventArgs e) => this.Close();
+
+        private void btnDodajNaKurs_Click(object sender, EventArgs e)
+        {
+
+
+            var forma = new dodajPolaznikaNaKursForm(_idOsobe);
+            forma.ShowDialog();
+            try
+            {
+                var lista = DTOManager.VratiPrijavljeneKurseve(_idOsobe);
+                lvKursevi.BeginUpdate();
+                lvKursevi.Items.Clear();
+
+                foreach (var k in lista)
+                {
+                    var nivo = k.Nivo;
+                    var item = new ListViewItem(new[]
+                    {
+                        k.Id.ToString(),
+                        k.Naziv ?? "",
+                        nivo
+                    });
+                    lvKursevi.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                lvKursevi.EndUpdate();
+            }
+        }
     }
 }
 

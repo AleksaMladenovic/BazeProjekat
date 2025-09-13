@@ -19,6 +19,12 @@
     <Compile Update="Forme\DodajPolaznikaForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\dodajPolaznikaNaKursForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajPolozenIspitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\DodeliMentoraForm.cs">
       <SubType>Form</SubType>
     </Compile>
