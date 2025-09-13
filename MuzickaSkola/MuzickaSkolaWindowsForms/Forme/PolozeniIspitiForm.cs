@@ -66,6 +66,44 @@ namespace MuzickaSkolaWindowsForms.Forme
         }
 
         private void btnZatvori_Click(object sender, EventArgs e) => this.Close();
+
+        private void btnDodajIspit_Click(object sender, EventArgs e)
+        {
+            var polozeniIds = lvIspiti.Items
+                                        .Cast<ListViewItem>()
+                                        .Select(item => int.Parse(item.SubItems[0].Text)) 
+                                        .ToList();
+
+            DodajPolozeniIspitForm dodajFormu = new DodajPolozeniIspitForm(_idOsobe,polozeniIds);
+            dodajFormu.ShowDialog();
+            try
+            {
+                var lista = DTOManager.VratiPolozeneIspite(_idOsobe);
+                lvIspiti.BeginUpdate();
+                lvIspiti.Items.Clear();
+
+                foreach (var i in lista)
+                {
+                    var item = new ListViewItem(new[]
+                    {
+                        i.IdKursa.ToString(),
+                        i.NazivKursa ?? "",
+                        i.Datum.ToString("dd.MM.yyyy"),
+                        i.Ocena?.ToString() ?? "-",
+                        (i.Sertifikat == true) ? "DA" : "NE"
+                    });
+                    lvIspiti.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                lvIspiti.EndUpdate();
+            }
+        }
     }
 }
 

@@ -28,12 +28,12 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 .Cascade.All()
                 .Inverse();
 
-            //HasManyToMany(x => x.PrijavljeniPolaznici)
-            //    .Table("PRIJAVLJEN")
-            //    .ParentKeyColumn("ID_KURSA")
-            //    .ChildKeyColumn("ID_POLAZNIKA")
-            //    .Cascade.All()
-            //    .Inverse();
+            HasManyToMany(x => x.PrijavljeniPolaznici)
+                .Table("PRIJAVLJEN")
+                .ParentKeyColumn("ID_KURSA")
+                .ChildKeyColumn("ID_POLAZNIKA")
+                .Cascade.All()
+                .Inverse();
 
             HasManyToMany(x=>x.LokacijeOdrzavanja)
                 .Table("ODVIJA_NA")

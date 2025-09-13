@@ -7,10 +7,22 @@
     <Compile Update="Forme\DetaljiNastavnikForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forme\DodajIzmeniCasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajIzmeniPrisustvoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forme\DodajNastavnikaForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\DodajPolaznikaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\dodajPolaznikaNaKursForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\DodajPolozenIspitForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\DodeliMentoraForm.cs">
@@ -38,6 +50,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\KurseviForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forme\KursLokacijeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forme\LokacijeForm.cs">

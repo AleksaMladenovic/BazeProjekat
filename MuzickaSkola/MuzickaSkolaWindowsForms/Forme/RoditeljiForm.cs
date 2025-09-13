@@ -36,7 +36,8 @@ namespace MuzickaSkolaWindowsForms.Forme
                 lvRoditelji.Items.Add(item);
             }
         }
-        private void btnIzmeniRoditelja_Click(object sender, EventArgs e) {
+        private void btnIzmeniRoditelja_Click(object sender, EventArgs e)
+        {
             if (lvRoditelji.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Izaberite roditelja za izmenu.");
@@ -48,9 +49,31 @@ namespace MuzickaSkolaWindowsForms.Forme
             using (var f = new IzmeniRoditeljaForm(id))
             {
                 if (f.ShowDialog(this) == DialogResult.OK)
-                    UcitajRoditelje(); // osveži
+                    UcitajRoditelje();
             }
         }
-        private void btnObrisiRoditelja_Click(object sender, EventArgs e) { /* obrisi izabrani */ }
+
+
+        private void btnObrisiRoditelja_Click_1(object sender, EventArgs e)
+        {
+            if (lvRoditelji.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite roditelja kog želite da obrišete!");
+                return;
+            }
+            int idOsobe = int.Parse(lvRoditelji.SelectedItems[0].SubItems[0].Text);
+
+            var poruka = "Da li želite da obrišete izabranog polaznika?";
+            var title = "Potvrda brisanja";
+            var result = MessageBox.Show(poruka, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.OK)
+            {
+
+                DTOManager.ObrisiRoditelja(idOsobe);
+
+                MessageBox.Show("Brisanje je uspešno obavljeno.");
+                UcitajRoditelje();
+            }
+        }
     }
 }

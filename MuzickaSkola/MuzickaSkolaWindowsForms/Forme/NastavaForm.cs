@@ -1,11 +1,15 @@
-﻿using FluentNHibernate.Utils;
+﻿using FluentNHibernate.Conventions;
+using FluentNHibernate.Utils;
+using MuzickaSkolaWindowsForms.Entiteti;
 using MuzickaSkolaWindowsForms.Forme;
+using Remotion.Linq.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,21 +33,38 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         {
             this.Text = $"Nastava za kurs: {kurs.Naziv}";
             lblInfoKursa.Text = $"Prikaz nastavnih blokova za kurs: {kurs.Naziv} (ID: {kurs.Id})";
-            OnemoguciDugmice();
+            OnemoguciDugmiceZaNastavu();
+            OnemoguciDugmiceZaCasove();
+            OnemoguciDugmiceZaPrisustva();
             PopuniListuNastave();
         }
-        private void OnemoguciDugmice()
+        private void OnemoguciDugmiceZaNastavu()
         {
             cmdDodajCas.Enabled = false;
-            cmdIzmeniCas.Enabled = false;
-            cmdObrisiCas.Enabled = false;
+            cmdIzmeniNastavu.Enabled = false;
         }
 
-        private void OmoguciDugmice()
+        private void OmoguciDugmiceZaNastavu()
         {
             cmdDodajCas.Enabled = true;
-            cmdIzmeniCas.Enabled = true;
-            cmdObrisiCas.Enabled = true;
+            cmdIzmeniNastavu.Enabled = true;
+        }
+
+        private void OmoguciDugmiceZaCasove()
+        {
+            if (listViewNastava.SelectedItems.Count > 0 && listViewCasovi.SelectedItems.Count > 0)
+            {
+                cmdIzmeniCas.Enabled = true;
+                cmdObrisiCas.Enabled = true;
+                cmdDodajPrisustvo.Enabled = true;
+            }
+        }
+
+        private void OnemoguciDugmiceZaCasove()
+        {
+            cmdIzmeniCas.Enabled = false;
+            cmdObrisiCas.Enabled = false;
+            cmdDodajPrisustvo.Enabled = false;
         }
 
         private void PopuniListuNastave()
@@ -64,6 +85,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             }
         }
 
+
         private void cmdDodajNastavu_Click(object sender, EventArgs e)
         {
             var form = new DodajIzmeniNastavuForm(kurs.Id);
@@ -80,27 +102,220 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 DatumOd = SelektovanaNastava.DatumOd,
                 DatumDo = SelektovanaNastava.DatumDo,
                 FIndividualna = SelektovanaNastava.TipNastave == "Individualna",
-                FGrupna = SelektovanaNastava.TipNastave =="Grupna",
+                FGrupna = SelektovanaNastava.TipNastave == "Grupna",
                 IdKursa = kurs.Id,
             };
             var form = new DodajIzmeniNastavuForm(nastavaDto);
             form.ShowDialog();
             this.PopuniListuNastave();
+            this.OnemoguciDugmiceZaNastavu();
+            this.OnemoguciDugmiceZaCasove();
         }
 
         private void cmdObrisiNastavu_Click(object sender, EventArgs e)
         {
+            var SelektovanaNastava = (NastavaPregled)listViewNastava.SelectedItems[0].Tag;
+
             string poruka = "Da li zelite da obrisete izabrani nastavni blok?";
+            if (DTOManager.VratiSveCasoveZaNastavu(SelektovanaNastava.Id).IsNotEmpty())
+                poruka = "Izabrna nastava ima časove, da li ste sigurni da želite da je obrišete?";
             string title = "Pitanje";
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             DialogResult result = MessageBox.Show(poruka, title, buttons);
 
             if (result == DialogResult.OK)
             {
-                var SelektovanaNastava = (NastavaPregled)listViewNastava.SelectedItems[0].Tag;
                 if (DTOManager.ObrisiNastavu(SelektovanaNastava.Id))
                 {
                     MessageBox.Show("Uspešno obrisan nastavni blok!");
+                    this.PopuniListuNastave();
+                    this.PopuniListuCasova();
+                }
+            }
+        }
+
+        private void listViewNastava_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.PopuniListuCasova();
+        }
+
+        private void PopuniListuCasova()
+        {
+            if (listViewNastava.SelectedItems.Count == 0)
+            {
+                listViewCasovi.Items.Clear();
+                lblInfoNastava.Text = "Izaberite nastavni blok da vidite casove.";
+                PopuniListuPrisustva();
+                OnemoguciDugmiceZaNastavu();
+                OnemoguciDugmiceZaCasove();
+                return;
+            }
+
+            var selektovanaNastava = (NastavaPregled)listViewNastava.SelectedItems[0].Tag;
+
+            lblInfoNastava.Text = $"Časovi za blok od {selektovanaNastava.DatumOdString}";
+
+            List<CasPregled> casovi = DTOManager.VratiSveCasoveZaNastavu(selektovanaNastava.Id);
+
+            this.listViewCasovi.Items.Clear();
+
+            foreach (var cas in casovi)
+            {
+                ListViewItem item = new ListViewItem(new string[] {
+                    cas.Id.ToString(),
+                    cas.Termin.ToString("dd.MM.yyyy HH:mm"),
+                    cas.Tema,
+                    cas.ImeNastavnika,
+                    cas.Ucionica,
+                });
+                item.Tag = cas;
+                listViewCasovi.Items.Add(item);
+            }
+            this.listViewCasovi.Refresh();
+            OmoguciDugmiceZaNastavu();
+        }
+        private void cmdIzmeniCas_Click(object sender, EventArgs e)
+        {
+            var selektovanCas = (CasPregled)listViewCasovi.SelectedItems[0].Tag;
+            var selektovanaNastava = (NastavaPregled)listViewNastava.SelectedItems[0].Tag;
+
+            var casDto = new CasBasic() { Id = selektovanCas.Id, NastavaId = selektovanaNastava.Id, NastavnikId = selektovanCas.IdNastavnika, Tema = selektovanCas.Tema, Termin = selektovanCas.Termin, Ucionica = selektovanCas.Ucionica, Lokacija = selektovanCas.Lokacija };
+            var form = new DodajIzmeniCasForm(casDto);
+            form.ShowDialog();
+            this.PopuniListuCasova();
+            OnemoguciDugmiceZaCasove();
+        }
+
+        private void cmdDodajCas_Click(object sender, EventArgs e)
+        {
+            var selektovanaNastava = (NastavaPregled)listViewNastava.SelectedItems[0].Tag;
+            var PostojeUcioniceZaKurs = DTOManager.DaLiPostojeUcioniceZaKurs(this.kurs.Id);
+            if (!PostojeUcioniceZaKurs)
+            {
+                MessageBox.Show($"Ne postoje definisane učionice za kurs!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var form = new DodajIzmeniCasForm(selektovanaNastava.Id);
+            form.ShowDialog();
+            this.PopuniListuCasova();
+            OnemoguciDugmiceZaCasove();
+        }
+
+        private void listViewCasovi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewCasovi.SelectedItems.Count > 0)
+            {
+                OmoguciDugmiceZaCasove();
+                OmoguciDugmiceZaPrisustva();
+                this.PopuniListuPrisustva();
+            }
+            else
+            {
+                OnemoguciDugmiceZaCasove();
+                OnemoguciDugmiceZaPrisustva();
+                this.PopuniListuPrisustva();
+            }
+        }
+
+        private void cmdObrisiCas_Click(object sender, EventArgs e)
+        {
+            var selektovanCas = (CasPregled)listViewCasovi.SelectedItems[0].Tag;
+            string poruka = "Da li zelite da obrišete izabrani čas?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                if (DTOManager.ObrisiCas(selektovanCas.Id))
+                {
+                    MessageBox.Show("Uspešno obrisan čas!");
+                    this.PopuniListuNastave();
+                    this.PopuniListuCasova();
+                }
+            }
+        }
+        private void PopuniListuPrisustva()
+        {
+            this.listViewPrisustvo.Items.Clear();
+            if (listViewCasovi.SelectedItems.Count == 0)
+                return;
+            var selektovanCas = (CasPregled)listViewCasovi.SelectedItems[0].Tag;
+            List<PrisustvoPregled> prisustva = DTOManager.VratiPrisustvaZaCas(selektovanCas.Id);
+            foreach (var pris in prisustva)
+            {
+                ListViewItem item = new ListViewItem(new string[] {
+                    pris.ImePolaznika,
+                    pris.PrezimePolaznika,
+                    pris.Ocena.ToString()
+                });
+                item.Tag = pris;
+                listViewPrisustvo.Items.Add(item);
+            }
+            OnemoguciDugmiceZaPrisustva();
+        }
+
+        private void OnemoguciDugmiceZaPrisustva()
+        {
+            cmdUkloniPrisustvo.Enabled = false;
+            cmdIzmeniOcenu.Enabled = false;
+        }
+
+        private void OmoguciDugmiceZaPrisustva()
+        {
+            cmdUkloniPrisustvo.Enabled = true;
+            cmdIzmeniOcenu.Enabled = true;
+        }
+
+        private void listViewPrisustvo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewPrisustvo.SelectedItems.Count > 0)
+            {
+                OmoguciDugmiceZaPrisustva();
+            }
+            else
+            {
+                OnemoguciDugmiceZaPrisustva();
+            }
+        }
+
+        private void cmdDodajPrisustvo_Click(object sender, EventArgs e)
+        {
+            var selektovanCas = (CasPregled)listViewCasovi.SelectedItems[0].Tag;
+
+            var form = new DodajIzmeniPrisustvoForm(selektovanCas.Id);
+            form.ShowDialog();
+            PopuniListuPrisustva();
+        }
+
+        private void cmdIzmeniOcenu_Click(object sender, EventArgs e)
+        {
+            var selektovanoPrisustvo = (PrisustvoPregled)listViewPrisustvo.SelectedItems[0].Tag;
+            var form = new DodajIzmeniPrisustvoForm(selektovanoPrisustvo);
+            form.ShowDialog();
+            PopuniListuPrisustva();
+        }
+
+        private void cmdUkloniPrisustvo_Click(object sender, EventArgs e)
+        {
+            var selektovanoPrisustvo = (PrisustvoPregled)listViewPrisustvo.SelectedItems[0].Tag;
+            string poruka = "Da li zelite da obrišete izabrano prisustvo?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    DTOManager.ObrisiPrisustvo(selektovanoPrisustvo);
+
+                    this.PopuniListuPrisustva(); 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Došlo je do greške prilikom brisanja: {ex.Message}");
                 }
             }
         }

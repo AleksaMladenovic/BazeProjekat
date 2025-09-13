@@ -14,7 +14,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         {
             Table("OSOBA");//samo ovo dodao
             UseUnionSubclassForInheritanceMapping();
-
+            Table("OSOBA");
             Id(x => x.Id).Column("ID_OSOBE").GeneratedBy.Foreign("OsnovniPodaci");
 
             HasOne(x => x.OsnovniPodaci).Constrained();
@@ -24,7 +24,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 .Cascade.All()
                 .Inverse();
 
-            HasManyToMany(x=>x.PrijavljeniKursevi)
+            HasManyToMany(x => x.PrijavljeniKursevi)
                 .Table("PRIJAVLJEN")
                 .ParentKeyColumn("ID_POLAZNIKA")
                 .ChildKeyColumn("ID_KURSA")
