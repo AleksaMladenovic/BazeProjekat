@@ -1,4 +1,7 @@
+using DatabaseAccess.DataProvider;
+using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using ProdavnicaLibrary;
 
 namespace WebAPI.Controllers
 {
@@ -6,6 +9,7 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class KursController : ControllerBase
     {
+     
         
     }
 }
