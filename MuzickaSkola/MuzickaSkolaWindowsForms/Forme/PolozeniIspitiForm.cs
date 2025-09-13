@@ -69,7 +69,12 @@ namespace MuzickaSkolaWindowsForms.Forme
 
         private void btnDodajIspit_Click(object sender, EventArgs e)
         {
-            DodajPolozeniIspitForm dodajFormu = new DodajPolozeniIspitForm(_idOsobe);
+            var polozeniIds = lvIspiti.Items
+                                        .Cast<ListViewItem>()
+                                        .Select(item => int.Parse(item.SubItems[0].Text)) 
+                                        .ToList();
+
+            DodajPolozeniIspitForm dodajFormu = new DodajPolozeniIspitForm(_idOsobe,polozeniIds);
             dodajFormu.ShowDialog();
             try
             {

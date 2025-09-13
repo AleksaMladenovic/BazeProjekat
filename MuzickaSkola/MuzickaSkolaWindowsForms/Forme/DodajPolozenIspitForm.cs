@@ -7,17 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
     public partial class DodajPolozeniIspitForm : Form
     {
         private readonly int _idPolaznika;
-
-        public DodajPolozeniIspitForm(int idPolaznika)
+        private List<int> _polozeniIds;
+        public DodajPolozeniIspitForm(int idPolaznika, List<int> polozeniIds)
         {
-            _idPolaznika = idPolaznika;
             InitializeComponent();
+            _idPolaznika = idPolaznika;
+            _polozeniIds = polozeniIds;
         }
 
         private void DodajPolozeniIspitForm_Load(object sender, EventArgs e)
@@ -31,9 +33,15 @@ namespace MuzickaSkolaWindowsForms.Forme
             try
             {
                 var kursevi = DTOManager.VratiPrijavljeneKurseve(_idPolaznika);
-                cmbKursevi.DataSource = kursevi;
-                cmbKursevi.DisplayMember = "Naziv"; // Prikazuje naziv kursa
-                cmbKursevi.ValueMember = "Id";      // Vrednost iza prikaza je ID
+
+                // izbacujemo već položene
+                var filtrirani = kursevi
+                    .Where(k => !_polozeniIds.Contains(k.Id))
+                    .ToList();
+
+                cmbKursevi.DataSource = filtrirani;
+                cmbKursevi.DisplayMember = "Naziv";
+                cmbKursevi.ValueMember = "Id";
             }
             catch (Exception ex)
             {
