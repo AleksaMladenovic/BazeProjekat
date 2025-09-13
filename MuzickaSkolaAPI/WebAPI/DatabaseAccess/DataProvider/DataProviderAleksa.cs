@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using NHibernate.Linq;
 namespace DatabaseAccess.DataProvider
 {
     public static class DataProviderAleksa
@@ -323,6 +323,207 @@ namespace DatabaseAccess.DataProvider
             }
         }
 
+        #endregion
+
+        #region Kurs
+        public static Result<List<DatabaseAccess.DTOs.KursView>, ErrorMessage> VratiSveKursevePregled()
+        {
+            List<DatabaseAccess.DTOs.KursView> kurseviPregled = new List<DatabaseAccess.DTOs.KursView>();
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                IList<Kurs> kursevi = s.Query<Kurs>().ToList();
+                foreach (var k in kursevi)
+                {
+                    var nastavnikDto = NastavnikView.VratiNastavnika(k.VodiNastavnik.Id);
+                    var dto = new DatabaseAccess.DTOs.KursView()
+                    {
+                        Id = k.Id,
+                        Naziv = k.Naziv,
+                        Nivo = k.Nivo,
+                        VodiNastavnik = nastavnikDto
+                    };
+                    if (k is InstrumentKurs) dto.TipKursa = TipKursaEnum.Instrument;
+                    else if (k is GrupaInstrumenataKurs) dto.TipKursa = TipKursaEnum.GrupaInstrumenata;
+                    else if (k is IndividualnoPevanjeKurs) dto.TipKursa = TipKursaEnum.IndividualnoPevanje;
+                    else if (k is HorskoPevanjeKurs) dto.TipKursa = TipKursaEnum.HorskoPevanje;
+                    else if (k is MuzickaTeorijaKurs) dto.TipKursa = TipKursaEnum.MuzickaTeorija;
+
+                    kurseviPregled.Add(dto);
+                }
+
+                return kurseviPregled;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+        
+
+        public static Result<DatabaseAccess.DTOs.KursView, ErrorMessage> IzmeniKurs(KursBasic kursDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Kurs? kursZaIzmenu = s.Get<Kurs>(kursDto.Id);
+                if (kursZaIzmenu == null)
+                {
+                    return new ErrorMessage($"Kurs sa id'{kursDto.Id}' ne postoji.", 404);
+                }
+
+                kursZaIzmenu.Naziv = kursDto.Naziv;
+                kursZaIzmenu.Nivo = kursDto.Nivo;
+                PostaviSpecijalanProperyKursu(kursDto, kursZaIzmenu);
+                kursZaIzmenu.VodiNastavnik = VratiNastavnika(kursDto.NastavnikId);
+                s.Update(kursZaIzmenu);
+                s.Flush();
+                return new DatabaseAccess.DTOs.KursView(kursZaIzmenu);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s.Close();
+            }
+        }
+        private static void PostaviSpecijalanProperyKursu(KursBasic kursBasic, Kurs kurs)
+        {
+            if (kursBasic.TipKursa == TipKursaEnum.Instrument)
+                ((InstrumentKurs)kurs).Instrument = kursBasic.Instrument;
+            else if (kursBasic.TipKursa == TipKursaEnum.GrupaInstrumenata)
+                ((GrupaInstrumenataKurs)kurs).GrupaInstrumenata = kursBasic.GrupaInstrumenata;
+            else if (kursBasic.TipKursa == TipKursaEnum.MuzickaTeorija)
+                ((MuzickaTeorijaKurs)kurs).NazivPredmeta = kursBasic.NazivPredmeta;
+        }
+        public static Result<DatabaseAccess.DTOs.KursView, ErrorMessage> DodajKurs(KursBasic kursDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Kurs? noviKursEntitet = null;
+                switch (kursDto.TipKursa)
+                {
+                    case TipKursaEnum.Instrument:
+                        noviKursEntitet = new InstrumentKurs
+                        {
+                            // Popunjavamo specifični properti
+                            Instrument = kursDto.Instrument
+                        };
+                        break;
+
+                    case TipKursaEnum.GrupaInstrumenata:
+                        noviKursEntitet = new GrupaInstrumenataKurs
+                        {
+                            GrupaInstrumenata = kursDto.GrupaInstrumenata
+                        };
+                        break;
+
+                    case TipKursaEnum.IndividualnoPevanje:
+                        noviKursEntitet = new IndividualnoPevanjeKurs();
+                        break;
+
+                    case TipKursaEnum.HorskoPevanje:
+                        noviKursEntitet = new HorskoPevanjeKurs();
+                        break;
+
+                    case TipKursaEnum.MuzickaTeorija:
+                        noviKursEntitet = new MuzickaTeorijaKurs
+                        {
+                            NazivPredmeta = kursDto.NazivPredmeta
+                        };
+                        break;
+
+                    default:
+                        return new ErrorMessage($"Prosleđeni DTO ne odgovara tipu kursa '{kursDto.TipKursa}'.", 400);
+                }
+                if (noviKursEntitet != null)
+                {
+                    noviKursEntitet.Naziv = kursDto.Naziv;
+                    noviKursEntitet.Nivo = kursDto.Nivo;
+                    noviKursEntitet.VodiNastavnik = VratiNastavnika(kursDto.NastavnikId);
+
+                    s.Save(noviKursEntitet);
+                    s.Flush();
+                }
+                return new DatabaseAccess.DTOs.KursView(noviKursEntitet);
+
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+        public static Result<bool, ErrorMessage> ObrisiKurs(int KursId)
+        {
+            ISession s=null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Kurs? kursZaBrisanje = s.Get<Kurs>(KursId);
+                if (kursZaBrisanje == null)
+                {
+                    return new ErrorMessage($"Kurs sa id'{KursId}' ne postoji.", 404);
+
+                }
+                s.Delete(kursZaBrisanje);
+                s.Flush();
+                s.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+        }
+
+        #endregion
+
+        #region Nastavnik 
+
+        public static Nastavnik VratiNastavnika(int id)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Nastavnik n = (Nastavnik)s.Get<Honorarac>(id) ?? s.Get<StalnoZaposlen>(id);
+
+                if (n != null)
+                {
+                    NHibernateUtil.Initialize(n.OsnovniPodaci);
+                    NHibernateUtil.Initialize(n.VodiKurseve);
+                    NHibernateUtil.Initialize(n.DrziCasove);
+                    NHibernateUtil.Initialize(n.KomisijeCijiJeClan);
+                }
+                return n;
+            }
+            catch (Exception ec)
+            {
+                throw;
+            }
+            finally
+            {
+                if (s != null) s.Close();
+            }
+        }
         #endregion
     }
 }

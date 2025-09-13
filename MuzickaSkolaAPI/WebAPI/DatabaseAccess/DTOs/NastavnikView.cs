@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccess.DTOs
 {
-    public abstract class NastavnikView
+    public class NastavnikView
     {
         public OsobaView OsnovniPodaci { get; set; }
         public DateTime? DatumZaposlenja { get; set; }
@@ -77,26 +77,24 @@ namespace DatabaseAccess.DTOs
             try
             {
                 s = DataLayer.GetSession();
-                Nastavnik nastavnikEntitet = s.Get<Nastavnik>(nastavnikId);
-
-                if (nastavnikEntitet != null)
+                StalnoZaposlen sz = s.Get<StalnoZaposlen>(nastavnikId);
+                if (sz != null)
                 {
-                    if (nastavnikEntitet is StalnoZaposlen sz)
-                    {
-                        NHibernateUtil.Initialize(sz.JeMentor);
-
-                        nastavnikView = new StalnoZaposlenView(sz);
-                    }
-                    else if (nastavnikEntitet is Honorarac h)
-                    {
-                        nastavnikView = new HonoraracView(h);
-                    }
+                    return new StalnoZaposlenView(sz);
+                }
+                Honorarac h = s.Get<Honorarac>(nastavnikId);
+                if (h != null)
+                {
+                    return new HonoraracView(h);
+                }
+                else
+                {
+                    throw new ArgumentException("Nepoznat tip nastavnika.", nameof(nastavnikId));
                 }
             }
             catch (Exception ex) { throw; }
             finally { s?.Close(); }
 
-            return nastavnikView;
         }
     }
 
