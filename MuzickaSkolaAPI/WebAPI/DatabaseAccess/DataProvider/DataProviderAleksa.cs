@@ -15,7 +15,7 @@ namespace DatabaseAccess.DataProvider
     public static class DataProviderAleksa
     {
         #region Lokacija
-        public static Result<List<LokacijaView>,ErrorMessage> VratiSveLokacije()
+        public static Result<List<LokacijaView>, ErrorMessage> VratiSveLokacije()
         {
             List<LokacijaView> lokacijePregled = new List<LokacijaView>();
             ISession? s = null;
@@ -39,7 +39,7 @@ namespace DatabaseAccess.DataProvider
             }
             catch (Exception ex)
             {
-                var error = new ErrorMessage(ex.Message,500);
+                var error = new ErrorMessage(ex.Message, 500);
                 return error;
             }
             finally
@@ -142,7 +142,7 @@ namespace DatabaseAccess.DataProvider
 
                 if (lokacijaZaBrisanje.Ucionice.Count > 0)
                 {
-                    return new ErrorMessage("Nije moguće obrisati lokaciju jer sadrži jednu ili više učionica. Molimo vas, prvo obrišite učionice.", 409); 
+                    return new ErrorMessage("Nije moguće obrisati lokaciju jer sadrži jednu ili više učionica. Molimo vas, prvo obrišite učionice.", 409);
                 }
 
                 if (lokacijaZaBrisanje.KurseviKojiSeOdrzavaju.Count > 0)
@@ -190,7 +190,7 @@ namespace DatabaseAccess.DataProvider
                     ucionice.Add(new UcionicaView(u));
                 }
 
-                return ucionice; 
+                return ucionice;
             }
             catch (Exception ex)
             {
@@ -228,7 +228,7 @@ namespace DatabaseAccess.DataProvider
                 };
 
                 novaUcionica.Id.Naziv = ucionicaView.Naziv;
-                novaUcionica.Id.PripadaLokaciji = lokacijaEntitet; 
+                novaUcionica.Id.PripadaLokaciji = lokacijaEntitet;
 
                 lokacijaEntitet.Ucionice.Add(novaUcionica);
 
@@ -368,7 +368,7 @@ namespace DatabaseAccess.DataProvider
                 s?.Close();
             }
         }
-        
+
 
         public static Result<DatabaseAccess.DTOs.KursView, ErrorMessage> IzmeniKurs(KursBasic kursDto)
         {
@@ -475,7 +475,7 @@ namespace DatabaseAccess.DataProvider
 
         public static Result<bool, ErrorMessage> ObrisiKurs(int KursId)
         {
-            ISession s=null;
+            ISession s = null;
             try
             {
                 s = DataLayer.GetSession();
@@ -558,7 +558,7 @@ namespace DatabaseAccess.DataProvider
         public static Result<List<NastavaView>, ErrorMessage> VratiSvuNastavuZaKurs(int kursId)
         {
             List<NastavaView> nastavePregled = new List<NastavaView>();
-            ISession s = null; 
+            ISession s = null;
 
             try
             {
@@ -567,7 +567,7 @@ namespace DatabaseAccess.DataProvider
                               where n.PripadaKursu.Id == kursId
                               select n;
                 var kurs = s.Get<Kurs>(kursId);
-                if(kurs==null)
+                if (kurs == null)
                     return new ErrorMessage($"Kurs sa id'{kursId}' ne postoji.", 404);
 
                 string tipNastave = VratiTipNastave(VratiTipKursa(kurs));
@@ -578,8 +578,8 @@ namespace DatabaseAccess.DataProvider
                         Id = n.Id,
                         DatumOd = n.DatumOd,
                         DatumDo = n.DatumDo,
-                        FIndividualna = tipNastave=="Individualna",
-                        FGrupna = tipNastave=="Grupna",
+                        FIndividualna = tipNastave == "Individualna",
+                        FGrupna = tipNastave == "Grupna",
                     });
                 }
                 return nastavePregled;
@@ -597,7 +597,7 @@ namespace DatabaseAccess.DataProvider
 
         public static string VratiTipNastave(string tipKursa)
         {
-            if (tipKursa == TipKursaEnum.Instrument || tipKursa == TipKursaEnum.GrupaInstrumenata|| tipKursa == TipKursaEnum.IndividualnoPevanje)
+            if (tipKursa == TipKursaEnum.Instrument || tipKursa == TipKursaEnum.GrupaInstrumenata || tipKursa == TipKursaEnum.IndividualnoPevanje)
             {
                 return "Individualna";
             }
@@ -687,7 +687,7 @@ namespace DatabaseAccess.DataProvider
             {
                 s = DataLayer.GetSession();
                 Nastava? nastava = s.Get<Nastava>(NastavaId);
-                if (nastava == null )
+                if (nastava == null)
                     return new ErrorMessage("Nije pronadjena nastava!", 404);
                 if (nastava.Casovi.Count > 0)
                     return new ErrorMessage("Za nastavu su evidentirani casovi!", 400);
@@ -708,7 +708,7 @@ namespace DatabaseAccess.DataProvider
         #endregion
 
         #region Casovi
-        public static Result<List<CasView>,ErrorMessage> VratiSveCasoveZaNastavu(int nastavaId)
+        public static Result<List<CasView>, ErrorMessage> VratiSveCasoveZaNastavu(int nastavaId)
         {
             List<CasView> casoviPregled = new List<CasView>();
             ISession s = null;
@@ -753,7 +753,7 @@ namespace DatabaseAccess.DataProvider
             {
                 s = DataLayer.GetSession();
                 var nastavnik = VratiNastavnika(cas.NastavnikId);
-                if(nastavnik == null)
+                if (nastavnik == null)
                     return new ErrorMessage("Ne postoji nastavnik sa datim ID-em!", 400);
                 var nastava = s.Get<Nastava>(cas.NastavaId);
                 if (nastavnik == null)
@@ -806,11 +806,11 @@ namespace DatabaseAccess.DataProvider
                 var nastavnik = VratiNastavnika(cas.NastavnikId);
                 if (nastavnik == null)
                     return new ErrorMessage("Ne postoji nastavnik sa datim ID-em!", 400);
-                
+
                 var nastava = s.Get<Nastava>(cas.NastavaId);
                 if (nastavnik == null)
                     return new ErrorMessage("Ne postoji nastava sa datim ID-em!", 400);
-                
+
                 UcionicaId idUcionice = new UcionicaId() { Naziv = cas.Ucionica, PripadaLokaciji = s.Get<Lokacija>(cas.Lokacija) };
                 var ucionica = s.Get<Ucionica>(idUcionice);
                 if (ucionica == null)
@@ -872,7 +872,7 @@ namespace DatabaseAccess.DataProvider
 
         #region PrisustvaCasovi
 
-        public static Result<List<PrisustvoView>,ErrorMessage> VratiPrisustvaZaCas(int casId)
+        public static Result<List<PrisustvoView>, ErrorMessage> VratiPrisustvaZaCas(int casId)
         {
             List<PrisustvoView> prisustvaView = new List<PrisustvoView>();
             ISession s = null;
@@ -890,7 +890,7 @@ namespace DatabaseAccess.DataProvider
                     prisustvaView.Add(new PrisustvoView
                     {
                         PolaznikId = p.Id.PolaznikId,
-                        PolaznikPunoIme = polaznikOsoba.Ime + " " +polaznikOsoba.Prezime,
+                        PolaznikPunoIme = polaznikOsoba.Ime + " " + polaznikOsoba.Prezime,
                         CasId = casId,
                         Ocena = p.Ocena,
                     });
@@ -925,10 +925,10 @@ namespace DatabaseAccess.DataProvider
 
                 if (!moguciPolaznici.Select(p => p.IdOsobe).Contains(prisustvoDto.IdPolaznika))
                 {
-                    return new ErrorMessage("Nije moguce evidentirati polaznika za dati čas!",400);
+                    return new ErrorMessage("Nije moguce evidentirati polaznika za dati čas!", 400);
                 }
                 Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
-                if(c==null)
+                if (c == null)
                     return new ErrorMessage("Cas sa Id-em ne postoji!", 400);
 
                 var novoPrisustvo = new Prisustvo
@@ -948,7 +948,7 @@ namespace DatabaseAccess.DataProvider
                     Ocena = novoPrisustvo.Ocena,
                 };
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return new ErrorMessage(ex.Message, 500);
             }
@@ -1025,10 +1025,10 @@ namespace DatabaseAccess.DataProvider
 
                 s.Update(p);
                 s.Flush();
-                return true; 
+                return true;
             }
             catch (Exception ex)
-            { 
+            {
                 return new ErrorMessage(ex.Message, 500);
             }
             finally { s?.Close(); }
@@ -1071,5 +1071,108 @@ namespace DatabaseAccess.DataProvider
         }
 
         #endregion
+
+        #region KurseviLokacije
+
+        public static Result<List<LokacijaPregled>, ErrorMessage> VratiSveLokacijeZaKurs(int kursId)
+        {
+            List<LokacijaPregled> lokacijePregled = new();
+            ISession? s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Kurs? kurs = s.Get<Kurs>(kursId);
+
+                if (kurs == null)
+                    return new ErrorMessage("Kurs sa tim ID-jem ne postoji!", 404);
+
+                foreach (var lok in kurs.LokacijeOdrzavanja)
+                {
+                    int sumaKapaciteta = lok.Ucionice.Sum(u => u.Kapacitet);
+                    lokacijePregled.Add(new LokacijaPregled(lok.Adresa, sumaKapaciteta, lok.RadnoVreme));
+                }
+                return lokacijePregled;
+            }
+            catch (Exception ex) { return new ErrorMessage(ex.Message, 500); }
+            finally { s?.Close(); }
+        }
+        public static Result<bool, ErrorMessage> DodajLokacijuKursu(string adresaLokacije, int idKursa)
+        {
+            ISession? s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Kurs kurs = s.Get<Kurs>(idKursa);
+                if (kurs == null)
+                    return new ErrorMessage("Kurs ne postoji.", 404);
+
+                Lokacija lok = s.Get<Lokacija>(adresaLokacije);
+                if (lok == null)
+                    return new ErrorMessage("Lokacija ne postoji.", 404);
+
+                if (kurs.LokacijeOdrzavanja.Any(l => l.Adresa == adresaLokacije))
+                {
+                    return new ErrorMessage("Kurs je već dodeljen ovoj lokaciji!", 409);
+                }
+
+                kurs.LokacijeOdrzavanja.Add(lok);
+
+                s.Update(kurs);
+                s.Flush();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+        
+
+        public static Result<bool, ErrorMessage> UkloniLokacijuIzKursa(int kursId, string adresa)
+        {
+            ISession? s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+               
+                bool postojeCasovi = s.Query<Cas>()
+                                       .Any(c => c.PripadaNastavi.PripadaKursu.Id == kursId &&
+                                                 c.UcionicaOdrzavnja.Id.PripadaLokaciji.Adresa == adresa);
+                if (postojeCasovi)
+                    return new ErrorMessage("Postoje časovi za ovaj kurs na lokaciji, uklanjanje nije dozvoljeno!", 409);
+
+                Kurs kurs = s.Query<Kurs>().Fetch(k => k.LokacijeOdrzavanja).Where(k => k.Id == kursId).SingleOrDefault();
+                if (kurs == null)
+                    return new ErrorMessage("Kurs ne postoji.", 404);
+
+                Lokacija? lokZaBrisanje = kurs.LokacijeOdrzavanja.FirstOrDefault(l => l.Adresa == adresa);
+                if (lokZaBrisanje == null)
+                    return new ErrorMessage("Kurs nije bio dodeljen toj lokaciji.", 404);
+
+                kurs.LokacijeOdrzavanja.Remove(lokZaBrisanje);
+
+                s.Update(kurs);
+                s.Flush();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return new ErrorMessage(ex.Message, 500);
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+        #endregion
+
     }
 }
