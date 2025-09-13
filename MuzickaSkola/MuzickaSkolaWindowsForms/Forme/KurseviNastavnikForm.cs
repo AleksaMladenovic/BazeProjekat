@@ -19,15 +19,12 @@ namespace MuzickaSkolaWindowsForms
 
         private int idNastavnika;
 
-        // Konstruktor prima ID nastavnika čije kurseve prikazujemo
         public KurseviNastavnikForm(int nastavnikId)
         {
             InitializeComponent();
             this.idNastavnika = nastavnikId;
-            // Možemo postaviti i naslov prozora, ali nije neophodno
         }
 
-        // Kada se forma učita, popuni podatke
         private void KurseviNastavnikaForm_Load(object sender, EventArgs e)
         {
             PopuniPodacima();

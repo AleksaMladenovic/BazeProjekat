@@ -57,7 +57,6 @@ namespace MuzickaSkolaWindowsForms.Forme
                         Adresa = tbAdresa.Text?.Trim(),
                         Telefon = tbTelefon.Text?.Trim(),
                         Email = tbEmail.Text?.Trim(),
-                        // ako imaš textbox za zanimanje, samo mu daj ime tbZanimanje
                         Zanimanje = this.Controls.Find("tbZanimanje", true).FirstOrDefault() is TextBox tbZ ? tbZ.Text.Trim() : null
                     };
 

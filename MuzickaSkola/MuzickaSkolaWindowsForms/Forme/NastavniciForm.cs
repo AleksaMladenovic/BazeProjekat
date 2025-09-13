@@ -24,28 +24,19 @@ namespace MuzickaSkolaWindowsForms.Forme
 
         public void PopuniPodacima()
         {
-            // Prvo, uvek obrišemo sve što je možda od ranije bilo u listi
             this.listViewNastavnici.Items.Clear();
 
-            // Pozivamo našu metodu iz DataProvider-a koja vraća listu nastavnika
             List<NastavnikPregled> podaci = DTOManager.VratiSveNastavnike();
 
-            // Sada, za svakog nastavnika iz te liste, pravimo jedan red u ListView-u
             foreach (NastavnikPregled n in podaci)
             {
-                // Kreiramo red
                 ListViewItem item = new ListViewItem(new string[] { n.Jmbg, n.Ime, n.Prezime, n.StrucnaSprema, n.TipZaposlenja });
 
-                // Ovde radimo jedan trik: u "nevidljivu etiketu" (Tag) svakog reda
-                // sačuvamo ID nastavnika. Ovo će nam trebati kasnije kada budemo radili
-                // izmenu i brisanje, da znamo na kog nastavnika se misli.
                 item.Tag = n.Id;
 
-                // Dodajemo popunjen red u listu
                 this.listViewNastavnici.Items.Add(item);
             }
 
-            // Na kraju, osvežimo prikaz liste
             this.listViewNastavnici.Refresh();
         }
 
@@ -60,14 +51,12 @@ namespace MuzickaSkolaWindowsForms.Forme
 
         private void btnObrisiNastavnika_Click(object sender, EventArgs e)
         {
-            // 1. Proveravamo da li je neki red uopšte selektovan
             if (listViewNastavnici.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Molimo vas, izaberite nastavnika kojeg želite da obrišete.");
                 return;
             }
 
-            // 2. Pitamo korisnika za potvrdu
             DialogResult rezultat = MessageBox.Show("Da li ste sigurni da želite da obrišete izabranog nastavnika?",
                                                     "Potvrda brisanja",
                                                     MessageBoxButtons.YesNo,
@@ -75,16 +64,12 @@ namespace MuzickaSkolaWindowsForms.Forme
 
             if (rezultat == DialogResult.Yes)
             {
-                // 3. Ako je korisnik potvrdio, uzimamo ID iz Tag-a
-                //    Setite se, sačuvali smo ID u Tag property kada smo punili listu.
                 int idZaBrisanje = (int)listViewNastavnici.SelectedItems[0].Tag;
 
-                // 4. Pozivamo našu metodu iz DataProvider-a
                 DTOManager.ObrisiNastavnika(idZaBrisanje);
 
                 MessageBox.Show("Nastavnik uspešno obrisan!");
 
-                // 5. Osvežavamo listu da se obrisani nastavnik više ne prikazuje
                 this.PopuniPodacima();
             }
         }
@@ -102,7 +87,6 @@ namespace MuzickaSkolaWindowsForms.Forme
 
             if (nastavnik != null)
             {
-                // Otvaramo formu i prosleđujemo joj objekat
                 DodajNastavnikaForm formaZaIzmenu = new DodajNastavnikaForm(nastavnik);
                 formaZaIzmenu.ShowDialog();
                 this.PopuniPodacima();
@@ -117,11 +101,8 @@ namespace MuzickaSkolaWindowsForms.Forme
                 return;
             }
 
-            // Sada moramo da nađemo kompletan DTO objekat za selektovani ID
             int id = (int)listViewNastavnici.SelectedItems[0].Tag;
 
-            // Ponovo pozivamo DataProvider da dobijemo sve podatke
-            // Ovo nije najefikasnije, ali je najjednostavnije za sada
             List<NastavnikPregled> sviNastavnici = DTOManager.VratiSveNastavnike();
             NastavnikPregled selektovaniNastavnik = sviNastavnici.FirstOrDefault(n => n.Id == id);
 
@@ -161,7 +142,6 @@ namespace MuzickaSkolaWindowsForms.Forme
             {
                 DodeliMentoraForm forma = new DodeliMentoraForm(selektovaniNastavnik);
                 forma.ShowDialog();
-                // Nije neophodno osvežiti listu, jer se mentor ne vidi u glavnom prikazu
             }
         }
 

@@ -96,16 +96,9 @@ namespace MuzickaSkolaWindowsForms
                 return;
             }
 
-            // --- KORAK 2: ODLUČIVANJE (DODAVANJE ILI IZMENA) ---
-            // Proveravamo da li je `nastavnikZaIzmenu` null.
-            // Ako jeste, znači da smo formu otvorili preko dugmeta "Dodaj".
-            // Ako nije, znači da smo je otvorili preko dugmeta "Izmeni".
-
+            
             if (this.nastavnikZaIzmenu == null)
             {
-                // --- LOGIKA ZA DODAVANJE NOVOG NASTAVNIKA ---
-
-                // Kreiramo potpuno novi Osoba objekat
                 Osoba o = new Osoba()
                 {
                     Jmbg = txtJmbg.Text,
@@ -121,42 +114,32 @@ namespace MuzickaSkolaWindowsForms
                     FRoditelj = false
                 };
 
-                // Proveravamo koji je tip zaposlenja izabran
                 if (rbStalnoZaposlen.Checked)
                 {
-                    // Kreiramo novi StalnoZaposlen objekat
                     StalnoZaposlen sz = new StalnoZaposlen()
                     {
                         RadnoVreme = txtRadnoVreme.Text
                     };
-                    // Šaljemo oba nova objekta DataProvider-u na snimanje
                     DTOManager.DodajNastavnika(o, sz);
                 }
-                else // Mora biti Honorarac
+                else
                 {
-                    // Kreiramo novi Honorarac objekat
                     Honorarac h = new Honorarac()
                     {
                         BrojUgovora = txtBrojUgovora.Text,
                         TrajanjeUgovora = txtTrajanjeUgovora.Text,
                         BrojCasova = (int)numBrojCasova.Value
                     };
-                    // Šaljemo oba nova objekta DataProvider-u na snimanje
                     DTOManager.DodajNastavnika(o, h);
                 }
                 MessageBox.Show("Nastavnik je uspešno dodat!");
             }
-            else // Ako nije null, MENJAMO
+            else 
             {
-                // --- ISPRAVNA LOGIKA ZA IZMENU ---
-
-                // 1. Ažuriramo podatke na postojećem Osoba objektu
                 Osoba o = this.nastavnikZaIzmenu.OsnovniPodaci;
                 o.Jmbg = txtJmbg.Text;
                 o.Ime = txtIme.Text;
-                // ... popunite sve ostale Osoba propertije ...
 
-                // 2. Proveravamo da li se tip promenio
                 bool bioJeStalnoZaposlen = this.nastavnikZaIzmenu is StalnoZaposlen;
                 bool biceStalnoZaposlen = rbStalnoZaposlen.Checked;
 
@@ -164,7 +147,6 @@ namespace MuzickaSkolaWindowsForms
 
                 if (bioJeStalnoZaposlen == biceStalnoZaposlen)
                 {
-                    // Tip se NIJE promenio, samo ažuriramo postojeći objekat
                     finalniNastavnik = this.nastavnikZaIzmenu;
                     if (finalniNastavnik is StalnoZaposlen sz)
                     {
@@ -179,7 +161,6 @@ namespace MuzickaSkolaWindowsForms
                 }
                 else
                 {
-                    // Tip SE PROMENIO, kreiramo NOVI objekat odgovarajućeg tipa
                     if (biceStalnoZaposlen)
                     {
                         finalniNastavnik = new StalnoZaposlen
@@ -187,7 +168,7 @@ namespace MuzickaSkolaWindowsForms
                             RadnoVreme = txtRadnoVreme.Text
                         };
                     }
-                    else // Biće Honorarac
+                    else 
                     {
                         finalniNastavnik = new Honorarac
                         {
@@ -196,12 +177,10 @@ namespace MuzickaSkolaWindowsForms
                             BrojCasova = (int)numBrojCasova.Value
                         };
                     }
-                    // Povezujemo novi objekat sa postojećom Osobom
                     finalniNastavnik.Id = o.Id;
                     finalniNastavnik.OsnovniPodaci = o;
                 }
 
-                // 3. Prosleđujemo finalni objekat (stari ili novi) DataProvider-u
                 DTOManager.IzmeniNastavnika(finalniNastavnik);
                 MessageBox.Show("Nastavnik je uspešno izmenjen!");
             }

@@ -26,10 +26,8 @@ namespace MuzickaSkolaWindowsForms
 
         private void DodeliMentoraForm_Load(object sender, EventArgs e)
         {
-            // Postavljamo info labelu
             lblNastavnikInfo.Text = $"Dodeljujete mentora za: {nastavnik.OsnovniPodaci.Ime} {nastavnik.OsnovniPodaci.Prezime}";
 
-            // Popunjavamo listu mogućih mentora
             PopuniListuMentora();
         }
 
@@ -40,7 +38,6 @@ namespace MuzickaSkolaWindowsForms
 
             foreach (var mentor in mentori)
             {
-                // Ne prikazujemo nastavnika samog sebi kao mogućeg mentora
                 if (mentor.Id == this.nastavnik.Id) continue;
 
                 ListViewItem item = new ListViewItem(new string[] { mentor.PunoIme.Split(' ')[0], mentor.PunoIme.Split(' ')[1] });

@@ -49,6 +49,7 @@ namespace MuzickaSkolaWindowsForms.Forme
         {
             Form dodajPolaznikaForm = new DodajPolaznikaForm();
             dodajPolaznikaForm.ShowDialog();
+            popuniPodacima();
         }
 
         private void btnObrisiPolaznika_Click(object sender, EventArgs e)
@@ -59,7 +60,6 @@ namespace MuzickaSkolaWindowsForms.Forme
                 return;
             }
 
-            // Kolona 0 = IdOsobe (tako puniš listu)
             int idOsobe = int.Parse(lwSviPolaznici.SelectedItems[0].SubItems[0].Text);
 
             var poruka = "Da li želite da obrišete izabranog polaznika?";
@@ -68,7 +68,6 @@ namespace MuzickaSkolaWindowsForms.Forme
 
             if (result == DialogResult.OK)
             {
-                // false = obriši samo ulogu polaznika, zadrži OSOBA
                 DTOManager.ObrisiPolaznika(idOsobe, obrisiISamuOsobu: false);
 
                 MessageBox.Show("Brisanje je uspešno obavljeno.");

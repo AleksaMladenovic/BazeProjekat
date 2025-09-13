@@ -63,7 +63,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                     Email = tbEmail.Text?.Trim()
                 };
 
-                DTOManager.IzmeniRoditelja(updated); // ažurira OSOBA
+                DTOManager.IzmeniRoditelja(updated); 
                 MessageBox.Show("Izmene su sačuvane.");
                 this.DialogResult = DialogResult.OK;
                 this.Close();

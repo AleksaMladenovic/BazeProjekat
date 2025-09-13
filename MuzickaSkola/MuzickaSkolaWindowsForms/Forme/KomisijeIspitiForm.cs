@@ -71,7 +71,6 @@ namespace MuzickaSkolaWindowsForms
                 return;
             }
 
-            // 2. Pitamo korisnika za potvrdu
             DialogResult rezultat = MessageBox.Show("Da li ste sigurni da želite da obrišete izabranu komisiju? Sve veze sa članovima.",
                                                     "Potvrda brisanja",
                                                     MessageBoxButtons.YesNo,
