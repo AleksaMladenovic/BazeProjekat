@@ -10,8 +10,6 @@ namespace MuzickaSkolaWindowsForms.Entiteti
     public class Prisustvo
     {
         public virtual PrisustvoId Id { get; set; }
-        //public virtual required string JmbgPolaznika {  get; set; }
-        //public virtual int IdCasa {  get; set; }
         public virtual int Ocena {  get; set; }
 
         public Prisustvo() {
@@ -21,14 +19,10 @@ namespace MuzickaSkolaWindowsForms.Entiteti
 
     public class PrisustvoId
     {
-        // Deo ključa koji pokazuje na Polaznika
         public virtual int PolaznikId { get; set; }    
 
-        // Deo ključa koji pokazuje na Cas
         public virtual Cas CasKomePrisustvuje { get; set; }
 
-        // NHibernate zahteva da se Equals() i GetHashCode() predefinišu
-        // za klase koje predstavljaju kompozitni ključ.
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;

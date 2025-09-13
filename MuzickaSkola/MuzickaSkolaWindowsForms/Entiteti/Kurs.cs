@@ -27,7 +27,6 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         {
             NastavniBlokovi = new List<Nastava>();
             LokacijeOdrzavanja = new List<Lokacija>();
-            //PrijavljeniPolaznici = new List<Polaznik>();
             ZavrsniIspiti = new List<ZavrsniIspit>();
         }
     }

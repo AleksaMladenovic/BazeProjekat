@@ -170,7 +170,7 @@ namespace MuzickaSkolaWindowsForms
         public string StrucnaSprema { get; set; }
         public string TipZaposlenja { get; set; }
         public DateTime? DatumZaposlenja { get; set; }
-        public string DetaljiZaposlenja { get; set; } // Nova kolona za detalje
+        public string DetaljiZaposlenja { get; set; } 
         public string RadnoVreme { get; set; }
         public string Adresa { get; set; }
         public string Telefon { get; set; }
@@ -187,7 +187,6 @@ namespace MuzickaSkolaWindowsForms
         }
 
 
-        // Konstruktor koji prima sve potrebne podatke za prikaz
         public NastavnikPregled(int id, string jmbg, string ime, string prezime,string strucnasprema,string tipZaposlenja)
         {
             Id = id;
@@ -212,7 +211,6 @@ namespace MuzickaSkolaWindowsForms
             this.PunoIme = punoIme;
         }
 
-        // Ovo je važno da bi ComboBox znao šta da prikaže
         public override string ToString()
         {
             return this.PunoIme;
@@ -267,7 +265,6 @@ namespace MuzickaSkolaWindowsForms
         public string? Jbd { get; set; }
         public string? ImeRoditelja { get; set; } 
 
-        // Konstruktor za lakše kreiranje
         public PolaznikPregled(int id, string jmbg, string ime, string prezime, string tip)
         {
             this.IdOsobe = id;
@@ -284,7 +281,6 @@ namespace MuzickaSkolaWindowsForms
 
     public abstract class PolaznikBasic
     {
-        // Osnovni podaci o osobi
         public int IdOsobe { get; set; }
         public string? Jmbg { get; set; }
         public string? Ime { get; set; }
@@ -328,12 +324,7 @@ namespace MuzickaSkolaWindowsForms
         public string Telefon { get; set; }
         public string Email { get; set; }
     }
-    //public class KursPregled
-    //{
-    //    public int IdKursa { get; set; }
-    //    public string Naziv { get; set; }
-    //    public string Nivo { get; set; } 
-    //}
+    
 
     public class PrisustvoPregled
     {
@@ -346,14 +337,7 @@ namespace MuzickaSkolaWindowsForms
         public string PrezimePolaznika { get; set; }
     }
 
-    //public class ZavrsniIspitPregled
-    //{
-    //    public int IdKursa { get; set; }
-    //    public string NazivKursa { get; set; }
-    //    public DateTime Datum { get; set; }   
-    //    public int? Ocena { get; set; }
-    //    public bool? Sertifikat { get; set; }
-    //}
+  
     #endregion
 
     #region Nastava
@@ -392,7 +376,7 @@ namespace MuzickaSkolaWindowsForms
         public DateTime? DatumDo { get; set; }
         public bool FIndividualna { get; set; }
         public bool FGrupna { get; set; }
-        public int IdKursa { get; set; } // Važno za dodavanje/izmenu
+        public int IdKursa { get; set; } 
     }
 
     #endregion

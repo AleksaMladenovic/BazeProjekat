@@ -37,8 +37,6 @@ public static class DataLayer
     {
         try
         {
-            // ShowSql prikazuje SQL koji je generisan, ali u .NET Core aplikacijama se prikazuju u konzoli.
-            // Ako se aplikacija pokrene sa dotnet bin\Debug\net8.0-windows\ProdavnicaIgracaka.dll, mogu da se vide
             string cs = ConfigurationManager.ConnectionStrings["OracleCS"].ConnectionString;
             var cfg = OracleManagedDataClientConfiguration.Oracle10
                         .ShowSql()
@@ -47,7 +45,6 @@ public static class DataLayer
             return Fluently.Configure()
                     .Database(cfg)
                     .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Kurs>())
-                    //.ExposeConfiguration(BuildSchema)
                     .BuildSessionFactory();
         }
         catch (Exception e)
@@ -57,8 +54,5 @@ public static class DataLayer
         }
     }
 
-    /*private static void BuildSchema(NHibernate.Cfg.Configuration cfg)
-    {
-        // Konfiguracija
-    }*/
+   
 }
