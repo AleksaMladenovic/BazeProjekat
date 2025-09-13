@@ -41,18 +41,31 @@ namespace DatabaseAccess.DTOs
             {
                 return null;
             }
+            ISession?s = null;
 
-            if (nastavnikEntitet is StalnoZaposlen sz)
+            try
             {
-                return new StalnoZaposlenView(sz);
+                s = DataLayer.GetSession();
+                StalnoZaposlen sz = s.Get<StalnoZaposlen>(nastavnikEntitet.Id);
+                if (sz!=null)
+                {
+                    return new StalnoZaposlenView(sz);
+                }
+                Honorarac h = s.Get<Honorarac>(nastavnikEntitet.Id);
+                if (h!=null)
+                {
+                    return new HonoraracView(h);
+                }
+                else
+                {
+                    throw new ArgumentException("Nepoznat tip nastavnika.", nameof(nastavnikEntitet));
+                }
             }
-            else if (nastavnikEntitet is Honorarac h)
-            {
-                return new HonoraracView(h);
+            catch (Exception) {
+                throw;
             }
-            else
-            {
-                throw new ArgumentException("Nepoznat tip nastavnika.", nameof(nastavnikEntitet));
+            finally{
+                s.Close();
             }
         }
 
