@@ -958,11 +958,9 @@ namespace MuzickaSkolaWindowsForms
             {
                 s = DataLayer.GetSession();
 
-                // Učitavamo sve honorarce
                 var honorarci = s.Query<Honorarac>().ToList();
                 foreach (var h in honorarci)
                 {
-                    // Koristimo inicijalizator objekta da popunimo SVE propertije
                     rezultat.Add(new NastavnikPregled()
                     {
                         Id = h.Id,
@@ -981,11 +979,9 @@ namespace MuzickaSkolaWindowsForms
                     });
                 }
 
-                // Učitavamo sve stalno zaposlene
                 var stalnoZaposleni = s.Query<StalnoZaposlen>().ToList();
                 foreach (var sz in stalnoZaposleni)
                 {
-                    // Koristimo inicijalizator objekta da popunimo SVE propertije
                     rezultat.Add(new NastavnikPregled()
                     {
                         Id = sz.Id,
@@ -1025,27 +1021,23 @@ namespace MuzickaSkolaWindowsForms
                 s = DataLayer.GetSession();
                 s.BeginTransaction();
 
-                // 1. Prvo snimamo OsnovnePodatke (Osoba).
-                //    Baza će sama generisati ID za nju.
+
                 s.Save(osoba);
 
-                // 2. Sada kada Osoba ima ID, povezujemo Nastavnika sa njom.
-                //    Ovo je ključno za one-to-one vezu.
-                nastavnik.OsnovniPodaci = osoba;
-                nastavnik.Id = osoba.Id; // Ručno postavljamo isti ID
 
-                // 3. Na kraju, snimamo specifičan tip nastavnika (Honorarac ili StalnoZaposlen).
-                //    NHibernate će na osnovu tipa znati u koju tabelu da upiše (HONORARAC ili STALNO_ZAP).
+                nastavnik.OsnovniPodaci = osoba;
+                nastavnik.Id = osoba.Id;
+
                 s.Save(nastavnik);
 
                 s.Transaction.Commit();
             }
             catch (Exception ec)
             {
-                // U slučaju greške, poništi sve promene
+
                 s?.Transaction.Rollback();
 
-                // Prikazujemo detaljnu poruku o grešci
+
                 string errorMessage = "Došlo je do greške prilikom snimanja:" + Environment.NewLine + ec.Message;
                 if (ec.InnerException != null)
                 {
@@ -1063,7 +1055,6 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
-        // U DataProvider.cs
 
         public static void ObrisiNastavnika(int idNastavnika)
         {
@@ -1071,39 +1062,34 @@ namespace MuzickaSkolaWindowsForms
             try
             {
                 s = DataLayer.GetSession();
+
+
                 s.BeginTransaction();
 
-                // KORAK 1: Pokušaj da učitaš i obrišeš kao Honorarac
-                Honorarac honoraracZaBrisanje = s.Get<Honorarac>(idNastavnika);
-                if (honoraracZaBrisanje != null)
-                {
-                    // Našli smo ga, brišemo ga
-                    s.Delete(honoraracZaBrisanje);
-                }
-                else
-                {
-                    // Nije bio Honorarac, mora da je StalnoZaposlen
-                    StalnoZaposlen szZaBrisanje = s.Get<StalnoZaposlen>(idNastavnika);
-                    if (szZaBrisanje != null)
-                    {
-                        // Našli smo ga, brišemo ga
-                        s.Delete(szZaBrisanje);
-                    }
-                }
+                string updateMentorSql = "UPDATE OSOBA SET ID_MENTORA = NULL WHERE ID_MENTORA = :id";
+                s.CreateSQLQuery(updateMentorSql).SetParameter("id", idNastavnika).ExecuteUpdate();
 
-                // KORAK 2: Sada kada je "dete" (uloga) obrisano, brišemo i osnovne podatke.
-                // Ovo je neophodno jer Cascade ne radi uvek kako treba u ovom scenariju.
-                Osoba osobaZaBrisanje = s.Get<Osoba>(idNastavnika);
-                if (osobaZaBrisanje != null)
-                {
-                    s.Delete(osobaZaBrisanje);
-                }
+
+                string deleteKomisijeSql = "DELETE FROM SE_SASTOJI WHERE ID_NASTAVNIKA = :id";
+                s.CreateSQLQuery(deleteKomisijeSql).SetParameter("id", idNastavnika).ExecuteUpdate();
+
+
+                string deleteStalnoZapSql = "DELETE FROM STALNO_ZAP WHERE ID_OSOBE = :id";
+                s.CreateSQLQuery(deleteStalnoZapSql).SetParameter("id", idNastavnika).ExecuteUpdate();
+
+                string deleteHonoraracSql = "DELETE FROM HONORARAC WHERE ID_OSOBE = :id";
+                s.CreateSQLQuery(deleteHonoraracSql).SetParameter("id", idNastavnika).ExecuteUpdate();
+
+
+                string deleteOsobaSql = "DELETE FROM OSOBA WHERE ID_OSOBE = :id";
+                s.CreateSQLQuery(deleteOsobaSql).SetParameter("id", idNastavnika).ExecuteUpdate();
+
 
                 s.Transaction.Commit();
             }
             catch (Exception ec)
             {
-                s?.Transaction.Rollback();
+                s?.Transaction?.Rollback();
 
                 string errorMessage = "Došlo je do greške prilikom brisanja:" + Environment.NewLine + ec.Message;
                 if (ec.InnerException != null)
@@ -1150,8 +1136,7 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
-        // NOVA, KOMPLETNA METODA ZA IZMENU
-        public static void IzmeniNastavnika(Nastavnik nastavnikKojiSeMenja)
+        public static void IzmeniNastavnika(Nastavnik nastavnikSaForme)
         {
             ISession s = null;
             try
@@ -1159,11 +1144,71 @@ namespace MuzickaSkolaWindowsForms
                 s = DataLayer.GetSession();
                 s.BeginTransaction();
 
-                // Pošto je objekat `nastavnikKojiSeMenja` došao iz prethodne sesije,
-                // koristimo s.Update() da ga "zakačimo" za novu sesiju i snimimo promene.
-                // Moramo da uradimo Update za oba dela objekta.
-                s.Update(nastavnikKojiSeMenja.OsnovniPodaci);
-                s.Update(nastavnikKojiSeMenja);
+
+                Osoba osobaIzBaze = s.Get<Osoba>(nastavnikSaForme.Id);
+                Nastavnik nastavnikIzBaze = (Nastavnik)s.Get<Honorarac>(nastavnikSaForme.Id) ?? s.Get<StalnoZaposlen>(nastavnikSaForme.Id);
+
+
+                osobaIzBaze.Jmbg = nastavnikSaForme.OsnovniPodaci.Jmbg;
+                osobaIzBaze.Ime = nastavnikSaForme.OsnovniPodaci.Ime;
+                osobaIzBaze.Prezime = nastavnikSaForme.OsnovniPodaci.Prezime;
+                osobaIzBaze.Adresa = nastavnikSaForme.OsnovniPodaci.Adresa;
+                osobaIzBaze.Telefon = nastavnikSaForme.OsnovniPodaci.Telefon;
+                osobaIzBaze.Email = nastavnikSaForme.OsnovniPodaci.Email;
+                osobaIzBaze.StrucnaSprema = nastavnikSaForme.OsnovniPodaci.StrucnaSprema;
+                osobaIzBaze.DatumZaposlenja = nastavnikSaForme.OsnovniPodaci.DatumZaposlenja;
+                osobaIzBaze.Mentor = nastavnikSaForme.OsnovniPodaci.Mentor;
+
+
+                bool tipSePromenio = nastavnikIzBaze.GetType() != nastavnikSaForme.GetType();
+
+
+                if (tipSePromenio)
+                {
+                    if (nastavnikIzBaze is StalnoZaposlen)
+                    {
+
+                        string updateMentorSql = "UPDATE OSOBA SET ID_MENTORA = NULL WHERE ID_MENTORA = :id";
+                        s.CreateSQLQuery(updateMentorSql).SetParameter("id", nastavnikSaForme.Id).ExecuteUpdate();
+
+
+                        string deleteStalnoZapSql = "DELETE FROM STALNO_ZAP WHERE ID_OSOBE = :id";
+                        s.CreateSQLQuery(deleteStalnoZapSql).SetParameter("id", nastavnikSaForme.Id).ExecuteUpdate();
+
+
+                        Honorarac h = (Honorarac)nastavnikSaForme;
+                        string insertHonoraracSql = "INSERT INTO HONORARAC (ID_OSOBE, BROJ_UGOVORA, TRAJANJE_UGOVORA, BROJ_CASOVA) VALUES (:id, :broj, :trajanje, :casovi)";
+                        s.CreateSQLQuery(insertHonoraracSql)
+                            .SetParameter("id", h.Id).SetParameter("broj", h.BrojUgovora)
+                            .SetParameter("trajanje", h.TrajanjeUgovora).SetParameter("casovi", h.BrojCasova)
+                            .ExecuteUpdate();
+                    }
+                    else
+                    {
+                        string deleteHonoraracSql = "DELETE FROM HONORARAC WHERE ID_OSOBE = :id";
+                        s.CreateSQLQuery(deleteHonoraracSql).SetParameter("id", nastavnikSaForme.Id).ExecuteUpdate();
+
+                        StalnoZaposlen sz = (StalnoZaposlen)nastavnikSaForme;
+                        string insertStalnoZapSql = "INSERT INTO STALNO_ZAP (ID_OSOBE, RADNO_VREME) VALUES (:id, :vreme)";
+                        s.CreateSQLQuery(insertStalnoZapSql)
+                            .SetParameter("id", sz.Id).SetParameter("vreme", sz.RadnoVreme)
+                            .ExecuteUpdate();
+                    }
+                }
+                else
+                {
+                    if (nastavnikIzBaze is StalnoZaposlen szIzBaze && nastavnikSaForme is StalnoZaposlen szSaForme)
+                    {
+                        szIzBaze.RadnoVreme = szSaForme.RadnoVreme;
+                    }
+                    else if (nastavnikIzBaze is Honorarac hIzBaze && nastavnikSaForme is Honorarac hSaForme)
+                    {
+                        hIzBaze.BrojUgovora = hSaForme.BrojUgovora;
+                        hIzBaze.TrajanjeUgovora = hSaForme.TrajanjeUgovora;
+                        hIzBaze.BrojCasova = hSaForme.BrojCasova;
+                    }
+                }
+
 
                 s.Transaction.Commit();
             }
@@ -1191,16 +1236,14 @@ namespace MuzickaSkolaWindowsForms
             {
                 s = DataLayer.GetSession();
 
-                // 1. Učitavamo kompletan objekat nastavnika iz baze
                 Nastavnik n = (Nastavnik)s.Get<Honorarac>(nastavnikId) ?? s.Get<StalnoZaposlen>(nastavnikId);
 
                 if (n != null)
                 {
-                    // 2. KLJUČAN KORAK: "Budimo" kolekciju kurseva PRE zatvaranja sesije
                     //    da bismo izbegli LazyInitializationException.
                     NHibernateUtil.Initialize(n.VodiKurseve);
 
-                    // 3. Sada kada je kolekcija učitana, prolazimo kroz nju
+
                     foreach (Kurs k in n.VodiKurseve)
                     {
                         string tipKursa = "Nepoznat";
@@ -1210,7 +1253,7 @@ namespace MuzickaSkolaWindowsForms
                         else if (k is IndividualnoPevanjeKurs) tipKursa = "Individualno pevanje";
                         else if (k is HorskoPevanjeKurs) tipKursa = "Horsko pevanje";
 
-                        rezultat.Add(new KursPregled(k.Id, k.Naziv, k.Nivo,tipKursa));
+                        rezultat.Add(new KursPregled(k.Id, k.Naziv, k.Nivo, tipKursa));
                     }
                 }
             }
@@ -1242,7 +1285,6 @@ namespace MuzickaSkolaWindowsForms
             {
                 s = DataLayer.GetSession();
 
-                // Povlačimo sve stalno zaposlene, jer samo oni mogu biti mentori
                 IEnumerable<StalnoZaposlen> mentori = s.Query<StalnoZaposlen>().ToList();
 
                 foreach (var sz in mentori)
@@ -1250,7 +1292,8 @@ namespace MuzickaSkolaWindowsForms
                     rezultat.Add(new MentorPregled(sz.Id, $"{sz.OsnovniPodaci.Ime} {sz.OsnovniPodaci.Prezime}"));
                 }
             }
-            catch (Exception ec) {
+            catch (Exception ec)
+            {
                 string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
                 if (ec.InnerException != null)
                 {
@@ -1271,16 +1314,16 @@ namespace MuzickaSkolaWindowsForms
                 s = DataLayer.GetSession();
                 s.BeginTransaction();
 
-                // 1. Učitamo nastavnika kojem dodeljujemo mentora
+
                 Osoba ucenik = s.Load<Osoba>(nastavnikId);
 
-                // 2. Učitamo nastavnika koji postaje mentor
+
                 StalnoZaposlen mentor = s.Load<StalnoZaposlen>(mentorId);
 
-                // 3. Povežemo ih
+
                 ucenik.Mentor = mentor;
 
-                // 4. s.Update() nije potreban, Commit će snimiti promenu
+
                 s.Transaction.Commit();
             }
             catch (Exception ec)
@@ -1311,12 +1354,10 @@ namespace MuzickaSkolaWindowsForms
 
                 if (n != null)
                 {
-                    // "Budimo" kolekciju časova pre zatvaranja sesije
                     NHibernateUtil.Initialize(n.DrziCasove);
 
                     foreach (Cas c in n.DrziCasove)
                     {
-                        // Formiramo string za prikaz učionice
                         string ucionicaInfo = "N/A";
                         if (c.UcionicaOdrzavnja != null && c.UcionicaOdrzavnja.Id != null)
                         {
@@ -1383,17 +1424,14 @@ namespace MuzickaSkolaWindowsForms
                 if (n != null)
                 {
 
-                    // 1. Prvo brišemo sve postojeće veze
                     n.KomisijeCijiJeClan.Clear();
 
-                    // 2. Zatim dodajemo nove veze
                     foreach (int komisijaId in noveKomisijeIds)
                     {
                         Komisija k = s.Load<Komisija>(komisijaId);
                         n.KomisijeCijiJeClan.Add(k);
                     }
 
-                    // s.Update(n) nije neophodan, Commit će snimiti promene u kolekciji
                     s.Transaction.Commit();
                 }
             }
@@ -1414,7 +1452,6 @@ namespace MuzickaSkolaWindowsForms
         }
 
 
-        // Metoda koja vraća sve ispite za jednu odabranu komisiju
         public static List<NastavnikPregled> VratiClanoveKomisije(int komisijaId)
         {
             List<NastavnikPregled> rezultat = new List<NastavnikPregled>();
@@ -1457,7 +1494,82 @@ namespace MuzickaSkolaWindowsForms
             finally { if (s != null) s.Close(); }
             return rezultat;
         }
+
+        public static void DodajNovuKomisiju()
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                s.BeginTransaction();
+
+                Komisija novaKomisija = new Komisija();
+
+                s.Save(novaKomisija);
+                s.Flush();
+                s.Transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                if (s?.Transaction != null && s.Transaction.IsActive)
+                {
+                    s.Transaction.Rollback();
+                }
+                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+                if (ec.InnerException != null)
+                {
+                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+                }
+                MessageBox.Show(errorMessage);
+            }
+            finally
+            {
+                if (s != null) s.Close();
+            }
+        }
+
+        public static void ObrisiKomisiju(int komisijaId)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                s.BeginTransaction();
+
+
+                Komisija komisijaZaBrisanje = s.Get<Komisija>(komisijaId);
+
+                if (komisijaZaBrisanje != null)
+                {
+
+                    foreach (var ispit in komisijaZaBrisanje.IspitiKojeOcenjuje)
+                    {
+
+                        ispit.OcenjujeKomisija = null;
+                    }
+
+                    komisijaZaBrisanje.ClanoviKomisije.Clear();
+
+                    s.Delete(komisijaZaBrisanje);
+
+                    s.Transaction.Commit();
+                }
+            }
+            catch (Exception ec)
+            {
+                s?.Transaction.Rollback();
+            }
+            finally
+            {
+                if (s != null)
+                {
+                    s.Close();
+                    s.Dispose();
+                }
+            }
+        }
         #endregion Nastavnik
+
         #region Polaznik
 
         public static List<PolaznikPregled> VratiSvePolaznike()
