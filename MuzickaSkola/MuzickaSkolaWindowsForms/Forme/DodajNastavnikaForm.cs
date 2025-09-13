@@ -146,42 +146,65 @@ namespace MuzickaSkolaWindowsForms
                 }
                 MessageBox.Show("Nastavnik je uspešno dodat!");
             }
-            else
+            else // Ako nije null, MENJAMO
             {
-                // --- LOGIKA ZA IZMENU POSTOJEĆEG NASTAVNIKA ---
+                // --- ISPRAVNA LOGIKA ZA IZMENU ---
 
-                // 1. Uzimamo postojeće objekte koje smo dobili kada smo otvorili formu
-                Nastavnik n = this.nastavnikZaIzmenu;
-                Osoba o = n.OsnovniPodaci;
-
-                // 2. Ažuriramo SVE propertije na tim objektima sa SVEŽIM vrednostima iz polja na formi.
+                // 1. Ažuriramo podatke na postojećem Osoba objektu
+                Osoba o = this.nastavnikZaIzmenu.OsnovniPodaci;
                 o.Jmbg = txtJmbg.Text;
                 o.Ime = txtIme.Text;
-                o.Prezime = txtPrezime.Text;
-                o.Adresa = txtAdresa.Text;
-                o.Telefon = txtTelefon.Text;
-                o.Email = txtEmail.Text;
-                o.StrucnaSprema = txtStrucnaSprema.Text;
-                o.DatumZaposlenja = dtpDatumZaposlenja.Value;
+                // ... popunite sve ostale Osoba propertije ...
 
-                // Ažuriramo i specifične podatke
-                if (n is StalnoZaposlen sz)
+                // 2. Proveravamo da li se tip promenio
+                bool bioJeStalnoZaposlen = this.nastavnikZaIzmenu is StalnoZaposlen;
+                bool biceStalnoZaposlen = rbStalnoZaposlen.Checked;
+
+                Nastavnik finalniNastavnik;
+
+                if (bioJeStalnoZaposlen == biceStalnoZaposlen)
                 {
-                    sz.RadnoVreme = txtRadnoVreme.Text;
+                    // Tip se NIJE promenio, samo ažuriramo postojeći objekat
+                    finalniNastavnik = this.nastavnikZaIzmenu;
+                    if (finalniNastavnik is StalnoZaposlen sz)
+                    {
+                        sz.RadnoVreme = txtRadnoVreme.Text;
+                    }
+                    else if (finalniNastavnik is Honorarac h)
+                    {
+                        h.BrojUgovora = txtBrojUgovora.Text;
+                        h.TrajanjeUgovora = txtTrajanjeUgovora.Text;
+                        h.BrojCasova = (int)numBrojCasova.Value;
+                    }
                 }
-                else if (n is Honorarac h)
+                else
                 {
-                    h.BrojUgovora = txtBrojUgovora.Text;
-                    h.TrajanjeUgovora = txtTrajanjeUgovora.Text;
-                    h.BrojCasova = (int)numBrojCasova.Value;
+                    // Tip SE PROMENIO, kreiramo NOVI objekat odgovarajućeg tipa
+                    if (biceStalnoZaposlen)
+                    {
+                        finalniNastavnik = new StalnoZaposlen
+                        {
+                            RadnoVreme = txtRadnoVreme.Text
+                        };
+                    }
+                    else // Biće Honorarac
+                    {
+                        finalniNastavnik = new Honorarac
+                        {
+                            BrojUgovora = txtBrojUgovora.Text,
+                            TrajanjeUgovora = txtTrajanjeUgovora.Text,
+                            BrojCasova = (int)numBrojCasova.Value
+                        };
+                    }
+                    // Povezujemo novi objekat sa postojećom Osobom
+                    finalniNastavnik.Id = o.Id;
+                    finalniNastavnik.OsnovniPodaci = o;
                 }
 
-                // 3. Prosleđujemo IZMENJENI objekat (samo Nastavnik, jer on sadrži i Osobu) DataProvider-u
-                DTOManager.IzmeniNastavnika(n);
+                // 3. Prosleđujemo finalni objekat (stari ili novi) DataProvider-u
+                DTOManager.IzmeniNastavnika(finalniNastavnik);
                 MessageBox.Show("Nastavnik je uspešno izmenjen!");
             }
-
-            // Na kraju, bilo da smo dodavali ili menjali, zatvaramo formu
             this.Close();
         }
     }

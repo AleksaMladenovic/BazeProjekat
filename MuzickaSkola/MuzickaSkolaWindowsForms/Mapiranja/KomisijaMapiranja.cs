@@ -8,7 +8,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
 {
     class KomisijaMapiranja:ClassMap<Komisija>
     {
-        KomisijaMapiranja()
+        public KomisijaMapiranja()
         {
             Table("KOMISIJA");
             Id(p => p.Id, "ID_KOMISIJE").GeneratedBy.SequenceIdentity("KOMISIJA_ID_SEQ");
@@ -17,8 +17,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
                 .Table("SE_SASTOJI")
                 .ParentKeyColumn("ID_KOMISIJE")
                 .ChildKeyColumn("ID_NASTAVNIKA")
-                .Cascade.All()
-                .Inverse();
+                .Cascade.All();
 
             HasMany(x => x.IspitiKojeOcenjuje)
                 .KeyColumn("ID_KOMISIJE")

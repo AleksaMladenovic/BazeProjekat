@@ -12,12 +12,13 @@ namespace MuzickaSkolaWindowsForms
 {
     public partial class KomisijeIspitiForm : Form
     {
+
         public KomisijeIspitiForm()
         {
             InitializeComponent();
+            this.Text = "Pregled Komisija i Članova"; // Promenimo naslov
         }
 
-        // Događaj koji se okida kada se forma učita
         private void KomisijeIspitiForm_Load(object sender, EventArgs e)
         {
             PopuniListuKomisija();
@@ -36,30 +37,60 @@ namespace MuzickaSkolaWindowsForms
             listViewKomisije.Refresh();
         }
 
-        // Događaj koji se okida KADA SE PROMENI SELEKCIJA u levoj listi
         private void listViewKomisije_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewKomisije.SelectedItems.Count > 0)
             {
                 int komisijaId = (int)listViewKomisije.SelectedItems[0].Tag;
-                PopuniListuIspita(komisijaId);
+                PopuniListuClanova(komisijaId);
             }
             else
             {
-                listViewIspiti.Items.Clear();
+                listViewClanovi.Items.Clear(); // Koristimo novo ime
             }
         }
 
-        private void PopuniListuIspita(int komisijaId)
+        // NOVA METODA
+        private void PopuniListuClanova(int komisijaId)
         {
-            listViewIspiti.Items.Clear();
-            List<ZavrsniIspitPregled> ispiti = DTOManager.VratiIspiteZaKomisiju(komisijaId);
-            foreach (var i in ispiti)
+            listViewClanovi.Items.Clear(); // Koristimo novo ime
+            List<NastavnikPregled> clanovi = DTOManager.VratiClanoveKomisije(komisijaId);
+            foreach (var clan in clanovi)
             {
-                ListViewItem item = new ListViewItem(new string[] { i.NazivKursa, i.Datum.ToString("dd.MM.yyyy"), i.Ocena.ToString(), i.PunoImePolaznika });
-                listViewIspiti.Items.Add(item);
+                ListViewItem item = new ListViewItem(new string[] { clan.Ime, clan.Prezime, clan.TipZaposlenja });
+                listViewClanovi.Items.Add(item);
             }
-            listViewIspiti.Refresh();
+            listViewClanovi.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (listViewKomisije.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Molimo vas, izaberite komisiju koju želite da obrišete.");
+                return;
+            }
+
+            // 2. Pitamo korisnika za potvrdu
+            DialogResult rezultat = MessageBox.Show("Da li ste sigurni da želite da obrišete izabranu komisiju? Sve veze sa članovima.",
+                                                    "Potvrda brisanja",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Warning);
+
+            if (rezultat == DialogResult.Yes)
+            {
+                
+                int idZaBrisanje = (int)listViewKomisije.SelectedItems[0].Tag;
+
+                DTOManager.ObrisiKomisiju(idZaBrisanje);
+
+                
+                this.PopuniListuKomisija();
+                
+                this.listViewClanovi.Items.Clear();
+
+                MessageBox.Show("Komisija je uspešno obrisana.");
+            }
         }
     }
 }

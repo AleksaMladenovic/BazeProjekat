@@ -8,7 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
+
+
+	<ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="3.4.1" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.9.1" />
   </ItemGroup>
