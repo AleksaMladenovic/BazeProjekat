@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using NHibernate;
 using MuzickaSkolaWindowsForms.Entiteti;
 using FluentNHibernate.Utils;
+using FluentNHibernate.Conventions;
+using NHibernate.Linq;
+using Antlr.Runtime.Tree;
 
 
 namespace MuzickaSkolaWindowsForms
@@ -43,6 +46,35 @@ namespace MuzickaSkolaWindowsForms
             return lokacijePregled;
         }
 
+        public static List<LokacijaPregled> VratiSveLokacijeZaKurs(int kursId)
+        {
+            List<LokacijaPregled> lokacijePregled = new List<LokacijaPregled>();
+            ISession? s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Kurs kurs = s.Get<Kurs>(kursId);
+                IList<Lokacija> sveLokacijeZaKurs = kurs.LokacijeOdrzavanja;
+
+                foreach (var lok in sveLokacijeZaKurs)
+                {
+                    int sumaKapaciteta = lok.Ucionice.Sum(u => u.Kapacitet);
+
+                    lokacijePregled.Add(new LokacijaPregled(lok.Adresa, sumaKapaciteta, lok.RadnoVreme));
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                s?.Close();
+            }
+            return lokacijePregled;
+        }
+
         public static void DodajLokaciju(LokacijaBasic lokacijaDto)
         {
             try
@@ -65,6 +97,43 @@ namespace MuzickaSkolaWindowsForms
             }
         }
 
+        public static void DodajLokacijuKursu(string lokacija, int idKursa)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+        }
+
+        public static bool DaLiPostojeCasoviZaKursNaLokaciji(int kursId,string adresa)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                var casovi = from c in s.Query<Cas>()
+                             where c.UcionicaOdrzavnja.Id.PripadaLokaciji.Adresa == adresa && c.PripadaNastavi.PripadaKursu.Id == kursId
+                             select c;
+
+                return casovi.Any();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return true;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
         public static bool DaLiLokacijaPostoji(string adresa)
         {
             try
@@ -102,7 +171,41 @@ namespace MuzickaSkolaWindowsForms
 
         }
 
+        public static void AzurirajLokacijeZaKurs(int kursId, List<string> adreseNovihLokacija)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
 
+                Kurs kurs = s.Get<Kurs>(kursId);
+
+                if (kurs == null)
+                {
+                    throw new ArgumentException($"Kurs sa ID-jem {kursId} ne postoji.");
+                }
+
+                kurs.LokacijeOdrzavanja.Clear();
+                
+                foreach (string adresa in adreseNovihLokacija)
+                {
+                    Lokacija lokacija = s.Load<Lokacija>(adresa);
+
+                    kurs.LokacijeOdrzavanja.Add(lokacija);
+                }
+
+                s.Update(kurs);
+                s.Flush();
+            }
+            catch (Exception )
+            {
+                throw;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
         public static LokacijaBasic VratiLokacijuZaIzmenu(string adresa)
         {
             LokacijaBasic novaLokacija = new LokacijaBasic() { Adresa = adresa};
@@ -164,6 +267,54 @@ namespace MuzickaSkolaWindowsForms
             return ucionicePregled;
         }
 
+        public static List<UcionicaPregled> VratiSveUcioniceNastavu(int nastavaId)
+        {
+            List<UcionicaPregled> ucionicePregled = new List<UcionicaPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Nastava nastava = s.Get<Nastava>(nastavaId);
+                if (nastava == null)
+                {
+                    return ucionicePregled;
+                }
+                int kursId = nastava.PripadaKursu.Id;
+
+                Kurs kurs = s.Get<Kurs>(kursId);
+                IList<Lokacija> dostupneLokacije = kurs.LokacijeOdrzavanja;
+
+                if (dostupneLokacije.Count == 0)
+                {
+                    return ucionicePregled;
+                }
+
+                List<string> adreseLokacija = dostupneLokacije.Select(l => l.Adresa).ToList();
+
+                IEnumerable<Ucionica> ucionice = s.Query<Ucionica>()
+                    .Where(u => adreseLokacija.Contains(u.Id.PripadaLokaciji.Adresa))
+                    .ToList();
+
+                foreach (Ucionica u in ucionice)
+                {
+                    ucionicePregled.Add(new UcionicaPregled()
+                    {
+                        Naziv = u.Id.Naziv,
+                        Kapacitet = u.Kapacitet,
+                        Opremljenost = u.Opremljenost,
+                        AdresaLokacije = u.Id.PripadaLokaciji.Adresa,
+                        PunoImeUcionice = $"{u.Id.Naziv} ({u.Id.PripadaLokaciji.Adresa})"
+                    });
+                }
+
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            return ucionicePregled;
+        }
         public static bool DaLiUcionicaPostoji(string adresaLokacije, string nazivUcionice)
         {
             try
@@ -268,6 +419,43 @@ namespace MuzickaSkolaWindowsForms
                 Opremljenost = ucionicaPregled.Opremljenost,
                 AdresaLokacije = ucionicaPregled.AdresaLokacije
             };
+        }
+
+        public static bool DaLiPostojeUcioniceZaKurs(int kursId)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                //fetch osigurava da se sve ucita u jednom upitu
+                Kurs kurs = s.Query<Kurs>()
+                            .Fetch(k => k.LokacijeOdrzavanja)
+                            .Where(k => k.Id == kursId)
+                            .SingleOrDefault();
+
+                if (kurs == null)
+                {
+                    return false;
+                }
+
+                if (kurs.LokacijeOdrzavanja.Count == 0)
+                {
+                    return false;
+                }
+
+
+                List<string> adreseLokacija = kurs.LokacijeOdrzavanja.Select(l => l.Adresa).ToList();
+
+                bool imaUcionica = s.Query<Ucionica>()
+                                    .Any(u => adreseLokacija.Contains(u.Id.PripadaLokaciji.Adresa));
+
+                return imaUcionica;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
         }
         #endregion
 
@@ -500,58 +688,6 @@ namespace MuzickaSkolaWindowsForms
                 return false;
             }
         }
-
-        //public static List<Nastavnik> VratiSveNastavnike()
-        //{
-        //    try
-        //    {
-        //        ISession s = DataLayer.GetSession();
-
-        //        var osobeNastavnici =( from o in s.Query<Osoba>()
-        //                               where o.FNastavnik==true
-        //                               select o).ToList();
-
-        //        List<Nastavnik> listaNastavnika = new List<Nastavnik>();
-        //        foreach(var o in osobeNastavnici)
-        //        {
-        //            var st = s.Get<StalnoZaposlen>(o.Id);
-        //            if (st != null)
-        //            {
-        //                listaNastavnika.Add(st);
-        //                continue;
-        //            }
-        //            var hn = s.Get<Honorarac>(o.Id);
-        //            listaNastavnika.Add(hn);
-        //        }
-        //        s.Close();
-        //        return listaNastavnika;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.FormatExceptionMessage());
-        //        return new List<Nastavnik>();
-        //    }
-        //}
-
-        //public static Nastavnik VratiNastavnika(int id)
-        //{
-        //    try
-        //    {
-        //        ISession s = DataLayer.GetSession();
-
-                
-        //        Nastavnik nastavnik = s.Get<StalnoZaposlen>(id);
-        //        if (nastavnik != null)
-        //            return nastavnik;
-        //        nastavnik = s.Get<Honorarac>(id);
-        //        return nastavnik;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.FormatExceptionMessage());
-        //        return null;
-        //    }
-        //}
         #endregion
 
         #region Nastava
@@ -578,8 +714,9 @@ namespace MuzickaSkolaWindowsForms
                         TipNastave = tipNastave,
                     });
                 }
-                return nastavePregled;
                 s.Close();
+                return nastavePregled;
+
             }
             catch (Exception ex)
             {
@@ -671,10 +808,145 @@ namespace MuzickaSkolaWindowsForms
 
         public static bool ObrisiNastavu(int NastavaId)
         {
-            return true;
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Nastava? nastava = s.Get<Nastava>(NastavaId);
+                s.Delete(nastava);
+                s.Flush();
+                s.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
         }
 
+        public static List<CasPregled> VratiSveCasoveZaNastavu(int nastavaId)
+        {
+            List<CasPregled> casoviPregled = new List<CasPregled>();
 
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Cas> sviCasovi = from c in s.Query<Cas>()
+                                             where c.PripadaNastavi.Id == nastavaId
+                                             select c;
+
+                foreach(Cas c in sviCasovi)
+                {
+                    Nastavnik nastavnik = DTOManager.VratiNastavnika(c.DrziNastavnik.Id);
+
+                    casoviPregled.Add(new CasPregled
+                    {
+                        Id = c.Id,
+                        Termin = c.Termin,
+                        Tema = c.Tema,
+                        ImeNastavnika = nastavnik != null ? $"{nastavnik.OsnovniPodaci.Ime} {nastavnik.OsnovniPodaci.Prezime}" : "N/A",
+                        Ucionica = c.UcionicaOdrzavnja.Id.Naziv,
+                        IdNastavnika = nastavnik.Id,
+                        Lokacija = c.UcionicaOdrzavnja.Id.PripadaLokaciji.Adresa
+                    });
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            return casoviPregled;
+
+        }
+
+        public static bool TerminObuhvataNastava(DateTime termin, int idNastave)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                var nastava = s.Get<Nastava>(idNastave);
+                bool poslePocetka = termin.Date >= nastava.DatumOd.Date;
+                bool preKraja = !nastava.DatumDo.HasValue || termin.Date <= nastava.DatumDo.Value.Date;
+                return poslePocetka && preKraja;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+        }
+
+        public static void DodajCas(CasBasic cas)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                UcionicaId idUcionice = new UcionicaId() { Naziv = cas.Ucionica, PripadaLokaciji = s.Get<Lokacija>(cas.Lokacija) };
+                Cas? noviCas = new Cas()
+                {
+                    Termin = cas.Termin,
+                    Tema = cas.Tema,
+                    DrziNastavnik = VratiNastavnika(cas.NastavnikId),
+                    PripadaNastavi = s.Get<Nastava>(cas.NastavaId),
+                    UcionicaOdrzavnja = s.Get<Ucionica>(idUcionice)
+                };
+
+                s.Save(noviCas);
+
+                s.Flush();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+        }
+
+        public static void IzmeniCas(CasBasic cas)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                UcionicaId idUcionice = new UcionicaId() { Naziv = cas.Ucionica, PripadaLokaciji = s.Get<Lokacija>(cas.Lokacija) };
+                var casZaMenjanje = s.Get<Cas>(cas.Id);
+                casZaMenjanje.Tema = cas.Tema;
+                casZaMenjanje.Termin = cas.Termin;
+                casZaMenjanje.DrziNastavnik = VratiNastavnika(cas.NastavnikId);
+                casZaMenjanje.PripadaNastavi = s.Get<Nastava>(cas.NastavaId);
+                casZaMenjanje.UcionicaOdrzavnja = s.Get<Ucionica>(idUcionice);
+
+
+                s.Update(casZaMenjanje);
+
+                s.Flush();
+                s.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+        }
+
+        public static bool ObrisiCas(int casId)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                var cas = s.Get<Cas>(casId);
+
+
+                s.Delete(cas);
+                s.Flush();
+                s.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+        }
         #endregion
 
         #region Nastavnik
@@ -1715,6 +1987,175 @@ namespace MuzickaSkolaWindowsForms
                         .ToList();
             }
         }
+
+        public static List<PrisustvoPregled> VratiPrisustvaZaCas(int casId)
+        {
+            List<PrisustvoPregled> prisustvaPregled = new List<PrisustvoPregled>();
+            ISession s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                IEnumerable<Prisustvo> svaPrisustva = s.Query<Prisustvo>()
+                    .Where(p => p.Id.CasKomePrisustvuje.Id == casId);
+
+                foreach (var p in svaPrisustva)
+                {
+                    var polaznikOsoba = s.Get<Osoba>(p.Id.PolaznikId);
+                    prisustvaPregled.Add(new PrisustvoPregled
+                    {
+                        IdPolaznika = p.Id.PolaznikId,
+                        ImePolaznika =  polaznikOsoba.Ime,
+                        PrezimePolaznika = polaznikOsoba.Prezime,
+                        IdCasa = casId,
+                        Ocena = p.Ocena,
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                s?.Close();
+            }
+
+            return prisustvaPregled;
+        }
+
+        public static void DodajPrisustvo(PrisustvoPregled prisustvoDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Polaznik p = s.Load<Polaznik>(prisustvoDto.IdPolaznika);
+                Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
+
+                var novoPrisustvo = new Prisustvo
+                {
+                    Ocena = prisustvoDto.Ocena
+                };
+                novoPrisustvo.Id.PolaznikId = prisustvoDto.IdPolaznika;
+                novoPrisustvo.Id.CasKomePrisustvuje = c;
+
+                s.Save(novoPrisustvo);
+                s.Flush();
+            }
+            catch (Exception) { throw; }
+            finally { s?.Close(); }
+        }
+
+        public static void IzmeniPrisustvo(PrisustvoPregled prisustvoDto)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                Cas c = s.Load<Cas>(prisustvoDto.IdCasa);
+
+                var idZaPretragu = new PrisustvoId() {
+                    CasKomePrisustvuje = c,
+                    PolaznikId = prisustvoDto.IdPolaznika,
+                };
+                Prisustvo p = s.Get<Prisustvo>(idZaPretragu);
+                p.Ocena = prisustvoDto.Ocena;
+                
+
+                s.Update(p);
+                s.Flush();
+            }
+            catch (Exception) { throw; }
+            finally { s?.Close(); }
+        }
+
+        public static void ObrisiPrisustvo(PrisustvoPregled prisustvo)
+        {
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                var idZaBrisanje = new PrisustvoId
+                {
+                    PolaznikId = prisustvo.IdPolaznika,
+                    CasKomePrisustvuje = s.Load<Cas>(prisustvo.IdCasa)
+                };
+
+                Prisustvo prisustvoZaBrisanje = s.Get<Prisustvo>(idZaBrisanje);
+
+                if (prisustvoZaBrisanje != null)
+                {
+                    s.Delete(prisustvoZaBrisanje);
+                }
+                s.Flush();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+        public static List<PolaznikPregled> VratiPolaznikeZaEvidenciju(int casId)
+        {
+            List<PolaznikPregled> polazniciZaEvidenciju = new List<PolaznikPregled>();
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+
+                Cas cas = s.Get<Cas>(casId);
+                if (cas == null) return polazniciZaEvidenciju;
+                Kurs kurs = cas.PripadaNastavi.PripadaKursu;
+
+                IList<DetePolaznik> decaPolaznici = s.Query<DetePolaznik>()
+                                    .Where(dp => dp.PrijavljeniKursevi.Contains(kurs))
+                                    .ToList();
+
+                IList<OdrasliPolaznik> odrasliPolaznici = s.Query<OdrasliPolaznik>()
+                                                           .Where(op => op.PrijavljeniKursevi.Contains(kurs))
+                                                           .ToList();
+
+                IList<Polaznik> prijavljeniPolaznici = new List<Polaznik>();
+                foreach (var dete in decaPolaznici) { prijavljeniPolaznici.Add(dete); }
+                foreach (var odrasli in odrasliPolaznici) { prijavljeniPolaznici.Add(odrasli); }
+
+                if (!prijavljeniPolaznici.Any()) return polazniciZaEvidenciju;
+
+                HashSet<int> idjeviPrisutnihPolaznika = s.Query<Prisustvo>()
+                                                       .Where(p => p.Id.CasKomePrisustvuje.Id == casId)
+                                                       .Select(p => p.Id.PolaznikId)
+                                                       .ToHashSet();
+
+                var neevidentiraniPolaznici = prijavljeniPolaznici
+                                              .Where(p => !idjeviPrisutnihPolaznika.Contains(p.Id));
+
+                // 4. Prevedi u DTO
+                foreach (var p in neevidentiraniPolaznici)
+                {
+                    polazniciZaEvidenciju.Add(new PolaznikPregled
+                    {
+                        IdOsobe = p.Id,
+                        Ime = p.OsnovniPodaci.Ime,
+                        Prezime =p.OsnovniPodaci.Prezime
+                    });
+                }
+            }
+            catch (Exception ex) { throw; }
+            finally { s?.Close(); }
+
+            return polazniciZaEvidenciju;
+        }
+
+
         public static List<ZavrsniIspitPregled> VratiPolozeneIspite(int idOsobe)
         {
             using (var s = DataLayer.GetSession())

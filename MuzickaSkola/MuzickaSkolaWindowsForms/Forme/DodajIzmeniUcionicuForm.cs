@@ -59,6 +59,11 @@ namespace MuzickaSkolaWindowsForms.Forme
             {
                 try
                 {
+                    if (DTOManager.DaLiUcionicaPostoji(adresaLokacije, txtNaziv.Text))
+                    {
+                        MessageBox.Show($"Učionica sa nazivom '{txtNaziv.Text}' već postoji na ovoj lokaciji.", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     ucionicaDto = new UcionicaBasic
                     {
                         AdresaLokacije = this.adresaLokacije,
@@ -66,11 +71,7 @@ namespace MuzickaSkolaWindowsForms.Forme
                         Naziv = txtNaziv.Text,
                         Opremljenost = txtOpremljenost.Text,
                     };
-                    if(DTOManager.DaLiUcionicaPostoji(adresaLokacije, ucionicaDto.Naziv))
-                    {
-                        MessageBox.Show($"Učionica sa nazivom '{ucionicaDto.Naziv}' već postoji na ovoj lokaciji.", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                    
                     DTOManager.DodajUcionicu(ucionicaDto);
                     MessageBox.Show("Uspešno dodata nova učionica!", "Uspeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();

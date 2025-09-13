@@ -13,6 +13,10 @@ namespace MuzickaSkolaWindowsForms.Entiteti
         //public virtual required string JmbgPolaznika {  get; set; }
         //public virtual int IdCasa {  get; set; }
         public virtual int Ocena {  get; set; }
+
+        public Prisustvo() {
+            Id = new PrisustvoId();
+        }
     }
 
     public class PrisustvoId
