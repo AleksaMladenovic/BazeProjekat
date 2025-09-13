@@ -12,7 +12,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
     {
         public PolaznikMapiranja()
         {
-            Table("OSOBA");//samo ovo dodao
+            
             UseUnionSubclassForInheritanceMapping();
             Table("OSOBA");
             Id(x => x.Id).Column("ID_OSOBE").GeneratedBy.Foreign("OsnovniPodaci");

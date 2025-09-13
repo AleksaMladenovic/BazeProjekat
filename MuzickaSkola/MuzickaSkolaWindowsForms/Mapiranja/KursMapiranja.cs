@@ -17,8 +17,6 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
             Id(p => p.Id, "ID_KURSA").GeneratedBy.SequenceIdentity("KURS_ID_SEQ");
 
             DiscriminateSubClassesOnColumn("TIP_KURSA");
-                //.Not.Nullable()
-                //.Default("Kurs");
 
             Map(p => p.Nivo, "NIVO");
             Map(p => p.Naziv, "NAZIV_KURSA");

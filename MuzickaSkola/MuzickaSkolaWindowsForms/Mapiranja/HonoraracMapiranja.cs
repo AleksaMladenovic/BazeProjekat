@@ -8,12 +8,9 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
     {
         public HonoraracMapiranja()
         {
-            // Kažemo gde se nalaze podaci specifični za Honorarca
             Table("HONORARAC");
-            // Kažemo preko koje kolone se spaja sa OSOBA tabelom
             KeyColumn("ID_OSOBE");
 
-            // Mapiramo samo atribute specifične za Honorarca
             Map(p => p.BrojUgovora, "BROJ_UGOVORA");
             Map(p => p.TrajanjeUgovora, "TRAJANJE_UGOVORA");
             Map(p => p.BrojCasova, "BROJ_CASOVA");

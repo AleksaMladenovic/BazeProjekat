@@ -13,7 +13,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
         public RoditeljMapiranja()
         {
             Table("OSOBA");
-            Id(x => x.Id).Column("ID_OSOBE").GeneratedBy.Assigned(); // ← NEMA Foreign!
+            Id(x => x.Id).Column("ID_OSOBE").GeneratedBy.Assigned(); 
 
         
 

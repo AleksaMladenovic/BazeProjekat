@@ -18,10 +18,7 @@ namespace MuzickaSkolaWindowsForms.Mapiranja
 
             Map(p => p.Termin, "TERMIN");
             Map(p => p.Tema, "TEMA");
-            //Map(p => p.JmbgNastavnika, "JMBG_NASTAVNIKA");
-            //Map(p => p.NazivUcionice, "NAZIV_UCIONICE");
-            //Map(p => p.AdresaLokacije, "ADRESA_LOKACIJE");
-            //Map(p => p.IdNastave, "ID_NASTAVE");
+           
 
             HasMany(x => x.PrisutniPolaznici)
                 .KeyColumn("ID_CASA")
