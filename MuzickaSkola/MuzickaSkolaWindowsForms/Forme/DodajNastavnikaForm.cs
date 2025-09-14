@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms
 {
-    public partial class DodajNastavnikaForm : Form
+    public partial class DodajNastavnikaForm : BaseForm
     {
         private Nastavnik nastavnikZaIzmenu;
 

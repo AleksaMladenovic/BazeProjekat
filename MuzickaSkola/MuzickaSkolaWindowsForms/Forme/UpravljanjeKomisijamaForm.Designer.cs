@@ -44,28 +44,35 @@
             // lblNastavnikInfo
             // 
             lblNastavnikInfo.AutoSize = true;
-            lblNastavnikInfo.Location = new Point(69, 9);
+            lblNastavnikInfo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblNastavnikInfo.ForeColor = Color.MidnightBlue;
+            lblNastavnikInfo.Location = new Point(79, 9);
             lblNastavnikInfo.Name = "lblNastavnikInfo";
-            lblNastavnikInfo.Size = new Size(217, 15);
+            lblNastavnikInfo.Size = new Size(248, 17);
             lblNastavnikInfo.TabIndex = 0;
             lblNastavnikInfo.Text = "Upravljanje članstvom za: [Ime Prezime]";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 52);
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(14, 52);
             label1.Name = "label1";
-            label1.Size = new Size(105, 15);
+            label1.Size = new Size(118, 17);
             label1.TabIndex = 1;
             label1.Text = "Clan u komisijama";
+            label1.Click += label1_Click;
             // 
             // listViewClan
             // 
+            listViewClan.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listViewClan.Columns.AddRange(new ColumnHeader[] { columnHeader1 });
             listViewClan.FullRowSelect = true;
-            listViewClan.Location = new Point(12, 70);
+            listViewClan.GridLines = true;
+            listViewClan.Location = new Point(14, 70);
             listViewClan.Name = "listViewClan";
-            listViewClan.Size = new Size(105, 151);
+            listViewClan.Size = new Size(116, 154);
             listViewClan.TabIndex = 2;
             listViewClan.UseCompatibleStateImageBehavior = false;
             listViewClan.View = View.Details;
@@ -77,40 +84,52 @@
             // 
             // btnUkloniUcesce
             // 
-            btnUkloniUcesce.Location = new Point(155, 130);
+            btnUkloniUcesce.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnUkloniUcesce.BackColor = Color.LightSteelBlue;
+            btnUkloniUcesce.FlatStyle = FlatStyle.Flat;
+            btnUkloniUcesce.Location = new Point(191, 137);
             btnUkloniUcesce.Name = "btnUkloniUcesce";
-            btnUkloniUcesce.Size = new Size(75, 23);
+            btnUkloniUcesce.Size = new Size(44, 26);
             btnUkloniUcesce.TabIndex = 3;
+            btnUkloniUcesce.TabStop = false;
             btnUkloniUcesce.Text = "<-";
-            btnUkloniUcesce.UseVisualStyleBackColor = true;
+            btnUkloniUcesce.UseVisualStyleBackColor = false;
             btnUkloniUcesce.Click += btnDodajUcesce_Click;
             // 
             // btnDodajUcesce
             // 
-            btnDodajUcesce.Location = new Point(155, 89);
+            btnDodajUcesce.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnDodajUcesce.BackColor = Color.LightSteelBlue;
+            btnDodajUcesce.FlatStyle = FlatStyle.Flat;
+            btnDodajUcesce.Location = new Point(191, 94);
             btnDodajUcesce.Name = "btnDodajUcesce";
-            btnDodajUcesce.Size = new Size(75, 23);
+            btnDodajUcesce.Size = new Size(44, 26);
             btnDodajUcesce.TabIndex = 4;
+            btnDodajUcesce.TabStop = false;
             btnDodajUcesce.Text = "->";
-            btnDodajUcesce.UseVisualStyleBackColor = true;
+            btnDodajUcesce.UseVisualStyleBackColor = false;
             btnDodajUcesce.Click += btnUkloniUcesce_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(258, 52);
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(295, 50);
             label2.Name = "label2";
-            label2.Size = new Size(105, 15);
+            label2.Size = new Size(120, 17);
             label2.TabIndex = 5;
             label2.Text = "Dostupne komisije";
             // 
             // listViewNijeClan
             // 
+            listViewNijeClan.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listViewNijeClan.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
             listViewNijeClan.FullRowSelect = true;
-            listViewNijeClan.Location = new Point(258, 70);
+            listViewNijeClan.GridLines = true;
+            listViewNijeClan.Location = new Point(295, 70);
             listViewNijeClan.Name = "listViewNijeClan";
-            listViewNijeClan.Size = new Size(105, 151);
+            listViewNijeClan.Size = new Size(116, 154);
             listViewNijeClan.TabIndex = 6;
             listViewNijeClan.UseCompatibleStateImageBehavior = false;
             listViewNijeClan.View = View.Details;
@@ -122,29 +141,41 @@
             // 
             // btnSnimiPromene
             // 
-            btnSnimiPromene.Location = new Point(127, 198);
+            btnSnimiPromene.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnSnimiPromene.BackColor = Color.MidnightBlue;
+            btnSnimiPromene.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnSnimiPromene.FlatStyle = FlatStyle.Flat;
+            btnSnimiPromene.ForeColor = Color.White;
+            btnSnimiPromene.Location = new Point(144, 198);
             btnSnimiPromene.Name = "btnSnimiPromene";
-            btnSnimiPromene.Size = new Size(125, 23);
+            btnSnimiPromene.Size = new Size(140, 26);
             btnSnimiPromene.TabIndex = 7;
+            btnSnimiPromene.TabStop = false;
             btnSnimiPromene.Text = "Sačuvaj promene";
-            btnSnimiPromene.UseVisualStyleBackColor = true;
+            btnSnimiPromene.UseVisualStyleBackColor = false;
             btnSnimiPromene.Click += btnSnimiPromene_Click;
             // 
             // btnDodajKomisiju
             // 
-            btnDodajKomisiju.Location = new Point(127, 169);
+            btnDodajKomisiju.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnDodajKomisiju.BackColor = Color.MidnightBlue;
+            btnDodajKomisiju.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnDodajKomisiju.FlatStyle = FlatStyle.Flat;
+            btnDodajKomisiju.ForeColor = Color.White;
+            btnDodajKomisiju.Location = new Point(144, 169);
             btnDodajKomisiju.Name = "btnDodajKomisiju";
-            btnDodajKomisiju.Size = new Size(125, 23);
+            btnDodajKomisiju.Size = new Size(140, 26);
             btnDodajKomisiju.TabIndex = 8;
+            btnDodajKomisiju.TabStop = false;
             btnDodajKomisiju.Text = "Dodaj novu komisiju";
-            btnDodajKomisiju.UseVisualStyleBackColor = true;
+            btnDodajKomisiju.UseVisualStyleBackColor = false;
             btnDodajKomisiju.Click += btnDodajKomisiju_Click;
             // 
             // UpravljanjeKomisijamaForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(371, 230);
+            ClientSize = new Size(422, 233);
             Controls.Add(btnDodajKomisiju);
             Controls.Add(btnSnimiPromene);
             Controls.Add(listViewNijeClan);
@@ -154,8 +185,8 @@
             Controls.Add(listViewClan);
             Controls.Add(label1);
             Controls.Add(lblNastavnikInfo);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
             Name = "UpravljanjeKomisijamaForm";
-            Text = "UpravljanjeKomisijamaForm";
             Load += UpravljanjeKomisijamaForm_Load;
             Click += UpravljanjeKomisijamaForm_Load;
             ResumeLayout(false);

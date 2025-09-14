@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class DodajIzmeniCasForm : Form
+    public partial class DodajIzmeniCasForm : BaseForm
     {
         private int idNastave;
         private CasBasic? cas;

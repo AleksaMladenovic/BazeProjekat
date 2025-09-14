@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class DodajIzmeniKursForm : Form
+    public partial class DodajIzmeniKursForm : BaseForm
     {
         private KursBasic? kurs;
         public DodajIzmeniKursForm()

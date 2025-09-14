@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class PolazniciForm : Form
+    public partial class PolazniciForm : BaseForm
     {
         public PolazniciForm()
         {
@@ -158,8 +158,28 @@ namespace MuzickaSkolaWindowsForms.Forme
             using (var f = new PrijavljeniKurseviForm(idOsobe, punoIme))
                 f.ShowDialog(this);
         }
-       
+
 
         private string GetPunoIme(string ime, string prezime) => $"{ime} {prezime}";
+
+        private void labelNaslov_Click(object sender, EventArgs e)
+        {
+
+        }
+        #region dizajn
+        private void lwSviPolaznici_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void lwSviPolaznici_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 }

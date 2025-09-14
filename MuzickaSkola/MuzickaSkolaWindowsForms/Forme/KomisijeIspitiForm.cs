@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms
 {
-    public partial class KomisijeIspitiForm : Form
+    public partial class KomisijeIspitiForm : BaseForm
     {
 
         public KomisijeIspitiForm()
@@ -78,18 +78,50 @@ namespace MuzickaSkolaWindowsForms
 
             if (rezultat == DialogResult.Yes)
             {
-                
+
                 int idZaBrisanje = (int)listViewKomisije.SelectedItems[0].Tag;
 
                 DTOManager.ObrisiKomisiju(idZaBrisanje);
 
-                
+
                 this.PopuniListuKomisija();
-                
+
                 this.listViewClanovi.Items.Clear();
 
                 MessageBox.Show("Komisija je uspešno obrisana.");
             }
         }
+
+
+        #region dizajn
+
+        private void listViewKomisije_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewKomisije_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+
+        private void listViewClanovi_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewClanovi_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
+
     }
 }

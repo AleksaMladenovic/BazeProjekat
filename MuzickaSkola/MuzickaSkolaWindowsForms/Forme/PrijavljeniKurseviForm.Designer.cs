@@ -34,7 +34,10 @@
             lvKursevi = new ListView();
             btnZatvori = new Button();
             btnDodajNaKurs = new Button();
+            panel1 = new Panel();
+            labelNaslov = new Label();
             gbInfo.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // gbInfo
@@ -42,9 +45,11 @@
             gbInfo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gbInfo.Controls.Add(lblZaPolaznikaCaption);
             gbInfo.Controls.Add(lblPolaznikValue);
-            gbInfo.Location = new Point(12, 12);
+            gbInfo.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            gbInfo.ForeColor = Color.MidnightBlue;
+            gbInfo.Location = new Point(12, 66);
             gbInfo.Name = "gbInfo";
-            gbInfo.Size = new Size(796, 62);
+            gbInfo.Size = new Size(780, 62);
             gbInfo.TabIndex = 0;
             gbInfo.TabStop = false;
             gbInfo.Text = "Informacije";
@@ -52,9 +57,11 @@
             // lblZaPolaznikaCaption
             // 
             lblZaPolaznikaCaption.AutoSize = true;
+            lblZaPolaznikaCaption.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblZaPolaznikaCaption.ForeColor = Color.MidnightBlue;
             lblZaPolaznikaCaption.Location = new Point(12, 27);
             lblZaPolaznikaCaption.Name = "lblZaPolaznikaCaption";
-            lblZaPolaznikaCaption.Size = new Size(76, 15);
+            lblZaPolaznikaCaption.Size = new Size(87, 17);
             lblZaPolaznikaCaption.TabIndex = 0;
             lblZaPolaznikaCaption.Text = "Za polaznika:";
             // 
@@ -63,7 +70,7 @@
             lblPolaznikValue.AutoSize = true;
             lblPolaznikValue.Location = new Point(100, 27);
             lblPolaznikValue.Name = "lblPolaznikValue";
-            lblPolaznikValue.Size = new Size(12, 15);
+            lblPolaznikValue.Size = new Size(13, 17);
             lblPolaznikValue.TabIndex = 1;
             lblPolaznikValue.Text = "-";
             // 
@@ -73,10 +80,10 @@
             lvKursevi.BorderStyle = BorderStyle.FixedSingle;
             lvKursevi.FullRowSelect = true;
             lvKursevi.GridLines = true;
-            lvKursevi.Location = new Point(12, 88);
+            lvKursevi.Location = new Point(12, 145);
             lvKursevi.MultiSelect = false;
             lvKursevi.Name = "lvKursevi";
-            lvKursevi.Size = new Size(796, 365);
+            lvKursevi.Size = new Size(780, 269);
             lvKursevi.TabIndex = 1;
             lvKursevi.UseCompatibleStateImageBehavior = false;
             lvKursevi.View = View.Details;
@@ -84,29 +91,66 @@
             // btnZatvori
             // 
             btnZatvori.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnZatvori.Location = new Point(698, 459);
+            btnZatvori.BackColor = Color.MidnightBlue;
+            btnZatvori.FlatAppearance.BorderSize = 0;
+            btnZatvori.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnZatvori.FlatStyle = FlatStyle.Flat;
+            btnZatvori.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnZatvori.ForeColor = Color.White;
+            btnZatvori.Location = new Point(682, 418);
             btnZatvori.Name = "btnZatvori";
             btnZatvori.Size = new Size(110, 34);
             btnZatvori.TabIndex = 2;
             btnZatvori.Text = "Zatvori";
-            btnZatvori.UseVisualStyleBackColor = true;
+            btnZatvori.UseVisualStyleBackColor = false;
             btnZatvori.Click += btnZatvori_Click;
             // 
             // btnDodajNaKurs
             // 
-            btnDodajNaKurs.Location = new Point(12, 461);
+            btnDodajNaKurs.BackColor = Color.MidnightBlue;
+            btnDodajNaKurs.FlatAppearance.BorderSize = 0;
+            btnDodajNaKurs.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnDodajNaKurs.FlatStyle = FlatStyle.Flat;
+            btnDodajNaKurs.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnDodajNaKurs.ForeColor = Color.White;
+            btnDodajNaKurs.Location = new Point(12, 422);
             btnDodajNaKurs.Name = "btnDodajNaKurs";
             btnDodajNaKurs.Size = new Size(123, 32);
             btnDodajNaKurs.TabIndex = 3;
             btnDodajNaKurs.Text = "Dodaj na kurs";
-            btnDodajNaKurs.UseVisualStyleBackColor = true;
+            btnDodajNaKurs.UseVisualStyleBackColor = false;
             btnDodajNaKurs.Click += btnDodajNaKurs_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.MidnightBlue;
+            panel1.Controls.Add(labelNaslov);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(804, 60);
+            panel1.TabIndex = 4;
+            // 
+            // labelNaslov
+            // 
+            labelNaslov.Anchor = AnchorStyles.None;
+            labelNaslov.AutoSize = true;
+            labelNaslov.BackColor = Color.Transparent;
+            labelNaslov.Font = new Font("Times New Roman", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            labelNaslov.ForeColor = Color.White;
+            labelNaslov.Location = new Point(285, 9);
+            labelNaslov.Name = "labelNaslov";
+            labelNaslov.Size = new Size(229, 33);
+            labelNaslov.TabIndex = 1;
+            labelNaslov.Text = "Prijavljeni Kursevi";
+            labelNaslov.TextAlign = ContentAlignment.TopCenter;
             // 
             // PrijavljeniKurseviForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(820, 500);
+            ClientSize = new Size(804, 461);
+            Controls.Add(panel1);
             Controls.Add(btnDodajNaKurs);
             Controls.Add(gbInfo);
             Controls.Add(lvKursevi);
@@ -114,10 +158,11 @@
             MinimumSize = new Size(820, 500);
             Name = "PrijavljeniKurseviForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Prijavljeni kursevi";
             Load += PrijavljeniKurseviForm_Load;
             gbInfo.ResumeLayout(false);
             gbInfo.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -128,5 +173,7 @@
         private ListView lvKursevi;
         private Button btnZatvori;
         private Button btnDodajNaKurs;
+        private Panel panel1;
+        private Label labelNaslov;
     }
 }

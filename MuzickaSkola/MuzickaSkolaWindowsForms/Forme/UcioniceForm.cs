@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class UcioniceForm : Form
+    public partial class UcioniceForm : BaseForm
     {
         private string? adresaLokacije;
         public UcioniceForm()

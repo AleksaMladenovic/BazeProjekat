@@ -11,7 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class DodajPolozeniIspitForm : Form
+    public partial class DodajPolozeniIspitForm : BaseForm
     {
         private readonly int _idPolaznika;
         private List<int> _polozeniIds;
