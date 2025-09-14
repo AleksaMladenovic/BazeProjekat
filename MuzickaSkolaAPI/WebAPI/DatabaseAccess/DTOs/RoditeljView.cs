@@ -19,7 +19,7 @@ namespace DatabaseAccess.DTOs
         {
             Deca = new List<DetePolaznikView>();
         }
-        internal RoditeljView(Roditelj? r)
+        public RoditeljView(Roditelj? r)
         {
             if (r != null)
             {
@@ -32,5 +32,23 @@ namespace DatabaseAccess.DTOs
                 this.BrojDece = r.Deca?.Count ?? 0;
             }
         }
+    }
+    public class RoditeljCreateView
+    {
+        public string Jmbg { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string? Adresa { get; set; }
+        public string? Telefon { get; set; }
+        public string? Email { get; set; }
+    }
+    public class RoditeljUpdateView
+    {
+        public string Jmbg { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string Adresa { get; set; }
+        public string? Telefon { get; set; }
+        public string? Email { get; set; }
     }
 }

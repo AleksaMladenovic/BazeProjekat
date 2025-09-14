@@ -42,4 +42,38 @@ namespace DatabaseAccess.DTOs
             }
         }
     }
+    public class CasViewPomocni
+    {
+        public int Id { get; set; }
+        public DateTime Termin { get; set; }
+        public string? Tema { get; set; }
+
+        public NastavnikBasicView? DrziNastavnik { get; set; }
+        public UcionicaView? UcionicaOdrzavanja { get; set; }
+        public int BrojPrisutnihPolaznika { get; set; }
+
+        public CasViewPomocni() { }
+
+        internal CasViewPomocni(Cas? c)
+        {
+            if (c != null)
+            {
+                this.Id = c.Id;
+                this.Termin = c.Termin;
+                this.Tema = c.Tema;
+
+                if (c.DrziNastavnik != null)
+                {
+                    this.DrziNastavnik = new NastavnikBasicView(c.DrziNastavnik);
+                }
+
+                if (c.UcionicaOdrzavnja != null)
+                {
+                    this.UcionicaOdrzavanja = new UcionicaView(c.UcionicaOdrzavnja);
+                }
+
+                this.BrojPrisutnihPolaznika = c.PrisutniPolaznici?.Count ?? 0;
+            }
+        }
+    }
 }

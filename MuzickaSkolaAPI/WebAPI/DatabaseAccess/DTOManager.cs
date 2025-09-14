@@ -104,7 +104,12 @@
 //            {
 //                ISession s = DataLayer.GetSession();
 
-                
+//            }
+//            catch (Exception ex)
+//            {
+//                MessageBox.Show(ex.FormatExceptionMessage());
+//            }
+//        }
 
 //            }catch(Exception ex)
 //            {
@@ -444,6 +449,11 @@
 //                    return false;
 //                }
 
+//        public static bool DaLiPostojeUcioniceZaKurs(int kursId)
+//        {
+//            try
+//            {
+//                ISession s = DataLayer.GetSession();
 
 //                List<string> adreseLokacija = kurs.LokacijeOdrzavanja.Select(l => l.Adresa).ToList();
 
@@ -558,6 +568,33 @@
 //            return kursBasic;
 //        }
 
+//        public static string VratiTipKursa(Kurs kurs)
+//        {
+//            if (kurs is InstrumentKurs)
+//            {
+//                return "INSTRUMENT";
+//            }
+//            else if (kurs is GrupaInstrumenataKurs)
+//            {
+//                return "GRUPA_INSTRUMENATA";
+//            }
+//            else if (kurs is IndividualnoPevanjeKurs)
+//            {
+//                return "INDIVIDUALNO_PEVANJE";
+//            }
+//            else if (kurs is HorskoPevanjeKurs)
+//            {
+//                return "HORSKO_PEVANJE";
+//            }
+//            else if (kurs is MuzickaTeorijaKurs)
+//            {
+//                return "MUZICKA_TEORIJA";
+//            }
+//            else
+//            {
+//                return "NEPOZNAT_TIP";
+//            }
+//        }
 
 //        private static void PostaviSpecijalanPropertyKursuBasic(KursBasic kursBasic, Kurs kurs)
 //        {
@@ -578,6 +615,22 @@
 //                ((MuzickaTeorijaKurs)kurs).NazivPredmeta = kursBasic.NazivPredmeta;
 //        }
 
+//                var kurs = s.Get<Kurs>(kursId);
+//                if (kurs == null)
+//                {
+//                    MessageBox.Show($"Kurs sa id'{kursId}' ne postoji.", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+//                }
+//                var nastavnik = VratiNastavnika(kurs.VodiNastavnik.Id);
+//                kursBasic = new KursBasic()
+//                {
+//                    Id = kurs.Id,
+//                    Naziv = kurs.Naziv,
+//                    Nivo = kurs.Nivo,
+//                    ImeNastavnika = nastavnik.OsnovniPodaci.Ime + " " + nastavnik.OsnovniPodaci.Prezime,
+//                    NastavnikId = nastavnik.Id,
+//                    TipKursa = VratiTipKursa(kurs),
+//                };
+//                PostaviSpecijalanPropertyKursuBasic(kursBasic, kurs);
 
 //        public static void DodajKurs(KursBasic kursDto, string tipKursa)
 //        {
@@ -794,6 +847,16 @@
 //                nastava.DatumOd = nastavaDto.DatumOd;
 
 
+//                s.Save(nastava);
+//                s.Flush();
+//                s.Close();
+//                return true;
+//            }
+//            catch (Exception ex)
+//            {
+//                MessageBox.Show(ex.FormatExceptionMessage());
+//                return false;
+//            }
 
 //                s.Update(nastava);
 //                s.Flush();
@@ -917,6 +980,22 @@
 //                casZaMenjanje.PripadaNastavi = s.Get<Nastava>(cas.NastavaId);
 //                casZaMenjanje.UcionicaOdrzavnja = s.Get<Ucionica>(idUcionice);
 
+//        public static bool TerminObuhvataNastava(DateTime termin, int idNastave)
+//        {
+//            try
+//            {
+//                ISession s = DataLayer.GetSession();
+//                var nastava = s.Get<Nastava>(idNastave);
+//                bool poslePocetka = termin.Date >= nastava.DatumOd.Date;
+//                bool preKraja = !nastava.DatumDo.HasValue || termin.Date <= nastava.DatumDo.Value.Date;
+//                return poslePocetka && preKraja;
+//            }
+//            catch (Exception ex)
+//            {
+//                MessageBox.Show(ex.FormatExceptionMessage());
+//                return false;
+//            }
+//        }
 
 //                s.Update(casZaMenjanje);
 
@@ -936,6 +1015,18 @@
 //                ISession s = DataLayer.GetSession();
 //                var cas = s.Get<Cas>(casId);
 
+//        public static void IzmeniCas(CasBasic cas)
+//        {
+//            try
+//            {
+//                ISession s = DataLayer.GetSession();
+//                UcionicaId idUcionice = new UcionicaId() { Naziv = cas.Ucionica, PripadaLokaciji = s.Get<Lokacija>(cas.Lokacija) };
+//                var casZaMenjanje = s.Get<Cas>(cas.Id);
+//                casZaMenjanje.Tema = cas.Tema;
+//                casZaMenjanje.Termin = cas.Termin;
+//                casZaMenjanje.DrziNastavnik = VratiNastavnika(cas.NastavnikId);
+//                casZaMenjanje.PripadaNastavi = s.Get<Nastava>(cas.NastavaId);
+//                casZaMenjanje.UcionicaOdrzavnja = s.Get<Ucionica>(idUcionice);
 
 //                s.Delete(cas);
 //                s.Flush();
@@ -1013,6 +1104,18 @@
 //            return rezultat;
 //        }
 
+//                s.Delete(cas);
+//                s.Flush();
+//                s.Close();
+//                return true;
+//            }
+//            catch (Exception ex)
+//            {
+//                MessageBox.Show(ex.FormatExceptionMessage());
+//                return false;
+//            }
+//        }
+//        #endregion
 
 //        public static void DodajNastavnika(Osoba osoba, Nastavnik nastavnik)
 //        {
@@ -1022,9 +1125,31 @@
 //                s = DataLayer.GetSession();
 //                s.BeginTransaction();
 
+//                var honorarci = s.Query<Honorarac>().ToList();
+//                foreach (var h in honorarci)
+//                {
+//                    rezultat.Add(new NastavnikPregled()
+//                    {
+//                        Id = h.Id,
+//                        Jmbg = h.OsnovniPodaci.Jmbg,
+//                        Ime = h.OsnovniPodaci.Ime,
+//                        Prezime = h.OsnovniPodaci.Prezime,
+//                        Adresa = h.OsnovniPodaci.Adresa,
+//                        Telefon = h.OsnovniPodaci.Telefon,
+//                        Email = h.OsnovniPodaci.Email,
+//                        StrucnaSprema = h.OsnovniPodaci.StrucnaSprema,
+//                        DatumZaposlenja = h.OsnovniPodaci.DatumZaposlenja,
+//                        TipZaposlenja = "Honorarac",
+//                        BrojUgovora = h.BrojUgovora,
+//                        TrajanjeUgovora = h.TrajanjeUgovora,
+//                        BrojCasova = h.BrojCasova
+//                    });
+//                }
 
 //                s.Save(osoba);
 
+//            return rezultat;
+//        }
 
 //                nastavnik.OsnovniPodaci = osoba;
 //                nastavnik.Id = osoba.Id;
@@ -1056,6 +1181,7 @@
 //            }
 //        }
 
+//                s.Save(nastavnik);
 
 //        public static void ObrisiNastavnika(int idNastavnika)
 //        {
@@ -1064,6 +1190,7 @@
 //            {
 //                s = DataLayer.GetSession();
 
+//                s?.Transaction.Rollback();
 
 //                s.BeginTransaction();
 
@@ -1145,10 +1272,22 @@
 //                s = DataLayer.GetSession();
 //                s.BeginTransaction();
 
+//                s.Transaction.Commit();
+//            }
+//            catch (Exception ec)
+//            {
+//                s?.Transaction?.Rollback();
 
 //                Osoba osobaIzBaze = s.Get<Osoba>(nastavnikSaForme.Id);
 //                Nastavnik nastavnikIzBaze = (Nastavnik)s.Get<Honorarac>(nastavnikSaForme.Id) ?? s.Get<StalnoZaposlen>(nastavnikSaForme.Id);
 
+//        public static Nastavnik VratiNastavnika(int id)
+//        {
+//            ISession s = null;
+//            try
+//            {
+//                s = DataLayer.GetSession();
+//                Nastavnik n = (Nastavnik)s.Get<Honorarac>(id) ?? s.Get<StalnoZaposlen>(id);
 
 //                osobaIzBaze.Jmbg = nastavnikSaForme.OsnovniPodaci.Jmbg;
 //                osobaIzBaze.Ime = nastavnikSaForme.OsnovniPodaci.Ime;
@@ -1160,9 +1299,18 @@
 //                osobaIzBaze.DatumZaposlenja = nastavnikSaForme.OsnovniPodaci.DatumZaposlenja;
 //                osobaIzBaze.Mentor = nastavnikSaForme.OsnovniPodaci.Mentor;
 
+//        public static void IzmeniNastavnika(Nastavnik nastavnikSaForme)
+//        {
+//            ISession s = null;
+//            try
+//            {
+//                s = DataLayer.GetSession();
+//                s.BeginTransaction();
 
 //                bool tipSePromenio = nastavnikIzBaze.GetType() != nastavnikSaForme.GetType();
 
+//                Osoba osobaIzBaze = s.Get<Osoba>(nastavnikSaForme.Id);
+//                Nastavnik nastavnikIzBaze = (Nastavnik)s.Get<Honorarac>(nastavnikSaForme.Id) ?? s.Get<StalnoZaposlen>(nastavnikSaForme.Id);
 
 //                if (tipSePromenio)
 //                {
@@ -1315,15 +1463,45 @@
 //                s = DataLayer.GetSession();
 //                s.BeginTransaction();
 
+//        public static List<MentorPregled> VratiSveMoguceMentore()
+//        {
+//            List<MentorPregled> rezultat = new List<MentorPregled>();
+//            ISession s = null;
+//            try
+//            {
+//                s = DataLayer.GetSession();
 
 //                Osoba ucenik = s.Load<Osoba>(nastavnikId);
 
+//                foreach (var sz in mentori)
+//                {
+//                    rezultat.Add(new MentorPregled(sz.Id, $"{sz.OsnovniPodaci.Ime} {sz.OsnovniPodaci.Prezime}"));
+//                }
+//            }
+//            catch (Exception ec)
+//            {
+//                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+//                if (ec.InnerException != null)
+//                {
+//                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+//                }
+//                MessageBox.Show(errorMessage);
+//            }
+//            finally { if (s != null) s.Close(); }
 
 //                StalnoZaposlen mentor = s.Load<StalnoZaposlen>(mentorId);
 
+//        public static void DodeliMentora(int nastavnikId, int mentorId)
+//        {
+//            ISession s = null;
+//            try
+//            {
+//                s = DataLayer.GetSession();
+//                s.BeginTransaction();
 
 //                ucenik.Mentor = mentor;
 
+//                Osoba ucenik = s.Load<Osoba>(nastavnikId);
 
 //                s.Transaction.Commit();
 //            }
@@ -1452,6 +1630,7 @@
 //            }
 //        }
 
+//                Nastavnik n = (Nastavnik)s.Get<Honorarac>(nastavnikId) ?? s.Get<StalnoZaposlen>(nastavnikId);
 
 //        public static List<NastavnikPregled> VratiClanoveKomisije(int komisijaId)
 //        {
@@ -1537,6 +1716,27 @@
 //                s = DataLayer.GetSession();
 //                s.BeginTransaction();
 
+//                        if (detaljiNastavnika != null)
+//                        {
+//                            string tip = detaljiNastavnika is StalnoZaposlen ? "Stalno zaposlen" : "Honorarac";
+//                            // Kreiramo DTO sa svim podacima
+//                            rezultat.Add(new NastavnikPregled(clan.Id, clan.Jmbg, clan.Ime, clan.Prezime, clan.StrucnaSprema, tip)); // Detalje ostavljamo prazne za sada
+//                        }
+//                    }
+//                }
+//            }
+//            catch (Exception ec)
+//            {
+//                string errorMessage = "Došlo je do greške:" + Environment.NewLine + ec.Message;
+//                if (ec.InnerException != null)
+//                {
+//                    errorMessage += Environment.NewLine + "Unutrašnja greška:" + Environment.NewLine + ec.InnerException.Message;
+//                }
+//                MessageBox.Show(errorMessage);
+//            }
+//            finally { if (s != null) s.Close(); }
+//            return rezultat;
+//        }
 
 //                Komisija komisijaZaBrisanje = s.Get<Komisija>(komisijaId);
 
@@ -1581,6 +1781,7 @@
 //            {
 //                s = DataLayer.GetSession();
 
+//                    komisijaZaBrisanje.ClanoviKomisije.Clear();
 
 //                IEnumerable<OdrasliPolaznik> odrasli = s.Query<OdrasliPolaznik>().ToList();
 
@@ -1592,6 +1793,7 @@
 //                    });
 //                }
 
+//        #region Polaznik
 
 //                IEnumerable<DetePolaznik> deca = s.Query<DetePolaznik>().ToList();
 
@@ -1932,6 +2134,14 @@
 
 //                    if (!roditelj.FRoditelj) roditelj.FRoditelj = true;
 
+//                int idRoditelja = dp.PrijavioRoditelj?.Id ?? 0;
+//                string? punoImeRoditelja = null;
+//                if (idRoditelja > 0)
+//                {
+//                    var osobaRoditelj = s.Get<Osoba>(idRoditelja);
+//                    if (osobaRoditelj != null)
+//                        punoImeRoditelja = $"{osobaRoditelj.Ime} {osobaRoditelj.Prezime}";
+//                }
 
 //                    if (!string.IsNullOrWhiteSpace(ime)) roditelj.Ime = ime!;
 //                    if (!string.IsNullOrWhiteSpace(prezime)) roditelj.Prezime = prezime!;
@@ -2034,6 +2244,8 @@
 //            }
 //        }
 
+//                if (!string.IsNullOrWhiteSpace(roditeljJmbg))
+//                {
 
 //        public static void ObrisiRoditelja(int idOsobe)
 //        {
@@ -2044,6 +2256,15 @@
 //                if (o == null)
 //                    throw new ApplicationException($"Osoba sa ID={idOsobe} ne postoji.");
 
+//                    var osobaRoditelj = s.Get<Osoba>(roditeljId);
+//                    if (osobaRoditelj != null)
+//                    {
+//                        if (!string.IsNullOrWhiteSpace(roditeljIme))
+//                            osobaRoditelj.Ime = roditeljIme!;
+//                        if (!string.IsNullOrWhiteSpace(roditeljPrezime))
+//                            osobaRoditelj.Prezime = roditeljPrezime!;
+//                        if (!string.IsNullOrEmpty(roditeljJmbg))
+//                            osobaRoditelj.Jmbg = roditeljJmbg!;
 
 //                var deca = s.Query<DetePolaznik>()
 //                            .Where(d => d.PrijavioRoditelj != null && d.PrijavioRoditelj.Id == idOsobe)
@@ -2278,6 +2499,7 @@
 //            return polazniciZaEvidenciju;
 //        }
 
+//                s.Delete(o);
 
 //        public static List<ZavrsniIspitPregled> VratiPolozeneIspite(int idOsobe)
 //        {
