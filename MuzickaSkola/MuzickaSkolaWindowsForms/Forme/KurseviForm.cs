@@ -113,7 +113,12 @@ namespace MuzickaSkolaWindowsForms.Forme
         }
 
         private void cmdLokacijeOdrzavanja_Click(object sender, EventArgs e)
-        {
+        { 
+            if(listViewKursevi.SelectedItems.Count == 0)
+            {
+                MessageBox.Show($"Morate selektovati Kurs za lokacije!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var selektovaniKurs = (KursPregled)listViewKursevi.SelectedItems[0].Tag;
             var form = new KursLokacijeForm(selektovaniKurs.Id);
             form.ShowDialog();
