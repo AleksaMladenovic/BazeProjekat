@@ -11,11 +11,17 @@ using MuzickaSkolaWindowsForms.Forme;
 
 namespace MuzickaSkolaWindowsForms
 {
-    public partial class PocetnaStranica : Form
+    public partial class PocetnaStranica : BaseForm
     {
+        
+
+
+
         public PocetnaStranica()
         {
             InitializeComponent();
+
+  
         }
 
         private void cmdPolaznici_Click(object sender, EventArgs e)
@@ -37,5 +43,25 @@ namespace MuzickaSkolaWindowsForms
             kurseviForm.ShowDialog();
 
         }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmdPolaznici_MouseEnter(object sender, EventArgs e)
+        {
+            
+        }
+        private void cmdPolaznici_MouseLeave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void cmdPolaznici_Leave(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

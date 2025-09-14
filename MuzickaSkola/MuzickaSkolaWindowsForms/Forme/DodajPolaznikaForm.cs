@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace MuzickaSkolaWindowsForms.Forme
 {
 
-    public partial class DodajPolaznikaForm : Form
+    public partial class DodajPolaznikaForm : BaseForm
     {
        
         public DodajPolaznikaForm()

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class RoditeljiForm : Form
+    public partial class RoditeljiForm : BaseForm
     {
         public RoditeljiForm()
         {
@@ -75,5 +75,21 @@ namespace MuzickaSkolaWindowsForms.Forme
                 UcitajRoditelje();
             }
         }
+        #region dizajn
+
+        private void lvRoditelji_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void lvRoditelji_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 }

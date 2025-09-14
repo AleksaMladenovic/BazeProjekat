@@ -43,85 +43,95 @@
             // 
             dtpTermin.CustomFormat = "dd.MM.yyyy HH:mm";
             dtpTermin.Format = DateTimePickerFormat.Custom;
-            dtpTermin.Location = new Point(78, 11);
+            dtpTermin.Location = new Point(89, 11);
             dtpTermin.Name = "dtpTermin";
-            dtpTermin.Size = new Size(170, 23);
+            dtpTermin.Size = new Size(194, 25);
             dtpTermin.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(25, 17);
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(29, 17);
             label1.Name = "label1";
-            label1.Size = new Size(47, 15);
+            label1.Size = new Size(52, 17);
             label1.TabIndex = 1;
             label1.Text = "Termin:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(33, 43);
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(38, 43);
             label2.Name = "label2";
-            label2.Size = new Size(39, 15);
+            label2.Size = new Size(43, 17);
             label2.TabIndex = 2;
             label2.Text = "Tema:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(10, 73);
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(11, 73);
             label3.Name = "label3";
-            label3.Size = new Size(62, 15);
+            label3.Size = new Size(72, 17);
             label3.TabIndex = 3;
             label3.Text = "Nastavnik:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(16, 102);
+            label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label4.ForeColor = Color.MidnightBlue;
+            label4.Location = new Point(18, 102);
             label4.Name = "label4";
-            label4.Size = new Size(56, 15);
+            label4.Size = new Size(61, 17);
             label4.TabIndex = 4;
             label4.Text = "Učionica:";
             // 
             // txtTema
             // 
-            txtTema.Location = new Point(78, 40);
+            txtTema.Location = new Point(89, 40);
             txtTema.Name = "txtTema";
-            txtTema.Size = new Size(170, 23);
+            txtTema.Size = new Size(194, 25);
             txtTema.TabIndex = 5;
             // 
             // cmbNastavnici
             // 
             cmbNastavnici.FormattingEnabled = true;
-            cmbNastavnici.Location = new Point(78, 70);
+            cmbNastavnici.Location = new Point(89, 70);
             cmbNastavnici.Name = "cmbNastavnici";
-            cmbNastavnici.Size = new Size(170, 23);
+            cmbNastavnici.Size = new Size(194, 25);
             cmbNastavnici.TabIndex = 6;
             // 
             // cmbUcionice
             // 
             cmbUcionice.FormattingEnabled = true;
-            cmbUcionice.Location = new Point(78, 99);
+            cmbUcionice.Location = new Point(89, 99);
             cmbUcionice.Name = "cmbUcionice";
-            cmbUcionice.Size = new Size(170, 23);
+            cmbUcionice.Size = new Size(194, 25);
             cmbUcionice.TabIndex = 7;
             // 
             // cmdSacuvaj
             // 
-            cmdSacuvaj.Location = new Point(16, 128);
+            cmdSacuvaj.BackColor = Color.MidnightBlue;
+            cmdSacuvaj.ForeColor = Color.White;
+            cmdSacuvaj.Location = new Point(18, 128);
             cmdSacuvaj.Name = "cmdSacuvaj";
-            cmdSacuvaj.Size = new Size(232, 23);
+            cmdSacuvaj.Size = new Size(265, 31);
             cmdSacuvaj.TabIndex = 8;
             cmdSacuvaj.Text = "Sačuvaj";
-            cmdSacuvaj.UseVisualStyleBackColor = true;
+            cmdSacuvaj.UseVisualStyleBackColor = false;
             cmdSacuvaj.Click += cmdSacuvaj_Click;
             // 
             // DodajIzmeniCasForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(257, 162);
+            ClientSize = new Size(294, 162);
             Controls.Add(cmdSacuvaj);
             Controls.Add(cmbUcionice);
             Controls.Add(cmbNastavnici);
@@ -131,8 +141,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(dtpTermin);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.White;
             Name = "DodajIzmeniCasForm";
-            Text = "DodajIzmeniCasForm";
             Load += DodajIzmeniCasForm_Load;
             ResumeLayout(false);
             PerformLayout();

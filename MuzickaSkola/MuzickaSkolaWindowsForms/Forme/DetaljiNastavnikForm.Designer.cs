@@ -39,9 +39,11 @@
             // 
             lblAdresa.AccessibleName = "";
             lblAdresa.AutoSize = true;
+            lblAdresa.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblAdresa.ForeColor = Color.MidnightBlue;
             lblAdresa.Location = new Point(12, 9);
             lblAdresa.Name = "lblAdresa";
-            lblAdresa.Size = new Size(38, 15);
+            lblAdresa.Size = new Size(41, 17);
             lblAdresa.TabIndex = 0;
             lblAdresa.Text = "label1";
             // 
@@ -49,9 +51,11 @@
             // 
             lblEmail.AccessibleName = "";
             lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblEmail.ForeColor = Color.MidnightBlue;
             lblEmail.Location = new Point(12, 36);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(38, 15);
+            lblEmail.Size = new Size(43, 17);
             lblEmail.TabIndex = 1;
             lblEmail.Text = "label2";
             // 
@@ -59,9 +63,11 @@
             // 
             lblTelefon.AccessibleName = "";
             lblTelefon.AutoSize = true;
+            lblTelefon.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblTelefon.ForeColor = Color.MidnightBlue;
             lblTelefon.Location = new Point(12, 63);
             lblTelefon.Name = "lblTelefon";
-            lblTelefon.Size = new Size(38, 15);
+            lblTelefon.Size = new Size(43, 17);
             lblTelefon.TabIndex = 2;
             lblTelefon.Text = "label3";
             // 
@@ -69,9 +75,11 @@
             // 
             lblZaposlenje.AccessibleName = "";
             lblZaposlenje.AutoSize = true;
+            lblZaposlenje.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblZaposlenje.ForeColor = Color.MidnightBlue;
             lblZaposlenje.Location = new Point(12, 92);
             lblZaposlenje.Name = "lblZaposlenje";
-            lblZaposlenje.Size = new Size(38, 15);
+            lblZaposlenje.Size = new Size(43, 17);
             lblZaposlenje.TabIndex = 3;
             lblZaposlenje.Text = "label4";
             // 
@@ -79,15 +87,17 @@
             // 
             lblDetalji.AccessibleName = "";
             lblDetalji.AutoSize = true;
+            lblDetalji.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblDetalji.ForeColor = Color.MidnightBlue;
             lblDetalji.Location = new Point(12, 121);
             lblDetalji.Name = "lblDetalji";
-            lblDetalji.Size = new Size(38, 15);
+            lblDetalji.Size = new Size(43, 17);
             lblDetalji.TabIndex = 4;
             lblDetalji.Text = "label5";
             // 
             // DetaljiNastavnikForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(287, 156);
             Controls.Add(lblDetalji);
@@ -96,7 +106,6 @@
             Controls.Add(lblEmail);
             Controls.Add(lblAdresa);
             Name = "DetaljiNastavnikForm";
-            Text = "DetaljiNastavnikForm";
             Load += DetaljiNastavnikaForm_Load;
             ResumeLayout(false);
             PerformLayout();

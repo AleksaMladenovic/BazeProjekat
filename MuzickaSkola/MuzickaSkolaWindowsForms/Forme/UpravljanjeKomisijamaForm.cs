@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms
 {
-    public partial class UpravljanjeKomisijamaForm : Form
+    public partial class UpravljanjeKomisijamaForm : BaseForm
     {
         public UpravljanjeKomisijamaForm()
         {
@@ -98,11 +98,16 @@ namespace MuzickaSkolaWindowsForms
 
         private void btnDodajKomisiju_Click(object sender, EventArgs e)
         {
-                DTOManager.DodajNovuKomisiju();
-            
-                this.PopuniListe();
+            DTOManager.DodajNovuKomisiju();
+
+            this.PopuniListe();
 
             MessageBox.Show("Nova komisija je uspešno kreirana i dodata u listu dostupnih.");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

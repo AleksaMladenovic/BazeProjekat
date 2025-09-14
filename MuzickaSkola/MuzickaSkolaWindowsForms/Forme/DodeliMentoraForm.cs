@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms
 {
-    public partial class DodeliMentoraForm : Form
+    public partial class DodeliMentoraForm : BaseForm
     {
         public DodeliMentoraForm()
         {
@@ -62,5 +62,22 @@ namespace MuzickaSkolaWindowsForms
             MessageBox.Show("Mentor je uspešno dodeljen!");
             this.Close();
         }
+        #region dizajn
+        private void listViewMentori_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+       
+
+        private void listViewMentori_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+
+        #endregion
     }
 }

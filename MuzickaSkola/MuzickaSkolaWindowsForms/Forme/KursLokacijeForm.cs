@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class KursLokacijeForm : Form
+    public partial class KursLokacijeForm : BaseForm
     {
         private int kursId;
         public KursLokacijeForm()
@@ -126,5 +126,40 @@ namespace MuzickaSkolaWindowsForms.Forme
                 MessageBox.Show($"Došlo je do greške!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #region dizajn
+
+        private void listViewNedodeljeneLokacije_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewNedodeljeneLokacije_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
+        {
+        }
+
+        private void listViewDodeljeneLokacije_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewDodeljeneLokacije_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+       
+
+        private void listViewNedodeljeneLokacije_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 }

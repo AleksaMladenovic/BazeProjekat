@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class LokacijeForm : Form
+    public partial class LokacijeForm : BaseForm
     {
         public LokacijeForm()
         {
@@ -102,6 +102,27 @@ namespace MuzickaSkolaWindowsForms.Forme
             formaUcionice.ShowDialog();
             this.PopuniPodacima();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        #region dizajn
+        private void listViewLokacije_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewLokacije_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 
 

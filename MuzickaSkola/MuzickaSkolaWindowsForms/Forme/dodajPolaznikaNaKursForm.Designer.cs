@@ -41,19 +41,25 @@
             // 
             cmbKursevi.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbKursevi.FormattingEnabled = true;
-            cmbKursevi.Location = new Point(18, 19);
+            cmbKursevi.Location = new Point(12, 19);
             cmbKursevi.Name = "cmbKursevi";
-            cmbKursevi.Size = new Size(219, 23);
+            cmbKursevi.Size = new Size(219, 25);
             cmbKursevi.TabIndex = 0;
             // 
             // btnDodaj
             // 
-            btnDodaj.Location = new Point(254, 19);
+            btnDodaj.BackColor = Color.MidnightBlue;
+            btnDodaj.FlatAppearance.BorderSize = 0;
+            btnDodaj.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnDodaj.FlatStyle = FlatStyle.Flat;
+            btnDodaj.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnDodaj.ForeColor = Color.White;
+            btnDodaj.Location = new Point(262, 14);
             btnDodaj.Name = "btnDodaj";
-            btnDodaj.Size = new Size(88, 22);
+            btnDodaj.Size = new Size(114, 32);
             btnDodaj.TabIndex = 1;
             btnDodaj.Text = "Dodaj kurs";
-            btnDodaj.UseVisualStyleBackColor = true;
+            btnDodaj.UseVisualStyleBackColor = false;
             btnDodaj.Click += btnDodaj_Click;
             // 
             // lwPrijavljeniKursevi
@@ -63,10 +69,13 @@
             lwPrijavljeniKursevi.GridLines = true;
             lwPrijavljeniKursevi.Location = new Point(18, 66);
             lwPrijavljeniKursevi.Name = "lwPrijavljeniKursevi";
-            lwPrijavljeniKursevi.Size = new Size(324, 188);
+            lwPrijavljeniKursevi.OwnerDraw = true;
+            lwPrijavljeniKursevi.Size = new Size(358, 188);
             lwPrijavljeniKursevi.TabIndex = 2;
             lwPrijavljeniKursevi.UseCompatibleStateImageBehavior = false;
             lwPrijavljeniKursevi.View = View.Details;
+            lwPrijavljeniKursevi.DrawColumnHeader += lwPrijavljeniKursevi_DrawColumnHeader;
+            lwPrijavljeniKursevi.DrawItem += lwPrijavljeniKursevi_DrawItem;
             // 
             // colId
             // 
@@ -76,34 +85,41 @@
             // colNaziv
             // 
             colNaziv.Text = "Naziv";
+            colNaziv.TextAlign = HorizontalAlignment.Center;
             colNaziv.Width = 200;
             // 
             // colNivo
             // 
             colNivo.Text = "Nivo";
+            colNivo.TextAlign = HorizontalAlignment.Center;
             colNivo.Width = 100;
             // 
             // btnZatvori
             // 
-            btnZatvori.Location = new Point(243, 260);
+            btnZatvori.BackColor = Color.MidnightBlue;
+            btnZatvori.FlatAppearance.BorderSize = 0;
+            btnZatvori.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnZatvori.FlatStyle = FlatStyle.Flat;
+            btnZatvori.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnZatvori.ForeColor = Color.White;
+            btnZatvori.Location = new Point(262, 260);
             btnZatvori.Name = "btnZatvori";
             btnZatvori.Size = new Size(114, 32);
             btnZatvori.TabIndex = 3;
             btnZatvori.Text = "Zatvori";
-            btnZatvori.UseVisualStyleBackColor = true;
+            btnZatvori.UseVisualStyleBackColor = false;
             btnZatvori.Click += btnZatvori_Click;
             // 
             // dodajPolaznikaNaKursForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(369, 295);
+            ClientSize = new Size(388, 295);
             Controls.Add(btnZatvori);
             Controls.Add(lwPrijavljeniKursevi);
             Controls.Add(btnDodaj);
             Controls.Add(cmbKursevi);
             Name = "dodajPolaznikaNaKursForm";
-            Text = "Dodaj polaznika na kurs";
             Load += dodajPolaznikaNaKursForm_Load;
             ResumeLayout(false);
         }
