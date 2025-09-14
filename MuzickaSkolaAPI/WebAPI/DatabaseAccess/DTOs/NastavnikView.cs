@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccess.DTOs
 {
-    public abstract class NastavnikView
+    public class NastavnikView
     {
         public OsobaView OsnovniPodaci { get; set; }
         public DateTime? DatumZaposlenja { get; set; }
@@ -41,18 +41,18 @@ namespace DatabaseAccess.DTOs
             {
                 return null;
             }
-            ISession?s = null;
+            ISession? s = null;
 
             try
             {
                 s = DataLayer.GetSession();
                 StalnoZaposlen sz = s.Get<StalnoZaposlen>(nastavnikEntitet.Id);
-                if (sz!=null)
+                if (sz != null)
                 {
                     return new StalnoZaposlenView(sz);
                 }
                 Honorarac h = s.Get<Honorarac>(nastavnikEntitet.Id);
-                if (h!=null)
+                if (h != null)
                 {
                     return new HonoraracView(h);
                 }
@@ -61,44 +61,58 @@ namespace DatabaseAccess.DTOs
                     throw new ArgumentException("Nepoznat tip nastavnika.", nameof(nastavnikEntitet));
                 }
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
-            finally{
+            finally
+            {
                 s.Close();
             }
         }
 
 
-        public static NastavnikView VratiNastavnika(int nastavnikId)
+
+    }
+    public class NastavnikCreateView
+    {
+        public string Jmbg { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string? Adresa { get; set; }
+        public string? Telefon { get; set; }
+        public string? Email { get; set; }
+        public DateTime? DatumZaposlenja { get; set; }
+        public string? StrucnaSprema { get; set; }
+        public int? IdMentora { get; set; }
+
+        public string TipZaposlenja { get; set; } // Očekivane vrednosti: "Honorarac" ili "StalnoZaposlen"
+
+        public string? BrojUgovora { get; set; }
+        public string? TrajanjeUgovora { get; set; }
+        public int? BrojCasova { get; set; }
+
+        public string? RadnoVreme { get; set; }
+    }
+    public class NastavnikBasicView
+    {
+        public int Id { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+
+        public NastavnikBasicView() { }
+
+        internal NastavnikBasicView(Nastavnik n)
         {
-            NastavnikView nastavnikView = null;
-            ISession s = null;
-            try
+            if (n != null)
             {
-                s = DataLayer.GetSession();
-                Nastavnik nastavnikEntitet = s.Get<Nastavnik>(nastavnikId);
-
-                if (nastavnikEntitet != null)
+                Id = n.Id;
+                if (n.OsnovniPodaci != null)
                 {
-                    if (nastavnikEntitet is StalnoZaposlen sz)
-                    {
-                        NHibernateUtil.Initialize(sz.JeMentor);
-
-                        nastavnikView = new StalnoZaposlenView(sz);
-                    }
-                    else if (nastavnikEntitet is Honorarac h)
-                    {
-                        nastavnikView = new HonoraracView(h);
-                    }
+                    Ime = n.OsnovniPodaci.Ime;
+                    Prezime = n.OsnovniPodaci.Prezime;
                 }
             }
-            catch (Exception ex) { throw; }
-            finally { s?.Close(); }
-
-            return nastavnikView;
         }
     }
-
-
 }

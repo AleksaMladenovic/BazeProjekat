@@ -34,5 +34,18 @@ namespace DatabaseAccess.DTOs
                 else this.TipPolaznika = "Nedefinisan";
             }
         }
+        public class PolaznikUpdateView
+        {
+            public int IdOsobe { get; set; }
+            public string Ime { get; set; }
+            public string Prezime { get; set; }
+            public string Jmbg { get; set; }
+            public string? Adresa { get; set; }
+            public string? Telefon { get; set; }
+            public string? Email { get; set; }
+            public string? Zanimanje { get; set; }
+            public string? Jbd { get; set; }
+            public int? IdRoditelja { get; set; }
+        }
     }
 }

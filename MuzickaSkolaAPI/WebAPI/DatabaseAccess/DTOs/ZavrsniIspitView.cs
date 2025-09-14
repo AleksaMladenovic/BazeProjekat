@@ -53,5 +53,15 @@ namespace DatabaseAccess.DTOs
                 }
             }
         }
+
+    }
+    public class ZavrsniIspitCreateView
+    {
+        public int IdKursa { get; set; }
+        public int IdKomisije { get; set; }
+
+        public DateTime Datum { get; set; }
+        public int Ocena { get; set; }
+        public bool Sertifikat { get; set; }
     }
 }
