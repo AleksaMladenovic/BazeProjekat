@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class dodajPolaznikaNaKursForm : Form
+    public partial class dodajPolaznikaNaKursForm : BaseForm
     {
         private int _idPolaznika;
         private List<KursPregled> _sviKursevi;
@@ -62,17 +62,17 @@ namespace MuzickaSkolaWindowsForms.Forme
 
             var odabraniKurs = (KursPregled)cmbKursevi.SelectedItem;
 
-            
+
             if (_prijavljeniKursevi.Any(k => k.Id == odabraniKurs.Id))
             {
                 MessageBox.Show("Polaznik je već prijavljen na ovaj kurs.");
                 return;
             }
 
-         
+
             DTOManager.DodajPolaznikaNaKurs(_idPolaznika, odabraniKurs.Id);
 
-           
+
             _prijavljeniKursevi = DTOManager.VratiPrijavljeneKurseve(_idPolaznika);
             PopuniPrijavljeneKurseve();
 
@@ -83,6 +83,21 @@ namespace MuzickaSkolaWindowsForms.Forme
         {
             this.Close();
         }
+        #region dizajn
+        private void lwPrijavljeniKursevi_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void lwPrijavljeniKursevi_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 }
 

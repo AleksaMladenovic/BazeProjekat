@@ -87,8 +87,9 @@
             splitContainer1.Panel2.Controls.Add(cmdDodajCas);
             splitContainer1.Panel2.Controls.Add(listViewCasovi);
             splitContainer1.Panel2.Controls.Add(lblInfoNastava);
-            splitContainer1.Size = new Size(940, 538);
-            splitContainer1.SplitterDistance = 389;
+            splitContainer1.Size = new Size(921, 538);
+            splitContainer1.SplitterDistance = 381;
+            splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 0;
             // 
             // groupBox1
@@ -99,48 +100,63 @@
             groupBox1.Controls.Add(listViewNastava);
             groupBox1.Location = new Point(3, 27);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(383, 499);
+            groupBox1.Size = new Size(438, 499);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Nastavni blokovi";
             // 
             // cmdObrisiNastavu
             // 
-            cmdObrisiNastavu.Location = new Point(247, 470);
+            cmdObrisiNastavu.BackColor = Color.MidnightBlue;
+            cmdObrisiNastavu.FlatAppearance.BorderSize = 0;
+            cmdObrisiNastavu.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdObrisiNastavu.FlatStyle = FlatStyle.Flat;
+            cmdObrisiNastavu.ForeColor = Color.White;
+            cmdObrisiNastavu.Location = new Point(282, 470);
             cmdObrisiNastavu.Name = "cmdObrisiNastavu";
-            cmdObrisiNastavu.Size = new Size(75, 23);
+            cmdObrisiNastavu.Size = new Size(86, 30);
             cmdObrisiNastavu.TabIndex = 3;
             cmdObrisiNastavu.Text = "Obriši";
-            cmdObrisiNastavu.UseVisualStyleBackColor = true;
+            cmdObrisiNastavu.UseVisualStyleBackColor = false;
             cmdObrisiNastavu.Click += cmdObrisiNastavu_Click;
             // 
             // cmdIzmeniNastavu
             // 
-            cmdIzmeniNastavu.Location = new Point(151, 470);
+            cmdIzmeniNastavu.BackColor = Color.MidnightBlue;
+            cmdIzmeniNastavu.FlatAppearance.BorderSize = 0;
+            cmdIzmeniNastavu.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdIzmeniNastavu.FlatStyle = FlatStyle.Flat;
+            cmdIzmeniNastavu.ForeColor = Color.White;
+            cmdIzmeniNastavu.Location = new Point(173, 470);
             cmdIzmeniNastavu.Name = "cmdIzmeniNastavu";
-            cmdIzmeniNastavu.Size = new Size(75, 23);
+            cmdIzmeniNastavu.Size = new Size(86, 30);
             cmdIzmeniNastavu.TabIndex = 2;
             cmdIzmeniNastavu.Text = "Izmeni";
-            cmdIzmeniNastavu.UseVisualStyleBackColor = true;
+            cmdIzmeniNastavu.UseVisualStyleBackColor = false;
             cmdIzmeniNastavu.Click += cmdIzmeniNastavu_Click;
             // 
             // cmdDodajNastavu
             // 
-            cmdDodajNastavu.Location = new Point(57, 470);
+            cmdDodajNastavu.BackColor = Color.MidnightBlue;
+            cmdDodajNastavu.FlatAppearance.BorderSize = 0;
+            cmdDodajNastavu.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdDodajNastavu.FlatStyle = FlatStyle.Flat;
+            cmdDodajNastavu.ForeColor = Color.White;
+            cmdDodajNastavu.Location = new Point(65, 470);
             cmdDodajNastavu.Name = "cmdDodajNastavu";
-            cmdDodajNastavu.Size = new Size(75, 23);
+            cmdDodajNastavu.Size = new Size(86, 30);
             cmdDodajNastavu.TabIndex = 1;
             cmdDodajNastavu.Text = "Dodaj";
-            cmdDodajNastavu.UseVisualStyleBackColor = true;
+            cmdDodajNastavu.UseVisualStyleBackColor = false;
             cmdDodajNastavu.Click += cmdDodajNastavu_Click;
             // 
             // listViewNastava
             // 
             listViewNastava.Columns.AddRange(new ColumnHeader[] { chId, chDatumOd, chDatumDo, Tip });
             listViewNastava.FullRowSelect = true;
-            listViewNastava.Location = new Point(9, 0);
+            listViewNastava.Location = new Point(10, 0);
             listViewNastava.Name = "listViewNastava";
-            listViewNastava.Size = new Size(368, 464);
+            listViewNastava.Size = new Size(420, 464);
             listViewNastava.TabIndex = 0;
             listViewNastava.UseCompatibleStateImageBehavior = false;
             listViewNastava.View = View.Details;
@@ -168,49 +184,68 @@
             // lblInfoKursa
             // 
             lblInfoKursa.AutoSize = true;
-            lblInfoKursa.Location = new Point(12, 9);
+            lblInfoKursa.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblInfoKursa.ForeColor = Color.MidnightBlue;
+            lblInfoKursa.Location = new Point(14, 9);
             lblInfoKursa.Name = "lblInfoKursa";
-            lblInfoKursa.Size = new Size(59, 15);
+            lblInfoKursa.Size = new Size(69, 17);
             lblInfoKursa.TabIndex = 0;
             lblInfoKursa.Text = "Info kursa";
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
             label1.Location = new Point(3, 258);
             label1.Name = "label1";
-            label1.Size = new Size(193, 15);
+            label1.Size = new Size(222, 17);
             label1.TabIndex = 11;
             label1.Text = "Prisutni polaznici za selektovani čas";
             // 
             // cmdUkloniPrisustvo
             // 
-            cmdUkloniPrisustvo.Location = new Point(343, 497);
+            cmdUkloniPrisustvo.BackColor = Color.MidnightBlue;
+            cmdUkloniPrisustvo.FlatAppearance.BorderSize = 0;
+            cmdUkloniPrisustvo.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdUkloniPrisustvo.FlatStyle = FlatStyle.Flat;
+            cmdUkloniPrisustvo.ForeColor = Color.White;
+            cmdUkloniPrisustvo.Location = new Point(344, 497);
             cmdUkloniPrisustvo.Name = "cmdUkloniPrisustvo";
-            cmdUkloniPrisustvo.Size = new Size(112, 23);
+            cmdUkloniPrisustvo.Size = new Size(128, 30);
             cmdUkloniPrisustvo.TabIndex = 10;
             cmdUkloniPrisustvo.Text = "Ukloni prisustvo";
-            cmdUkloniPrisustvo.UseVisualStyleBackColor = true;
+            cmdUkloniPrisustvo.UseVisualStyleBackColor = false;
             cmdUkloniPrisustvo.Click += cmdUkloniPrisustvo_Click;
             // 
             // cmdIzmeniOcenu
             // 
-            cmdIzmeniOcenu.Location = new Point(226, 497);
+            cmdIzmeniOcenu.BackColor = Color.MidnightBlue;
+            cmdIzmeniOcenu.FlatAppearance.BorderSize = 0;
+            cmdIzmeniOcenu.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdIzmeniOcenu.FlatStyle = FlatStyle.Flat;
+            cmdIzmeniOcenu.ForeColor = Color.White;
+            cmdIzmeniOcenu.Location = new Point(221, 497);
             cmdIzmeniOcenu.Name = "cmdIzmeniOcenu";
-            cmdIzmeniOcenu.Size = new Size(102, 23);
+            cmdIzmeniOcenu.Size = new Size(117, 30);
             cmdIzmeniOcenu.TabIndex = 9;
             cmdIzmeniOcenu.Text = "Izmeni ocenu";
-            cmdIzmeniOcenu.UseVisualStyleBackColor = true;
+            cmdIzmeniOcenu.UseVisualStyleBackColor = false;
             cmdIzmeniOcenu.Click += cmdIzmeniOcenu_Click;
             // 
             // cmdDodajPrisustvo
             // 
-            cmdDodajPrisustvo.Location = new Point(105, 497);
+            cmdDodajPrisustvo.BackColor = Color.MidnightBlue;
+            cmdDodajPrisustvo.FlatAppearance.BorderSize = 0;
+            cmdDodajPrisustvo.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdDodajPrisustvo.FlatStyle = FlatStyle.Flat;
+            cmdDodajPrisustvo.ForeColor = Color.White;
+            cmdDodajPrisustvo.Location = new Point(96, 497);
             cmdDodajPrisustvo.Name = "cmdDodajPrisustvo";
-            cmdDodajPrisustvo.Size = new Size(104, 23);
+            cmdDodajPrisustvo.Size = new Size(119, 30);
             cmdDodajPrisustvo.TabIndex = 8;
             cmdDodajPrisustvo.Text = "Dodaj prisustvo";
-            cmdDodajPrisustvo.UseVisualStyleBackColor = true;
+            cmdDodajPrisustvo.UseVisualStyleBackColor = false;
             cmdDodajPrisustvo.Click += cmdDodajPrisustvo_Click;
             // 
             // listViewPrisustvo
@@ -219,7 +254,7 @@
             listViewPrisustvo.FullRowSelect = true;
             listViewPrisustvo.Location = new Point(3, 276);
             listViewPrisustvo.Name = "listViewPrisustvo";
-            listViewPrisustvo.Size = new Size(535, 215);
+            listViewPrisustvo.Size = new Size(611, 215);
             listViewPrisustvo.TabIndex = 7;
             listViewPrisustvo.UseCompatibleStateImageBehavior = false;
             listViewPrisustvo.View = View.Details;
@@ -241,32 +276,47 @@
             // 
             // cmdObrisiCas
             // 
-            cmdObrisiCas.Location = new Point(343, 222);
+            cmdObrisiCas.BackColor = Color.MidnightBlue;
+            cmdObrisiCas.FlatAppearance.BorderSize = 0;
+            cmdObrisiCas.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdObrisiCas.FlatStyle = FlatStyle.Flat;
+            cmdObrisiCas.ForeColor = Color.White;
+            cmdObrisiCas.Location = new Point(344, 222);
             cmdObrisiCas.Name = "cmdObrisiCas";
-            cmdObrisiCas.Size = new Size(75, 23);
+            cmdObrisiCas.Size = new Size(86, 30);
             cmdObrisiCas.TabIndex = 6;
             cmdObrisiCas.Text = "Obriši";
-            cmdObrisiCas.UseVisualStyleBackColor = true;
+            cmdObrisiCas.UseVisualStyleBackColor = false;
             cmdObrisiCas.Click += cmdObrisiCas_Click;
             // 
             // cmdIzmeniCas
             // 
-            cmdIzmeniCas.Location = new Point(242, 222);
+            cmdIzmeniCas.BackColor = Color.MidnightBlue;
+            cmdIzmeniCas.FlatAppearance.BorderSize = 0;
+            cmdIzmeniCas.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdIzmeniCas.FlatStyle = FlatStyle.Flat;
+            cmdIzmeniCas.ForeColor = Color.White;
+            cmdIzmeniCas.Location = new Point(239, 222);
             cmdIzmeniCas.Name = "cmdIzmeniCas";
-            cmdIzmeniCas.Size = new Size(75, 23);
+            cmdIzmeniCas.Size = new Size(86, 30);
             cmdIzmeniCas.TabIndex = 5;
             cmdIzmeniCas.Text = "Izmeni";
-            cmdIzmeniCas.UseVisualStyleBackColor = true;
+            cmdIzmeniCas.UseVisualStyleBackColor = false;
             cmdIzmeniCas.Click += cmdIzmeniCas_Click;
             // 
             // cmdDodajCas
             // 
-            cmdDodajCas.Location = new Point(134, 222);
+            cmdDodajCas.BackColor = Color.MidnightBlue;
+            cmdDodajCas.FlatAppearance.BorderSize = 0;
+            cmdDodajCas.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdDodajCas.FlatStyle = FlatStyle.Flat;
+            cmdDodajCas.ForeColor = Color.White;
+            cmdDodajCas.Location = new Point(129, 222);
             cmdDodajCas.Name = "cmdDodajCas";
-            cmdDodajCas.Size = new Size(75, 23);
+            cmdDodajCas.Size = new Size(86, 30);
             cmdDodajCas.TabIndex = 4;
             cmdDodajCas.Text = "Dodaj";
-            cmdDodajCas.UseVisualStyleBackColor = true;
+            cmdDodajCas.UseVisualStyleBackColor = false;
             cmdDodajCas.Click += cmdDodajCas_Click;
             // 
             // listViewCasovi
@@ -275,7 +325,7 @@
             listViewCasovi.FullRowSelect = true;
             listViewCasovi.Location = new Point(3, 27);
             listViewCasovi.Name = "listViewCasovi";
-            listViewCasovi.Size = new Size(535, 189);
+            listViewCasovi.Size = new Size(611, 189);
             listViewCasovi.TabIndex = 1;
             listViewCasovi.UseCompatibleStateImageBehavior = false;
             listViewCasovi.View = View.Details;
@@ -308,20 +358,23 @@
             // lblInfoNastava
             // 
             lblInfoNastava.AutoSize = true;
+            lblInfoNastava.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblInfoNastava.ForeColor = Color.MidnightBlue;
             lblInfoNastava.Location = new Point(3, 9);
             lblInfoNastava.Name = "lblInfoNastava";
-            lblInfoNastava.Size = new Size(73, 15);
+            lblInfoNastava.Size = new Size(85, 17);
             lblInfoNastava.TabIndex = 0;
             lblInfoNastava.Text = "Info Nastava";
             // 
             // NastavaForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(940, 538);
+            ClientSize = new Size(921, 538);
             Controls.Add(splitContainer1);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.MidnightBlue;
             Name = "NastavaForm";
-            Text = "NastavaForm";
             Load += NastavaForm_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

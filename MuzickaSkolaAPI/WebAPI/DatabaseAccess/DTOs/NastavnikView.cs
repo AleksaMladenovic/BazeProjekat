@@ -1,4 +1,4 @@
-﻿using MuzickaSkolaWindowsForms.Entiteti;
+using MuzickaSkolaWindowsForms.Entiteti;
 using ProdavnicaLibrary;
 using System;
 using System.Collections.Generic;
@@ -112,7 +112,42 @@ namespace DatabaseAccess.DTOs
                     Ime = n.OsnovniPodaci.Ime;
                     Prezime = n.OsnovniPodaci.Prezime;
                 }
+                Honorarac h = s.Get<Honorarac>(nastavnikId);
+                if (h != null)
+                {
+                    return new HonoraracView(h);
+                }
+                else
+                {
+                    throw new ArgumentException("Nepoznat tip nastavnika.", nameof(nastavnikId));
+                }
             }
         }
     }
+    public static NastavnikView VratiNastavnika(int nastavnikId)
+        {
+            NastavnikView nastavnikView = null;
+            ISession s = null;
+            try
+            {
+                s = DataLayer.GetSession();
+                StalnoZaposlen sz = s.Get<StalnoZaposlen>(nastavnikId);
+                if (sz != null)
+                {
+                    return new StalnoZaposlenView(sz);
+                }
+                Honorarac h = s.Get<Honorarac>(nastavnikId);
+                if (h != null)
+                {
+                    return new HonoraracView(h);
+                }
+                else
+                {
+                    throw new ArgumentException("Nepoznat tip nastavnika.", nameof(nastavnikId));
+                }
+            }
+            catch (Exception ex) { throw; }
+            finally { s?.Close(); }
+
+        }
 }

@@ -117,4 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox_Kursevi.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DgAACw4BQL7hQQAABAVJREFUaEPt2XXIbUUUBfCfHRiIWBjYimJh/WMhYmAXqBgoItgFooiBf4gNgiKC
+        Yjd2BwZ2F4qJ3d0JyoJ94TDc98V7933vU+6Cgcs9c/aZNbP3ntlrGOL/iflwJC7GBu3DyYxlcA5+wAM4
+        DV/gGeyO2doXJgvWxuX4Bddjvc6z2bE3XsFnOBkLdp7PMMyMbfE4vqzZXrzt1CDuFIIhGsKrtB0mAvHv
+        w/EB3qrfc7edRsHyOBc/4f6aiJnaToPGcvXRn/HYgD46f03Ah3gJB2CuttMgsBT+xo/Yon04BYTwX/hn
+        nO2m1tCgkEC9svz3WqzfduiDuNsCI7QlcWIF9zu4Dg+1RgaNRSuTfIXnKsPM2nYaBYuVjW86NmbBLhNB
+        oIcEbrLP53gfR5dPj4SsWlbvV3yNE5rnE0og+BhrYTPcXjFyIVbu9Oml22Sb7ysRJKauqgDuYpoJzIud
+        cEwN5B68WFni206L+7yJP7Fm5/3V6viQOLkZx9fqvIEDm3QbAi/gkfL/2P2tAj+u9S6ex301loxp5xrj
+        FHEYPsEltbx7YXOsU1ll2WqrYqMi0iXQw8I4CTdi61qFFiFwG/bBpngYF2CTmpjtsAMOrU3yCnyKQ1pD
+        XRxVO+RYERfqR2AsaF3oWWxVv7Mi/bJcsuAR7Z9dDAmMAy2BJ/F2pdXfa99pMakJ5HyUbJaW+OoXN5Oa
+        wFgwJNDiUbyOU7DxKIVKjhsrYk9cXZteUuV4kFQ6UAIpETOIS/FanVizNySLJBifxqt4D39UqZnN8Vgs
+        0RobAwZOoMU8FYzr1gZ4K66pjS+nz2nFdCfQ4vRqg8LAY2A0DAk0+M+70JDAeDEk0GBIYLwYEmgwJDBe
+        zBACuZjYrWSM83FHaTU5XUZKiSKd3zlKx2CO0jtikdbYCAQWKg0o6twNeLAklEgpPfspMe8speI47FHa
+        0qgEIj5lcDmzn1lSSwbYK/fStqlzfaSTFCbRjnKUzl1ByEcmDLoE5sT+eKr65p2cbWIjtmKz+40c0/er
+        wUcXysR+NxYCU+tCEWqj2aTAyUxu2SEQfeejqhkOmspaILhsehLoIbO/b81WCpmoevkdAbdfoT4eZGxj
+        IhBlLbLG9uVCp5Y6lnYGzq7/8zzFSj9EH011lrZS+7CQd7M6qY1jM7Z738k3e9/IWDKmUQkc3LloiGYf
+        f41mH+M9wz0SUZkTbCkTI0dehNUbeyn4I/52sUb1zTsh90S5Rtd+2ln1jQRzJMXeuKKxThFzYIUKuLEi
+        brEhzqs7rwRmPwE2lx1JDBFuMwH9hKuRkLFFn82t53RDgvOuyjAZcA+5N3i5biiTQic1Ip/cW663a7UM
+        /JYBBPGEIUt9d208afm9dNtpiP8D/gVyMT6xderzAgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="pictureBox_Lokacije.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DgAACw4BQL7hQQAABBdJREFUaEPtmVeoXFUUQJcxxobG+qEklpCooGgUQZCAIiiKglghJEqCYsGOBXuM
+        JuKPIBasHyZYI4JiA7FFBbEjVkRJLDGoMcQWe2HBHrhs3ry58949dx4hCwaGs8/MPWX3C+tZ99geOBm4
+        BrgTWATcAJwN7JUnjyWOBF4G/gb+A1YDHwLvAt9Uxj8DLgE2zX8wKKYCS2NxbwBnAZPzJGBz4DjgwdjM
+        l8AxeVLbHAL8ACyPxW2QJ3RhT+BZ4N9Qtbq/axQX/2eojXrfL+OA62MTN2ZhaVQbT97FT8jCPrks1G9u
+        FpTkxVCbkZx8RvV5APgF2DELS6C38cSOz4JRsB2wBrgrC0rwEvBmDcPbF7gAuBw4AtgwT0hcCfwVmynG
+        tvGQc7Kggu7yobglDfSP+P4+sFueXGGnmF/UFmbHYnbOggoPA78B5wETgY3iBrSZL2KsG+8Aj+TBJpkX
+        utqN/WKDLj6zd9zGpVlQ4V7g7TzYJHcAH+fBChcB/wBbZkHwagSwbhgXVubBJjEx85q7cQXwe6jNUDwV
+        saMbVwE/5sEmuSl0uRtHhQodlgXA1pHg3ZwFFfz/ZXmwSc4MT+FihmJ8ZKAuopo6O//JuJ3dK+OZF4Bn
+        8mCTTI8TPjoLKuwRmaYGq7qoNqYdLn5mnlxhM+DncBRF+bSGq9sq7OH5MNxbepy8dFy0mWpR9DTm800+
+        yCj9AfBKFpTASmpF6HRTnBqnf3AWlGJOPFCvM1pMT74HHs2CkpjIWUZ+DmyShX1ibPkJmJQFpTHb1Bau
+        zoI+OCjc8rlZ0Ba3AWuBXbOgBlZyHwFv1Ui1i2GA+g54LAtqoL83bzogC9rmlDBoK7W6TIuU29Rh4Nhd
+        eC0aVnUN+rlodg1XG7SKdYAGbfTtxUlxY8dmwaCxVtCgd8mCCtsA3wJPZ8FYwMX1Ckh3A7+O0Gu1wmmh
+        HtbAmRnh8y/OgrGAhrxPpBie8CepY2eFZrLW6Wi4mboGXwzTiUOB+4BVcfJ+TAv079Xi3e+OGTM687QX
+        i5dZg9jMgRFBXYiLvxU4Mfy7G7PDZqvQNvuUuJXb47c7AIcD88P1+h9fhXdqBVNfVcFG1QnAxnlCdNes
+        wpaEx7HTYJGTcbOq0xOxEY28V8dvVHT8vRlkt85DhzMq6jJcKdnh9DDy87OgSVQVi5mhTj1jgvZ6nz7f
+        tzeWrMW4p0djK+Mt2amoi7mR9lAMuxGqhOrRNLYe7UqYohdFQ1NXfVATrXBvyReDLv69NhI8vYSdCR/o
+        R7UyHtjXqYv2YUV3XXSsPZDFwBZ5Ykn05wuBr0OtfOHna9b7gWuBCyO18GPJ6AsMb8/um/1Pf2OssCO9
+        f/7zNvE0XYC34osNA5wR11PtuNFOhLaEfBxYMIJbGwimCK2qxXra5n8To+wiBeIw1wAAAABJRU5ErkJg
+        gg==
+</value>
+  </data>
 </root>

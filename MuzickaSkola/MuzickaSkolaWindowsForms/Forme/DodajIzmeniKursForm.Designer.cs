@@ -54,68 +54,74 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(14, 9);
             label1.Name = "label1";
-            label1.Size = new Size(70, 15);
+            label1.Size = new Size(81, 17);
             label1.TabIndex = 0;
             label1.Text = "Naziv kursa:";
             // 
             // txtNaziv
             // 
-            txtNaziv.Location = new Point(98, 6);
+            txtNaziv.Location = new Point(112, 6);
             txtNaziv.Name = "txtNaziv";
-            txtNaziv.Size = new Size(194, 23);
+            txtNaziv.Size = new Size(221, 25);
             txtNaziv.TabIndex = 1;
             // 
             // txtNivo
             // 
-            txtNivo.Location = new Point(98, 36);
+            txtNivo.Location = new Point(112, 36);
             txtNivo.Name = "txtNivo";
-            txtNivo.Size = new Size(194, 23);
+            txtNivo.Size = new Size(221, 25);
             txtNivo.TabIndex = 3;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(47, 39);
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(54, 39);
             label2.Name = "label2";
-            label2.Size = new Size(35, 15);
+            label2.Size = new Size(39, 17);
             label2.TabIndex = 2;
             label2.Text = "Nivo:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 72);
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(23, 72);
             label3.Name = "label3";
-            label3.Size = new Size(62, 15);
+            label3.Size = new Size(72, 17);
             label3.TabIndex = 4;
             label3.Text = "Nastavnik:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(24, 105);
+            label4.Location = new Point(27, 105);
             label4.Name = "label4";
-            label4.Size = new Size(58, 15);
+            label4.Size = new Size(66, 17);
             label4.TabIndex = 6;
             label4.Text = "Tip kursa:";
             // 
             // cmbNastavnici
             // 
             cmbNastavnici.FormattingEnabled = true;
-            cmbNastavnici.Location = new Point(98, 69);
+            cmbNastavnici.Location = new Point(112, 69);
             cmbNastavnici.Name = "cmbNastavnici";
-            cmbNastavnici.Size = new Size(194, 23);
+            cmbNastavnici.Size = new Size(221, 25);
             cmbNastavnici.TabIndex = 8;
             // 
             // cmbTipKursa
             // 
             cmbTipKursa.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipKursa.FormattingEnabled = true;
-            cmbTipKursa.Location = new Point(98, 98);
+            cmbTipKursa.Location = new Point(112, 98);
             cmbTipKursa.Name = "cmbTipKursa";
-            cmbTipKursa.Size = new Size(194, 23);
+            cmbTipKursa.Size = new Size(221, 25);
             cmbTipKursa.TabIndex = 9;
             cmbTipKursa.SelectedIndexChanged += cmbTipKursa_SelectedIndexChanged;
             // 
@@ -125,23 +131,23 @@
             pnlInstrument.Controls.Add(label5);
             pnlInstrument.Location = new Point(3, 127);
             pnlInstrument.Name = "pnlInstrument";
-            pnlInstrument.Size = new Size(254, 41);
+            pnlInstrument.Size = new Size(290, 41);
             pnlInstrument.TabIndex = 10;
             pnlInstrument.Visible = false;
             // 
             // txtInstrument
             // 
-            txtInstrument.Location = new Point(95, 6);
+            txtInstrument.Location = new Point(109, 6);
             txtInstrument.Name = "txtInstrument";
-            txtInstrument.Size = new Size(148, 23);
+            txtInstrument.Size = new Size(169, 25);
             txtInstrument.TabIndex = 3;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(9, 9);
+            label5.Location = new Point(10, 9);
             label5.Name = "label5";
-            label5.Size = new Size(68, 15);
+            label5.Size = new Size(79, 17);
             label5.TabIndex = 2;
             label5.Text = "Instrument:";
             // 
@@ -151,23 +157,23 @@
             pnlGrupaInstrumenata.Controls.Add(label6);
             pnlGrupaInstrumenata.Location = new Point(3, 127);
             pnlGrupaInstrumenata.Name = "pnlGrupaInstrumenata";
-            pnlGrupaInstrumenata.Size = new Size(292, 41);
+            pnlGrupaInstrumenata.Size = new Size(334, 41);
             pnlGrupaInstrumenata.TabIndex = 11;
             pnlGrupaInstrumenata.Visible = false;
             // 
             // txtGrupaInstrumenata
             // 
-            txtGrupaInstrumenata.Location = new Point(130, 6);
+            txtGrupaInstrumenata.Location = new Point(149, 6);
             txtGrupaInstrumenata.Name = "txtGrupaInstrumenata";
-            txtGrupaInstrumenata.Size = new Size(159, 23);
+            txtGrupaInstrumenata.Size = new Size(181, 25);
             txtGrupaInstrumenata.TabIndex = 3;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(9, 9);
+            label6.Location = new Point(10, 9);
             label6.Name = "label6";
-            label6.Size = new Size(115, 15);
+            label6.Size = new Size(133, 17);
             label6.TabIndex = 2;
             label6.Text = "Grupa instrumenata:";
             // 
@@ -177,41 +183,45 @@
             pnlMuzickaTeorija.Controls.Add(label7);
             pnlMuzickaTeorija.Location = new Point(3, 127);
             pnlMuzickaTeorija.Name = "pnlMuzickaTeorija";
-            pnlMuzickaTeorija.Size = new Size(292, 41);
+            pnlMuzickaTeorija.Size = new Size(334, 41);
             pnlMuzickaTeorija.TabIndex = 12;
             pnlMuzickaTeorija.Visible = false;
             // 
             // txtNazivPredmeta
             // 
-            txtNazivPredmeta.Location = new Point(130, 6);
+            txtNazivPredmeta.Location = new Point(149, 6);
             txtNazivPredmeta.Name = "txtNazivPredmeta";
-            txtNazivPredmeta.Size = new Size(159, 23);
+            txtNazivPredmeta.Size = new Size(181, 25);
             txtNazivPredmeta.TabIndex = 3;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(9, 9);
+            label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label7.ForeColor = Color.MidnightBlue;
+            label7.Location = new Point(10, 9);
             label7.Name = "label7";
-            label7.Size = new Size(93, 15);
+            label7.Size = new Size(107, 17);
             label7.TabIndex = 2;
             label7.Text = "Naziv predmeta:";
             // 
             // cmdSacuvaj
             // 
-            cmdSacuvaj.Location = new Point(12, 174);
+            cmdSacuvaj.BackColor = Color.MidnightBlue;
+            cmdSacuvaj.ForeColor = Color.White;
+            cmdSacuvaj.Location = new Point(14, 174);
             cmdSacuvaj.Name = "cmdSacuvaj";
-            cmdSacuvaj.Size = new Size(280, 23);
+            cmdSacuvaj.Size = new Size(320, 29);
             cmdSacuvaj.TabIndex = 13;
             cmdSacuvaj.Text = "Sačuvaj";
-            cmdSacuvaj.UseVisualStyleBackColor = true;
+            cmdSacuvaj.UseVisualStyleBackColor = false;
             cmdSacuvaj.Click += cmdSacuvaj_Click;
             // 
             // DodajIzmeniKursForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(305, 206);
+            ClientSize = new Size(349, 206);
             Controls.Add(cmdSacuvaj);
             Controls.Add(pnlMuzickaTeorija);
             Controls.Add(pnlGrupaInstrumenata);
@@ -224,8 +234,9 @@
             Controls.Add(label2);
             Controls.Add(txtNaziv);
             Controls.Add(label1);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.MidnightBlue;
             Name = "DodajIzmeniKursForm";
-            Text = "DodajIzmeniKursForm";
             Load += DodajIzmeniKursForm_Load;
             pnlInstrument.ResumeLayout(false);
             pnlInstrument.PerformLayout();

@@ -39,41 +39,45 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(91, 15);
+            label1.Size = new Size(104, 17);
             label1.TabIndex = 0;
             label1.Text = "Datum početka:";
             // 
             // dtpDatumOd
             // 
             dtpDatumOd.Format = DateTimePickerFormat.Short;
-            dtpDatumOd.Location = new Point(109, 3);
+            dtpDatumOd.Location = new Point(132, 3);
             dtpDatumOd.Name = "dtpDatumOd";
-            dtpDatumOd.Size = new Size(132, 23);
+            dtpDatumOd.Size = new Size(132, 25);
             dtpDatumOd.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
             label2.Location = new Point(12, 39);
             label2.Name = "label2";
-            label2.Size = new Size(97, 15);
+            label2.Size = new Size(113, 17);
             label2.TabIndex = 2;
             label2.Text = "Datum završetka:";
             // 
             // dtpDatumDo
             // 
             dtpDatumDo.Format = DateTimePickerFormat.Short;
-            dtpDatumDo.Location = new Point(130, 33);
+            dtpDatumDo.Location = new Point(153, 31);
             dtpDatumDo.Name = "dtpDatumDo";
-            dtpDatumDo.Size = new Size(111, 23);
+            dtpDatumDo.Size = new Size(111, 25);
             dtpDatumDo.TabIndex = 3;
             // 
             // cbxDatumDo
             // 
             cbxDatumDo.AutoSize = true;
-            cbxDatumDo.Location = new Point(109, 40);
+            cbxDatumDo.Location = new Point(131, 41);
             cbxDatumDo.Name = "cbxDatumDo";
             cbxDatumDo.Size = new Size(15, 14);
             cbxDatumDo.TabIndex = 4;
@@ -82,19 +86,21 @@
             // 
             // cmdSnimi
             // 
+            cmdSnimi.BackColor = Color.MidnightBlue;
+            cmdSnimi.ForeColor = Color.White;
             cmdSnimi.Location = new Point(12, 62);
             cmdSnimi.Name = "cmdSnimi";
-            cmdSnimi.Size = new Size(229, 23);
+            cmdSnimi.Size = new Size(252, 32);
             cmdSnimi.TabIndex = 5;
             cmdSnimi.Text = "Snimi";
-            cmdSnimi.UseVisualStyleBackColor = true;
+            cmdSnimi.UseVisualStyleBackColor = false;
             cmdSnimi.Click += cmdSnimi_Click;
             // 
             // DodajIzmeniNastavuForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(257, 97);
+            ClientSize = new Size(276, 97);
             Controls.Add(cmdSnimi);
             Controls.Add(cbxDatumDo);
             Controls.Add(dtpDatumDo);
@@ -102,7 +108,6 @@
             Controls.Add(dtpDatumOd);
             Controls.Add(label1);
             Name = "DodajIzmeniNastavuForm";
-            Text = "DodajIzmeniNastavuForm";
             Load += DodajIzmeniNastavuForm_Load;
             ResumeLayout(false);
             PerformLayout();

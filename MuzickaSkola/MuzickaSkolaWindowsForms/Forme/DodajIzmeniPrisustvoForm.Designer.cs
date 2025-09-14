@@ -40,69 +40,76 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(23, 21);
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(12, 21);
             label1.Name = "label1";
-            label1.Size = new Size(54, 15);
+            label1.Size = new Size(62, 17);
             label1.TabIndex = 0;
             label1.Text = "Polaznik:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 59);
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(12, 59);
             label2.Name = "label2";
-            label2.Size = new Size(44, 15);
+            label2.Size = new Size(49, 17);
             label2.TabIndex = 1;
             label2.Text = "Ocena:";
             // 
             // cmbPolaznici
             // 
             cmbPolaznici.FormattingEnabled = true;
-            cmbPolaznici.Location = new Point(83, 18);
+            cmbPolaznici.Location = new Point(80, 18);
             cmbPolaznici.Name = "cmbPolaznici";
-            cmbPolaznici.Size = new Size(172, 23);
+            cmbPolaznici.Size = new Size(196, 25);
             cmbPolaznici.TabIndex = 2;
             // 
             // txtPolaznik
             // 
-            txtPolaznik.Location = new Point(83, 18);
+            txtPolaznik.Location = new Point(80, 18);
             txtPolaznik.Name = "txtPolaznik";
-            txtPolaznik.Size = new Size(172, 23);
+            txtPolaznik.Size = new Size(196, 25);
             txtPolaznik.TabIndex = 3;
             // 
             // numOcena
             // 
-            numOcena.Location = new Point(83, 57);
+            numOcena.Location = new Point(79, 57);
             numOcena.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             numOcena.Minimum = new decimal(new int[] { 5, 0, 0, 0 });
             numOcena.Name = "numOcena";
-            numOcena.Size = new Size(172, 23);
+            numOcena.Size = new Size(197, 25);
             numOcena.TabIndex = 4;
             numOcena.Value = new decimal(new int[] { 5, 0, 0, 0 });
             // 
             // cmdSnimi
             // 
-            cmdSnimi.Location = new Point(24, 98);
+            cmdSnimi.BackColor = Color.MidnightBlue;
+            cmdSnimi.ForeColor = Color.White;
+            cmdSnimi.Location = new Point(12, 98);
             cmdSnimi.Name = "cmdSnimi";
-            cmdSnimi.Size = new Size(231, 23);
+            cmdSnimi.Size = new Size(264, 29);
             cmdSnimi.TabIndex = 5;
             cmdSnimi.Text = "Snimi";
-            cmdSnimi.UseVisualStyleBackColor = true;
+            cmdSnimi.UseVisualStyleBackColor = false;
             cmdSnimi.Click += cmdSnimi_Click;
             // 
             // DodajIzmeniPrisustvoForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(274, 148);
+            ClientSize = new Size(293, 129);
             Controls.Add(cmdSnimi);
             Controls.Add(numOcena);
             Controls.Add(txtPolaznik);
             Controls.Add(cmbPolaznici);
             Controls.Add(label2);
             Controls.Add(label1);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.MidnightBlue;
             Name = "DodajIzmeniPrisustvoForm";
-            Text = "DodajIzmeniPrisustvoForm";
             Load += DodajIzmeniPrisustvoForm_Load;
             ((System.ComponentModel.ISupportInitialize)numOcena).EndInit();
             ResumeLayout(false);

@@ -28,159 +28,159 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbKursevi = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbKomisije = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpDatum = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numOcena = new System.Windows.Forms.NumericUpDown();
-            this.chkSertifikat = new System.Windows.Forms.CheckBox();
-            this.btnDodaj = new System.Windows.Forms.Button();
-            this.btnOtkazi = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numOcena)).BeginInit();
-            this.SuspendLayout();
+            label1 = new Label();
+            cmbKursevi = new ComboBox();
+            label2 = new Label();
+            cmbKomisije = new ComboBox();
+            label3 = new Label();
+            dtpDatum = new DateTimePicker();
+            label4 = new Label();
+            numOcena = new NumericUpDown();
+            chkSertifikat = new CheckBox();
+            btnDodaj = new Button();
+            btnOtkazi = new Button();
+            ((System.ComponentModel.ISupportInitialize)numOcena).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Kurs:";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(34, 30);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 17);
+            label1.TabIndex = 0;
+            label1.Text = "Kurs:";
             // 
             // cmbKursevi
             // 
-            this.cmbKursevi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbKursevi.FormattingEnabled = true;
-            this.cmbKursevi.Location = new System.Drawing.Point(140, 27);
-            this.cmbKursevi.Name = "cmbKursevi";
-            this.cmbKursevi.Size = new System.Drawing.Size(250, 21);
-            this.cmbKursevi.TabIndex = 1;
+            cmbKursevi.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbKursevi.FormattingEnabled = true;
+            cmbKursevi.Location = new Point(160, 27);
+            cmbKursevi.Name = "cmbKursevi";
+            cmbKursevi.Size = new Size(285, 25);
+            cmbKursevi.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Komisija:";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(34, 70);
+            label2.Name = "label2";
+            label2.Size = new Size(61, 17);
+            label2.TabIndex = 2;
+            label2.Text = "Komisija:";
             // 
             // cmbKomisije
             // 
-            this.cmbKomisije.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbKomisije.FormattingEnabled = true;
-            this.cmbKomisije.Location = new System.Drawing.Point(140, 67);
-            this.cmbKomisije.Name = "cmbKomisije";
-            this.cmbKomisije.Size = new System.Drawing.Size(250, 21);
-            this.cmbKomisije.TabIndex = 3;
+            cmbKomisije.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbKomisije.FormattingEnabled = true;
+            cmbKomisije.Location = new Point(160, 67);
+            cmbKomisije.Name = "cmbKomisije";
+            cmbKomisije.Size = new Size(285, 25);
+            cmbKomisije.TabIndex = 3;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Datum polaganja:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(34, 110);
+            label3.Name = "label3";
+            label3.Size = new Size(115, 17);
+            label3.TabIndex = 4;
+            label3.Text = "Datum polaganja:";
             // 
             // dtpDatum
             // 
-            this.dtpDatum.Location = new System.Drawing.Point(140, 104);
-            this.dtpDatum.Name = "dtpDatum";
-            this.dtpDatum.Size = new System.Drawing.Size(250, 20);
-            this.dtpDatum.TabIndex = 5;
+            dtpDatum.Location = new Point(160, 104);
+            dtpDatum.Name = "dtpDatum";
+            dtpDatum.Size = new Size(285, 25);
+            dtpDatum.TabIndex = 5;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 150);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Ocena:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label4.ForeColor = Color.MidnightBlue;
+            label4.Location = new Point(34, 150);
+            label4.Name = "label4";
+            label4.Size = new Size(49, 17);
+            label4.TabIndex = 6;
+            label4.Text = "Ocena:";
             // 
             // numOcena
             // 
-            this.numOcena.Location = new System.Drawing.Point(140, 148);
-            this.numOcena.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numOcena.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numOcena.Name = "numOcena";
-            this.numOcena.Size = new System.Drawing.Size(120, 20);
-            this.numOcena.TabIndex = 7;
-            this.numOcena.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            numOcena.Location = new Point(160, 148);
+            numOcena.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            numOcena.Minimum = new decimal(new int[] { 5, 0, 0, 0 });
+            numOcena.Name = "numOcena";
+            numOcena.Size = new Size(137, 25);
+            numOcena.TabIndex = 7;
+            numOcena.Value = new decimal(new int[] { 5, 0, 0, 0 });
             // 
             // chkSertifikat
             // 
-            this.chkSertifikat.AutoSize = true;
-            this.chkSertifikat.Location = new System.Drawing.Point(140, 188);
-            this.chkSertifikat.Name = "chkSertifikat";
-            this.chkSertifikat.Size = new System.Drawing.Size(113, 17);
-            this.chkSertifikat.TabIndex = 8;
-            this.chkSertifikat.Text = "Dodeljen sertifikat";
-            this.chkSertifikat.UseVisualStyleBackColor = true;
+            chkSertifikat.AutoSize = true;
+            chkSertifikat.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            chkSertifikat.ForeColor = Color.MidnightBlue;
+            chkSertifikat.Location = new Point(160, 188);
+            chkSertifikat.Name = "chkSertifikat";
+            chkSertifikat.Size = new Size(136, 21);
+            chkSertifikat.TabIndex = 8;
+            chkSertifikat.Text = "Dodeljen sertifikat";
+            chkSertifikat.UseVisualStyleBackColor = true;
             // 
             // btnDodaj
             // 
-            this.btnDodaj.Location = new System.Drawing.Point(140, 240);
-            this.btnDodaj.Name = "btnDodaj";
-            this.btnDodaj.Size = new System.Drawing.Size(120, 30);
-            this.btnDodaj.TabIndex = 9;
-            this.btnDodaj.Text = "Dodaj";
-            this.btnDodaj.UseVisualStyleBackColor = true;
-            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
+            btnDodaj.BackColor = Color.MidnightBlue;
+            btnDodaj.ForeColor = Color.White;
+            btnDodaj.Location = new Point(160, 240);
+            btnDodaj.Name = "btnDodaj";
+            btnDodaj.Size = new Size(137, 30);
+            btnDodaj.TabIndex = 9;
+            btnDodaj.Text = "Dodaj";
+            btnDodaj.UseVisualStyleBackColor = false;
+            btnDodaj.Click += btnDodaj_Click;
             // 
             // btnOtkazi
             // 
-            this.btnOtkazi.Location = new System.Drawing.Point(270, 240);
-            this.btnOtkazi.Name = "btnOtkazi";
-            this.btnOtkazi.Size = new System.Drawing.Size(120, 30);
-            this.btnOtkazi.TabIndex = 10;
-            this.btnOtkazi.Text = "Otkaži";
-            this.btnOtkazi.UseVisualStyleBackColor = true;
-            this.btnOtkazi.Click += new System.EventHandler(this.btnOtkazi_Click);
+            btnOtkazi.BackColor = Color.MidnightBlue;
+            btnOtkazi.ForeColor = Color.White;
+            btnOtkazi.Location = new Point(309, 240);
+            btnOtkazi.Name = "btnOtkazi";
+            btnOtkazi.Size = new Size(137, 30);
+            btnOtkazi.TabIndex = 10;
+            btnOtkazi.Text = "Otkaži";
+            btnOtkazi.UseVisualStyleBackColor = false;
+            btnOtkazi.Click += btnOtkazi_Click;
             // 
             // DodajPolozeniIspitForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 301);
-            this.Controls.Add(this.btnOtkazi);
-            this.Controls.Add(this.btnDodaj);
-            this.Controls.Add(this.chkSertifikat);
-            this.Controls.Add(this.numOcena);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.dtpDatum);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.cmbKomisije);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbKursevi);
-            this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "DodajPolozeniIspitForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dodaj položeni ispit";
-            this.Load += new System.EventHandler(this.DodajPolozeniIspitForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numOcena)).EndInit();
-            this.ResumeLayout(false);
-            
+            AutoScaleDimensions = new SizeF(8F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(485, 301);
+            Controls.Add(btnOtkazi);
+            Controls.Add(btnDodaj);
+            Controls.Add(chkSertifikat);
+            Controls.Add(numOcena);
+            Controls.Add(label4);
+            Controls.Add(dtpDatum);
+            Controls.Add(label3);
+            Controls.Add(cmbKomisije);
+            Controls.Add(label2);
+            Controls.Add(cmbKursevi);
+            Controls.Add(label1);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.MidnightBlue;
+            Name = "DodajPolozeniIspitForm";
+            Load += DodajPolozeniIspitForm_Load;
+            ((System.ComponentModel.ISupportInitialize)numOcena).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+
 
         }
 

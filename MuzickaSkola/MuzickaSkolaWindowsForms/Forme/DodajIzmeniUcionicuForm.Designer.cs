@@ -40,68 +40,76 @@
             // 
             // cmdSacuvajUcionicu
             // 
-            cmdSacuvajUcionicu.Location = new Point(11, 172);
+            cmdSacuvajUcionicu.BackColor = Color.MidnightBlue;
+            cmdSacuvajUcionicu.ForeColor = Color.White;
+            cmdSacuvajUcionicu.Location = new Point(13, 172);
             cmdSacuvajUcionicu.Name = "cmdSacuvajUcionicu";
-            cmdSacuvajUcionicu.Size = new Size(254, 23);
+            cmdSacuvajUcionicu.Size = new Size(290, 33);
             cmdSacuvajUcionicu.TabIndex = 9;
             cmdSacuvajUcionicu.Text = "Sačuvaj";
-            cmdSacuvajUcionicu.UseVisualStyleBackColor = true;
+            cmdSacuvajUcionicu.UseVisualStyleBackColor = false;
             cmdSacuvajUcionicu.Click += cmdSacuvajUcionicu_Click;
             // 
             // txtNaziv
             // 
-            txtNaziv.Location = new Point(100, 12);
+            txtNaziv.Location = new Point(114, 12);
             txtNaziv.Name = "txtNaziv";
-            txtNaziv.Size = new Size(165, 23);
+            txtNaziv.Size = new Size(188, 25);
             txtNaziv.TabIndex = 7;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(35, 43);
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(40, 43);
             label2.Name = "label2";
-            label2.Size = new Size(59, 15);
+            label2.Size = new Size(67, 17);
             label2.TabIndex = 6;
             label2.Text = "Kapacitet:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(55, 15);
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(63, 15);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(44, 17);
             label1.TabIndex = 5;
             label1.Text = "Naziv:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 73);
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(14, 73);
             label3.Name = "label3";
-            label3.Size = new Size(82, 15);
+            label3.Size = new Size(93, 17);
             label3.TabIndex = 10;
             label3.Text = "Opremljenost:";
             // 
             // numKapacitet
             // 
-            numKapacitet.Location = new Point(100, 41);
+            numKapacitet.Location = new Point(114, 41);
             numKapacitet.Name = "numKapacitet";
-            numKapacitet.Size = new Size(120, 23);
+            numKapacitet.Size = new Size(137, 25);
             numKapacitet.TabIndex = 11;
             // 
             // txtOpremljenost
             // 
-            txtOpremljenost.Location = new Point(100, 70);
+            txtOpremljenost.Location = new Point(114, 70);
             txtOpremljenost.Name = "txtOpremljenost";
-            txtOpremljenost.Size = new Size(165, 96);
+            txtOpremljenost.Size = new Size(188, 96);
             txtOpremljenost.TabIndex = 12;
             txtOpremljenost.Text = "";
             // 
             // DodajIzmeniUcionicuForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(276, 208);
+            ClientSize = new Size(315, 208);
             Controls.Add(txtOpremljenost);
             Controls.Add(numKapacitet);
             Controls.Add(label3);
@@ -109,8 +117,9 @@
             Controls.Add(txtNaziv);
             Controls.Add(label2);
             Controls.Add(label1);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.MidnightBlue;
             Name = "DodajIzmeniUcionicuForm";
-            Text = "DodajIzmeniUcionicuForm";
             ((System.ComponentModel.ISupportInitialize)numKapacitet).EndInit();
             ResumeLayout(false);
             PerformLayout();

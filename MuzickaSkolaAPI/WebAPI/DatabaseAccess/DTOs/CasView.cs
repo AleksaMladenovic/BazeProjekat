@@ -14,7 +14,6 @@ namespace DatabaseAccess.DTOs
         public string? Tema { get; set; }
 
         public NastavnikView? DrziNastavnik { get; set; }
-        public NastavaView? PripadaNastavi { get; set; }
         public UcionicaView? UcionicaOdrzavanja { get; set; }
 
         public int BrojPrisutnihPolaznika { get; set; }
@@ -32,11 +31,6 @@ namespace DatabaseAccess.DTOs
                 if (c.DrziNastavnik != null)
                 { 
                     this.DrziNastavnik = NastavnikView.KreirajNastavnikView(c.DrziNastavnik);
-                }
-
-                if (c.PripadaNastavi != null)
-                {
-                    this.PripadaNastavi = new NastavaView(c.PripadaNastavi);
                 }
 
                 if (c.UcionicaOdrzavnja != null)
