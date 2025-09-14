@@ -1,4 +1,4 @@
-﻿namespace ProdavnicaLibrary;
+﻿namespace MuzickaSkolaLibrary;
 
 internal static class Extensions
 {

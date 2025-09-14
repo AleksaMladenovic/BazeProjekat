@@ -1,5 +1,5 @@
 using DatabaseAccess.DTOs;
-using ProdavnicaLibrary;
+using MuzickaSkolaLibrary;
 
 public class NastavnikView
 {

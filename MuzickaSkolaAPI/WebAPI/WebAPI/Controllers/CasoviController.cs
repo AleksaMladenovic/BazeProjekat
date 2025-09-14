@@ -1,8 +1,7 @@
 ﻿using DatabaseAccess.DataProvider;
 using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using MuzickaSkolaWindowsForms;
-using ProdavnicaLibrary;
+using MuzickaSkolaLibrary;
 
 namespace WebAPI.Controllers
 {
@@ -15,7 +14,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetCasoviZaNastavu(int nastavaId)
         {
-            var result = DataProviderAleksa.VratiSveCasoveZaNastavu(nastavaId);
+            var result = DataProvider.VratiSveCasoveZaNastavu(nastavaId);
 
             if (result.IsError)
             {
@@ -31,7 +30,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddCas([FromBody] CasBasic casDto)
         {
-            var result = DataProviderAleksa.DodajCas(casDto);
+            var result = DataProvider.DodajCas(casDto);
 
             if (result.IsError)
             {
@@ -47,7 +46,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ChangeCas([FromBody] CasBasic casDto)
         {
-            var result = DataProviderAleksa.IzmeniCas(casDto);
+            var result = DataProvider.IzmeniCas(casDto);
 
             if (result.IsError)
             {
@@ -63,7 +62,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteCas(int casId)
         {
-            var result = DataProviderAleksa.ObrisiCas(casId);
+            var result = DataProvider.ObrisiCas(casId);
 
             if (result.IsError)
             {

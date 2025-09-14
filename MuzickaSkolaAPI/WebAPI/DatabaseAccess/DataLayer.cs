@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 
-namespace ProdavnicaLibrary;
+namespace MuzickaSkolaLibrary;
 
 public static class DataLayer
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProdavnicaLibrary;
+using MuzickaSkolaLibrary;
 using DatabaseAccess.DTOs;
 using MuzickaSkolaWindowsForms;
 using DatabaseAccess.DataProvider;
@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
                 try
                 {
                     
-                    return Ok(DataProviderMica.VratiSvePolaznike());
+                    return Ok(DataProvider.VratiSvePolaznike());
                 }
                 catch (Exception ex)
                 {
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
             {
                 try
                 {
-                    return Ok(DataProviderMica.VratiPolaznika(id));
+                    return Ok(DataProvider.VratiPolaznika(id));
                 }
                 catch (Exception ex)
                 {
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddOdrasliPolaznik([FromBody] OdrasliPolaznikCreateView polaznik)
         {
-            var result = await DataProviderMica.DodajOdraslogPolaznikaAsync(polaznik);
+            var result = await DataProvider.DodajOdraslogPolaznikaAsync(polaznik);
 
             if (result.IsError)
             {
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddDetePolaznik([FromBody] DetePolaznikCreateView polaznik)
         {
-            var result = await DataProviderMica.DodajDetePolaznikaAsync(polaznik);
+            var result = await DataProvider.DodajDetePolaznikaAsync(polaznik);
 
             if (result.IsError)
             {
@@ -83,7 +83,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ObrisiPolaznika(int id)
         {
-            var result = await DataProviderMica.ObrisiPolaznikaAsync(id);
+            var result = await DataProvider.ObrisiPolaznikaAsync(id);
 
             if (result.IsError)
             {
@@ -106,7 +106,7 @@ namespace WebAPI.Controllers
         {
             p.IdOsobe = id;
 
-            var result = await DataProviderMica.AzurirajPolaznikaAsync(p);
+            var result = await DataProvider.AzurirajPolaznikaAsync(p);
 
             if (result.IsError)
             {
@@ -141,7 +141,7 @@ namespace WebAPI.Controllers
                 Zanimanje = p.Zanimanje
             };
 
-            var result = await DataProviderMica.AzurirajOdraslogPolaznikaAsync(dto);
+            var result = await DataProvider.AzurirajOdraslogPolaznikaAsync(dto);
 
             if (result.IsError)
             {
@@ -161,7 +161,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ChangeDetePolaznik([FromBody] DetePolaznikUpdateView p)
         {
-            var result = await DataProviderMica.AzurirajDetePolaznikaAsync(p);
+            var result = await DataProvider.AzurirajDetePolaznikaAsync(p);
 
             var dto = new DetePolaznikUpdateView
             {
@@ -192,7 +192,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetSviRoditelji()
         {
-            var result =  DataProviderMica.VratiSveRoditelje();
+            var result =  DataProvider.VratiSveRoditelje();
             if (result.IsError) return BadRequest(result.Error);
             return Ok(result.Data);
         }
@@ -202,7 +202,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetRoditelj(int id)
         {
-            var result = await DataProviderMica.VratiRoditeljaAsync(id);
+            var result = await DataProvider.VratiRoditeljaAsync(id);
             if (result.IsError)
             {
                 if (result.Error.Contains("ne postoji")) return NotFound(result.Error);
@@ -216,7 +216,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddRoditelj([FromBody] RoditeljCreateView dto)
         {
-            var result = await DataProviderMica.DodajRoditeljaAsync(dto);
+            var result = await DataProvider.DodajRoditeljaAsync(dto);
             if (result.IsError) return BadRequest(result.Error);
 
             return StatusCode(201, $"Uspešno dodat roditelj {dto.Ime} {dto.Prezime}");
@@ -228,7 +228,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateRoditelj(int id, [FromBody] RoditeljUpdateView dto)
         {
-            var result = await DataProviderMica.AzurirajRoditeljaAsync(id, dto);
+            var result = await DataProvider.AzurirajRoditeljaAsync(id, dto);
             if (result.IsError)
             {
                 if (result.Error.Contains("ne postoji")) return NotFound(result.Error);
@@ -243,7 +243,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteRoditelj(int id)
         {
-            var result = await DataProviderMica.ObrisiRoditeljaAsync(id);
+            var result = await DataProvider.ObrisiRoditeljaAsync(id);
             if (result.IsError)
             {
                 if (result.Error.Contains("ne postoji")) return NotFound(result.Error);
@@ -258,7 +258,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetPrijavljeniKursevi(int id)
         {
-            var result = await DataProviderMica.VratiPrijavljeneKurseveAsync(id);
+            var result = await DataProvider.VratiPrijavljeneKurseveAsync(id);
 
             if (result.IsError)
             {
@@ -279,7 +279,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PrijaviPolaznikaNaKurs(int polaznikId, int kursId)
         {
-            var result = await DataProviderMica.DodajPolaznikaNaKursAsync(polaznikId, kursId);
+            var result = await DataProvider.DodajPolaznikaNaKursAsync(polaznikId, kursId);
 
             if (result.IsError)
             {
@@ -302,7 +302,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetPrisustva(int id)
         {
-            var result = await DataProviderMica.VratiPrisustvaAsync(id);
+            var result = await DataProvider.VratiPrisustvaAsync(id);
 
             if (result.IsError)
             {
@@ -322,7 +322,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetPolozeniIspiti(int id)
         {
-            var result = await DataProviderMica.VratiPolozeneIspiteAsync(id);
+            var result = await DataProvider.VratiPolozeneIspiteAsync(id);
 
             if (result.IsError)
             {
@@ -342,7 +342,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddPolozeniIspit(int id, [FromBody] ZavrsniIspitCreateView dto)
         {
-            var result = await DataProviderMica.DodajPolozeniIspitAsync(id, dto);
+            var result = await DataProvider.DodajPolozeniIspitAsync(id, dto);
 
             if (result.IsError)
             {

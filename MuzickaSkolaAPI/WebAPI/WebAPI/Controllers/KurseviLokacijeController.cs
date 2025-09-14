@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetLokacijeZaKurs(int kursId)
         {
-            var result = DataProviderAleksa.VratiSveLokacijeZaKurs(kursId);
+            var result = DataProvider.VratiSveLokacijeZaKurs(kursId);
 
             if (result.IsError)
             {
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult AddLokacijaKursu(int kursId, string adresaLokacije)
         {
-            var result = DataProviderAleksa.DodajLokacijuKursu(adresaLokacije, kursId);
+            var result = DataProvider.DodajLokacijuKursu(adresaLokacije, kursId);
 
             if (result.IsError)
             {
@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult RemoveLokacijaSaKursa(int kursId, string adresaLokacije)
         {
-            var result = DataProviderAleksa.UkloniLokacijuIzKursa(kursId, adresaLokacije);
+            var result = DataProvider.UkloniLokacijuIzKursa(kursId, adresaLokacije);
 
             if (result.IsError)
             {

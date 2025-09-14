@@ -1,8 +1,7 @@
 using DatabaseAccess.DataProvider;
 using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using MuzickaSkolaWindowsForms;
-using ProdavnicaLibrary;
+using MuzickaSkolaLibrary;
 
 namespace WebAPI.Controllers
 {
@@ -16,7 +15,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetKursevi()
         {
-            var result = DataProviderAleksa.VratiSveKursevePregled();
+            var result = DataProvider.VratiSveKursevePregled();
 
             if (result.IsError)
             {
@@ -32,7 +31,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddKurs([FromBody] KursBasic kursDto)
         {
-            var result = DataProviderAleksa.DodajKurs(kursDto);
+            var result = DataProvider.DodajKurs(kursDto);
 
             if (result.IsError)
             {
@@ -48,7 +47,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ChangeKurs([FromBody] KursBasic kursDto) 
         {
-            var result = DataProviderAleksa.IzmeniKurs(kursDto);
+            var result = DataProvider.IzmeniKurs(kursDto);
 
             if (result.IsError)
             {
@@ -64,7 +63,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeleteKurs(int kursId)
         {
-            var result = DataProviderAleksa.ObrisiKurs(kursId);
+            var result = DataProvider.ObrisiKurs(kursId);
 
             if (result.IsError)
             {

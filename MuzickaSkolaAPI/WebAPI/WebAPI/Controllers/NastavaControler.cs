@@ -1,6 +1,6 @@
 ﻿using DatabaseAccess.DataProvider;
+using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using MuzickaSkolaWindowsForms;
 
 namespace WebAPI.Controllers
 {
@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetNastaveZaKurs(int kursId)
         {
-            var result = DataProviderAleksa.VratiSvuNastavuZaKurs(kursId);
+            var result = DataProvider.VratiSvuNastavuZaKurs(kursId);
 
             if (result.IsError)
             {
@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddNastava([FromBody] NastavaBasic nastavaDto)
         {
-            var result = DataProviderAleksa.DodajNastavu(nastavaDto);
+            var result = DataProvider.DodajNastavu(nastavaDto);
 
             if (result.IsError)
             {
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ChangeNastava([FromBody] NastavaBasic nastavaDto)
         {
-            var result = DataProviderAleksa.IzmeniNastavu(nastavaDto);
+            var result = DataProvider.IzmeniNastavu(nastavaDto);
 
             if (result.IsError)
             {
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult DeleteNastava(int nastavaId)
         {
-            var result = DataProviderAleksa.ObrisiNastavu(nastavaId);
+            var result = DataProvider.ObrisiNastavu(nastavaId);
 
             if (result.IsError)
             {

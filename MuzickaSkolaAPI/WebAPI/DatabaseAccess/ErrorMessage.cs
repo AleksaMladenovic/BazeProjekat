@@ -1,4 +1,4 @@
-﻿namespace ProdavnicaLibrary;
+﻿namespace MuzickaSkolaLibrary;
 
 public class ErrorMessage
 {

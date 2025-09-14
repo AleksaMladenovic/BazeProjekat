@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MuzickaSkolaWindowsForms.Entiteti;
 
 
-namespace MuzickaSkolaWindowsForms
+namespace DatabaseAccess.DTOs
 {
     #region Lokacija
     public class LokacijaPregled {
@@ -28,7 +28,7 @@ namespace MuzickaSkolaWindowsForms
         {
             if (obj is LokacijaPregled other)
             {
-                return this.Adresa == other.Adresa;
+                return Adresa == other.Adresa;
             }
             return false;
         }
@@ -88,10 +88,10 @@ namespace MuzickaSkolaWindowsForms
         public KursPregled() { }
         public KursPregled(int id, string naziv, string nivo, string tipKursa)
         {
-            this.Id = id;
-            this.Naziv = naziv;
-            this.Nivo = nivo;
-            this.TipKursa = tipKursa;
+            Id = id;
+            Naziv = naziv;
+            Nivo = nivo;
+            TipKursa = tipKursa;
         }
     }
 
@@ -121,10 +121,10 @@ namespace MuzickaSkolaWindowsForms
         public CasPregled() { }
         public CasPregled(int id, DateTime termin, string tema, string ucionica)
         {
-            this.Id = id;
-            this.Termin = termin;
-            this.Tema = tema;
-            this.Ucionica = ucionica;
+            Id = id;
+            Termin = termin;
+            Tema = tema;
+            Ucionica = ucionica;
         }
     }
 
@@ -210,14 +210,14 @@ namespace MuzickaSkolaWindowsForms
 
         public MentorPregled(int id, string punoIme)
         {
-            this.Id = id;
-            this.PunoIme = punoIme;
+            Id = id;
+            PunoIme = punoIme;
         }
 
         // Ovo je važno da bi ComboBox znao šta da prikaže
         public override string ToString()
         {
-            return this.PunoIme;
+            return PunoIme;
         }
     }
 
@@ -229,8 +229,8 @@ namespace MuzickaSkolaWindowsForms
 
         public KomisijaPregled(int id)
         {
-            this.Id = id;
-            this.Opis = $"Komisija (ID: {id})";
+            Id = id;
+            Opis = $"Komisija (ID: {id})";
         }
     }
 
@@ -246,10 +246,10 @@ namespace MuzickaSkolaWindowsForms
         public ZavrsniIspitPregled() { }
         public ZavrsniIspitPregled(ZavrsniIspit zi)
         {
-            this.NazivKursa = zi.KursKojiSePolaze.Naziv;
-            this.Datum = zi.Datum;
-            this.Ocena = zi.Ocena;
-            this.PunoImePolaznika = $"{zi.PolazePolaznik.OsnovniPodaci.Ime} {zi.PolazePolaznik.OsnovniPodaci.Prezime}";
+            NazivKursa = zi.KursKojiSePolaze.Naziv;
+            Datum = zi.Datum;
+            Ocena = zi.Ocena;
+            PunoImePolaznika = $"{zi.PolazePolaznik.OsnovniPodaci.Ime} {zi.PolazePolaznik.OsnovniPodaci.Prezime}";
         }
     }
     #endregion
@@ -272,16 +272,16 @@ namespace MuzickaSkolaWindowsForms
         // Konstruktor za lakše kreiranje
         public PolaznikPregled(int id, string jmbg, string ime, string prezime, string tip)
         {
-            this.IdOsobe = id;
-            this.Jmbg = jmbg;
-            this.Ime = ime;
-            this.Prezime = prezime;
-            this.TipPolaznika = tip;
+            IdOsobe = id;
+            Jmbg = jmbg;
+            Ime = ime;
+            Prezime = prezime;
+            TipPolaznika = tip;
         }
 
         public PolaznikPregled() { }
 
-        public string PunoIme{ get => $"{this.Ime} {this.Prezime}"; }
+        public string PunoIme{ get => $"{Ime} {Prezime}"; }
     }
 
     public abstract class PolaznikBasic

@@ -1,7 +1,7 @@
 ﻿using DatabaseAccess.DataProvider;
 using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using ProdavnicaLibrary;
+using MuzickaSkolaLibrary;
 
 namespace WebAPI.Controllers
 {
@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetLokacije()
         {
-            var result = DataProviderAleksa.VratiSveLokacije();
+            var result = DataProvider.VratiSveLokacije();
             if (result.IsError)
             {
                 return StatusCode(400, result.Error?.Message);
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddLokacija([FromBody] LokacijaView lokacija)
         {
-            var result = DataProviderAleksa.DodajLokaciju(lokacija);
+            var result = DataProvider.DodajLokaciju(lokacija);
 
             if (result.IsError)
             {
@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)] 
         public IActionResult ChangeLokacija([FromBody] LokacijaView lokacija)
         {
-            var result = DataProviderAleksa.IzmeniLokaciju(lokacija);
+            var result = DataProvider.IzmeniLokaciju(lokacija);
 
             if (result.IsError)
             {
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult DeleteLokacija(string adresa)
         {
-            var result = DataProviderAleksa.ObrisiLokaciju(adresa);
+            var result = DataProvider.ObrisiLokaciju(adresa);
 
             if (result.IsError)
             {
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUcionice(string adresaLokacije)
         {
-            var result = DataProviderAleksa.VratiSveUcioniceZaLokaciju(adresaLokacije);
+            var result = DataProvider.VratiSveUcioniceZaLokaciju(adresaLokacije);
 
             if (result.IsError)
             {
@@ -103,7 +103,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult AddUcionica(string adresaLokacije, [FromBody] UcionicaView ucionica)
         {
-            var result = DataProviderAleksa.DodajUcionicu(adresaLokacije, ucionica);
+            var result = DataProvider.DodajUcionicu(adresaLokacije, ucionica);
 
             if (result.IsError)
             {
@@ -120,7 +120,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult ChangeUcionica([FromBody] UcionicaView ucionica)
         {
-            var result = DataProviderAleksa.IzmeniUcionicu(ucionica);
+            var result = DataProvider.IzmeniUcionicu(ucionica);
 
             if (result.IsError)
             {
@@ -138,7 +138,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult DeleteUcionica(string adresaLokacije, string nazivUcionice)
         {
-            var result = DataProviderAleksa.ObrisiUcionicu(adresaLokacije, nazivUcionice);
+            var result = DataProvider.ObrisiUcionicu(adresaLokacije, nazivUcionice);
 
             if (result.IsError)
             {

@@ -1,6 +1,6 @@
 ﻿using DatabaseAccess.DataProvider;
+using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
-using MuzickaSkolaWindowsForms;
 using MuzickaSkolaWindowsForms.Entiteti;
 
 namespace WebAPI.Controllers
@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetPrisustvaZaCas(int casId)
         {
-            var result = DataProviderAleksa.VratiPrisustvaZaCas(casId);
+            var result = DataProvider.VratiPrisustvaZaCas(casId);
 
             if (result.IsError)
             {
@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult AddPrisustvo([FromBody] PrisustvoPregled prisustvoDto)
         {
-            var result = DataProviderAleksa.DodajPrisustvo(prisustvoDto);
+            var result = DataProvider.DodajPrisustvo(prisustvoDto);
 
             if (result.IsError)
             {
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ChangePrisustvo([FromBody] PrisustvoPregled prisustvoDto)
         {
-            var result = DataProviderAleksa.IzmeniPrisustvo(prisustvoDto);
+            var result = DataProvider.IzmeniPrisustvo(prisustvoDto);
 
             if (result.IsError)
             {
@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult DeletePrisustvo(int polaznikId, int casId)
         {
-            var result = DataProviderAleksa.ObrisiPrisustvo(polaznikId,casId);
+            var result = DataProvider.ObrisiPrisustvo(polaznikId,casId);
 
             if (result.IsError)
             {

@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using ProdavnicaLibrary;
+using MuzickaSkolaLibrary;
 using DatabaseAccess.DTOs;
 using MuzickaSkolaWindowsForms;
 using DatabaseAccess.DataProvider;
@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetSviNastavnici()
         {
-            var result = await DataProviderMica.VratiSveNastavnikeAsync();
+            var result = await DataProvider.VratiSveNastavnikeAsync();
 
             if (result.IsError)
             {
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetNastavnik(int id)
         {
-            var result = await DataProviderMica.VratiNastavnikaAsync(id);
+            var result = await DataProvider.VratiNastavnikaAsync(id);
 
             if (result.IsError)
             {
@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddNastavnik([FromBody] NastavnikCreateView dto)
         {
-            var result = await DataProviderMica.DodajNastavnikaAsync(dto);
+            var result = await DataProvider.DodajNastavnikaAsync(dto);
 
             if (result.IsError)
             {
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteNastavnik(int id)
         {
-            var result = await DataProviderMica.ObrisiNastavnikaAsync(id);
+            var result = await DataProvider.ObrisiNastavnikaAsync(id);
 
             if (result.IsError)
             {
@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateNastavnik(int id, [FromBody] NastavnikCreateView dto)
         {
-            var result = await DataProviderMica.AzurirajNastavnikaAsync(id, dto);
+            var result = await DataProvider.AzurirajNastavnikaAsync(id, dto);
 
             if (result.IsError)
             {
@@ -109,7 +109,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetKurseviNastavnika(int id)
         {
-            var result = await DataProviderMica.VratiSveKurseveNastavnikaAsync(id);
+            var result = await DataProvider.VratiSveKurseveNastavnikaAsync(id);
 
             if (result.IsError)
             {
@@ -130,7 +130,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCasoviNastavnika(int id)
         {
-            var result = await DataProviderMica.VratiSveCasoveNastavnikaAsync(id);
+            var result = await DataProvider.VratiSveCasoveNastavnikaAsync(id);
 
             if (result.IsError)
             {
@@ -152,7 +152,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DodeliMentora(int nastavnikId, int mentorId)
         {
-            var result = await DataProviderMica.DodeliMentoraAsync(nastavnikId, mentorId);
+            var result = await DataProvider.DodeliMentoraAsync(nastavnikId, mentorId);
 
             if (result.IsError)
             {
@@ -173,7 +173,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetSveKomisije()
         {
-            var result = await DataProviderMica.VratiSveKomisijeAsync();
+            var result = await DataProvider.VratiSveKomisijeAsync();
 
             if (result.IsError)
             {
@@ -190,7 +190,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetClanoviKomisije(int id)
         {
-            var result = await DataProviderMica.VratiClanoveKomisijeAsync(id);
+            var result = await DataProvider.VratiClanoveKomisijeAsync(id);
 
             if (result.IsError)
             {
@@ -210,7 +210,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddNovaKomisija()
         {
-            var result = await DataProviderMica.DodajNovuKomisijuAsync();
+            var result = await DataProvider.DodajNovuKomisijuAsync();
 
             if (result.IsError)
             {
@@ -232,7 +232,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Telo zahteva ne sme biti prazno.");
             }
 
-            var result = await DataProviderMica.SacuvajIzmeneZaKomisijeAsync(id, noveKomisijeIds);
+            var result = await DataProvider.SacuvajIzmeneZaKomisijeAsync(id, noveKomisijeIds);
 
             if (result.IsError)
             {
@@ -252,7 +252,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteKomisija(int id)
         {
-            var result = await DataProviderMica.ObrisiKomisijuAsync(id);
+            var result = await DataProvider.ObrisiKomisijuAsync(id);
 
             if (result.IsError)
             {

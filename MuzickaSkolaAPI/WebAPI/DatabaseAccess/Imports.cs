@@ -6,5 +6,5 @@ global using System.Threading.Tasks;
 global using System.Text;
 global using MuzickaSkolaWindowsForms.Entiteti;
 global using NHibernate;
-global using static ProdavnicaLibrary.Extensions;
+global using static MuzickaSkolaLibrary.Extensions;
 global using System.Diagnostics.CodeAnalysis;
