@@ -33,9 +33,9 @@
             lblPolaznikValue = new Label();
             lvIspiti = new ListView();
             btnZatvori = new Button();
-            btnDodajIspit = new Button();
             panel1 = new Panel();
             labelNaslov = new Label();
+            btnDodajIspit = new Button();
             gbInfo.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -107,16 +107,6 @@
             btnZatvori.UseVisualStyleBackColor = false;
             btnZatvori.Click += btnZatvori_Click;
             // 
-            // btnDodajIspit
-            // 
-            btnDodajIspit.Location = new Point(16, 614);
-            btnDodajIspit.Name = "btnDodajIspit";
-            btnDodajIspit.Size = new Size(147, 43);
-            btnDodajIspit.TabIndex = 3;
-            btnDodajIspit.Text = "Dodaj ispit";
-            btnDodajIspit.UseVisualStyleBackColor = true;
-            btnDodajIspit.Click += btnDodajIspit_Click;
-            // 
             // panel1
             // 
             panel1.BackColor = Color.MidnightBlue;
@@ -141,13 +131,31 @@
             labelNaslov.Text = "Položeni ispiti";
             labelNaslov.TextAlign = ContentAlignment.TopCenter;
             // 
+            // btnDodajIspit
+            // 
+            btnDodajIspit.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDodajIspit.BackColor = Color.MidnightBlue;
+            btnDodajIspit.FlatAppearance.BorderSize = 0;
+            btnDodajIspit.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            btnDodajIspit.FlatStyle = FlatStyle.Flat;
+            btnDodajIspit.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            btnDodajIspit.ForeColor = Color.White;
+            btnDodajIspit.Location = new Point(16, 414);
+            btnDodajIspit.Margin = new Padding(3, 4, 3, 4);
+            btnDodajIspit.Name = "btnDodajIspit";
+            btnDodajIspit.Size = new Size(110, 34);
+            btnDodajIspit.TabIndex = 5;
+            btnDodajIspit.Text = "Dodaj ispit";
+            btnDodajIspit.UseVisualStyleBackColor = false;
+            btnDodajIspit.Click += btnDodajIspit_Click;
+            // 
             // PolozeniIspitiForm
             // 
             AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(804, 461);
-            Controls.Add(panel1);
             Controls.Add(btnDodajIspit);
+            Controls.Add(panel1);
             Controls.Add(gbInfo);
             Controls.Add(lvIspiti);
             Controls.Add(btnZatvori);
@@ -171,8 +179,8 @@
         private Label lblPolaznikValue;
         private ListView lvIspiti;
         private Button btnZatvori;
-        private Button btnDodajIspit;
         private Panel panel1;
         private Label labelNaslov;
+        private Button btnDodajIspit;
     }
 }
