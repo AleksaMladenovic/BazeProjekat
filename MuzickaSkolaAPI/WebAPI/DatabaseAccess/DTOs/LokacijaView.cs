@@ -11,7 +11,7 @@ namespace DatabaseAccess.DTOs
     {
         public string Adresa { get; set; }
         public string RadnoVreme { get; set; }
-
+        public int Kapacitet { get; set; }
         public IList<UcionicaView> Ucionice { get; set; }
         public IList<KursView> KurseviKojiSeOdrzavaju { get; set; }
 
@@ -27,7 +27,7 @@ namespace DatabaseAccess.DTOs
             {
                 this.Adresa = l.Adresa;
                 this.RadnoVreme = l.RadnoVreme;
-
+                this.Kapacitet = l.Ucionice.Sum(u => u.Kapacitet);
                 if (l.Ucionice != null)
                 {
                     this.Ucionice = l.Ucionice.Select(u => new UcionicaView(u)).ToList();

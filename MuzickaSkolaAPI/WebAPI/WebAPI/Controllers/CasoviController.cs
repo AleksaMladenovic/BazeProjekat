@@ -1,4 +1,4 @@
-using DatabaseAccess.DataProvider;
+﻿using DatabaseAccess.DataProvider;
 using DatabaseAccess.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using MuzickaSkolaWindowsForms;
@@ -8,15 +8,14 @@ namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class KursController : ControllerBase
+    public class CasoviController : ControllerBase
     {
         [HttpGet]
-        [Route("PreuzmiSveKurseve")] 
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetKursevi()
+        [Route("PreuzmiSveCasoveZaNastavu/{nastavaId}")]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetCasoviZaNastavu(int nastavaId)
         {
-            var result = DataProviderAleksa.VratiSveKursevePregled();
+            var result = DataProviderAleksa.VratiSveCasoveZaNastavu(nastavaId);
 
             if (result.IsError)
             {
@@ -27,12 +26,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("DodajKurs")]
+        [Route("DodajCas")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult AddKurs([FromBody] KursBasic kursDto)
+        public IActionResult AddCas([FromBody] CasBasic casDto)
         {
-            var result = DataProviderAleksa.DodajKurs(kursDto);
+            var result = DataProviderAleksa.DodajCas(casDto);
 
             if (result.IsError)
             {
@@ -43,12 +42,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("IzmeniKurs")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Route("IzmeniCas")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ChangeKurs([FromBody] KursBasic kursDto) 
+        public IActionResult ChangeCas([FromBody] CasBasic casDto)
         {
-            var result = DataProviderAleksa.IzmeniKurs(kursDto);
+            var result = DataProviderAleksa.IzmeniCas(casDto);
 
             if (result.IsError)
             {
@@ -59,12 +58,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("ObrisiKurs/{kursId}")]
+        [Route("ObrisiCas/{casId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteKurs(int kursId)
+        public IActionResult DeleteCas(int casId)
         {
-            var result = DataProviderAleksa.ObrisiKurs(kursId);
+            var result = DataProviderAleksa.ObrisiCas(casId);
 
             if (result.IsError)
             {

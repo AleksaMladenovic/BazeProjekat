@@ -1,22 +1,21 @@
-using DatabaseAccess.DataProvider;
-using DatabaseAccess.DTOs;
+﻿using DatabaseAccess.DataProvider;
 using Microsoft.AspNetCore.Mvc;
 using MuzickaSkolaWindowsForms;
-using ProdavnicaLibrary;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class KursController : ControllerBase
+    public class NastavaControler: ControllerBase
     {
         [HttpGet]
-        [Route("PreuzmiSveKurseve")] 
+        [Route("PreuzmiSveNastaveZaKurs/{kursId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetKursevi()
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetNastaveZaKurs(int kursId)
         {
-            var result = DataProviderAleksa.VratiSveKursevePregled();
+            var result = DataProviderAleksa.VratiSvuNastavuZaKurs(kursId);
 
             if (result.IsError)
             {
@@ -27,12 +26,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("DodajKurs")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Route("DodajNastavu")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult AddKurs([FromBody] KursBasic kursDto)
+        public IActionResult AddNastava([FromBody] NastavaBasic nastavaDto)
         {
-            var result = DataProviderAleksa.DodajKurs(kursDto);
+            var result = DataProviderAleksa.DodajNastavu(nastavaDto);
 
             if (result.IsError)
             {
@@ -43,12 +42,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        [Route("IzmeniKurs")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Route("IzmeniNastavu")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ChangeKurs([FromBody] KursBasic kursDto) 
+        public IActionResult ChangeNastava([FromBody] NastavaBasic nastavaDto)
         {
-            var result = DataProviderAleksa.IzmeniKurs(kursDto);
+            var result = DataProviderAleksa.IzmeniNastavu(nastavaDto);
 
             if (result.IsError)
             {
@@ -59,12 +58,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("ObrisiKurs/{kursId}")]
+        [Route("ObrisiNastavu/{nastavaId}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult DeleteKurs(int kursId)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult DeleteNastava(int nastavaId)
         {
-            var result = DataProviderAleksa.ObrisiKurs(kursId);
+            var result = DataProviderAleksa.ObrisiNastavu(nastavaId);
 
             if (result.IsError)
             {
