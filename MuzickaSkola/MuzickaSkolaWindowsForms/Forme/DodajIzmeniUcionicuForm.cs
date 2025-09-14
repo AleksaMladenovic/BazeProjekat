@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class DodajIzmeniUcionicuForm : Form
+    public partial class DodajIzmeniUcionicuForm : BaseForm
     {
         private string adresaLokacije;
         private UcionicaBasic? ucionicaDto;

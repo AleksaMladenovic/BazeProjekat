@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate.Linq.ReWriters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms
 {
-    public partial class CasoviNastavnikaForm : Form
+    public partial class CasoviNastavnikaForm : BaseForm
     {
         public CasoviNastavnikaForm()
         {
@@ -41,5 +42,19 @@ namespace MuzickaSkolaWindowsForms
             }
             this.listViewCasovi.Refresh();
         }
+        #region dizajn
+        private void listViewCasovi_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewCasovi_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 }

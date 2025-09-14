@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class DodajIzmenLokacijuForm : Form
+    public partial class DodajIzmenLokacijuForm : BaseForm
     {
         private LokacijaBasic lokacijaDto;
         public DodajIzmenLokacijuForm()

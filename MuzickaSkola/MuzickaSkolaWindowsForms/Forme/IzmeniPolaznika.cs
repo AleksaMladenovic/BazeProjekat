@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class IzmeniPolaznika : Form
+    public partial class IzmeniPolaznika : BaseForm
     {
         private readonly int _idOsobe;
         private readonly string _tip;

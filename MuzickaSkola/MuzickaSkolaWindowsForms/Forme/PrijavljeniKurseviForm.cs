@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class PrijavljeniKurseviForm : Form
+    public partial class PrijavljeniKurseviForm : BaseForm
     {
         private readonly int _idOsobe;
         private readonly string _punoIme;

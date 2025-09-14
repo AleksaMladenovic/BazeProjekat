@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class PrisustvoNaCasovimaForm : Form
+    public partial class PrisustvoNaCasovimaForm : BaseForm
     {
         private readonly int _idOsobe;
         private readonly string _punoIme;
@@ -23,7 +23,7 @@ namespace MuzickaSkolaWindowsForms.Forme
         }
         public PrisustvoNaCasovimaForm()
         {
-           InitializeComponent();
+            InitializeComponent();
         }
 
         private void PrisustvoNaCasovimaForm_Load(object sender, EventArgs e)
@@ -65,6 +65,11 @@ namespace MuzickaSkolaWindowsForms.Forme
         }
 
         private void btnZatvori_Click(object sender, EventArgs e) => this.Close();
+
+        private void gbInfo_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

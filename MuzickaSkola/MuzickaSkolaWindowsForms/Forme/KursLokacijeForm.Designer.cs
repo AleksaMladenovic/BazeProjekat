@@ -49,12 +49,17 @@
             // 
             listViewNedodeljeneLokacije.Columns.AddRange(new ColumnHeader[] { chAdresa, chRadnoVreme, chKapacitet });
             listViewNedodeljeneLokacije.FullRowSelect = true;
-            listViewNedodeljeneLokacije.Location = new Point(12, 38);
+            listViewNedodeljeneLokacije.GridLines = true;
+            listViewNedodeljeneLokacije.Location = new Point(14, 38);
             listViewNedodeljeneLokacije.Name = "listViewNedodeljeneLokacije";
-            listViewNedodeljeneLokacije.Size = new Size(434, 321);
+            listViewNedodeljeneLokacije.OwnerDraw = true;
+            listViewNedodeljeneLokacije.Size = new Size(495, 321);
             listViewNedodeljeneLokacije.TabIndex = 1;
             listViewNedodeljeneLokacije.UseCompatibleStateImageBehavior = false;
             listViewNedodeljeneLokacije.View = View.Details;
+            listViewNedodeljeneLokacije.DrawColumnHeader += listViewNedodeljeneLokacije_DrawColumnHeader;
+            listViewNedodeljeneLokacije.DrawItem += listViewNedodeljeneLokacije_DrawItem;
+            listViewNedodeljeneLokacije.RetrieveVirtualItem += listViewNedodeljeneLokacije_RetrieveVirtualItem;
             listViewNedodeljeneLokacije.SelectedIndexChanged += listViewNedodeljeneLokacije_SelectedIndexChanged;
             listViewNedodeljeneLokacije.MouseDoubleClick += listViewNedodeljeneLokacije_MouseDoubleClick;
             // 
@@ -77,12 +82,16 @@
             // 
             listViewDodeljeneLokacije.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
             listViewDodeljeneLokacije.FullRowSelect = true;
-            listViewDodeljeneLokacije.Location = new Point(500, 38);
+            listViewDodeljeneLokacije.GridLines = true;
+            listViewDodeljeneLokacije.Location = new Point(571, 38);
             listViewDodeljeneLokacije.Name = "listViewDodeljeneLokacije";
-            listViewDodeljeneLokacije.Size = new Size(434, 321);
+            listViewDodeljeneLokacije.OwnerDraw = true;
+            listViewDodeljeneLokacije.Size = new Size(495, 321);
             listViewDodeljeneLokacije.TabIndex = 2;
             listViewDodeljeneLokacije.UseCompatibleStateImageBehavior = false;
             listViewDodeljeneLokacije.View = View.Details;
+            listViewDodeljeneLokacije.DrawColumnHeader += listViewDodeljeneLokacije_DrawColumnHeader;
+            listViewDodeljeneLokacije.DrawItem += listViewDodeljeneLokacije_DrawItem;
             listViewDodeljeneLokacije.SelectedIndexChanged += listViewDodeljeneLokacije_SelectedIndexChanged;
             listViewDodeljeneLokacije.MouseDoubleClick += listViewDodeljeneLokacije_MouseDoubleClick;
             // 
@@ -103,75 +112,90 @@
             // 
             // cmdDodajLokaciju
             // 
-            cmdDodajLokaciju.Location = new Point(452, 140);
+            cmdDodajLokaciju.BackColor = SystemColors.ActiveBorder;
+            cmdDodajLokaciju.Location = new Point(517, 140);
             cmdDodajLokaciju.Name = "cmdDodajLokaciju";
-            cmdDodajLokaciju.Size = new Size(42, 31);
+            cmdDodajLokaciju.Size = new Size(48, 31);
             cmdDodajLokaciju.TabIndex = 3;
             cmdDodajLokaciju.Text = ">>";
-            cmdDodajLokaciju.UseVisualStyleBackColor = true;
+            cmdDodajLokaciju.UseVisualStyleBackColor = false;
             cmdDodajLokaciju.Click += cmdDodajLokaciju_Click;
             // 
             // cmdUkloniLokaciju
             // 
-            cmdUkloniLokaciju.Location = new Point(452, 206);
+            cmdUkloniLokaciju.BackColor = SystemColors.ActiveBorder;
+            cmdUkloniLokaciju.Location = new Point(517, 206);
             cmdUkloniLokaciju.Name = "cmdUkloniLokaciju";
-            cmdUkloniLokaciju.Size = new Size(42, 31);
+            cmdUkloniLokaciju.Size = new Size(48, 31);
             cmdUkloniLokaciju.TabIndex = 4;
             cmdUkloniLokaciju.Text = "<<";
-            cmdUkloniLokaciju.UseVisualStyleBackColor = true;
+            cmdUkloniLokaciju.UseVisualStyleBackColor = false;
             cmdUkloniLokaciju.Click += cmdUkloniLokaciju_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(452, 122);
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.MidnightBlue;
+            label1.Location = new Point(517, 122);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(43, 17);
             label1.TabIndex = 5;
             label1.Text = "Dodaj";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(452, 188);
+            label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.MidnightBlue;
+            label2.Location = new Point(517, 188);
             label2.Name = "label2";
-            label2.Size = new Size(38, 15);
+            label2.Size = new Size(46, 17);
             label2.TabIndex = 6;
-            label2.Text = "Ukoni";
+            label2.Text = "Ukloni";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 9);
+            label3.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label3.ForeColor = Color.MidnightBlue;
+            label3.Location = new Point(23, 9);
             label3.Name = "label3";
-            label3.Size = new Size(120, 15);
+            label3.Size = new Size(135, 17);
             label3.TabIndex = 7;
             label3.Text = "Nedodeljene lokacije:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(510, 9);
+            label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            label4.ForeColor = Color.MidnightBlue;
+            label4.Location = new Point(583, 9);
             label4.Name = "label4";
-            label4.Size = new Size(106, 15);
+            label4.Size = new Size(119, 17);
             label4.TabIndex = 8;
             label4.Text = "Dodeljene lokacije:";
             // 
             // cmdSacuvaj
             // 
-            cmdSacuvaj.Location = new Point(378, 365);
+            cmdSacuvaj.BackColor = Color.MidnightBlue;
+            cmdSacuvaj.FlatAppearance.BorderSize = 0;
+            cmdSacuvaj.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            cmdSacuvaj.FlatStyle = FlatStyle.Flat;
+            cmdSacuvaj.ForeColor = Color.White;
+            cmdSacuvaj.Location = new Point(432, 365);
             cmdSacuvaj.Name = "cmdSacuvaj";
-            cmdSacuvaj.Size = new Size(195, 23);
+            cmdSacuvaj.Size = new Size(223, 29);
             cmdSacuvaj.TabIndex = 9;
             cmdSacuvaj.Text = "Sačuvaj";
-            cmdSacuvaj.UseVisualStyleBackColor = true;
+            cmdSacuvaj.UseVisualStyleBackColor = false;
             cmdSacuvaj.Click += cmdSacuvaj_Click;
             // 
             // KursLokacijeForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(946, 393);
+            ClientSize = new Size(1081, 398);
             Controls.Add(cmdSacuvaj);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -181,8 +205,9 @@
             Controls.Add(cmdDodajLokaciju);
             Controls.Add(listViewDodeljeneLokacije);
             Controls.Add(listViewNedodeljeneLokacije);
+            Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            ForeColor = Color.White;
             Name = "KursLokacijeForm";
-            Text = "KursLokacijeForm";
             Load += KursLokacijeForm_Load;
             ResumeLayout(false);
             PerformLayout();

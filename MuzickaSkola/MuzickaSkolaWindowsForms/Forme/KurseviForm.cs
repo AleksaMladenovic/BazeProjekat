@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class KurseviForm : Form
+    public partial class KurseviForm : BaseForm
     {
         public KurseviForm()
         {
@@ -38,7 +38,7 @@ namespace MuzickaSkolaWindowsForms.Forme
             cmdIzmeniKurs.Enabled = true;
             cmdObrisiKurs.Enabled = true;
             cmdNastavniBlokovi.Enabled = true;
-            cmdLokacijeOdrzavanja.Enabled=true;
+            cmdLokacijeOdrzavanja.Enabled = true;
         }
         private void PopuniPodacima()
         {
@@ -118,5 +118,20 @@ namespace MuzickaSkolaWindowsForms.Forme
             var form = new KursLokacijeForm(selektovaniKurs.Id);
             form.ShowDialog();
         }
+        #region dizajner
+        private void listViewKursevi_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            // Iscrtaj pozadinu hedera u našoj primarnoj boji
+            e.Graphics.FillRectangle(new SolidBrush(Color.MidnightBlue), e.Bounds);
+
+            // Iscrtaj tekst hedera belom bojom
+            TextRenderer.DrawText(e.Graphics, e.Header.Text, new Font("Segoe UI", 10, FontStyle.Bold), e.Bounds, Color.White);
+        }
+
+        private void listViewKursevi_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true;
+        }
+        #endregion
     }
 }

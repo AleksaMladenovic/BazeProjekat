@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Forme
 {
-    public partial class DodajIzmeniPrisustvoForm : Form
+    public partial class DodajIzmeniPrisustvoForm : BaseForm
     {
         private int casId;
         private PrisustvoPregled prisustvoZaIzmenu;

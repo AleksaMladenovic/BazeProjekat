@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace MuzickaSkolaWindowsForms.Mapiranja
 {
-    public partial class NastavaForm : Form
+    public partial class NastavaForm : BaseForm
     {
         private KursPregled kurs;
         public NastavaForm()

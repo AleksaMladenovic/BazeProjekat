@@ -35,18 +35,27 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             button1 = new Button();
+            oracleCommand1 = new Oracle.ManagedDataAccess.Client.OracleCommand();
+            labelNaslov = new Label();
+            panel1 = new Panel();
+            label1 = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // listViewKomisije
             // 
             listViewKomisije.Columns.AddRange(new ColumnHeader[] { columnHeader1 });
             listViewKomisije.FullRowSelect = true;
-            listViewKomisije.Location = new Point(12, 12);
+            listViewKomisije.GridLines = true;
+            listViewKomisije.Location = new Point(12, 66);
             listViewKomisije.Name = "listViewKomisije";
-            listViewKomisije.Size = new Size(156, 258);
+            listViewKomisije.OwnerDraw = true;
+            listViewKomisije.Size = new Size(156, 204);
             listViewKomisije.TabIndex = 0;
             listViewKomisije.UseCompatibleStateImageBehavior = false;
             listViewKomisije.View = View.Details;
+            listViewKomisije.DrawColumnHeader += listViewKomisije_DrawColumnHeader;
+            listViewKomisije.DrawItem += listViewKomisije_DrawItem;
             listViewKomisije.SelectedIndexChanged += listViewKomisije_SelectedIndexChanged;
             // 
             // columnHeader1
@@ -58,12 +67,16 @@
             // 
             listViewClanovi.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader4, columnHeader5 });
             listViewClanovi.FullRowSelect = true;
-            listViewClanovi.Location = new Point(221, 12);
+            listViewClanovi.GridLines = true;
+            listViewClanovi.Location = new Point(221, 66);
             listViewClanovi.Name = "listViewClanovi";
-            listViewClanovi.Size = new Size(484, 287);
+            listViewClanovi.OwnerDraw = true;
+            listViewClanovi.Size = new Size(404, 233);
             listViewClanovi.TabIndex = 1;
             listViewClanovi.UseCompatibleStateImageBehavior = false;
             listViewClanovi.View = View.Details;
+            listViewClanovi.DrawColumnHeader += listViewClanovi_DrawColumnHeader;
+            listViewClanovi.DrawItem += listViewClanovi_DrawItem;
             // 
             // columnHeader3
             // 
@@ -82,25 +95,70 @@
             // 
             // button1
             // 
+            button1.BackColor = Color.MidnightBlue;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(109, 92, 246);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
             button1.Location = new Point(12, 276);
             button1.Name = "button1";
-            button1.Size = new Size(156, 23);
+            button1.Size = new Size(156, 28);
             button1.TabIndex = 2;
             button1.Text = "Obrisi Komisiju";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // labelNaslov
+            // 
+            labelNaslov.Anchor = AnchorStyles.None;
+            labelNaslov.AutoSize = true;
+            labelNaslov.BackColor = Color.Transparent;
+            labelNaslov.Font = new Font("Times New Roman", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            labelNaslov.ForeColor = Color.White;
+            labelNaslov.Location = new Point(174, 23);
+            labelNaslov.Name = "labelNaslov";
+            labelNaslov.Size = new Size(185, 33);
+            labelNaslov.TabIndex = 0;
+            labelNaslov.Text = "Muzička Škola";
+            labelNaslov.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.MidnightBlue;
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(638, 60);
+            panel1.TabIndex = 3;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.None;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Times New Roman", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(150, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(326, 33);
+            label1.TabIndex = 1;
+            label1.Text = "Pregled Komisija i Članova";
+            label1.TextAlign = ContentAlignment.TopCenter;
             // 
             // KomisijeIspitiForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(720, 316);
+            ClientSize = new Size(638, 316);
+            Controls.Add(panel1);
             Controls.Add(button1);
             Controls.Add(listViewClanovi);
             Controls.Add(listViewKomisije);
             Name = "KomisijeIspitiForm";
-            Text = "KomisijeClanoviForm";
             Load += KomisijeIspitiForm_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -113,5 +171,9 @@
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private Button button1;
+        private Oracle.ManagedDataAccess.Client.OracleCommand oracleCommand1;
+        private Label labelNaslov;
+        private Panel panel1;
+        private Label label1;
     }
 }

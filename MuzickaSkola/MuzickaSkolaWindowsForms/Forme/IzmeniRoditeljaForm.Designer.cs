@@ -28,154 +28,209 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-
-            this.gb = new System.Windows.Forms.GroupBox();
-            this.tlp = new System.Windows.Forms.TableLayoutPanel();
-            this.lblJmbg = new System.Windows.Forms.Label();
-            this.lblIme = new System.Windows.Forms.Label();
-            this.lblPrezime = new System.Windows.Forms.Label();
-            this.lblTelefon = new System.Windows.Forms.Label();
-            this.lblEmail = new System.Windows.Forms.Label();
-            this.tbJmbg = new System.Windows.Forms.TextBox();
-            this.tbIme = new System.Windows.Forms.TextBox();
-            this.tbPrezime = new System.Windows.Forms.TextBox();
-            this.tbTelefon = new System.Windows.Forms.TextBox();
-            this.tbEmail = new System.Windows.Forms.TextBox();
-            this.btnSacuvaj = new System.Windows.Forms.Button();
-            this.btnOdustani = new System.Windows.Forms.Button();
-
-            this.SuspendLayout();
-            this.gb.SuspendLayout();
-
-            // Form
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 260);
-            this.MinimumSize = new System.Drawing.Size(520, 260);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Name = "IzmeniRoditeljaForm";
-            this.Text = "Izmeni roditelja";
-            this.Load += new System.EventHandler(this.IzmeniRoditeljaForm_Load);
-
-            // GroupBox
-            this.gb.Name = "gb";
-            this.gb.Text = "Podaci o roditelju";
-            this.gb.Location = new System.Drawing.Point(12, 12);
-            this.gb.Size = new System.Drawing.Size(496, 200);
-            this.gb.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.gb.TabIndex = 0;
-
-            // TableLayoutPanel
-            this.tlp.Name = "tlp";
-            this.tlp.AutoSize = true;
-            this.tlp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tlp.Padding = new System.Windows.Forms.Padding(8);
-            this.tlp.ColumnCount = 2;
-            this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F)); // label
-            this.tlp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F)); // input
-            this.tlp.RowCount = 5;
-            this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            this.tlp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
-            this.tlp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tlp.TabIndex = 0;
-
-            // Labels
-            
-            this.lblJmbg.Text = "JMBG";
-            this.lblJmbg.AutoSize = true;
-            this.lblJmbg.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblJmbg.TabIndex = 0;
-
-            
-            this.lblIme.Text = "Ime";
-            this.lblIme.AutoSize = true;
-            this.lblIme.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblIme.TabIndex = 2;
-
-            
-            this.lblPrezime.Text = "Prezime";
-            this.lblPrezime.AutoSize = true;
-            this.lblPrezime.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPrezime.TabIndex = 4;
-
-            
-            this.lblTelefon.Text = "Telefon";
-            this.lblTelefon.AutoSize = true;
-            this.lblTelefon.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblTelefon.TabIndex = 6;
-
-            
-            this.lblEmail.Text = "Email";
-            this.lblEmail.AutoSize = true;
-            this.lblEmail.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblEmail.TabIndex = 8;
-
-            // TextBoxes
-            this.tbJmbg.Name = "tbJmbg";
-            this.tbJmbg.MaxLength = 13;
-            this.tbJmbg.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.tbJmbg.TabIndex = 1;
-
-            this.tbIme.Name = "tbIme";
-            this.tbIme.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.tbIme.TabIndex = 3;
-
-            this.tbPrezime.Name = "tbPrezime";
-            this.tbPrezime.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.tbPrezime.TabIndex = 5;
-
-            this.tbTelefon.Name = "tbTelefon";
-            this.tbTelefon.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.tbTelefon.TabIndex = 7;
-
-            this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.tbEmail.TabIndex = 9;
-
-            // Add rows to TLP (label, input)
-            this.tlp.Controls.Add(this.lblJmbg, 0, 0); this.tlp.Controls.Add(this.tbJmbg, 1, 0);
-            this.tlp.Controls.Add(this.lblIme, 0, 1); this.tlp.Controls.Add(this.tbIme, 1, 1);
-            this.tlp.Controls.Add(this.lblPrezime, 0, 2); this.tlp.Controls.Add(this.tbPrezime, 1, 2);
-            this.tlp.Controls.Add(this.lblTelefon, 0, 3); this.tlp.Controls.Add(this.tbTelefon, 1, 3);
-            this.tlp.Controls.Add(this.lblEmail, 0, 4); this.tlp.Controls.Add(this.tbEmail, 1, 4);
-
-            // Add TLP to GroupBox
-            this.gb.Controls.Add(this.tlp);
-
-            // Buttons
-            this.btnSacuvaj.Name = "btnSacuvaj";
-            this.btnSacuvaj.Text = "Sačuvaj";
-            this.btnSacuvaj.Size = new System.Drawing.Size(100, 34);
-            this.btnSacuvaj.Location = new System.Drawing.Point(this.ClientSize.Width - 220, 212);
-            this.btnSacuvaj.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            this.btnSacuvaj.TabIndex = 10;
-            this.btnSacuvaj.UseVisualStyleBackColor = true;
-            this.btnSacuvaj.Click += new System.EventHandler(this.btnSacuvaj_Click);
-
-            this.btnOdustani.Name = "btnOdustani";
-            this.btnOdustani.Text = "Otkaži";
-            this.btnOdustani.Size = new System.Drawing.Size(100, 34);
-            this.btnOdustani.Location = new System.Drawing.Point(this.ClientSize.Width - 110, 212);
-            this.btnOdustani.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            this.btnOdustani.TabIndex = 11;
-            this.btnOdustani.UseVisualStyleBackColor = true;
-            this.btnOdustani.Click += new System.EventHandler(this.btnOdustani_Click);
-
-            this.AcceptButton = this.btnSacuvaj;
-            this.CancelButton = this.btnOdustani;
-
-            // Add to form
-            this.Controls.Add(this.gb);
-            this.Controls.Add(this.btnSacuvaj);
-            this.Controls.Add(this.btnOdustani);
-
-            this.gb.ResumeLayout(false);
-            this.gb.PerformLayout();
-            this.ResumeLayout(false);
+            gb = new GroupBox();
+            tlp = new TableLayoutPanel();
+            lblJmbg = new Label();
+            tbJmbg = new TextBox();
+            lblIme = new Label();
+            tbIme = new TextBox();
+            lblPrezime = new Label();
+            tbPrezime = new TextBox();
+            lblTelefon = new Label();
+            tbTelefon = new TextBox();
+            lblEmail = new Label();
+            tbEmail = new TextBox();
+            btnSacuvaj = new Button();
+            btnOdustani = new Button();
+            gb.SuspendLayout();
+            tlp.SuspendLayout();
+            SuspendLayout();
+            // 
+            // gb
+            // 
+            gb.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gb.Controls.Add(tlp);
+            gb.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            gb.ForeColor = Color.MidnightBlue;
+            gb.Location = new Point(12, 12);
+            gb.Name = "gb";
+            gb.Size = new Size(496, 200);
+            gb.TabIndex = 0;
+            gb.TabStop = false;
+            gb.Text = "Podaci o roditelju";
+            // 
+            // tlp
+            // 
+            tlp.AutoSize = true;
+            tlp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tlp.ColumnCount = 2;
+            tlp.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
+            tlp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tlp.Controls.Add(lblJmbg, 0, 0);
+            tlp.Controls.Add(tbJmbg, 1, 0);
+            tlp.Controls.Add(lblIme, 0, 1);
+            tlp.Controls.Add(tbIme, 1, 1);
+            tlp.Controls.Add(lblPrezime, 0, 2);
+            tlp.Controls.Add(tbPrezime, 1, 2);
+            tlp.Controls.Add(lblTelefon, 0, 3);
+            tlp.Controls.Add(tbTelefon, 1, 3);
+            tlp.Controls.Add(lblEmail, 0, 4);
+            tlp.Controls.Add(tbEmail, 1, 4);
+            tlp.Dock = DockStyle.Top;
+            tlp.Location = new Point(3, 21);
+            tlp.Name = "tlp";
+            tlp.Padding = new Padding(8);
+            tlp.RowCount = 5;
+            tlp.RowStyles.Add(new RowStyle());
+            tlp.RowStyles.Add(new RowStyle());
+            tlp.RowStyles.Add(new RowStyle());
+            tlp.RowStyles.Add(new RowStyle());
+            tlp.RowStyles.Add(new RowStyle());
+            tlp.Size = new Size(490, 171);
+            tlp.TabIndex = 0;
+            // 
+            // lblJmbg
+            // 
+            lblJmbg.Anchor = AnchorStyles.Left;
+            lblJmbg.AutoSize = true;
+            lblJmbg.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblJmbg.ForeColor = Color.MidnightBlue;
+            lblJmbg.Location = new Point(11, 15);
+            lblJmbg.Name = "lblJmbg";
+            lblJmbg.Size = new Size(42, 17);
+            lblJmbg.TabIndex = 0;
+            lblJmbg.Text = "JMBG";
+            // 
+            // tbJmbg
+            // 
+            tbJmbg.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbJmbg.Location = new Point(131, 11);
+            tbJmbg.MaxLength = 13;
+            tbJmbg.Name = "tbJmbg";
+            tbJmbg.Size = new Size(348, 25);
+            tbJmbg.TabIndex = 1;
+            // 
+            // lblIme
+            // 
+            lblIme.Anchor = AnchorStyles.Left;
+            lblIme.AutoSize = true;
+            lblIme.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblIme.ForeColor = Color.MidnightBlue;
+            lblIme.Location = new Point(11, 46);
+            lblIme.Name = "lblIme";
+            lblIme.Size = new Size(31, 17);
+            lblIme.TabIndex = 2;
+            lblIme.Text = "Ime";
+            // 
+            // tbIme
+            // 
+            tbIme.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbIme.Location = new Point(131, 42);
+            tbIme.Name = "tbIme";
+            tbIme.Size = new Size(348, 25);
+            tbIme.TabIndex = 3;
+            // 
+            // lblPrezime
+            // 
+            lblPrezime.Anchor = AnchorStyles.Left;
+            lblPrezime.AutoSize = true;
+            lblPrezime.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblPrezime.ForeColor = Color.MidnightBlue;
+            lblPrezime.Location = new Point(11, 77);
+            lblPrezime.Name = "lblPrezime";
+            lblPrezime.Size = new Size(56, 17);
+            lblPrezime.TabIndex = 4;
+            lblPrezime.Text = "Prezime";
+            // 
+            // tbPrezime
+            // 
+            tbPrezime.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbPrezime.Location = new Point(131, 73);
+            tbPrezime.Name = "tbPrezime";
+            tbPrezime.Size = new Size(348, 25);
+            tbPrezime.TabIndex = 5;
+            // 
+            // lblTelefon
+            // 
+            lblTelefon.Anchor = AnchorStyles.Left;
+            lblTelefon.AutoSize = true;
+            lblTelefon.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblTelefon.ForeColor = Color.MidnightBlue;
+            lblTelefon.Location = new Point(11, 108);
+            lblTelefon.Name = "lblTelefon";
+            lblTelefon.Size = new Size(51, 17);
+            lblTelefon.TabIndex = 6;
+            lblTelefon.Text = "Telefon";
+            // 
+            // tbTelefon
+            // 
+            tbTelefon.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbTelefon.Location = new Point(131, 104);
+            tbTelefon.Name = "tbTelefon";
+            tbTelefon.Size = new Size(348, 25);
+            tbTelefon.TabIndex = 7;
+            // 
+            // lblEmail
+            // 
+            lblEmail.Anchor = AnchorStyles.Left;
+            lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold);
+            lblEmail.ForeColor = Color.MidnightBlue;
+            lblEmail.Location = new Point(11, 139);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(40, 17);
+            lblEmail.TabIndex = 8;
+            lblEmail.Text = "Email";
+            // 
+            // tbEmail
+            // 
+            tbEmail.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbEmail.Location = new Point(131, 135);
+            tbEmail.Name = "tbEmail";
+            tbEmail.Size = new Size(348, 25);
+            tbEmail.TabIndex = 9;
+            // 
+            // btnSacuvaj
+            // 
+            btnSacuvaj.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSacuvaj.Location = new Point(715, 173);
+            btnSacuvaj.Name = "btnSacuvaj";
+            btnSacuvaj.Size = new Size(100, 34);
+            btnSacuvaj.TabIndex = 10;
+            btnSacuvaj.Text = "Sačuvaj";
+            btnSacuvaj.UseVisualStyleBackColor = true;
+            btnSacuvaj.Click += btnSacuvaj_Click;
+            // 
+            // btnOdustani
+            // 
+            btnOdustani.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnOdustani.Location = new Point(715, 173);
+            btnOdustani.Name = "btnOdustani";
+            btnOdustani.Size = new Size(100, 34);
+            btnOdustani.TabIndex = 11;
+            btnOdustani.Text = "Otkaži";
+            btnOdustani.UseVisualStyleBackColor = true;
+            btnOdustani.Click += btnOdustani_Click;
+            // 
+            // IzmeniRoditeljaForm
+            // 
+            AcceptButton = btnSacuvaj;
+            AutoScaleDimensions = new SizeF(7F, 17F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnOdustani;
+            ClientSize = new Size(520, 221);
+            Controls.Add(gb);
+            Controls.Add(btnSacuvaj);
+            Controls.Add(btnOdustani);
+            MinimumSize = new Size(520, 260);
+            Name = "IzmeniRoditeljaForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Load += IzmeniRoditeljaForm_Load;
+            gb.ResumeLayout(false);
+            gb.PerformLayout();
+            tlp.ResumeLayout(false);
+            tlp.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
